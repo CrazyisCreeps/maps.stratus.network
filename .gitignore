@@ -1,0 +1,37 @@
+# Mac OSX generated files
+.DS_Store
+
+# Vim generated files
+*~
+*.swp
+
+# Minecraft files
+session.lock
+*.dat_old
+*.dat_mcr
+*players*
+*playerdata*
+*stats*
+uid.dat
+villages.dat
+
+# Photoshop files
+*.psd
+
+# Project files
+*.project
+*.sublime-project
+*.sublime-workspace
+
+# Compressed files
+*.zip
+*.tar
+*.tar.gz
+
+# Windows generated files
+Thumbs.db
+
+# Get rid of level.dat and region files
+*.dat
+*.mca
+*region*
