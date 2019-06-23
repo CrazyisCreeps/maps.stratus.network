@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<map proto="1.4.3" game="Payload">
+<name>Cerlise</name>
+<version>1.0.1</version>
+<objective>Push the payload to the end of the track.</objective>
+<authors>
+    <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="Map author"/><!--Obelistics-->
+    <author uuid="48924ea3-3aad-4e16-838c-368d8d9e0a25" contribution="Map author"/><!--Matic0B-->
+</authors>
+<teams>
+    <team id="red-team" color="dark red" max="8" max-overfill="8">Red</team>
+    <team id="blue-team" color="blue" max="8" max-overfill="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" unbreakable="true" prevent-sharing="true">iron sword</item>
+        <item slot="1" unbreakable="true" prevent-sharing="true">bow</item>
+        <item slot="2">golden apple</item>
+        <item slot="8" amount="20">arrow</item>
+        <chestplate unbreakable="true" locked="true">iron chestplate</chestplate>
+        <boots unbreakable="true" locked="true">iron boots</boots>
+        <leggings unbreakable="true" locked="true">chainmail leggings</leggings>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="334CB2" locked="true">leather helmet</helmet>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="993333" locked="true">leather helmet</helmet>
+    </kit>
+</kits>
+<killreward>
+    <item amount="8">arrow</item>
+    <item amount="1">golden apple</item>
+</killreward>
+<hunger><depletion>off</depletion></hunger>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+        <all id="red-holding-mid">
+        <payload-checkpoint payload-id="payload">1</payload-checkpoint>
+    </all>
+    <all id="red-holding-1st">
+        <payload-checkpoint payload-id="payload">2</payload-checkpoint>
+    </all>
+    <all id="blue-holding-mid">
+        <payload-friendly-checkpoint payload-id="payload">1</payload-friendly-checkpoint>
+    </all>
+    <all id="blue-holding-1st">
+        <payload-friendly-checkpoint payload-id="payload">0</payload-friendly-checkpoint>
+    </all>
+</filters>
+<regions>
+    <union id="only-red-region">
+        <rectangle min="47,-173" max="33,-200"/><!--Drop-->
+    </union>
+    <union id="only-blue-region">
+        <rectangle min="-32,-200" max="-46,-173"/><!--Drop-->
+    </union>
+    <apply region="only-blue-region" enter="only-blue" message="You cannot enter here!"/>
+    <apply region="only-red-region" enter="only-red" message="You cannot enter here!"/>
+    <apply block="never"/>
+</regions>
+<spawns>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="0">
+            <point>-40.5,32,-192.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="0">
+            <point>41.5,32,-192.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-180">
+            <point>0.5,11,-116</point>
+        </regions>
+    </default>
+</spawns>
+<portals>
+    <!--Red-->
+    <!--
+    <portal x="@-41.5" y="@17" z="@-192.5" yaw="@0">
+        <region><cylinder base="41.5,21,-192.5" radius="2" height="1"/></region>
+    </portal>
+    -->
+    <portal x="@59.5" y="@11" z="@-117.5" yaw="@90" filter="red-holding-mid">
+        <region><cylinder base="41.5,23,-192.5" radius="2" height="1"/></region>
+    </portal>
+    <portal x="@-7.5" y="@7" z="@-93.5" yaw="@180" filter="red-holding-1st">
+        <region><cylinder base="41.5,25,-192.5" radius="2" height="1"/></region>
+    </portal>
+    <!--Blue-->
+    <!--
+    <portal x="@-40.5" y="@17" z="@-192.5" yaw="@0">
+        <region><cylinder base="-40.5,21,-192.5" radius="2" height="1"/></region>
+    </portal>
+    -->
+    <portal x="@-58.5" y="@11" z="@-117.5" yaw="@-90" filter="blue-holding-mid">
+        <region><cylinder base="-40.5,23,-192.5" radius="2" height="1"/></region>
+    </portal>
+    <portal x="@8.5" y="@7" z="@-93.5" yaw="@180" filter="blue-holding-1st">
+        <region><cylinder base="-40.5,25,-192.5" radius="2" height="1"/></region>
+    </portal>
+</portals>
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>chainmail leggings</item>
+    <item>iron chestplate</item>
+    <item>iron boots</item>
+    <item>leather helmet</item>
+</itemremove>
+<payloads time-multiplier="0.25" capture-time="5s" recovery="5" decay="5" empty-decay="1">
+    <payload name="Payload" id="payload" spawn-location="0.5,7.0,-101.5" location="39.5,7.0,-153.5" radius="3" yaw="180.0" owner="blue-team" enemy-speed="1.25" friendly-speed="1.25" required="false" friendly-points="1" points="1" checkpoint-material="activator rail" friendly-checkpoints="true"/>
+</payloads>
+<time>12m</time>
+<score>
+    <limit>1</limit>
+</score>
+</map>

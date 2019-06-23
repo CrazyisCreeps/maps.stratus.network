@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+	<name>Forsaken Pumpkins</name>
+	<version>1.1</version>
+	<objective>Capture the enemy wools and place them back on your team's monument</objective>
+	<phase>development</phase>
+	<authors>
+		<author uuid="2f0caa04-30f3-4d79-a0e5-656596f864d9" contribution="Main map author"/>
+		<author uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65" contribution="Building and XML"/>
+	</authors>
+	<teams>
+		<team id="red" color="dark red" max="18" max-overfill="20">Red</team>
+		<team id="blue" color="dark blue" max="18" max-overfill="20">Blue</team>
+	</teams>
+	<kits>
+		<kit id="spawn">
+			<item slot="0" material="stone sword"/>
+			<item slot="1" material="bow"/>
+			<item slot="2" material="iron pickaxe"/>
+			<item slot="3" material="iron axe"/>
+			<item slot="4" material="iron spade"/>
+			<item slot="5" damage="4" amount="48" material="wood"/>
+			<item slot="7" amount="24" material="ladder"/>
+			<item slot="8" amount="32" material="pumpkin pie"/>
+			<item slot="28" amount="24" material="arrow"/>
+			<helmet>jack o lantern</helmet>
+			<leggings>chainmail leggings</leggings>
+		</kit>
+		<kit id="red-kit" parent="spawn">
+			<item slot="6" amount="16" damage="14" material="stained glass"/>
+			<chestplate color="993333">leather chestplate</chestplate>
+			<boots color="993333">leather boots</boots>
+		</kit>
+		<kit id="blue-kit" parent="spawn">
+			<item slot="6" amount="16" damage="11" material="stained glass"/>
+			<chestplate color="334cb2">leather chestplate</chestplate>
+			<boots color="334cb2">leather boots</boots>
+		</kit>
+	</kits>
+	<spawns>
+		<spawn team="red" kit="red-kit">
+			<region yaw="90">
+				<cuboid min="106.5,12.5,2.5" max="106.5,12.5,-1.5"/>
+			</region>
+		</spawn>
+		<spawn team="blue" kit="blue-kit">
+			<region yaw="-90">
+				<cuboid min="-105.5,12.5,-1.5" max="-105.5,12.5,2.5"/>
+			</region>
+		</spawn>
+		<default>
+			<region>
+				<cylinder base="0,64,0" radius="3" height="1"/>
+			</region>
+		</default>
+	</spawns>
+	<filters>
+   		<team id="only-red">red</team>
+		<team id="only-blue">blue</team>
+		<not id="no-void">
+        	<void/>
+    	</not>
+    	<deny id="deny-spawners">
+    		<material>mob spawner</material>
+    	</deny>
+    	<any id="only-cobwebs">
+    		<material>30</material>
+    	</any>
+    </filters>
+	<regions>
+		<rectangle id="everything" min="oo,oo" max="-oo,-oo"/>
+		<negative id="void">
+			<rectangle id="mid" min="-74.5,-38.5" max="74.5,39.5"/>
+			<union id="spawns">
+				<rectangle id="red-spawn" min="94.5,9.5" max="114.5,-8.5"/>
+				<rectangle id="blue-spawn" min="-93.5,-8.5" max="-113.5,9.5"/>
+			</union>
+			<union id="wool-rooms">
+				<union id="blue-rooms">
+					<union id="brown-wool">
+						<rectangle min="-119.5,35.5" max="-120.5,45.5"/>
+						<rectangle min="-121.5,29.5" max="-140.5,51.5"/>
+					</union>
+					<union id="red-wool">
+						<rectangle min="-119.5,-34.5" max="-120.5,-44.5"/>
+						<rectangle min="-121.5,-54.5" max="-136.5,-30.5"/>
+					</union>
+				</union>
+				<union id="red-rooms">
+					<union id="green-wool">
+						<rectangle min="120.5,-34.5" max="121.5,-44.5"/>
+						<rectangle min="122.5,-51.5" max="137.5,-30.5"/>
+					</union>
+					<union id="blue-wool">
+						<rectangle min="120.5,35.5" max="121.5,45.5"/>
+						<rectangle min="122.5,53.5" max="140.5,30.5"/>
+					</union>
+				</union>
+			</union>
+		</negative>
+		<apply block="no-void" message="You may not edit the void area!" region="void"/>
+		<apply block="never" message="You may not edit the spawns!" region="spawns"/>
+		<apply enter="only-red" message="You may not enter red's spawn!" region="red-spawn"/>
+		<apply enter="only-blue" message="You may not enter blue's spawn!" region="blue-spawn"/>
+		<apply block="deny-spawners" message="You may not destroy the spawners" region="everything"/>
+		<apply block="only-cobwebs" message="You may not edit the wool rooms!" region="wool-rooms"/>
+		<apply enter="only-blue" message="You may not enter the enemy wool rooms!" region="red-rooms"/>
+		<apply enter="only-red" message="You may not enter the enemy wool rooms!" region="blue-rooms"/>
+	</regions>
+	<renewables>
+    	<renewable rate="1.5" grow="true" particles="true" sound="true" avoid-players="2" region="everything">
+       		<renew-filter>
+            	<any>
+                	<material>iron block</material>
+            	</any>
+        	</renew-filter>
+        	<replace-filter>
+            	<any>
+                	<material>air</material>
+            	</any>
+        	</replace-filter>
+    	</renewable>
+    </renewables>
+	<wools team="red">
+		<wool color="red" location="-128.5,11,-39.5">
+			<monument>
+				<block>110.5,13,-0.5</block>
+			</monument>
+		</wool>
+		<wool color="yellow" location="-128.5,11,40.5">
+			<monument>
+				<block>110.5,13,1.5</block>
+			</monument>
+		</wool>
+	</wools>
+	<wools team="blue">
+		<wool color="green" location="129.5,11,-38.5">
+			<monument>
+				<block>-109.5,13,-0.5</block>
+			</monument>
+		</wool>
+		<wool color="blue" location="129.5,11,40.5">
+			<monument>
+				<block>-109.5,13,1.5</block>
+			</monument>
+		</wool>
+	</wools>
+	<itemremove>
+		<item damage="1">stained clay</item>
+		<item damage="2">179</item>
+		<item damage="6">44</item>
+		<item damage="4">wood</item>
+		<item>jack o lantern</item>
+		<item>leather chestplate</item>
+		<item>chainmail leggings</item>
+		<item>leather boots</item>
+		<item>sapling</item>
+		<item>string</item>
+		<item>ladder</item>
+		<item>stained glass</item>
+		<item>pumpkin pie</item>
+		<item>182</item>
+		<item>113</item>
+		<item>192</item>
+		<item>188</item>
+		<item>114</item>
+		<item>372</item>
+	</itemremove>
+	<tool-repair>
+		<tool>stone sword</tool>
+		<tool>bow</tool>
+		<tool>iron pickaxe</tool>
+		<tool>iron spade</tool>
+		<tool>iron axe</tool>
+	</tool-repair>
+	<kill-reward>
+		<item>golden apple</item>
+		<item amount="8">arrow</item>
+		<item amount="16" damage="4">wood</item>
+	</kill-reward>
+	<maxbuildheight>32</maxbuildheight>
+</map>

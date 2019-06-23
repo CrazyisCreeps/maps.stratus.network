@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<map proto="1.4.2" game="Water Drop">
+<name>Water Drop: Funnel</name>
+<slug>water_drop</slug>
+<version>1.0.1</version>
+<objective>Water drop your way to the finish line!</objective>
+<edition>standard</edition>
+<gamemode>Arcade</gamemode>
+<authors>
+    <author uuid="57f5535d-6b9e-4013-ad71-e2cc63ec8d7c"/> <!-- ItzaMeLuigi -->
+</authors>
+<players min="1" max="60" colors="true"/>
+<spawns>
+	<spawn yaw="180" kit="players">
+		<region>
+			<cuboid max="-4.5,200,1.5" min="5.5,200,1.5"/>
+		</region>
+	</spawn>
+	<default>
+		<region yaw="180">
+			<cuboid max="1.5,200,5.5" min="0.5,200,4.5"/>
+		</region>
+	</default>
+</spawns>
+<kits>
+    <kit id="players" force="true">
+        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <potion duration="oo" amplifier="-4">health boost</potion>
+        <potion duration="oo" amplifier="1">speed</potion>
+    </kit>
+</kits>
+<regions>
+	<union id="place-water">
+	<!-- Floor 1 -->
+		<cuboid min="-11.5,188,-2.5" max="12.5,190,-11.5"/>
+	<!-- Right -->
+		<cuboid min="13.5,174,-10.5" max="20.5,176,-3.5"/>
+		<cuboid min="14.5,152,-3.5" max="30.5,154,-10.5"/>
+		<cuboid min="13.5,134,-3.5" max="5.5,136,-10.5"/>
+	<!-- Left -->
+		<cuboid min="-12.5,174,-3.5" max="-19.5,176,-10.5"/>
+		<cuboid min="-29.5,152,-3.5" max="-13.5,154,-10.5"/>
+		<cuboid min="-12.5,134,-3.5" max="-4.5,136,-10.5"/>
+	<!-- Mid -->
+		<cuboid min="4.5,120,-11.5" max="-3.5,122,-2.5"/>
+		<cuboid min="5.5,94,-1.5" max="-4.5,96,-12.5"/>
+		<cuboid min="6.5,67,5.5" max="0.5,69,-0.5"/>
+		<cuboid min="0.5,45,5.5" max="-5.5,47,-0.5"/>
+		<cuboid min="-7.5,25,5.5" max="8.5,27,13.5"/>
+		<cuboid min="-1.5,3,2.5" max="2.5,5,-2.5"/>
+		<cuboid min="-0.5,0,-3.5" max="1.5,2,-5.5"/>
+	</union>
+    <apply block-place="water" block-break="water" block-physics="never" region="place-water" message="You may only place water on the ground"/>
+    <apply block="never" region="everywhere" message="You may only place water on the ground"/>
+</regions>
+<filters>
+	<all id="water">
+		<any>
+			<material>water</material>
+			<material>stationary water</material>
+		</any>
+		<not>
+			<cause>world</cause>
+		</not>
+	</all>
+</filters>
+<score>
+    <box points="1">
+        <region><cuboid id="finish" min="-0.5,1,3.5" max="1.5,2,-5.5"/></region>
+    </box>
+    <limit>1</limit>
+</score>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>leather boots</item>
+    <item>glass bottle</item>
+</itemremove>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
+<disabledamage>
+    <damage>ENTITY_ATTACK</damage>
+</disabledamage>
+</map>

@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<map proto="1.4.2" game="Water Drop">
+<name>Water Drop: Ender Blast</name>
+<version>1.2.2</version>
+<objective>Get to the bottom!</objective>
+<gamemode>Arcade</gamemode>
+<authors>
+    <author uuid="ca2306d1-1198-4d46-8c44-a82f5b3c8a4e" contribution="Original author and map layout" /> <!-- BeanButt -->
+    <author uuid="36e46b32-80ef-4fa5-b1e2-6c777736d888" contribution="Original XML and gameplay feedback" /> <!-- Elijah -->
+</authors>
+<contributors>
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="Original XML help and concept tweaks" /> <!-- ElectroidFilms -->
+    <contributor uuid="f690a591-348b-482e-a18d-7779d0c0a28c" contribution="Remastered XML" /> <!-- mitchiii_ -->
+</contributors>
+<players min="1" max="60" colors="true"/>
+<spawns>
+    <spawn kit="players" yaw="90" region="spawn"/>
+    <default kit="obs" yaw="90" region="spawn"/> 
+</spawns>
+<kits>
+    <kit id="obs">
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+    <kit id="players">
+        <health>6</health>
+        <max-health>6</max-health>
+        <clear/>
+        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <boots color="7fcc19" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit id="removal" force="true">
+        <clear/>
+        <item slot="0" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="1" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="2" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <boots color="993333" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="force-kill">
+        <potion duration="1" amplifier="100">harm</potion>
+    </kit>
+</kits>
+<filters>
+    <all id="water">
+        <any>
+            <material>water</material>
+            <material>stationary water</material>
+            <material>wood button</material>
+        </any>
+        <not>
+            <cause>world</cause>
+        </not>
+    </all>
+</filters>
+<regions>
+    <cylinder id="spawn" base="-11.5,200.1,0.5" radius="3" height="1"/>
+    <cylinder id="end" base="-102.5,7,0.5" radius="3" height="1"/>
+    <negative id="yes-bucket">
+        <cuboid id="no-bucket" min="-55,176,8" max="-84,120,-9"/>
+    </negative>
+    <complement id="no-cheat">
+        <cylinder base="-81,63,0" radius="50" height="3"/>
+        <cuboid min="-79,60,-2" max="-84,70,3"/>
+    </complement>
+    <cuboid id="repair" min="-83,24,-1" max="-80,26,2"/>
+    <cuboid id="dont" min="-92,19,-3" max="-99,10,4"/>
+    <apply kit="removal" region="no-bucket"/>
+    <apply kit="players" region="yes-bucket"/>
+    <apply block="never" region="repair"/>
+    <apply block="never" region="dont"/>
+    <apply block-place="water" block-break="water" block-physics="never"/>
+</regions>
+<score>
+    <limit>1</limit>
+    <box points="1" region="end"/>
+</score>
+<portals>
+    <portal region="no-cheat" y="-1000"/>
+</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>leather boots</item>
+    <item>barrier</item>
+</itemremove>
+</map>

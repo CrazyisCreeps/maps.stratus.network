@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<map proto="1.4.4">
+<name>Fun Guy</name>
+<version>1.2.1</version>
+<objective>Capture the enemy team's two wools.</objective>
+<authors>
+    <author uuid="d563101f-4e74-4f14-8707-b8f32c54902b"/> <!-- Winneror -->
+    <author uuid="6bec5c3a-4934-4b19-9aa8-c7c569820f7d"/> <!-- Claf -->
+</authors>
+<contributors>
+    <contributor uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042"/> <!-- triplezko -->
+    <contributor uuid="5519d739-24ff-42a1-8f0e-cbe9830cb0fc"/> <!-- BigBadLoser -->
+    <contributor uuid="d71152ca-187d-43c4-9901-ba001606c655"/> <!-- wylt -->
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" max="8" max-overfill="8">Red</team>
+    <team id="blue-team" color="blue" max="8" max-overfill="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="2" material="iron pickaxe" unbreakable="true">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="4" amount="64" material="golden carrot"/>
+		<item slot="5" material="golden apple"/>
+        <item slot="6" amount="64" damage="1" material="wood"/>
+        <item slot="7" amount="64" damage="1" material="wood"/>
+        <item slot="28" material="arrow"/>
+        <effect duration="6" amplifier="5">resistance</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <item slot="8" amount="64" damage="14" material="stained clay"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <item slot="8" amount="64" damage="11" material="stained clay"/>
+    </kit>
+</kits>
+<wools>
+    <wool team="red-team" color="cyan" location="-28.5,14.5,-270.5">
+        <monument>
+            <block>63,11,-93</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="silver" location="163.5,14.5,-270.5">
+        <monument>
+            <block>71,11,-93</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="pink" location="163.5,14.5,-128.5">
+        <monument>
+            <block>71,11,-307</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="lime" location="-28.5,14.5,-128.5">
+        <monument>
+            <block>63,11,-307</block>
+        </monument>
+    </wool>
+</wools>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="180">
+            <point>67.5,22,-72.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="0">
+            <point>67.5,22,-326.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <point>67.5,14,-199.5</point>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <union id="wool-blocks">
+        <block>163,13,-129</block>
+        <block>-29,13,-129</block>
+        <block>-29,13,-271</block>
+        <block>163,13,-271</block>
+    </union>
+    <apply block="never">
+        <region>
+            <block>67,13,-200</block>
+        </region>
+    </apply>
+    <apply block="only-red" enter="only-red" message="You may not modify or enter your own wool room!">
+        <region>
+            <rectangle min="-32,-264" max="-19,-277"/> <!-- Cyan -->
+            <rectangle min="167,-277" max="154,-264"/> <!-- Silver -->
+        </region>
+    </apply>
+    <apply block="only-blue" enter="only-blue" message="You may not modify or enter your own wool room!">
+        <region>
+            <rectangle min="167,-135" max="154,-122"/> <!-- Pink -->
+            <rectangle min="-32,-122" max="-19,-135"/> <!-- Lime -->
+        </region>
+    </apply>
+    <!-- Spawns -->
+    <apply block="never" message="You may not modify the spawn region!">
+        <region>
+            <union id="spawns">
+                <rectangle min="76,-68" max="58,-94"/> <!-- red -->
+                <rectangle min="59,-331" max="77,-305"/> <!-- blue -->
+            </union>
+        </region>
+    </apply>
+    <apply block="deny-void" message="You may not build in the void!">
+        <region>
+            <negative>
+                <rectangle min="127,-122" max="8,-158"/>
+                <rectangle min="8,-277" max="127,-241"/>
+                <rectangle min="30,-241" max="105,-158"/>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <!--
+    <material id="only-gold">gold block</material>
+    <not id="deny-player-place">
+        <participating/>
+    </not> -->
+</filters>
+<renewables>
+    <renewable interval="10s" avoid-players="3">
+        <region>
+            <cuboid min="66,0,-102" max="59,16,-109"/> <!-- red -->
+            <cuboid min="76,0,-290" max="69,16,-297"/> <!-- blue -->
+        </region>
+        <renew-filter>
+            <material>iron block</material>
+        </renew-filter>
+        <replace-filter>
+            <material>air</material>
+        </replace-filter>
+    </renewable>
+    <renewable interval="5s" avoid-players="0" region="wool-blocks">
+        <renew-filter>
+            <material>wool</material>
+        </renew-filter>
+    </renewable>
+</renewables>
+<time results="objective">45m</time>
+<timelock>on</timelock>
+<respawn delay="7s"/>
+<kill-reward>
+    <item material="golden apple"/>
+	<item material="wood" damage="1" amount="32"/>
+</kill-reward>
+<maxbuildheight>23</maxbuildheight>
+<crafting>
+    <disable>shield</disable>
+	<disable>minecart</disable>
+	<disable>boat</disable>
+	<disable>boat spruce</disable>
+	<disable>boat birch</disable>
+	<disable>boat jungle</disable>
+	<disable>boat acacia</disable>
+	<disable>boat dark oak</disable>
+</crafting>
+<itemremove>
+    <item>dirt</item>
+    <item>wood</item>
+    <item>stained clay</item>w
+    <item>golden carrot</item>
+    <item>bucket</item>
+    <item>obsidian</item>
+    <item>netherrack</item>
+    <item>ender stone</item>
+    <item>red_mushroom</item>
+    <item>brown_mushroom</item>
+    <item>redstone</item>
+    <item>redstone torch on</item>
+    <item>redstone torch off</item>
+    <item>dead bush</item>
+    <item>cactus</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>red_rose</item>
+    <item>yellow_flower</item>
+    <item>string</item>
+    <item>water_lily</item>
+    <item>cobblestone</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<tnt>
+    <power>3</power>
+</tnt>
+</map>

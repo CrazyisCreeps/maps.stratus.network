@@ -1,0 +1,181 @@
+<map proto="1.4.2">
+<name>Tasty Fight</name>
+<version>1.0.0</version>
+<gamemode>dtm</gamemode>
+<objective>Destroy both of the opposing monuments to win!</objective>
+<authors>
+	<author>Crimson_Aught</author>
+</authors>
+<teams>
+	<team id="red" color="dark red" max="26">Raspberries</team>
+	<team id="blue" color="blue" max="26">Blueberries</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="90">
+            <cuboid min="-82.5,21.5,3.5" max="-84.5,21.5,1.5"/>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="-90">
+            <cuboid min="82.5,21.5,-0.5" max="84.5,21.5,-2.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <cuboid min="2,38,-119" max="-1,38,-117"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" enchantment="durability:1">diamond pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4" amount="48">wood</item>
+        <item slot="6" amount="1">exp bottle</item>
+        <item slot="7" amount="2">golden apple</item>
+        <item slot="8" amount="32">pumpkin pie</item>
+        <item slot="27" amount="1">lapis block</item>
+		<item slot="28" amount="1">arrow</item>
+        <potion duration="5" amplifier="3">heal</potion>
+        <potion duration="5">damage resistance</potion>
+    </kit>
+	<kit id="red-kit" parents="spawn">
+	    <item slot="5" amount="32" damage="14">stained glass</item>
+	    <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+	    <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+	<kit id="blue-kit" parents="spawn">
+		<item slot="5" amount="32" damage="11">stained glass</item>
+	    <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
+	    <leggings color="0066cc" unbreakable="true">leather leggings</leggings>
+        <boots color="0066cc" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+	<not id="no-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+	<negative id="void">
+		<union id="spawns">
+			<union id="red-spawn">
+				<rectangle min="91.5,2.5" max="86.5,-5.5"/>
+				<rectangle min="85.5,1.5" max="84.5,-4.5"/>
+				<rectangle min="82.5,0.5" max="83.5,-3.5"/>
+				<rectangle min="81.5,-0.5" max="80.5,-2.5"/>
+				<rectangle min="78.5,-1.5" max="79.5,-1.5"/>
+				<rectangle min="87.5,3.5" max="90.5,-6.5"/>
+			</union>
+			<union id="blue-spawn">
+				<rectangle min="-91.5,-1.5" max="-86.5,6.5"/>
+				<rectangle min="-85.5,5.5" max="-84.5,-0.5"/>
+				<rectangle min="-82.5,4.5" max="-83.5,0.5"/>
+				<rectangle min="-81.5,3.5" max="-80.5,1.5"/>
+				<rectangle min="-78.5,2.5" max="-79.5,2.5"/>
+				<rectangle min="-87.5,-2.5" max="-90.5,7.5"/>
+			</union>
+		</union>
+		<union id="front-of-spawn">
+			<union id="red-front">
+				<rectangle min="85.5,2.5" max="81.5,-5.5"/>
+				<rectangle min="83.5,3.5" max="81.5,-6.5"/>
+				<rectangle min="79.5,1.5" max="80.5,-4.5"/>
+				<rectangle min="78.5,0.5" max="77.5,-3.5"/>
+				<rectangle min="76.5,-2.5" max="75.5,-0.5"/>
+				<rectangle min="74.5,-1.5" max="73.5,-1.5"/>
+				<rectangle min="72.5,4.5" max="70.5,6.5"/>
+				<rectangle min="72.5,-9.5" max="70.5,-7.5"/>
+			</union>
+			<union id="blue-front">
+				<rectangle min="-85.5,-1.5" max="-81.5,6.5"/>
+				<rectangle min="-83.5,-2.5" max="-81.5,7.5"/>
+				<rectangle min="-79.5,-0.5" max="-80.5,5.5"/>
+				<rectangle min="-78.5,0.5" max="-77.5,4.5"/>
+				<rectangle min="-76.5,1.5" max="-75.5,3.5"/>
+				<rectangle min="-74.5,2.5" max="-73.5,2.5"/>
+				<rectangle min="-72.5,-3.5" max="-70.5,-5.5"/>
+				<rectangle min="-72.5,10.5" max="-70.5,8.5"/>
+			</union>
+		</union>
+	</negative>
+		<apply block="never" message="You may not edit this area" region="front-of-spawn"/>
+		<apply block-place="no-void" message="You may not place blocks in this area" region="void"/>
+		<apply block="never" message="You may not edit this area" region="spawns"/>
+		<apply enter="only-red" message="You may not enter the enemy spawn" region="red-spawn"/>
+		<apply enter="only-blue" message="You may not enter the enemy spawn" region="blue-spawn"/>
+		<apply block="never" message="You may not edit this area" region="front-of-spawn"/>
+</regions>
+<destroyables completion="100%" mode-changes="true"  materials="obsidian">
+	<destroyable owner="red" name="Right Monument">
+		<region>
+			<cuboid min="36.5,14,-36.5" max="38.5,19,-13.5"/>
+		</region>
+	</destroyable>
+	<destroyable owner="red" name="Left Monument">
+		<region>
+			<cuboid min="93.5,11,82.5" max="95.5,16,84.5"/>
+		</region>
+	</destroyable>
+	<destroyable owner="blue" name="Right Monument">
+		<region>
+			<cuboid min="-93.5,11,-81.5" max="-95.5,16,-83.5"/>
+		</region>
+	</destroyable>
+	<destroyable owner="blue" name="Left Monument">
+		<region>
+			<cuboid min="-36.5,14,37.5" max="-38.5,19,35.5"/>
+		</region>
+	</destroyable>
+</destroyables>
+<modes>
+    <mode after="15m" material="beacon" name="`bBeacon `0Monument `6Mode"/>
+    <mode after="20m" material="gold block" name="`6Gold `0Monument `6Mode"/>
+    <mode after="30m" material="coal block" name="`0Coal `0Monument `6Mode"/>
+</modes>
+<maxbuildheight>32</maxbuildheight>
+<killreward>
+    <item material="golden apple"/>
+    <item amount="2" material="exp bottle"/>
+    <item amount="2" damage="4" material="ink sack"/>
+</killreward>
+<itemremove>
+    <item>string</item>
+    <item>glowstone dust</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>sugar cane</item>
+    <item>clay ball</item>
+    <item>stone plate</item>
+    <item>sand</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>glass bottle</item>
+    <item>stained glass</item>
+    <item>ladder</item>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+    <item>leather boots</item>
+	<item>red rose</item>
+	<item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>pumpkin pie</item>
+    <item>golden apple</item>
+    <item>exp bottle</item>
+    <item>pumpkin pie</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+</map>

@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Proelium TDM</name>
+<version>1.0.9</version>
+<objective>Get the most kills after 7 minutes!</objective>
+<gamemode>rage</gamemode>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- pepsidawg00 -->
+</authors>
+<contributors>
+    <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="Name and XML beautification"/> <!-- Dinner1111 -->
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="XML Refinification"/> <!-- ElectroidFilms -->
+    <contributor uuid="e37f18f1-117b-47db-8806-6d3a0854b518" contribution="XML Helpification"/> <!-- chickolympics -->
+    <contributor uuid="d341db34-f1ab-406e-b290-da6a6703565e" contribution="Minor map help"/> <!-- MlgCheetoPuff -->
+    <contributor uuid="c1ea235d-4224-46e4-ba4a-638838f6d039" contribution="House design inspiration"/> <!-- Daffy_Duck01 -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="20">Blue</team>
+    <team id="red" color="dark red" max="20">Red</team>
+</teams>
+<spawns>
+    <spawn yaw="0" team="red" kit="red-kit">
+        <regions>
+            <cuboid min="5,21,-232" max="1,21,-236"/>
+        </regions>
+    </spawn>
+    <spawn yaw="180" team="blue" kit="blue-kit">
+        <regions>
+            <cuboid min="1,21,-58" max="5,21,-53"/>
+        </regions>
+    </spawn>
+    <default kit="obs" yaw="90">
+        <regions>
+            <cylinder base="-121,44,-144" radius="2" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" enchantment="damage all:10">iron sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow damage:10">bow</item>
+        <item slot="2" amount="2">arrow</item>
+        <item slot="3" amount="1">ender pearl</item>
+        <potion duration="oo">speed</potion>
+        <potion duration="5" amplifier="25">heal</potion>
+        <potion duration="5" amplifier="25">damage resistance</potion>
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="blue-kit" parent="spawn">
+        <helmet color="0000FF" locked="true">leather helmet</helmet>
+        <chestplate color="0000FF" locked="true">leather chestplate</chestplate>
+        <leggings color="0000FF" locked="true">leather leggings</leggings>
+        <boots color="0000FF" locked="true" material="leather boots">
+            <enchantment level="10">depth_strider</enchantment>
+        </boots>
+    </kit>
+    <kit id="red-kit" parent="spawn">
+        <helmet color="FF0000" locked="true">leather helmet</helmet>
+        <chestplate color="FF0000" locked="true">leather chestplate</chestplate>
+        <leggings color="FF0000" locked="true">leather leggings</leggings>
+        <boots color="FF0000" locked="true" material="leather boots">
+            <enchantment level="10">depth_strider</enchantment>
+        </boots>
+    </kit>
+    <kit id="obs">
+        <potion duration="oo">night vision</potion>
+    </kit>
+</kits>
+<timelock>on</timelock>
+<time>7m</time>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<score>
+    <kills>1</kills>
+</score>
+<rage/>
+<regions>
+    <apply block="never">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<kill-rewards> 
+    <kill-reward>
+        <item>arrow</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="5"/>
+        </filter>
+        <item>ender pearl</item>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>ender pearl</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+</map>

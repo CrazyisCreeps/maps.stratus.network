@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Settlement</name>
+<version>1.0</version>
+<objective>Destroy the opponent's obsidian monument!</objective>
+<authors>
+	<author uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad"/> <!-- AlmightyBread -->
+</authors>
+<contributors>
+	<contributor uuid="74e59389-2b3e-490d-954a-a7af1fb1eded" contribution="XML"/> <!-- Dowly_ -->
+</contributors>
+<teams>
+	<team id="blue-team" color="blue" max="16">Blue</team>
+	<team id="red-team" color="dark_red" max="16">Red</team>
+</teams>
+<maxbuildheight>30</maxbuildheight>
+<timelock>on</timelock>
+<kits>
+	<kit id="spawn-kit">
+    <item slot="0" unbreakable="true">iron sword</item>
+    <item slot="1" unbreakable="true">bow</item>
+    <item slot="2" unbreakable="true">diamond pickaxe</item>
+    <item slot="3" unbreakable="true">iron axe</item>
+    <item slot="30" unbreakable="true">stone spade</item>
+		<item slot="5" damage="1" amount="32">wood</item>
+		<item slot="7">golden apple</item>
+		<item slot="8" amount="64">bread</item>
+    <item slot="28" amount="32">arrow</item>
+  </kit>
+	<kit id="blue-kit" parents="spawn-kit">
+		<helmet color="0066cc" material="leather helmet" unbreakable="true"/>
+		<item slot="6" damage="11" amount="16" material="stained clay"/>
+	</kit>
+  <kit id="red-kit" parents="spawn-kit">
+    <helmet color="cd0000" material="leather helmet" unbreakable="true"/>
+		<item slot="6" damage="14" amount="16" material="stained clay"/>
+  </kit>
+</kits>
+<spawns>
+  <default yaw="0">
+    <region>
+      <cuboid min="2,52,-31" max="-1,52,-29"/>
+    </region>
+  </default>
+  <spawn team="blue-team" kit="blue-kit" yaw="-45">
+    <region>
+      <cuboid id="blue-spawnpoint" min="-117,10,-23" max="-115,10,-21"/>
+    </region>
+  </spawn>
+  <spawn team="red-team" kit="red-kit" yaw="135">
+    <region>
+			<region id="red-spawnpoint"/>
+    </region>
+  </spawn>
+</spawns>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+		<all id="only-iron-blue">
+			<material>iron block</material>
+			<filter id="only-blue"/>
+		</all>
+		<all id="only-iron-red">
+			<material>iron block</material>
+			<filter id="only-red"/>
+		</all>
+</filters>
+<regions>
+	<negative id="outside-map">
+		<rectangle min="-97,-29" max="98,32"/>
+		<region id="spawns"/>
+	</negative>
+	<mirror id="blue-spawnpoint1" origin="0.5,0,1.5" normal="0,0,1">
+		<region id="blue-spawnpoint"/>
+	</mirror>
+	<mirror id="red-spawnpoint" origin="0.5,0,1.5" normal="1,0,0">
+		<region id="blue-spawnpoint1"/>
+	</mirror>
+	<union id="spawns">
+		<cuboid id="blue-spawn" min="-97,0,-29" max="-120,oo,-15"/>
+		<mirror id="blue-spawn1" origin="0.5,0,1.5" normal="0,0,1">
+			<region id="blue-spawn"/>
+		</mirror>
+		<mirror id="red-spawn" origin="0.5,0,1.5" normal="1,0,0">
+			<region id="blue-spawn1"/>
+		</mirror>
+	</union>
+	<mirror id="blue-mon1" origin="0.5,0,1.5" normal="0,0,1">
+		<region id="blue-mon"/>
+	</mirror>
+	<mirror id="red-mon" origin="0.5,0,1.5" normal="1,0,0">
+		<region id="blue-mon1"/>
+	</mirror>
+	<apply block-place="never" region="outside-map" message="You may not edit the void!"/>
+	<apply enter="only-blue" block-break="only-iron-blue" block-place="never" region="blue-spawn" message="This region is disabled."/>
+	<apply enter="only-red" block-break="only-iron-red" block-place="never" region="red-spawn" message="This region is disabled."/>
+</regions>
+<destroyables name="Monument" material="obsidian" mode-changes="true">
+  <destroyable owner="blue-team">
+    <region>
+      <cuboid id="blue-mon" min="-82,13,2" max="-83,15,3"/>
+    </region>
+  </destroyable>
+  <destroyable owner="red-team">
+    <region>
+      <region id="red-mon"/>
+    </region>
+  </destroyable>
+</destroyables>
+<modes>
+  <mode after="15m" material="beacon" name="BEACON MONUMENT MODE"/>
+</modes>
+<toolrepair>
+  <tool>iron sword</tool>
+  <tool>bow</tool>
+  <tool>diamond pickaxe</tool>
+  <tool>iron axe</tool>
+  <tool>stone spade</tool>
+	<tool>arrow</tool>
+</toolrepair>
+<itemremove>
+	<item>seeds</item>
+	<item>wheat</item>
+	<item>dirt</item>
+	<item>log</item>
+	<item>bread</item>
+  <item>obsidian</item>
+  <item>beacon</item>
+  <item>leather helmet</item>
+  <item>chainmail chestplate</item>
+	<item>chainmail leggings</item>
+	<item>iron boots</item>
+</itemremove>
+</map>

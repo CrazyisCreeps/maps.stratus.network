@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Seditio</name>
+<version>1.0.1</version>
+<objective>Leak the enemy core to win the game!</objective>
+<gamemode>dtc</gamemode>
+<time result="objectives">45m</time>
+<maxbuildheight>40</maxbuildheight>
+<authors>
+	<author uuid="1c898c77-b0cc-474a-8ce4-b5521f2b18e7"/> <!-- Proddyy -->
+	<author uuid="8de835a6-916a-4fcf-9b25-239dda454411"/> <!-- Passively -->
+    <author uuid="6054286f-89a0-479e-8c26-a893b90b2ff4"/> <!-- Ses1a -->
+    <author uuid="c9ac7c8d-d13b-42a7-a608-f55ab9636417"/> <!-- _martin_19 -->
+</authors>
+<teams>
+   <team id="green-team" color="green" max="5">Green</team>
+   <team id="orange-team" color="gold" max="5">Orange</team>
+</teams>
+<spawns>
+    <spawn team="orange-team" kit="orange-kit">
+        <regions yaw="180">
+            <point>-136.5,19,139.5</point>
+        </regions>
+    </spawn>
+    <spawn team="green-team" kit="green-kit">
+        <regions yaw="0">
+            <point>-136.5,19,-10.5</point>
+        </regions>
+    </spawn>
+    <default kit="all">
+        <regions yaw="90">
+            <cuboid min="-181,51,66" max="-178,51,63"/>
+        </regions>
+    </default>
+</spawns>
+<respawn delay="4s" blackout="true"/>
+<kits>
+	<kit id="all">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="global" parents="all">
+        <item slot="0" material="iron sword"/>
+        <item slot="1" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="2" material="diamond pickaxe"/>
+        <item slot="3" material="iron axe"/>
+        <item slot="4" amount="64" material="smooth brick"/>
+        <item slot="7" amount="2" material="golden apple"/>
+        <item slot="8" amount="24" material="golden carrot"/>
+        <item slot="28" amount="1" material="arrow"/>
+        <leggings material="chainmail leggings"/>
+        <potion duration="10" amplifier="4">resistance</potion>
+    </kit>
+    <kit id="orange-kit" parents="global">
+        <helmet color="D87F33" enchantment="protection environmental:1" material="leather helmet"/>
+        <chestplate color="D87F33" enchantment="protection environmental:1" material="leather chestplate"/>
+        <boots color="D87F33" enchantment="protection environmental:1" material="leather boots"/>
+        <item slot="5" amount="64" damage="1" material="stained glass"/>
+    </kit>
+    <kit id="green-kit" parents="global">
+        <helmet color="4C7F99" enchantment="protection environmental:1" material="leather helmet"/>
+        <chestplate color="4C7F99" enchantment="protection environmental:1" material="leather chestplate"/>
+        <boots color="4C7F99" enchantment="protection environmental:1" material="leather boots"/>
+        <item slot="5" amount="64" damage="13" material="stained glass"/>
+    </kit>
+    <kit id="k-r">
+        <item material="golden apple"/>
+    </kit>
+</kits>
+<kill-rewards>
+    <kill-reward>
+        <kit id="k-r"/>
+    </kill-reward>
+</kill-rewards>
+<regions>
+    <negative id="void">
+        <cuboid min="-157,11,8" max="-116,oo,121"/>
+    </negative>
+     <union id="spawns">
+     	<cuboid min="-131,11,8" max="-142,oo,-20"/> <!-- green -->
+     	<cuboid min="-142,11,121" max="-131,oo,154"/> <!-- orange -->
+     </union> 
+     <apply block="never" region="void" message="You may not build in the void!"/>
+     <apply enter="never" region="spawns" message="You may not enter the spawn area!"/>
+    <cuboid id="green-core" min="-141,24,38" max="-132,16,29"/>
+    <cuboid id="orange-core" min="-132,24,91" max="-141,16,100"/>
+</regions>
+<cores 
+	material="obsidian" 
+	leak="4" 
+	mode-changes="true">
+    <core team="orange-team" region="orange-core"/>
+    <core team="green-team" region="green-core"/>
+</cores>
+<modes>
+    <mode after="10m" material="gold block" name="`6GOLD CORE MODE"/>
+    <mode after="25m" material="packed ice" name="`bPACKED ICE CORE MODE"/>
+</modes>
+<itemremove>
+    <item>arrow</item>
+    <item>obsidian</item>
+    <item>gold block</item>
+    <item>packed ice</item>
+    <item>golden carrot</item>
+    <item>stained glass:13</item>
+    <item>stained glass:1</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>chainmail leggings</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+</map>

@@ -1,0 +1,142 @@
+<map proto="1.4.2">
+<name>Croak</name>
+<version>1.3.0</version>
+<objective>Destroy the enemy's obsidian monument!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="bac7aaf9-888c-4522-8913-13a833527da6"/> <!-- drop_the_hammer -->
+</authors>
+<contributors>
+	<contributor uuid="57f5535d-6b9e-4013-ad71-e2cc63ec8d7c"/> <!-- ItzaMeLuigi -->
+</contributors>
+<teams>
+	<team id="red" color="dark red" max="12">Red</team>
+	<team id="blue" color="blue" max="12">Blue</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="90">
+        	<cuboid min="124,9,3" max="122,9,1"/>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="-90">
+        	<cuboid min="-122,9,-1" max="-120,9,1"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <cuboid min="-0.5,57,-61.5" max="2.5,57,-60.5"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3" enchantment="dig_speed:1;durability:2">iron axe</item>
+        <item slot="4" amount="32" damage="2" >wood</item>
+		<item slot="6" amount="32">arrow</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="32">grilled pork</item>
+        <potion duration="4" amplifier="3">heal</potion>
+        <potion duration="4">damage resistance</potion>
+    </kit>
+	<kit id="red-kit" parents="spawn">
+		<helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+	    <chestplate color="cd0000" enchantment="protection_projectile:2" unbreakable="true">leather chestplate</chestplate>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+        <item slot="5" amount="16" damage="14">stained clay</item>
+    </kit>
+	<kit id="blue-kit" parents="spawn">
+	    <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+		<chestplate color="0066cc" enchantment="protection_projectile:2" unbreakable="true">leather chestplate</chestplate>
+        <boots color="0066cc" unbreakable="true">leather boots</boots>
+		<item slot="5" amount="16" damage="11">stained clay</item>
+    </kit>
+</kits>
+<filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+	<not id="no-void">
+        <void/>
+    </not>
+	<any id="only-gold">
+        <material>gold block</material>
+    </any>
+</filters>
+<regions>
+	<negative id="void">
+		<union id="playable">
+			<rectangle min="-31.5,-31.5" max="-7.5,-2.5"/>
+			<rectangle min="25.5,-12.5" max="49.5,-31.5"/>
+			<rectangle min="33.5,4.5" max="9.5,33.5"/>
+			<rectangle min="-23.5,33.5" max="-46.5,14.5"/>
+		</union>
+		<union id="spawns">
+			<rectangle id="blue-spawn" min="112.5,10.5" max="125.5,-6.5"/>
+			<rectangle id="red-spawn" min="-110.5,-8.5" max="-123.5,8.5"/>
+		</union>
+	</negative>
+	<apply block-place="no-void" message="You may not place blocks in this area" region="void"/>
+	<apply block-break="only-gold" block-place="never" message="You may not break blocks in spawn" region="spawns"/>
+	<apply enter="only-red" message="You may not enter the enemy spawn" region="red-spawn"/>
+	<apply enter="only-blue" message="You may not enter the enemy spawn" region="blue-spawn"/>
+	<apply use="only-red" message="You may open the enemy spawn chests" region="red-spawn"/>
+	<apply use="only-blue" message="You may open the enemy spawn chests" region="blue-spawn"/>
+</regions>
+<destroyables completion="100%" mode-changes="true"  materials="obsidian">
+	<destroyable owner="red" name="Monument">
+		<region>
+			<cuboid min="-68.5,14,5.5" max="-66.5,17,7.5"/>
+		</region>
+	</destroyable>
+	<destroyable owner="blue" name="Monument">
+		<region>
+			<cuboid min="68.5,14,-3.5" max="70.5,17,-5.5"/>
+		</region>
+	</destroyable>
+</destroyables>
+<modes>
+    <mode after="10m" material="beacon" name="`bBeacon `0Monument `6Mode"/>
+    <mode after="20m" material="coal block" name="`0Coal `0Monument `6Mode"/>
+    <mode after="30m" material="stained clay" name="`8Stained `8Clay `0Monument `6Mode"/>
+</modes>
+<killreward>
+    <item material="golden apple"/>
+    <item material="wood" amount="8" damage="2"/>
+    <item material="arrow" amount="6"/>
+</killreward>
+<maxbuildheight>32</maxbuildheight>
+<itemremove>
+    <item>grilled pork</item>
+    <item>obsidian</item>
+    <item>wood</item>
+    <item>sandstone</item>
+    <item>string</item>
+    <item>glowstone dust</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>sugar cane</item>
+    <item>clay ball</item>
+    <item>stone plate</item>
+    <item>sand</item>
+    <item>wood</item>
+    <item>golden apple</item>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+    <item>leather boots</item>
+	<item>red rose</item>
+	<item>coal block</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+</map>

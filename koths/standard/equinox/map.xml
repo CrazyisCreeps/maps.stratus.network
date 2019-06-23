@@ -1,0 +1,136 @@
+<?xml version="1.1"?>
+<map proto="1.4.2">
+<name>Equinox</name>
+<version>1.3.5</version>
+<objective>Control the center point.</objective>
+<authors>
+    <author uuid="62c41f0e-133d-4192-ad33-f0896f47d23a"/> <!-- nixter1029 -->
+    <author uuid="57f5535d-6b9e-4013-ad71-e2cc63ec8d7c"/> <!-- ItzaMeLuigi_ -->
+</authors>
+<contributors>
+    <contributor uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Feedback"/> <!-- StealthMedia -->
+    <contributor uuid="f6e01a72-98ca-450b-99b0-4cb5fd8f6747" contribution="Feedback"/> <!-- diamond22 -->
+    <contributor uuid="bf331953-4f92-43ee-8abc-7544b8234936" contribution="1.3 update help"/> <!-- ViceWatercolour -->
+</contributors>
+<rules>
+    <rule>Fall damage is disabled</rule>
+</rules>
+<teams>
+    <team id="red-team" color="dark red" max="20">Red</team>
+    <team id="blue-team" color="blue" max="20">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red-team" kit="red">
+        <region yaw="135">
+            <cylinder base="68,23,-128" radius="4" height="0"/> <!-- West -->
+        </region>
+        <region yaw="45">
+            <cylinder base="68,23,-150" radius="4" height="0"/> <!-- East -->
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="blue">
+        <region yaw="-135">
+            <cylinder base="-70,23,-128" radius="4" height="0"/> <!-- West -->
+        </region>
+        <region yaw="-45">
+            <cylinder base="-70,23,-150" radius="4" height="0"/> <!-- East -->
+        </region>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <cuboid min="-2,54,-140" max="0,54,-138"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="8" amount="16">arrow</item>
+        <item slot="2" amount="16">cooked beef</item>
+        <item slot="3" amount="1">golden apple</item>
+        <effect duration="7" amplifier="1">heal</effect>
+        <effect duration="8" amplifier="1">speed</effect>
+        <effect duration="9" amplifier="4">damage resistance</effect>
+    </kit>
+    <kit id="red" parents="spawn">
+        <helmet     color="cd0000" unbreakable="true">leather helmet</helmet>
+        <chestplate color="cd0000" enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
+        <leggings   color="cd0000" unbreakable="true">leather leggings</leggings>
+        <boots      color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue" parents="spawn">
+        <helmet     color="0066cc" unbreakable="true">leather helmet</helmet>
+        <chestplate color="0066cc" enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
+        <leggings   color="0066cc" unbreakable="true">leather leggings</leggings>
+        <boots      color="0066cc" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<regions>
+    <apply block="never" message="You may not modify the map."/>
+    <apply velocity="-1.0,1.2,0.0">
+        <region>
+            <cuboid min="-32,15,-141" max="-28,16,-137"/>
+        </region>
+    </apply>
+    <apply velocity="1.0,1.2,0.0">
+        <region>
+            <cuboid min="30,15,-137" max="26,16,-141"/>
+        </region>
+    </apply>
+</regions>
+<control-points incremental="true" show-progress="true" neutral-state="false" required="false" points="1">
+    <control-point name="Top Hill" capture-time="10s">
+        <capture><cylinder base="-0.5,29,-138.5" radius="8" height="2"/></capture>
+        <progress><cylinder base="-0.5,29,-138.5" radius="8" height="10"/></progress>
+        <captured><cuboid min="-6,37,-144" max="4,37,-134"/></captured>
+    </control-point>
+    <control-point name="Bottom Hill" capture-time="8s">
+        <capture><cylinder base="-0.5,17,-138.5" radius="4" height="2"/></capture>
+        <progress><cylinder base="-0.5,16,-138.5" radius="4" height="1"/></progress>
+        <captured><cuboid min="-9.5,15,-129.5" max="8.5,25,-147.5"/></captured>
+    </control-point>
+</control-points>
+<portals>
+	<!-- Mid Portals -->
+    <portal yaw="@-90" x="@-17" y="@33" z="@-139">
+        <region><cuboid min="-8,26,-138" max="-9,24,-140"/></region>
+    </portal>
+    <portal yaw="@90" x="@15" y="@33" z="@-139">
+        <region><cuboid min="8,26,-140" max="7,24,-138"/></region>
+    </portal>
+	<!-- Side Portals -->
+	<portal yaw="@0" x="@-0.5" y="@33" z="@-170.5">
+        <region><cuboid min="-1.5,15,-160.5" max="0.5,17,-160.5"/></region>
+    </portal>
+	<portal yaw="@180" x="@-0.5" y="@33" z="@-106.5">
+        <region><cuboid min="-0.5,15,-116.5" max="0.5,17,-116.5"/></region>
+    </portal>
+</portals>
+<score>
+    <limit>750</limit>
+</score>
+<timelock>on</timelock>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<killreward>
+    <item amount="4">arrow</item>
+    <item amount="1">golden apple</item>
+</killreward>
+<itemkeep>
+    <item>arrow</item>
+</itemkeep>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>cooked beef</item>
+</itemremove>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>

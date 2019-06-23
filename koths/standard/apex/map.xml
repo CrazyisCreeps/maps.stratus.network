@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Apex</name>
+<version>1.0.3</version>
+<objective>Capture the two hills</objective>
+<authors>
+	<author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="Map building and XML"/><!--Obelistics-->
+</authors>
+<teams>
+	<team id="red-team" color="dark red" max="18" max-overfill="24">Red</team>
+	<team id="blue-team" color="blue" max="18" max-overfill="24">Blue</team>
+</teams>
+<kits>
+	<kit id="spawn-kit" force="true">
+		<item slot="0" material="stone sword" unbreakable="true"/>
+		<item slot="1" material="bow" unbreakable="true"/>
+		<item slot="6" material="golden apple" amount="1"/>
+		<item slot="7" material="bread" amount="8"/>
+		<item slot="8" material="arrow" amount="18"/>
+		<effect duration="3s" amplifier="5">resistance</effect>
+        <game-mode>adventure</game-mode>
+	</kit>
+	<kit id="red-kit" parents="spawn-kit">
+		<chestplate material="iron chestplate" unbreakable="true"/>
+		<boots material="leather boots" color="993333" unbreakable="true"/>
+		<helmet material="leather helmet" color="993333" unbreakable="true"/>
+	</kit>
+	<kit id="blue-kit" parents="spawn-kit">
+		<chestplate material="iron chestplate" unbreakable="true"/>
+		<boots material="leather boots" color="334CB2" unbreakable="true"/>
+		<helmet material="leather helmet" color="334CB2" unbreakable="true"/>
+	</kit>
+</kits>
+<filters>
+	<team id="only-red">red-team</team>
+	<team id="only-blue">blue-team</team>
+</filters>
+<regions>
+	<union id="blue-only-regions">
+		<rectangle min="-171,110" max="-182,121"/>
+	</union>
+	<union id="red-only-regions">
+		<rectangle min="-61,22" max="-50,11"/>
+	</union>
+	<apply enter="only-red" region="red-only-regions" message="You cannot enter here"/>
+	<apply enter="only-blue" region="blue-only-regions" message="You cannot enter here"/>
+	<below id="void_region" y="60"/>
+</regions>
+<portals>
+    <!--teleport players further into void so to speed up void death-->
+    <portal y="-100" observers="never" region="void_region" sound="false" smooth="true" />
+</portals>
+<score>
+    <limit>550</limit>
+</score>
+<control-points capture-players="lead" incremental="true" show-progress="true" show="true" neutral-state="true" required="false">
+	<control-point name="East Hill"  capture-time="6s" points="1">
+		<capture><cuboid min="-86,84,69" max="-91,81,74"/></capture>
+		<progress><cuboid min="-86,82,69" max="-91,81,74"/></progress>
+		<captured><cuboid min="-86,99,69" max="-91,81,74"/></captured>
+	</control-point>
+	<control-point name="West Hill"  capture-time="6s" points="1">
+		<capture><cuboid min="-146,84,63" max="-141,81,58"/></capture>
+		<progress><cuboid min="-146,82,63" max="-141,81,58"/></progress>
+		<captured><cuboid min="-146,99,63" max="-141,81,58"/></captured>
+	</control-point>
+</control-points>
+<itemremove>
+	<item>stone sword</item>
+	<item>bow</item>
+	<item>leather chestplate</item>
+	<item>leather helmet</item>
+	<item>leather boots</item>
+	<item>iron chestplate</item>
+	<item>bread</item>
+</itemremove>
+<spawns>
+	<spawn team="red-team" kit="red-kit">
+		<regions yaw="90">
+			<point>-54.5,73.5,16.5</point>
+		</regions>
+	</spawn>
+	<spawn team="blue-team" kit="blue-kit">
+		<regions yaw="-90">
+			<point>-177.5,73.5,115.5</point>
+		</regions>
+	</spawn>
+	<default>
+		<regions yaw="180">
+			<point>-116,105,66</point>
+		</regions>
+	</default>
+</spawns>
+<timelock>on</timelock>
+</map>

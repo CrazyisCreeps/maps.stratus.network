@@ -1,0 +1,41 @@
+<map proto="1.4.0" game="Kill the King">
+<name>King's Conquest: Radiant Castles</name>
+<version>1.0</version>
+<authors>
+    <author uuid="ff0b4c92-edc5-4474-a145-04a433c9e485"/> <!-- MySquishyTurtle -->
+    <author uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9"/> <!-- Timothee38 -->
+</authors>
+<spawns>
+    <spawn team="red" region="red-spawn" sequential="true" yaw="90" kit="spawn" />
+    <spawn team="blue" region="blue-spawn" sequential="true" yaw="-90" kit="spawn" />
+    <default region="default-spawn" yaw="0" kit="obs" />
+</spawns>
+<filters>
+    <not id="deny-break">
+        <any>
+            <material>smooth brick</material>
+        </any>
+    </not>
+</filters>
+<regions>
+    <block id="red-spawn">248.5,13.5,-200.5</block>
+    <block id="blue-spawn">150.5,13.5,-200.5</block>
+    <union id="spawns">
+        <cylinder base="248.5,12,-200.5" radius="2" height="3" />
+        <cylinder base="150.5,12,-200.5" radius="2" height="3" />
+    </union>
+    <block id="default-spawn">199.5,45,-200.5</block>
+    <above id="build-limit" y="21" />
+    <below id="underground" y="2" />
+    <apply region="build-limit" block="never" message="`7You have reached the maximum build height! (`c35 Blocks`7)" />
+</regions>
+<flags>
+    <post id="red-post">248.5,13,-200.5</post>
+    <post id="blue-post">150.5,13,-200.5</post>
+</flags>
+<timelock>on</timelock>
+<include src="king-classes.xml"/>
+<itemremove>
+    <item>gold block</item>
+</itemremove>
+</map>

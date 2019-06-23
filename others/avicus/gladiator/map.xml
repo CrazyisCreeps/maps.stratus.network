@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<map proto="1.3.4">
+  <name>Gladiator</name>
+  <version>1.1.0</version><!-- incomplete -->
+  <objective>Earn points by killing players before the timer runs out!</objective>
+  <authors>
+    <author uuid="3893a242-cc17-447e-9b1c-774fc8941af8"/> <!-- G_Skippy -->
+  </authors>
+  <teams>
+    <team color="dark red" max="8">Red</team>
+    <team color="dark aqua" max="8">Cyan</team>
+    <team color="dark purple" max="8">Purple</team>
+    <team color="dark green" max="8">Lime</team>
+  </teams>
+  <kits>
+    <kit name="spawn">
+      <item material="iron sword" slot="0"/>
+      <item material="diamond pickaxe" slot="1"/>
+      <item amount="2" material="golden apple" slot="2"/>
+      <item amount="64" material="cobblestone" slot="3"/>
+      <item amount="16" material="log" slot="4"/>
+      <item amount="32" material="cooked beef" slot="5"/>
+      <potion duration="4" amplifier="25">heal</potion>
+      <potion duration="4" amplifier="25">damage resistance</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+      <helmet color="AA0000">leather helmet</helmet>
+      <chestplate color="AA0000">leather chestplate</chestplate>
+      <leggings color="AA0000">leather leggings</leggings>
+      <boots color="AA0000">leather boots</boots>
+    </kit>
+    <kit name="cyan" parents="spawn">
+        <helmet color="4C7F99">leather helmet</helmet>
+        <chestplate color="4C7F99">leather chestplate</chestplate>
+        <leggings color="4C7F99">leather leggings</leggings>
+        <boots color="4C7F99">leather boots</boots>
+    </kit>
+    <kit name="lime" parents="spawn">
+        <helmet color="7FCC19">leather helmet</helmet>
+        <chestplate color="7FCC19">leather chestplate</chestplate>
+        <leggings color="7FCC19">leather leggings</leggings>
+        <boots color="7FCC19">leather boots</boots>
+    </kit>
+    <kit name="purple" parents="spawn">
+      <helmet color="7F3FB2">leather helmet</helmet>
+      <chestplate color="7F3FB2">leather chestplate</chestplate>
+      <leggings color="7F3FB2">leather leggings</leggings>
+      <boots color="7F3FB2">leather boots</boots>
+    </kit>
+  </kits>
+  <regions>
+    <cylinder name="cyanspawn" base="76, 57, -797" height="4" radius="6"/>
+    <cylinder name="redspawn" base="23, 57, -744" height="4" radius="6"/>
+    <cylinder name="purplespawn" base="-29, 57, -797" height="4" radius="6"/>
+    <cylinder name="limespawn" base="23, 57, -850" height="4" radius="6"/>
+    <apply block="deny-all" message="You may not edit the spawnpoint!" reigon="redspawn"/>
+    <apply block="deny-all" message="You may not edit the spawnpoint!" region="cyanspawn"/>
+    <apply block="deny-all" message="You may not edit the spawnpoint!" region ="limespawn"/>
+    <apply block="deny-all" message="You may not edit the spawnpoint!" region="purplespawn"/>
+  </regions>
+  <spawns>
+    <spawn team="red" kit="red" yaw="180">
+      <block>23, 57, -744</block>
+    </spawn>
+    <spawn team="cyan" kit="cyan" yaw="-135">
+      <block>76, 57, -797</block>
+    </spawn>
+    <spawn team="purple" kit="purple" yaw="45">
+      <block>-29, 57, -797</block>
+    </spawn>
+    <spawn team="lime" kit="lime" yaw="-135">
+      <block>23, 57, -850</block>
+    </spawn>
+    <default yaw="-45">
+      <block>-41, 57, -862</block>
+    </default>
+  </spawns>
+  <toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+  </toolrepair>
+  <itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>cooked beef</item>
+    <item>golden apple</item>
+  </itemremove>
+  <time>7m</time>
+  <timelock>on</timelock>
+  <killreward>
+    <item amount="1">golden apple</item>
+  </killreward>
+</map>

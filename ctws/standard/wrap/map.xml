@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Wrap</name>
+<version>1.1.1</version>
+<objective>Take the enemy's wool and place it on your wool monument.</objective>
+<authors>
+    <author uuid="57f5535d-6b9e-4013-ad71-e2cc63ec8d7c"/> <!-- ItzaMeLuigi -->
+</authors>
+<gamerules>
+    <doDaylightCycle>true</doDaylightCycle>
+</gamerules>
+<teams>
+    <team id="blue" color="blue" max="12">Blue</team>
+    <team id="red" color="dark red" max="12">Red</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" material="iron sword"/>
+        <item slot="1" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="2" enchantment="durability:3;dig speed:2" material="iron pickaxe"/>
+        <item slot="3" enchantment="durability:3" material="iron axe"/>
+        <item slot="5" amount="16" material="glass"/>
+        <item slot="6" amount="8" material="ladder"/>
+        <item slot="7" amount="1" material="golden_apple"/>
+        <item slot="8" amount="32" material="cooked_fish"/>
+        <item slot="27" amount="2" material="stick"/>
+        <item slot="28" material="arrow"/>
+		<potion amplifier="5" duration="5">damage resistance</potion>
+    </kit>
+	<kit id="kit-blue" parents="spawn">
+        <item slot="4" amount="32" damage="1" material="wood"/>
+		<helmet color="334CB2">leather helmet</helmet>
+        <chestplate color="334CB2">leather chestplate</chestplate>
+        <boots color="334CB2">leather boots</boots>
+    </kit>
+	<kit id="kit-red" parents="spawn">
+        <item slot="4" amount="32" damage="2" material="wood"/>
+		<helmet color="993333">leather helmet</helmet>
+		<chestplate color="993333">leather chestplate</chestplate>
+        <boots color="993333">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="kit-red">
+        <region yaw="0">
+			<cuboid min="-1.5,8.5,-57.5" max="0.5,8.5,-56.5"/>
+		</region>
+    </spawn>
+    <spawn team="blue" kit="kit-blue">
+        <region yaw="180">
+			<cuboid min="-1.5,8.5,56.5" max="0.5,8.5,58.5"/>
+		</region>
+    </spawn>
+    <default>
+        <region yaw="90">
+			<cuboid min="0.5,30.5,-0.5" max="-0.5,30.5,1.5"/>
+		</region>
+    </default>
+</spawns>
+<filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+	<all id="only-iron">
+		<material>iron block</material>
+	</all>
+	<not id= "no-beacons">
+		<material>beacon</material>
+	</not>
+</filters>
+<regions>
+    <union id="allow-block-place">
+		<rectangle min="31.5,34.5" max="-32.5,22.5"/>
+        <rectangle min="-32.5,22.5" max="-20.5,-5.5"/>
+        <rectangle min="-20.5,-5.5" max="31.5,6.5"/>
+		<rectangle min="31.5,6.5" max="19.5,-33.5"/>
+		<rectangle min="19.5,-33.5" max="-32.5,-21.5"/>
+		<!-- Small strips in front of spawns -->
+		<rectangle min="-7.5,-34.5" max="6.5,-34.5"/>
+		<rectangle min="-7.5,35.5" max="6.5,35.5"/>
+    </union>
+	<negative id="void">
+		<region id="allow-block-place"/>
+	</negative>
+	<rectangle id="everything" min="oo,oo" max="-oo,-oo"/>
+	<union id="spawns">
+		<rectangle min="-6.5,-59.5" max="5.5,-35.5"/>
+		<rectangle min="-6.5,36.5" max="5.5,60.5"/>
+	</union>
+	<union id="spawn-entries">
+		<rectangle id="red-spawn" min="-6.5,-59.5" max="5.5,-35.5"/>
+		<rectangle id="blue-spawn" min="-6.5,36.5" max="5.5,60.5"/>
+	</union>
+	<union id="blue-wool-rooms">
+		<rectangle min="32.5,33.5" max="44.5,23.5"/>
+	</union>
+	<union id="red-wool-rooms">
+		<rectangle min="-33.5,-22.5" max="-45.5,-32.5"/>
+	</union>
+	<complement>	
+		<region id="spawns"/>
+		<region id="wool-placements"/>
+	</complement>
+    <union id="wool-placements">
+        <block location="-1,9,-54" id="magenta-wool"/>
+        <block location="-1,9,54" id="cyan-wool"/>
+    </union>
+	<cuboid id="obs-lobby" min="1.5,30,3.5" max="-2.5,32,-2.5"/>
+	<apply use="no-beacons" message="Beacons are disabled" region="everything"/>
+	<apply block-break="only-iron" block-place="never" message="You may only break iron blocks inside the spawns" region="spawns"/>
+	<apply enter="only-red" message="You may not enter the enemy spawn" region="red-spawn"/>
+	<apply enter="only-blue" message="You may not enter the enemy spawn" region="blue-spawn"/>
+	<apply block="never" use="always" message="You may not interact with the wool rooms" region="red-wool-rooms"/>
+	<apply block="never" use="always" message="You may not interact with the wool rooms" region="blue-wool-rooms"/>
+	<apply enter="only-blue" message="You may not enter your own wool room" region="red-wool-rooms"/>
+	<apply enter="only-red" message="You may not enter your own wool room" region="blue-wool-rooms"/>
+	<apply use="only-blue" region="blue-wool-rooms"/>
+	<apply use="only-red" region="red-wool-rooms"/>
+	<apply block-place="never" block-break="never" message="You may not edit the void area!" region="void"/>
+	<apply block="never" region="obs-lobby"/>
+</regions>
+<wools craftable="false">
+    <wool team="red" color="magenta" location="-1,9,-54" monument="magenta-wool"/>
+    <wool team="blue" color="cyan" location="-1,9,54" monument="cyan-wool"/>
+</wools>	
+<maxbuildheight>22</maxbuildheight>
+    <!--
+<crafting>
+	<disable>boat</disable>
+	<disable>boat_spruce</disable>
+	<disable>boat_birch</disable>
+	<disable>boat_jungle</disable>
+	<disable>boat_acacia</disable>
+	<disable>boat_dark_oak</disable>
+	<disable>minecart</disable>
+	<shaped override="true">
+        <result material="iron spade">
+			<enchantment level="3">durability</enchantment>
+			<enchantment level="1">efficiency</enchantment>
+        </result>
+        <shape>
+            <row>.I.</row>
+            <row>.S.</row>
+            <row>.S.</row>
+        </shape>
+        <ingredient symbol="I">iron ingot</ingredient>
+		<ingredient symbol="S">stick</ingredient>
+    </shaped>
+	<shaped override="true">
+        <result material="iron spade">
+			<enchantment level="3">durability</enchantment>
+			<enchantment level="1">efficiency</enchantment>
+        </result>
+        <shape>
+            <row>..I</row>
+            <row>..S</row>
+            <row>..S</row>
+        </shape>
+        <ingredient symbol="I">iron ingot</ingredient>
+		<ingredient symbol="S">stick</ingredient>
+    </shaped>
+	<shaped override="true">
+        <result material="iron spade">
+			<enchantment level="3">durability</enchantment>
+			<enchantment level="1">efficiency</enchantment>
+        </result>
+        <shape>
+            <row>I..</row>
+            <row>S..</row>
+            <row>S..</row>
+        </shape>
+        <ingredient symbol="I">iron ingot</ingredient>
+		<ingredient symbol="S">stick</ingredient>
+    </shaped>
+</crafting>
+-->
+<itemremove>
+    <item>string</item>
+    <item>glowstone dust</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>sugar cane</item>
+    <item>clay ball</item>
+    <item>stone plate</item>
+    <item>sand</item>
+    <item>log 2</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>glass bottle</item>
+    <item>cooked fish</item>
+    <item>golden apple</item>
+    <item>ladder</item>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+    <item>leather boots</item>
+	<item>red rose</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron spade</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<killreward>
+    <filter>
+        <team>red</team>
+    </filter>
+    <item amount="16" damage="2" material="wood"/>
+    <item material="golden apple"/>
+</killreward>
+<killreward>
+    <filter>
+        <team>blue</team>
+    </filter>
+    <item amount="16" damage="1" material="wood"/>
+    <item material="golden apple"/>
+</killreward>
+</map>

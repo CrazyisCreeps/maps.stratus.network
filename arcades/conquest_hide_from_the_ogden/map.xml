@@ -1,0 +1,440 @@
+<map proto="1.4.0" game="Blitz">
+<name>Conquest: Hide from the Ogden</name>
+<version>1.0</version>
+<objective>Players must hide from BrettOgden!</objective>
+<authors>
+     <author uuid="7475c44e-3066-468f-a4c6-488fe9612097"/><!-- JcNumbers -->
+     <author uuid="a6955518-97b8-4c1d-8e76-e641b8f8822c"/><!-- Qwuiblington -->
+</authors>
+<rules>
+    <rule>Players do not take damage from touching lava (fire damage is ON, though!)</rule>
+</rules>
+<teams>
+    <team id="huntTeam"  color="white" max="4">Brett Ogden</team>
+    <team show-name-tags="false" id="hideTeam" color="yellow" max="20" plural="true">Players</team>
+</teams>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<time result="hideTeam">5m</time>
+<broadcasts>
+    <tip after="0.1s" filter="only-huntTeam">You have been chosen as the mighty BrettOgden. Hunt down and eliminate the players using abilities and your double jump! You'll be released shortly.</tip>
+    <tip after="0.1s" filter="only-hideTeam">Quick.. Run away and hide from BrettOgden!</tip>
+    <tip after="5s">BrettOgden will be released in 20 seconds!</tip>
+    <tip after="10s">BrettOgden will be released in 15 seconds!</tip>
+    <tip after="15s">BrettOgden will be released in 10 seconds!</tip>
+    <tip after="20s">BrettOgden will be released in 5 seconds!</tip>
+    <tip after="21s">BrettOgden will be released in 4 seconds!</tip>
+    <tip after="22s">BrettOgden will be released in 3 seconds!</tip>
+    <tip after="23s">BrettOgden will be released in 2 seconds!</tip>
+    <tip after="24s">BrettOgden will be released in 1 second!</tip>
+    <tip after="25s">Conquest has begun.</tip>
+</broadcasts>
+<kits>
+    <!-- Applies to all-->
+    <kit id="parent-kit" force="true" potion-particles="false">
+        <potion duration="oo">night_vision</potion>
+    </kit>
+    <!-- Applies to huntTeam on spawn -->
+    <kit id="huntTeam-kit" force="true" potion-particles="false" parents="parent-kit">
+        <head slot="slot.armor.head" name="BrettOgden" uuid="1987fc00-a5b2-43b5-b94b-e3c0d25776e9" skin="eyJ0aW1lc3RhbXAiOjE0NTI0NzQ5NTExNzEsInByb2ZpbGVJZCI6IjE5ODdmYzAwYTViMjQzYjViOTRiZTNjMGQyNTc3NmU5IiwicHJvZmlsZU5hbWUiOiJCcmV0dE9nZGVuIiwidGV4dHVyZXMiOnsiU0tJTiI6eyJ1cmwiOiJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzliZmQ0OTNiOTNkMzUyZGEyZGY5NDM0Mjc5ZDhjZmYxNzJlM2RiZTM3Yzc4NWRiZjc1MzExNWI4OGI5In19fQ==" />
+        <chestplate name="`fReferee Shirt" color="FFFFFF" material="leather chestplate" locked="true" unbreakable="true"/>
+        <leggings name="`8Referee Pants" color="191919" material="leather leggings" locked="true" unbreakable="true"/>
+        <boots name="`8Referee Shoes" color="191919" material="leather boots" locked="true" unbreakable="true"/>
+        <double-jump recharge-before-landing="true" recharge-time="3" power="3"/>
+        <potion duration="oo" amplifier="5">resistance</potion>
+        <potion duration="oo" amplifier="100">regeneration</potion>
+        <potion duration="oo" amplifier="2" >jump</potion>
+        <game-mode>adventure</game-mode>
+        <walk-speed>0.9</walk-speed>
+    </kit>
+    <!-- Applies to huntTeam on release -->
+    <kit id="release-kit" force="true" potion-particles="false" parents="parent-kit">
+        <item slot="0" name="`rWhistle" lore="A ref's best friend" material="iron_sword"><enchantment>damage_all</enchantment></item>
+        <item slot="1" name="`rFreeze Tool" lore="Stop wrong-doers in their tracks" projectile="freeze-proj">ice</item>
+        <item slot="2" name="`rBlacklist" lore="Weapon of mass destruction" projectile="wither-proj" damage="1">skull_item</item>
+    </kit>
+    <!-- Applies to hideTeam on spawn-->
+    <kit id="hideTeam-kit" force="true" potion-particles="false" parents="parent-kit">
+        <helmet color="ffe01a" material="leather helmet" locked="true" unbreakable="true"/>
+        <chestplate color="ffe01a" material="leather chestplate" locked="true" unbreakable="true"/>
+        <leggings color="ffe01a" material="leather leggings" locked="true" unbreakable="true"/>
+        <boots color="ffe01a" material="leather boots" locked="true" unbreakable="true">
+            <enchantment level="2">depth_strider</enchantment>
+            <enchantment level="4">protection_environmental</enchantment>
+            <enchantment level="2">oxygen</enchantment>
+        </boots>
+        <item slot="0" name="`rCoin-flip" material="potion" damage="8197">
+            <potion amplifier="2" duration="15s">resistance</potion>
+            <potion amplifier="2" duration="15s">speed</potion>
+        </item>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <!-- Middle kit -->
+    <kit id="middle-kit" force="true" potion-particles="false" parents="parent-kit">
+        <helmet color="ffe01a" material="leather helmet" locked="true" unbreakable="true"/>
+        <chestplate color="ffe01a" material="leather chestplate" locked="true" unbreakable="true"/>
+        <leggings color="ffe01a" material="leather leggings" locked="true" unbreakable="true"/>
+        <boots color="ffe01a" material="leather boots" locked="true" unbreakable="true">
+            <enchantment level="2">depth_strider</enchantment>
+            <enchantment level="4">protection_environmental</enchantment>
+            <enchantment level="2">oxygen</enchantment>
+        </boots>
+    </kit>
+    <!-- Smoke Camo -->
+    <kit id="smoke-kit" force="true" potion-particles="false" parents="parent-kit">
+        <helmet color="330000" material="leather helmet" locked="true" unbreakable="true"/>
+        <chestplate color="330000" material="leather chestplate" locked="true" unbreakable="true"/>
+        <leggings color="330000" material="leather leggings" locked="true" unbreakable="true"/>
+        <boots color="330000" material="leather boots" locked="true" unbreakable="true">
+            <enchantment level="2">depth_strider</enchantment>
+            <enchantment level="4">protection_environmental</enchantment>
+            <enchantment level="2">oxygen</enchantment>
+        </boots>
+    </kit>
+    <!-- Facility Camo -->
+    <kit id="facility-kit" force="true" potion-particles="false" parents="parent-kit">
+        <helmet color="737373" material="leather helmet" locked="true" unbreakable="true"/>
+        <chestplate color="737373" material="leather chestplate" locked="true" unbreakable="true"/>
+        <leggings color="737373" material="leather leggings" locked="true" unbreakable="true"/>
+        <boots color="737373" material="leather boots" locked="true" unbreakable="true">
+            <enchantment level="2">depth_strider</enchantment>
+            <enchantment level="4">protection_environmental</enchantment>
+            <enchantment level="2">oxygen</enchantment>
+        </boots>
+    </kit>
+    <!-- Ascendance Camo -->
+    <kit id="ascendance-kit" force="true" potion-particles="false" parents="parent-kit">
+        <helmet color="ffffff" material="leather helmet" locked="true" unbreakable="true"/>
+        <chestplate color="ffffff" material="leather chestplate" locked="true" unbreakable="true"/>
+        <leggings color="ffffff" material="leather leggings" locked="true" unbreakable="true"/>
+        <boots color="ffffff" material="leather boots" locked="true" unbreakable="true">
+            <enchantment level="2">depth_strider</enchantment>
+            <enchantment level="4">protection_environmental</enchantment>
+            <enchantment level="2">oxygen</enchantment>
+        </boots>
+    </kit>
+    <!-- Limbo Camo -->
+    <kit id="limbo-kit" force="true" potion-particles="false" parents="parent-kit">
+        <helmet color="0000ff" material="leather helmet" locked="true" unbreakable="true"/>
+        <chestplate color="0000ff" material="leather chestplate" locked="true" unbreakable="true"/>
+        <leggings color="0000ff" material="leather leggings" locked="true" unbreakable="true"/>
+        <boots color="0000ff" material="leather boots" locked="true" unbreakable="true">
+            <enchantment level="2">depth_strider</enchantment>
+            <enchantment level="4">protection_environmental</enchantment>
+            <enchantment level="2">oxygen</enchantment>
+        </boots>
+    </kit>
+</kits>
+<projectiles>
+    <projectile id="freeze-proj" projectile="Snowball" velocity="3" throwable="false" cooldown="6"><potion amplifier="4" duration="4">slowness</potion></projectile>
+    <projectile id="wither-proj" projectile="WitherSkull" velocity="1.5" throwable="false" damage="5" cooldown="12s"><potion amplifier="5" duration="4">wither</potion></projectile>
+</projectiles>
+<kill-rewards>
+    <kill-reward>
+        <item name="`fAdmin Points" lore="Kill Counter" material="nether_star"/>
+    </kill-reward>
+</kill-rewards>
+<filters>
+    <team id="only-huntTeam">huntTeam</team>
+    <team id="only-hideTeam">hideTeam</team>
+</filters>
+<regions>
+    <union id="smoke-region">
+        <rectangle min="6.5,7.5" max="-5.5,7.5"/>
+        <rectangle min="7.5,8.5" max="-6.5,8.5"/>
+        <rectangle min="8.5,9.5" max="-7.5,9.5"/>
+        <rectangle min="9.5,10.5" max="-8.5,10.5"/>
+        <rectangle min="10.5,11.5" max="-9.5,11.5"/>
+        <rectangle min="11.5,12.5" max="-10.5,12.5"/>
+        <rectangle min="12.5,13.5" max="-11.5,13.5"/>
+        <rectangle min="13.5,14.5" max="-12.5,14.5"/>
+        <rectangle min="14.5,15.5" max="-13.5,15.5"/>
+        <rectangle min="15.5,16.5" max="-14.5,16.5"/>
+        <rectangle min="16.5,17.5" max="-15.5,17.5"/>
+        <rectangle min="17.5,18.5" max="-16.5,18.5"/>
+        <rectangle min="18.5,19.5" max="-17.5,19.5"/>
+        <rectangle min="19.5,20.5" max="-18.5,20.5"/>
+        <rectangle min="20.5,21.5" max="-19.5,21.5"/>
+        <rectangle min="21.5,22.5" max="-20.5,22.5"/>
+        <rectangle min="22.5,23.5" max="-21.5,23.5"/>
+        <rectangle min="23.5,24.5" max="-22.5,24.5"/>
+        <rectangle min="24.5,25.5" max="-23.5,25.5"/>
+        <rectangle min="25.5,26.5" max="-24.5,26.5"/>
+        <rectangle min="26.5,27.5" max="-25.5,27.5"/>
+        <rectangle min="27.5,28.5" max="-26.5,28.5"/>
+        <rectangle min="28.5,29.5" max="-27.5,29.5"/>
+        <rectangle min="29.5,30.5" max="-28.5,30.5"/>
+        <rectangle min="30.5,31.5" max="-29.5,31.5"/>
+        <rectangle min="31.5,32.5" max="-30.5,32.5"/>
+        <rectangle min="32.5,33.5" max="-31.5,33.5"/>
+        <rectangle min="33.5,34.5" max="-32.5,34.5"/>
+        <rectangle min="34.5,35.5" max="-33.5,35.5"/>
+        <rectangle min="35.5,36.5" max="-34.5,36.5"/>
+        <rectangle min="36.5,37.5" max="-35.5,37.5"/>
+        <rectangle min="37.5,38.5" max="-36.5,38.5"/>
+        <rectangle min="38.5,39.5" max="-37.5,39.5"/>
+        <rectangle min="39.5,40.5" max="-38.5,40.5"/>
+        <rectangle min="40.5,41.5" max="-39.5,41.5"/>
+        <rectangle min="41.5,42.5" max="-40.5,42.5"/>
+        <rectangle min="42.5,43.5" max="-41.5,43.5"/>
+    </union>
+    <union id="facility-region">
+        <rectangle min="7.5,-5.5" max="7.5,6.5"/>
+        <rectangle min="8.5,-6.5" max="8.5,7.5"/>
+        <rectangle min="9.5,-7.5" max="9.5,8.5"/>
+        <rectangle min="10.5,-8.5" max="10.5,9.5"/>
+        <rectangle min="11.5,-9.5" max="11.5,10.5"/>
+        <rectangle min="12.5,-10.5" max="12.5,11.5"/>
+        <rectangle min="13.5,-11.5" max="13.5,12.5"/>
+        <rectangle min="14.5,-12.5" max="14.5,13.5"/>
+        <rectangle min="15.5,-13.5" max="15.5,14.5"/>
+        <rectangle min="16.5,-14.5" max="16.5,15.5"/>
+        <rectangle min="17.5,-15.5" max="17.5,16.5"/>
+        <rectangle min="18.5,-16.5" max="18.5,17.5"/>
+        <rectangle min="19.5,-17.5" max="19.5,18.5"/>
+        <rectangle min="20.5,-18.5" max="20.5,19.5"/>
+        <rectangle min="21.5,-19.5" max="21.5,20.5"/>
+        <rectangle min="22.5,-20.5" max="22.5,21.5"/>
+        <rectangle min="23.5,-21.5" max="23.5,22.5"/>
+        <rectangle min="24.5,-22.5" max="24.5,23.5"/>
+        <rectangle min="25.5,-23.5" max="25.5,24.5"/>
+        <rectangle min="26.5,-24.5" max="26.5,25.5"/>
+        <rectangle min="27.5,-25.5" max="27.5,26.5"/>
+        <rectangle min="28.5,-26.5" max="28.5,27.5"/>
+        <rectangle min="29.5,-27.5" max="29.5,28.5"/>
+        <rectangle min="30.5,-28.5" max="30.5,29.5"/>
+        <rectangle min="31.5,-29.5" max="31.5,30.5"/>
+        <rectangle min="32.5,-30.5" max="32.5,31.5"/>
+        <rectangle min="33.5,-31.5" max="33.5,32.5"/>
+        <rectangle min="34.5,-32.5" max="34.5,33.5"/>
+        <rectangle min="35.5,-33.5" max="35.5,34.5"/>
+        <rectangle min="36.5,-34.5" max="36.5,35.5"/>
+        <rectangle min="37.5,-35.5" max="37.5,36.5"/>
+        <rectangle min="38.5,-36.5" max="37.5,37.5"/>
+        <rectangle min="39.5,-37.5" max="39.5,38.5"/>
+        <rectangle min="40.5,-38.5" max="40.5,39.5"/>
+        <rectangle min="41.5,-39.5" max="41.5,40.5"/>
+        <rectangle min="42.5,-40.5" max="42.5,31.5"/>
+        <rectangle min="43.5,-41.5" max="43.5,42.5"/>
+    </union>
+    <union id="ascendance-region">
+        <rectangle min="-5.5,-6.5" max="6.5,-6.5"/>
+        <rectangle min="-6.5,-7.5" max="7.5,-7.5"/>
+        <rectangle min="-7.5,-8.5" max="8.5,-8.5"/>
+        <rectangle min="-8.5,-9.5" max="9.5,-9.5"/>
+        <rectangle min="-9.5,-10.5" max="10.5,-10.5"/>
+        <rectangle min="-10.5,-11.5" max="11.5,-11.5"/>
+        <rectangle min="-11.5,-12.5" max="12.5,-12.5"/>
+        <rectangle min="-12.5,-13.5" max="13.5,-13.5"/>
+        <rectangle min="-13.5,-14.5" max="14.5,-14.5"/>
+        <rectangle min="-14.5,-15.5" max="15.5,-15.5"/>
+        <rectangle min="-15.5,-16.5" max="16.5,-16.5"/>
+        <rectangle min="-16.5,-17.5" max="17.5,-17.5"/>
+        <rectangle min="-17.5,-18.5" max="18.5,-18.5"/>
+        <rectangle min="-18.5,-19.5" max="19.5,-19.5"/>
+        <rectangle min="-19.5,-20.5" max="20.5,-20.5"/>
+        <rectangle min="-20.5,-21.5" max="21.5,-21.5"/>
+        <rectangle min="-21.5,-22.5" max="22.5,-22.5"/>
+        <rectangle min="-22.5,-23.5" max="23.5,-23.5"/>
+        <rectangle min="-23.5,-24.5" max="24.5,-24.5"/>
+        <rectangle min="-24.5,-25.5" max="25.5,-25.5"/>
+        <rectangle min="-25.5,-26.5" max="26.5,-26.5"/>
+        <rectangle min="-26.5,-27.5" max="27.5,-27.5"/>
+        <rectangle min="-27.5,-28.5" max="28.5,-28.5"/>
+        <rectangle min="-28.5,-29.5" max="29.5,-29.5"/>
+        <rectangle min="-29.5,-30.5" max="30.5,-30.5"/>
+        <rectangle min="-30.5,-31.5" max="31.5,-31.5"/>
+        <rectangle min="-31.5,-32.5" max="32.5,-32.5"/>
+        <rectangle min="-32.5,-33.5" max="33.5,-33.5"/>
+        <rectangle min="-33.5,-34.5" max="34.5,-34.5"/>
+        <rectangle min="-34.5,-35.5" max="35.5,-35.5"/>
+        <rectangle min="-35.5,-36.5" max="36.5,-36.5"/>
+        <rectangle min="-36.5,-37.5" max="37.5,-37.5"/>
+        <rectangle min="-37.5,-38.5" max="38.5,-38.5"/>
+        <rectangle min="-38.5,-39.5" max="39.5,-39.5"/>
+        <rectangle min="-39.5,-40.5" max="40.5,-40.5"/>
+        <rectangle min="-40.5,-41.5" max="41.5,-41.5"/>
+        <rectangle min="-41.5,-42.5" max="42.5,-42.5"/>
+    </union>
+    <union id="limbo-region">
+        <rectangle min="-6.5,6.5" max="-6.5,-5.5"/>
+        <rectangle min="-7.5,7.5" max="-7.5,-6.5"/>
+        <rectangle min="-8.5,8.5" max="-8.5,-7.5"/>
+        <rectangle min="-9.5,9.5" max="-9.5,-8.5"/>
+        <rectangle min="-10.5,10.5" max="-10.5,-9.5"/>
+        <rectangle min="-11.5,11.5" max="-11.5,-10.5"/>
+        <rectangle min="-12.5,12.5" max="-12.5,-11.5"/>
+        <rectangle min="-13.5,13.5" max="-13.5,-12.5"/>
+        <rectangle min="-14.5,14.5" max="-14.5,-13.5"/>
+        <rectangle min="-15.5,15.5" max="-15.5,-14.5"/>
+        <rectangle min="-16.5,16.5" max="-16.5,-15.5"/>
+        <rectangle min="-17.5,17.5" max="-17.5,-16.5"/>
+        <rectangle min="-18.5,18.5" max="-18.5,-17.5"/>
+        <rectangle min="-19.5,19.5" max="-19.5,-18.5"/>
+        <rectangle min="-20.5,20.5" max="-20.5,-19.5"/>
+        <rectangle min="-21.5,21.5" max="-21.5,-20.5"/>
+        <rectangle min="-22.5,22.5" max="-22.5,-21.5"/>
+        <rectangle min="-23.5,23.5" max="-23.5,-22.5"/>
+        <rectangle min="-24.5,24.5" max="-24.5,-23.5"/>
+        <rectangle min="-25.5,25.5" max="-25.5,-24.5"/>
+        <rectangle min="-26.5,26.5" max="-26.5,-25.5"/>
+        <rectangle min="-27.5,27.5" max="-27.5,-26.5"/>
+        <rectangle min="-28.5,28.5" max="-28.5,-27.5"/>
+        <rectangle min="-29.5,29.5" max="-29.5,-28.5"/>
+        <rectangle min="-30.5,30.5" max="-30.5,-29.5"/>
+        <rectangle min="-31.5,31.5" max="-31.5,-30.5"/>
+        <rectangle min="-32.5,32.5" max="-32.5,-31.5"/>
+        <rectangle min="-33.5,33.5" max="-33.5,-32.5"/>
+        <rectangle min="-34.5,34.5" max="-34.5,-33.5"/>
+        <rectangle min="-35.5,35.5" max="-35.5,-34.5"/>
+        <rectangle min="-36.5,36.5" max="-36.5,-35.5"/>
+        <rectangle min="-37.5,37.5" max="-37.5,-36.5"/>
+        <rectangle min="-38.5,38.5" max="-38.5,-37.5"/>
+        <rectangle min="-39.5,39.5" max="-39.5,-38.5"/>
+        <rectangle min="-40.5,40.5" max="-40.5,-39.5"/>
+        <rectangle min="-41.5,41.5" max="-41.5,-40.5"/>
+        <rectangle min="-42.5,42.5" max="-42.5,-41.5"/>
+    </union>
+    <!-- Map Protection -->
+    <apply block="never">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <!-- Hunter kit -->
+    <apply filter="only-huntTeam" kit="release-kit">
+        <region>
+            <block>0.5,34,0.5</block>
+        </region>
+    </apply>
+    <!-- Hunter release jump pad -->
+    <apply velocity="0,3.0,0">
+        <region>
+            <block>0.5,34,0.5</block>
+        </region>
+    </apply>
+    <!-- Lighthouse jump pad -->
+    <apply velocity="0,2.7,0">
+        <region>
+            <block>-41.5,32,38.5</block>
+            <block>-42.5,32,38.5</block>
+            <block>-41.5,32,35.5</block>
+            <block>-42.5,32,35.5</block>
+            <block>-43.5,32,37.5</block>
+            <block>-43.5,32,36.5</block>
+        </region>
+    </apply>
+    <apply region="smoke-region" kit="smoke-kit" filter="only-hideTeam" />
+    <apply region="facility-region" kit="facility-kit" filter="only-hideTeam" />
+    <apply region="ascendance-region" kit="ascendance-kit" filter="only-hideTeam" />
+    <apply region="limbo-region" kit="limbo-kit" filter="only-hideTeam" />
+    <apply kit="middle-kit" filter="only-hideTeam">
+        <region>
+            <rectangle min="-6,7" max="7,-6"/>
+        </region>
+    </apply>
+</regions>
+<spawns>
+    <!-- huntTeam spawn -->
+    <spawn team="huntTeam" kit="huntTeam-kit" yaw="-90">
+        <region>
+            <point>0.5,35,0.5</point>
+        </region>
+    </spawn>
+    <!-- hideTeam spawn -->
+    <spawn team="hideTeam" kit="hideTeam-kit" spread="true" safe="true">
+        <region>
+            <cylinder base="0.5,33,0.5" radius="6" height="1"/>
+        </region>
+    </spawn>
+    <!-- Observer spawn -->
+    <default kit="parent-kit">
+        <region>
+            <point>0.5,50,0.5</point> 
+        </region>
+    </default>
+</spawns>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<damage>
+    <deny>
+        <team>huntTeam</team>
+    </deny>
+</damage>
+<gamerules>
+    <doDaylightCycle>false</doDaylightCycle>
+    <naturalRegeneration>true</naturalRegeneration>
+</gamerules>
+<structures>
+    <!-- Air Block structure -->
+    <structure id="release-structure" air="true">
+        <region>
+            <cuboid min="0.5,35,0.5" size="1,1,1"/>
+        </region>
+    </structure>
+    <!-- Remove gold block -->
+    <dynamic structure="release-structure" offset="0,-1,0">
+        <filter>
+            <time>25s</time>
+        </filter>
+    </dynamic>
+    <!-- Remove glass block -->
+    <dynamic structure="release-structure" offset="0,2,0">
+        <filter>
+            <time>25s</time>
+        </filter>
+    </dynamic>
+</structures><!--
+<proximity-alarms>
+    <proximity-alarm region="smoke-region" message="`cPlayer spotted in `lSmoke-ing Hot`r`c!" flare-radius="12">
+        <detect>
+            <all>
+                <team>hideTeam</team>
+                <time>10s</time>
+            </all>
+        </detect>
+        <notify>
+            <team>huntTeam</team>
+        </notify>
+    </proximity-alarm>
+    <proximity-alarm region="facility-region" message="`cPlayer spotted in `lFacility Falls`r`c!" flare-radius="12">
+        <detect>
+            <all>
+                <team>hideTeam</team>
+                <time>10s</time>
+            </all>
+        </detect>
+        <notify>
+            <team>huntTeam</team>
+        </notify>
+    </proximity-alarm>
+    <proximity-alarm region="ascendance-region" message="`cPlayer spotted in `lAscendance Heights`r`c!" flare-radius="12">
+        <detect>
+            <all>
+                <team>hideTeam</team>
+                <time>10s</time>
+            </all>
+        </detect>
+        <notify>
+            <team>huntTeam</team>
+        </notify>
+    </proximity-alarm>
+    <proximity-alarm message="`cPlayer spotted in `lLimbo Lake`r`c!" flare-radius="12">
+        <detect>
+            <all>
+                <team>hideTeam</team>
+                <time>10s</time>
+            </all>
+        </detect>
+        <notify>
+            <team>huntTeam</team>
+        </notify>
+    </proximity-alarm>
+</proximity-alarms>-->
+<itemremove>
+    <item>ice</item>
+    <item>iron_sword</item>
+    <item>skull_item</item>
+    <item>leather boots</item>
+</itemremove>
+</map>

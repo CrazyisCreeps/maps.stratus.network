@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<map proto="1.4.3" game="`5`lOne in the Chamber">
+<name>LT Facility OiTC</name>
+<version>1.0.4</version>
+<objective>Be the last one standing!</objective>
+<authors>
+    <author uuid="715769c5-8c4c-4489-bdf8-f9cee2b2ae8a" contribution="OiTC Conversion"/> <!-- amactus -->
+    <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067" contribution="LAZERTAG Conversion"/> <!-- samthecat43 -->
+    <author uuid="a43135a4-d7b9-49ab-ac8d-a16bb2513c8d" contribution="LAZERTAG Conversion"/> <!-- Ny_ -->
+    <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="Original Map"/> <!-- Mikeg542 -->
+</authors>
+<score>
+    <limit>15</limit>
+    <kills>1</kills>
+</score>
+<players min="2" max="25"/>
+<kits>
+    <kit id="spawn" force="true">
+        <helmet locked="true" damage="15">stained glass</helmet>
+        <item slot="0" locked="true" unbreakable="true" enchantment="arrow damage:30">bow</item>
+        <item slot="1">arrow</item>
+        <effect duration="oo" amplifier="1">speed</effect>
+        <double-jump recharge-before-landing="true" enabled="true" power="2"/>
+        <effect>night vision</effect>
+        <chestplate unbreakable="true" attributes="generic.maxHealth:add:-14" locked="true">iron chestplate</chestplate>
+    </kit>
+    <kit id="levitation-kit">
+        <effect duration="1s" amplifier="12">levitation</effect>
+    </kit>
+    <kit id="reward-kit">
+        <effect duration="1s">night vision</effect>
+        <effect duration="oo" amplifier="1">speed</effect>
+    </kit>
+    <kit id="obs">
+        <effect>night vision</effect>
+    </kit>
+</kits>
+<itemremove>
+    <item>leather leggings</item>
+    <item>bow</item>
+    <item damage="15">stained glass</item>
+    <item>stone sword</item>
+    <item>iron sword</item>
+    <item>diamond sword</item>
+    <item>blaze rod</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>potion</item>
+    <item>glass bottle</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemremove>
+<spawns>
+    <spawn spread="true" safe="true" angle="916,10,-1208" kit="spawn">
+        <regions>
+			<union>
+				<cuboid min="-134,4,139" max="-80,8,60"/>
+			</union>
+        </regions>
+    </spawn>
+    <default kit="obs">
+        <regions yaw="-90">
+            <cuboid min="-75,17,97" max="-77,16f,101"/>
+        </regions>
+    </default>
+</spawns>
+<time>5m</time>
+<score>
+    <kills>1</kills>
+</score>
+<regions>
+    <apply block="never" message="You may not modify blocks!">
+         <rectangle min="-149,167" max="-63,35"/>
+    </apply>
+    <apply velocity="0.0,0.8,0.0">
+        <region>
+            <cuboid min="-93,7,122" max="-96,9,120"/>
+            <cuboid min="-117,7,122" max="-120,9,120"/>
+            <cuboid min="-120,7,77" max="-117,9,79"/>
+            <cuboid min="-96,7,77f" max="-93,9,79"/>
+        </region>
+    </apply>
+    <apply kit="levitation-kit">
+        <region>
+            <cuboid min="-101,4,122" max="-99,5,125"/>
+            <cuboid min="-112,4,77" max="-114,5,74"/>
+        </region>
+    </apply>
+</regions>
+<kill-rewards>
+	<kill-reward>
+        <filter>
+            <kill-streak count="1" repeat="true"/>
+        </filter>
+        <item material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<timelock>on</timelock>
+<multitrade/>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>

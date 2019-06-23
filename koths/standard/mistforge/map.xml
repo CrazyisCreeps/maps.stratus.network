@@ -1,0 +1,237 @@
+<map proto="1.4.0">
+<name>Mistforge</name>
+<version>1.1.0</version>
+<objective>Capture all 5 sequential control points.</objective>
+<authors>
+    <author uuid="15dc7f7a-40cd-4389-ad45-f8a33a09a394"/> <!--  Avoire  -->
+</authors>
+<contributors>
+    <contributor uuid="c65e66b3-e932-4b33-b907-fe4916806076" contribution="Tree Help"/> <!-- Draco_Rogue -->
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="Feedback"/> <!-- ElectroidFilms -->
+    <contributor uuid="dff980ed-9f69-491e-b79c-30c21350baf2" contribution="XML"/> <!-- DoomRobotBoy -->
+</contributors>
+<broadcasts>
+    <tip after="1s" every="2m">You only need to control the Damn point to advance to the Aqueduct points.</tip>
+	<tip after="2s" every="2m">Capture the River point to get Speed I!</tip>
+</broadcasts>
+<teams>
+    <team id="red" color="dark red" max="32" max-overfill="34">Red</team>
+    <team id="blue" color="blue" max="32" max-overfill="34">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" amount="32">cooked beef</item>
+        <item slot="3">golden apple</item>
+        <item slot="28">arrow</item>
+        <potion duration="4">damage resistance</potion>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+        <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+		<leggings unbreakable="true">iron leggings</leggings>
+		<effect duration="5" amplifier="10">regeneration</effect>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+        <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
+        <boots color="0066cc" unbreakable="true">leather boots</boots>
+		<leggings unbreakable="true">iron leggings</leggings>
+		<effect duration="5" amplifier="10">regeneration</effect>
+    </kit>
+	<kit id="upgrade" parents="spawn">
+        <effect duration="oo" amplifier="1">speed</effect>
+		<effect duration="5" amplifier="10">regeneration</effect>
+    </kit>
+	<give filter="captured-river">
+        <kit id="hill-reward">
+            <effect duration="oo" amplifier="1">speed</effect>
+        </kit>
+    </give>
+</kits>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>cooked beef</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>iron leggings</item>
+</itemremove>
+<regions>
+    <block id="jump-pad">-60.5,16,126.5</block>
+    <rectangle id="map" min="oo,oo" max="-oo,-oo"/>
+<!-- Applied -->
+    <apply block="never" region="map" message="You cannot interact with blocks!"/>
+    <apply velocity="0.0,1.3,0.0" region="jump-pad"/>
+	<cuboid id="blue-upgrade" min="-15.5,30,38.5" max="-17.5,31,37.5"/>
+	<cuboid id="red-upgrade" min="-15.5,30,213.5" max="-17.5,31,215.5"/>
+	<apply kit="upgrade" region="blue-upgrade"/>
+	<apply kit="upgrade" region="red-upgrade"/>
+	<cuboid id="red-spawn" min="-13.5,-oo,221.5" max="-9.5,oo,217.5"/>
+	<cuboid id="blue-spawn" min="-13.5,-oo,31.5" max="-9.5,oo,35.5"/>
+	<apply enter="only-red" region="red-spawn" message="You may not enter the enemy spawn!"/>
+	<apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy spawn!"/>
+</regions>
+<spawns>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="135">
+            <cuboid min="-10.5,35,220.5" max="-12.5,35,218.5"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="45">
+            <cuboid min="-10.5,35,34.5" max="-12.5,35,32.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <cylinder base="-60.5,32,126.5" radius=".5" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+	<any id="captured-river">
+        <all>
+            <filter id="only-blue"/>
+            <captured team="blue">mid-river</captured>
+        </all>
+        <all>
+            <filter id="only-red"/>
+            <captured team="red">mid-river</captured>
+        </all>
+    </any>
+	<all id="blue-river">
+		<captured team="blue">mid-river</captured>
+	</all>
+	<all id="red-river">
+		<captured team="red">mid-river</captured>
+	</all>
+</filters>
+<portals>
+    <portal x="@-16.5" y="@30" z="@214.5" yaw="@135" filter="red-river">
+        <region><cuboid min="-10.5,24,220.5" max="-12.5,25,218.5"/></region>
+    </portal>
+    <portal x="@-16.5" y="@30" z="@38.5" yaw="@45" filter="blue-river">
+        <region><cuboid min="-10.5,24,34.5" max="-12.5,25,32.5"/></region>
+    </portal>
+</portals>
+<control-points incremental="true" neutral-state="false" show-progress="true">
+    <control-point initial-owner="red" id="red-last" name="Red Courtyard" capture-time="6s">
+        <capture>
+            <cylinder base="-35.5,24,232.5" radius="6" height="2"/>
+        </capture>
+        <progress>
+            <cylinder base="-35.5,23,232.5" radius="6" height="1"/>
+        </progress>
+        <captured>
+            <cylinder base="-35.5,23,232.5" radius="6" height="1"/>
+        </captured>
+        <player-filter>
+            <any>
+                <objective>red-2nd</objective>
+                <team>red</team>
+            </any>
+        </player-filter>
+    </control-point>
+    <control-point initial-owner="red" id="red-2nd" name="Red Aqueduct" capture-time="8s">
+        <capture>
+            <cylinder base="-96.5,22,187.5" radius="6" height="2"/>
+        </capture>
+        <progress>
+            <cylinder base="-96.5,21,187.5" radius="6" height="2"/>
+        </progress>
+        <captured>
+            <cylinder base="-96.5,21,187.5" radius="6" height="2"/>
+        </captured>
+        <player-filter>
+            <any>
+                <objective>red-last</objective>
+                <all>
+                    <objective>mid-dam</objective>
+                </all>
+            </any>
+        </player-filter>
+    </control-point>
+    <control-point id="mid-dam" name="Dam" capture-time="10s">
+        <capture>
+            <cylinder base="-48.5,24,126.5" radius="7" height="2"/>
+        </capture>
+        <progress>
+            <cylinder base="-48.5,23,126.5" radius="7" height="1"/>
+        </progress>
+        <captured>
+            <cylinder base="-48.5,23,126.5" radius="7" height="1"/>
+        </captured>
+        <player-filter>
+            <any>
+                <objective>red-2nd</objective>
+                <objective>blue-2nd</objective>
+            </any>
+        </player-filter>
+    </control-point>
+    <control-point id="mid-river" name="River" capture-time="10s" required="false">
+        <capture>
+            <cylinder base="-150.5,18,126.5" radius="6" height="2"/>
+        </capture>
+        <progress>
+            <cylinder base="-150.5,17,126.5" radius="6" height="1"/>
+        </progress>
+        <captured>
+            <cylinder base="-150.5,17,126.5" radius="6" height="1"/>
+        </captured>
+        <player-filter>
+            <any>
+                <objective>red-2nd</objective>
+                <objective>blue-2nd</objective>
+            </any>
+        </player-filter>
+    </control-point>
+    <control-point initial-owner="blue" id="blue-2nd" name="Blue Aqueduct" capture-time="8s">
+        <capture>
+            <cylinder base="-96.5,22,65.5" radius="6" height="2"/>
+        </capture>
+        <progress>
+            <cylinder base="-96.5,21,65.5" radius="6" height="1"/>
+        </progress>
+        <captured>
+            <cylinder base="-96.5,21,65.5" radius="6" height="1"/>
+        </captured>
+        <player-filter>
+            <any>
+                <all>
+                    <objective>mid-dam</objective>
+                </all>
+                <objective>blue-last</objective>
+            </any>
+        </player-filter>
+    </control-point>
+    <control-point initial-owner="blue" id="blue-last" name="Blue Courtyard" capture-time="6s">
+        <capture>
+            <cylinder base="-35.5,24,20.5" radius="6" height="2"/>
+        </capture>
+        <progress>
+            <cylinder base="-35.5,23,20.5" radius="6" height="1"/>
+        </progress>
+        <captured>
+            <cylinder base="-35.5,23,20.5" radius="6" height="1"/>
+        </captured>
+        <player-filter>
+            <any>
+                <objective>blue-2nd</objective>
+                <team>blue</team>
+            </any>
+        </player-filter>
+    </control-point>
+</control-points>
+<time result="objectives">15m</time>
+</map>

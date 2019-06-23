@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<map proto="1.4.4">
+<name>Sharks Killed</name>
+<version>1.2.0</version>
+<objective>Capture the enemy team's wools.</objective>
+<gamemode>CTW</gamemode>
+<terrain remove-36="true"/>
+<authors>
+    <author uuid="a63de09d-6fa9-436f-9070-26f5e9a4d27b"/>
+</authors>
+<contributors>
+    <contributor uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad" contribution="Shark"/>
+    <contributor uuid="74e59389-2b3e-490d-954a-a7af1fb1eded" contribution="XML"/>
+    <contributor uuid="b8add1ba-8e13-4673-bc73-4e3ed524d40e" contribution="House"/>
+	<contributor uuid="d1649095-f0fb-443b-9831-9540a454606d" contribution="Feedback"/>
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" max="8" max-overfill="8">Red</team>
+    <team id="blue-team" color="blue" max="8" max-overfill="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true" enchantments="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="30" unbreakable="true">iron spade</item>
+		<item slot="4" amount="64">golden carrot</item>
+        <item slot="5">golden apple</item>
+        <item slot="6" amount="64">wood</item>
+		<item slot="7" amount="64">wood</item>
+		<item slot="8" amount="32">glass</item>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red-team" kit="spawn-kit">
+        <region yaw="-135">
+            <point>-325.5,52.0625,-115.5</point>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="spawn-kit">
+        <region yaw="45">
+            <point>-161.5,52.0625,-279.5</point>
+        </region>
+    </spawn>
+    <default>
+        <region yaw="45">
+            <point>-243.5,45,-197.5</point>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="void-filter">
+        <void/>
+    </not>
+	<material id="only-iron-break">iron block</material>
+	<not id="deny-player-place">
+        <participating/>
+    </not>
+</filters>
+<regions>
+    <union id="spawns">
+        <rectangle id="red-spawn" min="-327,-114" max="-287,-153"/>
+        <rectangle id="blue-spawn" min="-160,-281" max="-200,-242"/>
+    </union>
+    <union id="wool-rooms">
+        <union id="red-wrs"> <!-- Red must enter -->
+            <rectangle id="orange-wr" min="-144,-190" max="-131,-201"/>
+            <rectangle id="yellow-wr" min="-240,-297" max="-251,-310"/>
+        </union>
+        <union id="blue-wrs"> <!-- Blue must enter -->
+            <rectangle id="black-wr" min="-343,-205" max="-356,-194"/>
+            <rectangle id="white-wr" min="-247,-98" max="-236,-85"/>
+        </union>
+	</union>
+    <union id="iron-areas">
+        <cuboid min="-308,14,-125" max="-316,18,-133"/> <!-- Red iron -->
+        <cuboid min="-179,14,-270" max="-171,18,-262"/> <!-- Blue iron -->
+    </union>
+	<apply block="never">
+        <region>
+            <block>-244,15,-198</block>
+        </region>
+    </apply>
+    <apply enter="only-red" block="only-red" region="red-wrs" message="You may not enter your own wool room!"/>
+    <apply enter="only-blue" block="only-blue" region="blue-wrs" message="You may not enter your own wool room!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the opponent's spawn!"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the opponent's spawn!"/>
+	<apply block-break="only-iron-break" block-place="deny-player-place" region="red-spawn" message="You can only break iron blocks in spawn!"/>
+	<apply block-break="only-iron-break" block-place="deny-player-place" region="blue-spawn" message="You can only break iron blocks in spawn!"/>
+	<apply block-place="void-filter" region="everywhere" message="You may not modify the void!"/>
+</regions>
+<wools>
+    <wool team="red-team" color="yellow" location="-248.5,22.5,-307.5">
+        <monument>
+            <block>-319,11,-125</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="orange" location="-133.5,22.5,-198.5">
+        <monument>
+            <block>-317,11,-123</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="cyan" location="-238.5,22.5,-87.5">
+        <monument>
+            <block>-169,11,-271</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="light blue" location="-353.5,22.5,-196.5">
+        <monument>
+            <block>-171,11,-273</block>
+        </monument>
+    </wool>
+</wools>
+<renewables>
+    <renewable>
+        <region>
+            <region id="iron-areas"/>
+        </region>
+        <renew-filter>
+            <material>iron block</material>
+        </renew-filter>
+        <replace-filter>
+            <material>air</material>
+        </replace-filter>
+    </renewable>
+</renewables>
+<crafting>
+    <disable>shield</disable>
+	<disable>minecart</disable>
+	<disable>boat</disable>
+	<disable>boat spruce</disable>
+	<disable>boat birch</disable>
+	<disable>boat jungle</disable>
+	<disable>boat acacia</disable>
+	<disable>boat dark oak</disable>
+</crafting>
+<itemremove>
+    <item>wood</item>
+	<item>glass</item>
+	<item>arrow</item>
+	<item>golden carrot</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<kill-reward>
+    <item material="golden apple"/>
+	<item amount="32" material="wood"/>
+	<item amount="16" material="glass"/>
+</kill-reward>
+<maxbuildheight>29</maxbuildheight>
+<respawn delay="5s"/>
+<time result="objectives">45m</time>
+</map>

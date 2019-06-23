@@ -1,0 +1,193 @@
+<map proto="1.4.2">
+<name>Ushatak 2</name>
+<version>1.1.0</version>
+<objective>Destroy the enemy's obsidian monument!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+	<author uuid="bac7aaf9-888c-4522-8913-13a833527da6"/> <!-- drop_the_hammer -->
+</authors>
+<contributors>
+	<contributor uuid="57f5535d-6b9e-4013-ad71-e2cc63ec8d7c" contribution="XML"/> <!-- ItzaMeLuigi -->
+</contributors>
+<teams>
+	<team id="red" color="dark red" max="14">Red</team>
+	<team id="blue" color="blue" max="14">Blue</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="180">
+        	<cuboid min="79.5,13,47.5" max="77.5,13,45.5"/>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="0">
+        	<cuboid min="-73.5,13,-35.5" max="-71.5,13,-37.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <cuboid min="1,47,6" max="5,47,5"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3" enchantment="dig_speed:1">iron axe</item>
+        <item slot="4" amount="48" damage="5" >wood</item>
+		<item slot="5" amount="32">smooth brick</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="32">cooked beef</item>
+		<item slot="28" material="arrow" amount="1"/>
+		<item slot="29" enchantment="dig_speed:1">iron spade</item>
+        <potion duration="4" amplifier="3">heal</potion>
+        <potion duration="4">damage resistance</potion>
+    </kit>
+	<kit id="red-kit" parents="spawn">
+		<helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+	    <chestplate enchantment="protection_projectile:1" unbreakable="true">chainmail chestplate</chestplate>
+	    <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+	<kit id="blue-kit" parents="spawn">
+	    <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+		<chestplate enchantment="protection_projectile:1" unbreakable="true">chainmail chestplate</chestplate>
+		<leggings color="0066cc" unbreakable="true">leather leggings</leggings>
+        <boots color="0066cc" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+	<not id="no-void">
+        <void/>
+    </not>
+	<not id="no-log">
+        <material>162</material>
+    </not>
+	<any id="only-gold">
+        <material>gold block</material>
+    </any>
+</filters>
+<regions>
+	<negative id="void">
+		<union id="playable">
+			<rectangle min="56.5,19.5" max="46.5,-0.5"/>
+			<rectangle min="1.5,34.5" max="-50.5,54.5"/>
+			<rectangle min="-50.5,-9.5" max="-40.5,10.5"/>
+			<rectangle min="4.5,-24.5" max="56.5,-44.5"/>
+			<!-- Monuments -->
+			<rectangle min="-69.5,31.5" max="-87.5,13.5"/>
+			<rectangle min="75.5,-21.5" max="93.5,-3.5"/>
+		</union>
+		<union id="spawns">
+			<!-- Red Spawn -->
+			<union id="red-spawn">
+				<rectangle min="-82.5,-21.5" max="-79.5,-44.5"/>
+				<rectangle min="-78.5,-22.5" max="-74.5,-44.5"/>
+				<rectangle min="-73.5,-23.5" max="-73.5,-44.5"/>
+				<rectangle min="-72.5,-24.5" max="-71.5,-44.5"/>
+				<rectangle min="-72.5,-24.5" max="-71.5,-44.5"/>
+				<rectangle min="-70.5,-25.5" max="-70.5,-44.5"/>
+				<rectangle min="-69.5,-26.5" max="-64.5,-44.5"/>
+				<rectangle min="-63.5,-27.5" max="-63.5,-44.5"/>
+				<rectangle min="-62.5,-29.5" max="-62.5,-44.5"/>
+			</union>
+			<!-- Blue Spawn -->
+			<union id="blue-spawn">
+				<rectangle min="88.5,31.5" max="85.5,54.5"/>
+				<rectangle min="84.5,32.5" max="80.5,54.5"/>
+				<rectangle min="79.5,33.5" max="79.5,54.5"/>
+				<rectangle min="78.5,34.5" max="77.5,54.5"/>
+				<rectangle min="76.5,35.5" max="76.5,54.5"/>
+				<rectangle min="75.5,36.5" max="70.5,54.5"/>
+				<rectangle min="69.5,37.5" max="69.5,54.5"/>
+				<rectangle min="68.5,39.5" max="68.5,54.5"/>
+			</union>
+		</union>
+	</negative>
+	<cuboid id="bottom" min="-oo,0,-oo" max="oo,1,oo"/>
+	<apply block-break="no-log" message="You may not break this block" region="bottom"/>
+	<apply block-place="no-void" message="You may not place blocks in this area" region="void"/>
+	<apply block="never" message="You may not break blocks in spawn" region="spawns"/>
+	<apply enter="only-red" message="You may not enter the enemy spawn" region="red-spawn"/>
+	<apply enter="only-blue" message="You may not enter the enemy spawn" region="blue-spawn"/>
+</regions>
+<destroyables completion="100%" mode-changes="true"  materials="obsidian">
+	<destroyable owner="red" name="Monument">
+		<region>
+			<cuboid min="-77.5,9,21.5" max="-79.5,15,23.5"/>
+		</region>
+	</destroyable>
+	<destroyable owner="blue" name="Monument">
+		<region>
+			<cuboid min="85.5,9,-13.5" max="83.5,15,-11.5"/>
+		</region>
+	</destroyable>
+</destroyables>
+<modes>
+    <mode after="10m" material="beacon" name="`bBeacon `0Monument `6Mode"/>
+    <mode after="20m" material="coal block" name="`0Coal `0Monument `6Mode"/>
+    <mode after="30m" material="stained clay" name="`8Stained `8Clay `0Monument `6Mode"/>
+</modes>
+<renewables>
+    <renewable rate="0.4" grow="true" particles="true" sound="true" avoid-entities="true">
+        <region>
+            <cuboid min="-90.5,4,12.5" max="-103.5,7,24.5"/>
+            <cuboid min="96.5,4,-2.5" max="109.5,7,-14.5"/>
+        </region>
+        <renew-filter>
+            <any>
+                <material>gold block</material>
+            </any>
+        </renew-filter>
+        <replace-filter>
+            <any>
+                <material>air</material>
+            </any>
+        </replace-filter>
+    </renewable>
+</renewables>
+<killreward>
+    <item material="golden apple"/>
+    <item material="wood" amount="8" damage="5"/>
+</killreward>
+<maxbuildheight>28</maxbuildheight>
+<itemremove>
+    <item>cooked beef</item>
+    <item>obsidian</item>
+    <item>smooth brick</item>
+    <item>wood</item>
+    <item>162</item>
+    <item>string</item>
+    <item>glowstone dust</item>
+    <item>cactus</item>
+    <item>skull</item>
+    <item>torch</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>sugar cane</item>
+    <item>clay ball</item>
+    <item>stone plate</item>
+    <item>sand</item>
+    <item>golden apple</item>
+	<item>leather helmet</item>
+	<item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+	<item>red rose</item>
+	<item>coal block</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+</map>

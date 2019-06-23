@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<map proto="1.4.3" game="Payload">
+<name>Foundry: Payload</name>
+<version>1.1.1</version>
+<objective>Escort the payload to the other side.</objective>
+<authors>
+    <author uuid="2958ea4c-3501-404e-88cc-12e8632f68cc"/> <!--  NixaniaXi  -->
+</authors>
+<contributors>
+    <contributor uuid="57f5535d-6b9e-4013-ad71-e2cc63ec8d7c"/> <!--ItzaMeLuigi -->
+    <contrubutor uuid="48924ea3-3aad-4e16-838c-368d8d9e0a25"/> <!--matic0B-->
+    <contrubutor uuid="715769c5-8c4c-4489-bdf8-f9cee2b2ae8a"/> <!--amactus-->
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="12">Red</team>
+    <team id="blue" color="blue" max="12">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red" kit="redKit">
+        <regions yaw="180">
+            <cylinder base="-64.5,22,-0.5" radius="1" height="1"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blueKit">
+        <regions yaw="0">
+            <cylinder base="65.5,22,1.5" radius="1" height="1"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions angle="0,30,0">
+            <point>1.5,26,24.5</point>
+            <point>-0.5,26,-23.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <game-mode>adventure</game-mode>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="6" amount="1">golden apple</item>
+        <item slot="8" amount="32">arrow</item>
+        <chestplate enchantment="protection projectile:3" unbreakable="true" locked="true">chainmail chestplate</chestplate>
+    </kit>
+    <kit id="redKit" parents="spawn">
+        <helmet color="cd0000" unbreakable="true" locked="true">leather helmet</helmet>
+        <leggings color="cd0000" unbreakable="true" locked="true">leather leggings</leggings>
+        <boots color="cd0000" unbreakable="true" locked="true">leather boots</boots>
+    </kit>
+    <kit id="blueKit" parents="spawn">
+        <helmet color="0066cc" unbreakable="true" locked="true">leather helmet</helmet>
+        <leggings color="0066cc" unbreakable="true" locked="true">leather leggings</leggings>
+        <boots color="0066cc" unbreakable="true" locked="true">leather boots</boots>
+    </kit>
+</kits>
+<killreward>
+    <item>golden apple</item>
+    <item amount="32">arrow</item>
+</killreward>
+<payloads time-multiplier="0.25" capture-time="5s" recovery="2" decay="5" empty-decay="1">
+    <payload name="Payload" id="payload" spawn-location="0.5,8.0,0.5" location="-64.5,17.0,-16.5" radius="3" yaw="180.0" owner="blue" enemy-speed="1.25" friendly-speed="1.25" required="false" friendly-points="1" points="1" checkpoint-material="activator rail" friendly-checkpoints="true"/>
+</payloads>
+<time>12m</time>
+<score>
+    <limit>1</limit>
+</score>
+<itemremove>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <!-- Checkpoint Filters -->
+    <all id="red-holding-mid">
+        <payload-checkpoint payload-id="payload">2</payload-checkpoint>
+    </all>
+    <all id="red-holding-1st">
+        <payload-checkpoint payload-id="payload">3</payload-checkpoint>
+    </all>
+    <all id="red-holding-2nd">
+        <payload-checkpoint payload-id="payload">4</payload-checkpoint>
+    </all>
+    <all id="blue-holding-mid">
+        <payload-friendly-checkpoint payload-id="payload">2</payload-friendly-checkpoint>
+    </all>
+    <all id="blue-holding-1st">
+        <payload-friendly-checkpoint payload-id="payload">1</payload-friendly-checkpoint>
+    </all>
+    <all id="blue-holding-2nd">
+        <payload-friendly-checkpoint payload-id="payload">0</payload-friendly-checkpoint>
+    </all>
+</filters>
+<portals>
+    <!--Red-->
+    <portal x="@-64.5" y="@12" z="@-11.5" yaw="@180">
+        <region><cylinder base="-64.5,14,-0.5" radius="2" height="1"/></region>
+    </portal>
+    <portal x="@-53" y="@13" z="@-12" yaw="@-90" filter="red-holding-mid">
+        <region><cylinder base="-64.5,16,-0.5" radius="2" height="1"/></region>
+    </portal>
+    <portal x="@-8" y="@6" z="@-10" yaw="@-90" filter="red-holding-1st">
+        <region><cylinder base="-64.5,18,-0.5" radius="2" height="1"/></region>
+    </portal>
+    <portal x="@22" y="@11" z="@-2" yaw="@0" filter="red-holding-2nd">
+        <region><cylinder base="-64.5,20,-0.5" radius="2" height="1"/></region>
+    </portal>
+    <!--Blue-->
+    <portal x="@65.5" y="@12" z="@11.5" yaw="@0">
+        <region><cylinder base="65.5,14,1.5" radius="2" height="1"/></region>
+    </portal>
+    <portal x="@54" y="@13" z="@13" yaw="@90" filter="blue-holding-mid">
+        <region><cylinder base="65.5,16,1.5" radius="2" height="1"/></region>
+    </portal>
+    <portal x="@9" y="@6" z="@11" yaw="@90" filter="blue-holding-1st">
+        <region><cylinder base="65.5,18,1.5" radius="2" height="1"/></region>
+    </portal>
+    <portal x="@-21" y="@11" z="@3" yaw="@180" filter="blue-holding-2nd">
+        <region><cylinder base="65.5,20,1.5" radius="2" height="1"/></region>
+    </portal>
+</portals>
+<regions>
+    <cuboid id="blue-spawn" min="69,12,19" max="67,15,16"/>
+    <cuboid id="red-spawn" min="-68,12,-18" max="-66,15,-15"/>
+    <apply block="never" region="everywhere"/>
+    <apply enter="only-blue" region="blue-spawn"/>
+    <apply enter="only-red" region="red-spawn"/>
+</regions>
+<timelock>true</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

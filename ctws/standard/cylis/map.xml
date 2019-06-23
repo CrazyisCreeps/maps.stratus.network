@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Cylis</name>
+<version>1.1</version>
+<objective>Capture and place the enemies wools!</objective>
+<authors>
+    <author uuid="e4711469-1e41-4b89-a572-ff857f2ecdc9"/>
+</authors>
+<contributors>
+    <contributor uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9"/>
+</contributors>
+<gamerules>
+    <randomTickSpeed>false</randomTickSpeed>
+</gamerules>
+<teams>
+    <team id="red-team" color="dark red" max="14" max-overfill="18">Red</team>
+    <team id="blue-team" color="blue" max="14" max-overfill="18">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" unbreakable="true" prevent-sharing="true">iron sword</item>
+        <item slot="1" unbreakable="true" prevent-sharing="true">bow</item>
+        <item slot="2" unbreakable="true" prevent-sharing="true" enchantment="dig speed">iron pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="dig speed">iron axe</item>
+        <item slot="4" amount="24" damage="2">log</item>
+        <item slot="6" amount="24">bread</item>
+        <item slot="7">golden apple</item>
+        <item slot="28" amount="24">arrow</item>
+        <item slot="8">shears</item>
+        <potion amplifier="20" duration="4s">resistance</potion>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <item slot="5" amount="32" damage="11">stained clay</item>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <item slot="5" amount="32" damage="14">stained clay</item>
+    </kit>
+</kits>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="no-void">
+        <void/>
+    </not>
+    <all id="only-iron">
+        <material>iron_block</material>
+    </all>
+    <all id="allow-webs">
+    	<material>30</material>
+    </all>
+    <all id="red-wool-room-webs">
+    	<filter id="only-red"/>
+    	<filter id="allow-webs"/>
+    </all>
+    <all id="blue-wool-room-webs">
+    	<filter id="only-blue"/>
+    	<filter id="allow-webs"/>
+    </all>
+</filters>
+<regions>
+    <union id="woolrooms">
+        <rectangle id="red-wool-room" min="19,-121" max="32,-134"/>
+        <rectangle id="blue-wool-room" min="19,158" max="32,171"/>
+    </union>
+    <union id="red-spawn">
+        <rectangle min="12.5,92.5" max="38.5,118.5"/>
+    </union>
+    <union id="blue-spawn">
+        <rectangle min="38.5,-55.5" max="12.5,-81.5"/>
+    </union>
+    <apply block-break="only-iron" block-place="never" message="You cannot modify the spawn!" region="blue-spawn"/>
+    <apply block-break="only-iron" block-place="never" message="You cannot modify the spawn!" region="red-spawn"/>
+    <apply enter="only-red" message="You cannot enter the enemy spawn!" region="red-spawn"/>
+    <apply enter="only-blue" message="You cannot enter the enemy spawn!" region="blue-spawn"/>
+    <apply enter="only-red" message="You cannot enter your own wool room!" region="red-wool-room"/>
+    <apply enter="only-blue" message="You cannot enter your own wool room!" region="blue-wool-room"/>
+    <apply block="red-wool-room-webs" message="You cannot enter your own wool room!" region="red-wool-room"/>
+    <apply block="blue-wool-room-webs" message="You cannot enter your own wool room!" region="blue-wool-room"/>
+    <apply block="no-void" message="You cannot modify the void">
+        <region>
+            <negative>
+                <union>
+                    <rectangle min="14,136" max="37,125"/>
+                    <rectangle min="-5,85" max="56,-48"/>
+                    <rectangle min="37,-88" max="14,-99"/>
+                </union>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="180">
+            <cylinder base="25.5,9.5,105.5" radius="2" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="0">
+            <cylinder base="25.5,9.5,-68.5" radius="2" height="0"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <cylinder base="72.5,4,18.5" radius="1" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<wools>
+    <wool team="red-team" color="blue" location="25,10,-131">
+        <monument><block>25,10,110</block></monument>
+    </wool>
+    <wool team="blue-team" color="red" location="25,10,167">
+        <monument><block>25,10,-74</block></monument>
+    </wool>
+</wools>
+<killreward>
+    <item amount="1">golden apple</item>
+    <item amount="8">arrow</item>
+</killreward>
+<crafting>
+    <disable>boat</disable>
+    <disable>445</disable>
+    <disable>444</disable>
+</crafting>
+<timelock>on</timelock>
+<maxbuildheight>20</maxbuildheight>
+<itemremove>
+    <item>log</item>
+    <item>stained clay</item>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>bread</item>
+    <item>leaves</item>
+    <item>sapling</item>
+    <item>seeds</item>
+    <item>grass</item>
+    <item>dirt</item>
+    <item>stone</item>
+    <item>cobblestone</item>
+    <item>37</item>
+    <item>38</item>
+</itemremove>
+</map>

@@ -1,0 +1,579 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Hide n' Seek</name>
+<version>1.2.2</version>
+<objective>Find all the hiders before the 7 minutes are up!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="a9f11454-beac-4cc3-a138-1780802c8794"/> <!-- Crazy_ -->
+</authors>
+<rules>
+    <rule>Fall damage is off</rule>
+    <rule>Name tags of hiders don't show</rule>
+    <rule>Seekers glow</rule>
+    <rule>Seekers have speed I</rule>
+    <rule>The frequency of how often houses disappear increases as the match progresses</rule>
+    <rule>However, the amount per interval decreases</rule>
+    <rule>Every minute and a half(ish), hiders get a 15 second invisibility potion</rule>
+</rules>
+<teams>
+    <team id="hiders" color="green" show-name-tags="false" max="50" plural="true">Hiders</team>
+    <team id="seekers" color="dark aqua" max="2" max-overfill="2" plural="true">Seekers</team>
+</teams>
+<kits>
+    <kit id="blindness">
+        <effect>blindness</effect>
+    </kit>
+    <kit id="seeker-kit" force="true">
+        <item slot="0" locked="true" unbreakable="true" material="iron sword"/>
+        <helmet locked="true" unbreakable="true" material="diamond helmet"/>
+        <chestplate locked="true" unbreakable="true" material="diamond chestplate"/>
+        <leggings locked="true" unbreakable="true" material="diamond leggings"/>
+        <boots locked="true" unbreakable="true" material="diamond boots"/>
+        <effect duration="1s">blindness</effect>
+        <effect duration="oo">glowing</effect>
+        <effect duration="oo" amplifier="1">speed</effect>
+    </kit>
+    <!-- Gives a unique kit to a specific slot -->
+    <kit id="invis-1" force="true">
+        <item slot="0" material="potion" locked="true">
+            <effect duration="15s">invisibility</effect>
+        </item>
+    </kit>
+    <kit id="invis-2" force="true" locked="true">
+        <item slot="1" material="potion">
+            <effect duration="15s">invisibility</effect>
+        </item>
+    </kit>
+    <kit id="invis-3" force="true" locked="true">
+        <item slot="2" material="potion">
+            <effect duration="15s">invisibility</effect>
+        </item>
+    </kit>
+    <!-- Hiders get 15s invis pot a 2m, 3m45s & 5m30s -->
+    <give kit="invis-1">
+        <filter>
+            <all>
+                <time>2m</time>
+                <team>hiders</team>
+            </all>
+        </filter>
+    </give>
+    <give kit="invis-2">
+        <filter>
+            <all>
+                <time>3m45s</time>
+                <team>hiders</team>
+            </all>
+        </filter>
+    </give>
+    <give kit="invis-3">
+        <filter>
+            <all>
+                <time>5m30s</time>
+                <team>hiders</team>
+            </all>
+        </filter>
+    </give>
+</kits>
+<spawns>
+    <spawn team="hiders" yaw="90" safe="true" angle="3,3,29">
+        <regions>
+            <cuboid min="31.5,2,57.5" max="-23.5,2.5,2.5"/>
+        </regions>
+    </spawn>
+    <spawn team="seekers" kit="blindness">
+        <regions>
+            <point>3.5,72.5,30.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <cuboid min="5,2.5,31" max="3,2.5,29"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-hiders">hiders</team>
+    <team id="only-seekers">seekers</team>
+    <time id="25s">25s</time>
+    <time id="1min">1m</time>
+    <time id="2min">2m</time>
+    <time id="3min">3m</time>
+    <time id="4min">4m</time>
+    <time id="4min30s">4m30s</time>
+    <time id="5min">5m</time>
+    <time id="5min30s">5m30s</time>
+    <time id="6min">6m</time>
+    <time id="6min30s">6m30s</time>
+</filters>
+<regions>
+    <cuboid id="seeker-kit-zone" min="31.5,20,57.5" max="-23.5,40,2.5"/>
+    <apply block="never">
+        <everywhere/>
+    </apply>
+    <!-- When seekers fall onto map, they recieve their kit and lose blindness -->
+    <apply kit="seeker-kit" region="seeker-kit-zone" filter="only-seekers"/>
+</regions>
+<structures air="true"> 
+    <structure id="cage">
+        <region>
+            <cuboid min="2,80,28" max="6,86,32"/>
+        </region>
+    </structure>
+    <!-- Check dynamic structures for # of houses taken away per round. When there is 30 seconds left in the match, there should be 4 houses left -->
+    <!-- Facing north, # is the row from top to bottom, letter is placement in that row -->
+    <structure id="build1a">
+        <region>
+            <cuboid min="-24,29,2" max="-32,15,-6"/>
+        </region>
+    </structure>
+    <structure id="build1b">
+        <region>
+            <cuboid min="-15,29,2" max="-22,15,-6"/>
+        </region>
+    </structure>
+    <structure id="build1c">
+        <region>
+            <cuboid min="-6,29,2" max="-13,15,-6"/>
+        </region>
+    </structure>
+    <structure id="build1d">
+        <region>
+            <cuboid min="3,29,2" max="-4,15,-6"/>
+        </region>
+    </structure>
+    <structure id="build1e">
+        <region>
+            <cuboid min="12,29,2" max="5,15,-6"/>
+        </region>
+    </structure>
+    <structure id="build1f">
+        <region>
+            <cuboid min="21,29,2" max="14,15,-6"/>
+        </region>
+    </structure>
+    <structure id="build1g">
+        <region>
+            <cuboid min="30,29,2" max="23,15,-6"/>
+        </region>
+    </structure>
+    <structure id="build1h">
+        <region>
+            <cuboid min="40,29,2" max="32,15,-6"/>
+        </region>
+    </structure>
+    <structure id="build2a">
+        <region>
+            <cuboid min="-24,29,11" max="-32,15,4"/>
+        </region>
+    </structure>
+    <structure id="build2b">
+        <region>
+            <cuboid min="-15,29,11" max="-22,15,4"/>
+        </region>
+    </structure>
+    <structure id="build2c">
+        <region>
+            <cuboid min="-6,29,11" max="-13,15,4"/>
+        </region>
+    </structure>
+    <structure id="build2d">
+        <region>
+            <cuboid min="3,29,11" max="-4,15,4"/>
+        </region>
+    </structure>
+    <structure id="build2e">
+        <region>
+            <cuboid min="12,29,11" max="5,15,4"/>
+        </region>
+    </structure>
+    <structure id="build2f">
+        <region>
+            <cuboid min="21,29,11" max="14,15,4"/>
+        </region>
+    </structure>
+    <structure id="build2g">
+        <region>
+            <cuboid min="30,29,11" max="23,15,4"/>
+        </region>
+    </structure>
+    <structure id="build2h">
+        <region>
+            <cuboid min="40,29,11" max="32,15,4"/>
+        </region>
+    </structure>
+    <structure id="build3a">
+        <region>
+            <cuboid min="-24,29,20" max="-32,15,13"/>
+        </region>
+    </structure>
+    <structure id="build3b">
+        <region>
+            <cuboid min="-15,29,20" max="-22,15,13"/>
+        </region>
+    </structure>
+    <structure id="build3c">
+        <region>
+            <cuboid min="-6,29,20" max="-13,15,13"/>
+        </region>
+    </structure>
+    <structure id="build3d">
+        <region>
+            <cuboid min="3,29,20" max="-4,15,13"/>
+        </region>
+    </structure>
+    <structure id="build3e">
+        <region>
+            <cuboid min="12,29,20" max="5,15,13"/>
+        </region>
+    </structure>
+    <structure id="build3f">
+        <region>
+            <cuboid min="21,29,20" max="14,15,13"/>
+        </region>
+    </structure>
+    <structure id="build3g">
+        <region>
+            <cuboid min="30,29,20" max="23,15,13"/>
+        </region>
+    </structure>
+    <structure id="build3h">
+        <region>
+            <cuboid min="40,29,20" max="32,15,13"/>
+        </region>
+    </structure>
+    <structure id="build4a">
+        <region>
+            <cuboid min="-24,29,29" max="-32,15,22"/>
+        </region>
+    </structure>
+    <structure id="build4b">
+        <region>
+            <cuboid min="-15,29,29" max="-22,15,22"/>
+        </region>
+    </structure>
+    <structure id="build4c">
+        <region>
+            <cuboid min="-6,29,29" max="-13,15,22"/>
+        </region>
+    </structure>
+    <structure id="build4d">
+        <region>
+            <cuboid min="3,29,29" max="-4,15,22"/>
+        </region>
+    </structure>
+    <structure id="build4e">
+        <region>
+            <cuboid min="12,29,29" max="5,15,22"/>
+        </region>
+    </structure>
+    <structure id="build4f">
+        <region>
+            <cuboid min="21,29,29" max="14,15,22"/>
+        </region>
+    </structure>
+    <structure id="build4g">
+        <region>
+            <cuboid min="30,29,29" max="23,15,22"/>
+        </region>
+    </structure>
+    <structure id="build4h">
+        <region>
+            <cuboid min="40,29,29" max="32,15,22"/>
+        </region>
+    </structure>
+    <structure id="build5a">
+        <region>
+            <cuboid min="-24,29,38" max="-32,15,31"/>
+        </region>
+    </structure>
+    <structure id="build5b">
+        <region>
+            <cuboid min="-15,29,38" max="-22,15,31"/>
+        </region>
+    </structure>
+    <structure id="build5c">
+        <region>
+            <cuboid min="-6,29,38" max="-13,15,31"/>
+        </region>
+    </structure>
+    <structure id="build5d">
+        <region>
+            <cuboid min="3,29,38" max="-4,15,31"/>
+        </region>
+    </structure>
+    <structure id="build5e">
+        <region>
+            <cuboid min="12,29,38" max="5,15,31"/>
+        </region>
+    </structure>
+    <structure id="build5f">
+        <region>
+            <cuboid min="21,29,38" max="14,15,31"/>
+        </region>
+    </structure>
+    <structure id="build5g">
+        <region>
+            <cuboid min="30,29,38" max="23,15,31"/>
+        </region>
+    </structure>
+    <structure id="build5h">
+        <region>
+            <cuboid min="40,29,38" max="32,15,31"/>
+        </region>
+    </structure>
+    <structure id="build6a">
+        <region>
+            <cuboid min="-24,29,47" max="-32,15,40"/>
+        </region>
+    </structure>
+    <structure id="build6b">
+        <region>
+            <cuboid min="-15,29,47" max="-22,15,40"/>
+        </region>
+    </structure>
+    <structure id="build6c">
+        <region>
+            <cuboid min="-6,29,47" max="-13,15,40"/>
+        </region>
+    </structure>
+    <structure id="build6d">
+        <region>
+            <cuboid min="3,29,47" max="-4,15,40"/>
+        </region>
+    </structure>
+    <structure id="build6e">
+        <region>
+            <cuboid min="12,29,47" max="5,15,40"/>
+        </region>
+    </structure>
+    <structure id="build6f">
+        <region>
+            <cuboid min="21,29,47" max="14,15,40"/>
+        </region>
+    </structure>
+    <structure id="build6g">
+        <region>
+            <cuboid min="30,29,47" max="23,15,40"/>
+        </region>
+    </structure>
+    <structure id="build6h">
+        <region>
+            <cuboid min="40,29,47" max="32,15,40"/>
+        </region>
+    </structure>
+    <structure id="build7a">
+        <region>
+            <cuboid min="-24,29,56" max="-32,15,49"/>
+        </region>
+    </structure>
+    <structure id="build7b">
+        <region>
+            <cuboid min="-15,29,56" max="-22,15,49"/>
+        </region>
+    </structure>
+    <structure id="build7c">
+        <region>
+            <cuboid min="-6,29,56" max="-13,15,49"/>
+        </region>
+    </structure>
+    <structure id="build7d">
+        <region>
+            <cuboid min="3,29,56" max="-4,15,49"/>
+        </region>
+    </structure>
+    <structure id="build7e">
+        <region>
+            <cuboid min="12,29,56" max="5,15,49"/>
+        </region>
+    </structure>
+    <structure id="build7f">
+        <region>
+            <cuboid min="21,29,56" max="14,15,49"/>
+        </region>
+    </structure>
+    <structure id="build7g">
+        <region>
+            <cuboid min="30,29,56" max="23,15,49"/>
+        </region>
+    </structure>
+    <structure id="build7h">
+        <region>
+            <cuboid min="40,29,56" max="32,15,49"/>
+        </region>
+    </structure>
+    <structure id="build8a">
+        <region>
+            <cuboid min="-24,29,66" max="-32,15,58"/>
+        </region>
+    </structure>
+    <structure id="build8b">
+        <region>
+            <cuboid min="-15,29,66" max="-22,15,58"/>
+        </region>
+    </structure>
+    <structure id="build8c">
+        <region>
+            <cuboid min="-6,29,66" max="-13,15,58"/>
+        </region>
+    </structure>
+    <structure id="build8d">
+        <region>
+            <cuboid min="3,29,66" max="-4,15,58"/>
+        </region>
+    </structure>
+    <structure id="build8e">
+        <region>
+            <cuboid min="12,29,66" max="5,15,58"/>
+        </region>
+    </structure>
+    <structure id="build8f">
+        <region>
+            <cuboid min="21,29,66" max="14,15,58"/>
+        </region>
+    </structure>
+    <structure id="build8g">
+        <region>
+            <cuboid min="30,29,66" max="23,15,58"/>
+        </region>
+    </structure>
+    <structure id="build8h">
+        <region>
+            <cuboid min="40,29,66" max="32,15,58"/>
+        </region>
+    </structure>
+    <!-- Dyanmic structures -->
+    <dynamic structure="cage" offset="0,-10,0" trigger="25s"/>
+    <!-- 1 min (11 houses) -->
+    <dynamic structure="build2f" offset="0,-13,0" trigger="1min"/>
+    <dynamic structure="build3c" offset="0,-13,0" trigger="1min"/>
+    <dynamic structure="build5a" offset="0,-13,0" trigger="1min"/>
+    <dynamic structure="build5e" offset="0,-13,0" trigger="1min"/>       
+    <dynamic structure="build7b" offset="0,-13,0" trigger="1min"/>
+    <dynamic structure="build7h" offset="0,-13,0" trigger="1min"/>
+    <dynamic structure="build1c" offset="0,-13,0" trigger="1min"/>
+    <dynamic structure="build8g" offset="0,-13,0" trigger="1min"/>
+    <dynamic structure="build1f" offset="0,-13,0" trigger="1min"/>
+    <dynamic structure="build5h" offset="0,-13,0" trigger="1min"/>
+    <dynamic structure="build8e" offset="0,-13,0" trigger="1min"/>
+    <!-- 2 mins (11 houses) -->
+    <dynamic structure="build1e" offset="0,-13,0" trigger="2min"/>      
+    <dynamic structure="build2a" offset="0,-13,0" trigger="2min"/>        
+    <dynamic structure="build4h" offset="0,-13,0" trigger="2min"/>        
+    <dynamic structure="build5d" offset="0,-13,0" trigger="2min"/>       
+    <dynamic structure="build8a" offset="0,-13,0" trigger="2min"/>
+    <dynamic structure="build8f" offset="0,-13,0" trigger="2min"/>
+    <dynamic structure="build2h" offset="0,-13,0" trigger="2min"/>
+    <dynamic structure="build8b" offset="0,-13,0" trigger="2min"/>
+    <dynamic structure="build4a" offset="0,-13,0" trigger="2min"/>
+    <dynamic structure="build2c" offset="0,-13,0" trigger="2min"/>
+    <dynamic structure="build7c" offset="0,-13,0" trigger="2min"/>       
+    <!-- 3 mins (11 houses) -->
+    <dynamic structure="build1h" offset="0,-13,0" trigger="3min"/>       
+    <dynamic structure="build2d" offset="0,-13,0" trigger="3min"/>      
+    <dynamic structure="build3a" offset="0,-13,0" trigger="3min"/>
+    <dynamic structure="build4f" offset="0,-13,0" trigger="3min"/>        
+    <dynamic structure="build6g" offset="0,-13,0" trigger="3min"/>        
+    <dynamic structure="build7d" offset="0,-13,0" trigger="3min"/>
+    <dynamic structure="build5b" offset="0,-13,0" trigger="3min"/>
+    <dynamic structure="build5g" offset="0,-13,0" trigger="3min"/>
+    <dynamic structure="build5f" offset="0,-13,0" trigger="3min"/>
+    <dynamic structure="build2e" offset="0,-13,0" trigger="3min"/>
+    <dynamic structure="build4g" offset="0,-13,0" trigger="3min"/>   
+    <!-- 4 mins (5 houses) -->
+    <dynamic structure="build3e" offset="0,-13,0" trigger="4min"/>               
+    <dynamic structure="build4b" offset="0,-13,0" trigger="4min"/>
+    <dynamic structure="build8h" offset="0,-13,0" trigger="4min"/>
+    <dynamic structure="build4e" offset="0,-13,0" trigger="4min"/>
+    <dynamic structure="build6b" offset="0,-13,0" trigger="4min"/>
+    <!-- 4 mins 30 secs (5 houses) -->  
+    <dynamic structure="build1a" offset="0,-13,0" trigger="4min30s"/>
+    <dynamic structure="build3g" offset="0,-13,0" trigger="4min30s"/>
+    <dynamic structure="build6a" offset="0,-13,0" trigger="4min30s"/>
+    <dynamic structure="build6d" offset="0,-13,0" trigger="4min30s"/>
+    <dynamic structure="build6e" offset="0,-13,0" trigger="4min30s"/>
+    <!-- 5 mins (5 houses) -->
+    <dynamic structure="build1b" offset="0,-13,0" trigger="5min"/>      
+    <dynamic structure="build3h" offset="0,-13,0" trigger="5min"/>               
+    <dynamic structure="build6c" offset="0,-13,0" trigger="5min"/>
+    <dynamic structure="build7a" offset="0,-13,0" trigger="5min"/>
+    <dynamic structure="build6f" offset="0,-13,0" trigger="5min"/>
+    <!-- 5 mins 30 secs (4 houses) -->   
+    <dynamic structure="build1d" offset="0,-13,0" trigger="5min30s"/>
+    <dynamic structure="build4d" offset="0,-13,0" trigger="5min30s"/>
+    <dynamic structure="build8d" offset="0,-13,0" trigger="5min30s"/>
+    <dynamic structure="build3b" offset="0,-13,0" trigger="5min30s"/>
+    <!-- 6 mins (4 houses) -->       
+    <dynamic structure="build2b" offset="0,-13,0" trigger="6min"/>        
+    <dynamic structure="build7e" offset="0,-13,0" trigger="6min"/>               
+    <dynamic structure="build8c" offset="0,-13,0" trigger="6min"/>
+    <dynamic structure="build2g" offset="0,-13,0" trigger="6min"/>
+    <!-- 6 mins 30 secs (4 houses) -->
+    <dynamic structure="build1g" offset="0,-13,0" trigger="6min"/>
+    <dynamic structure="build4c" offset="0,-13,0" trigger="6min"/>
+    <dynamic structure="build7g" offset="0,-13,0" trigger="6min"/>
+    <dynamic structure="build7f" offset="0,-13,0" trigger="6min"/>   
+    <!-- Left overs: 3d, 3f, 5c, 6h --> 
+</structures>
+<time result="hiders">7m</time>
+<blitz>
+    <rule filter="only-hiders" lives="1"/>
+    <rule filter="only-seekers" lives="99"/>
+</blitz>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<timelock>on</timelock>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<broadcasts>
+    <alert after="25s">Seekers are released!</alert>
+    <alert after="5s" filter="only-hiders" every="2m11s">Your name tag won't display to the Seekers, no need to shift!</alert>
+    <alert after="35s">Every minute, some of the buildings will disappear!</alert>
+    <!-- Honestly mostly for my sake, but acts as a point of reference for when the houses go away -->
+    <tip after="1m">Some houses disappeared (Stage 1)</tip>
+    <tip after="2m">Some houses disappeared (Stage 2)</tip>
+    <tip after="3m">Some houses disappeared (Stage 3)</tip>
+    <tip after="4m">Some houses disappeared (Stage 4)</tip>
+    <tip after="4m30s">Some houses disappeared (Stage 5)</tip>
+    <tip after="5m">Some houses disappeared (Stage 6)</tip>
+    <tip after="5m30s">Some houses disappeared (Stage 7)</tip>
+    <tip after="6m">Some houses disappeared (Stage 8)</tip>
+    <tip after="6m30s">Some houses disappeared (Stage 9)</tip>
+</broadcasts>
+<filters>
+    <!-- Seekers release -->
+    <countdown duration="24s" message="Seekers are released in {0}">
+        <time>1s</time>
+    </countdown>
+    <!-- 30s before 2m mark -->
+    <countdown duration="30s" message="Hiders will recieve a potion of invisibilty in {0}">
+        <time>1m30s</time>
+    </countdown>
+    <!-- 30s before 3m45s mark -->
+    <countdown duration="30s" message="Hiders will recieve a potion of invisibilty in {0}">
+        <time>3m15s</time>
+    </countdown>
+    <!-- 30s before 5m30s mark -->
+    <countdown duration="30s" message="Hiders will recieve a potion of invisibilty in {0}">
+        <time>5m</time>
+    </countdown>
+</filters>
+<kill-rewards>
+    <kill-reward filter="only-hiders">
+        <item material="potion">
+            <effect duration="15s">invisibility</effect>
+        </item>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>iron sword</item>
+    <item>diamond helmet</item>
+    <item>diamond chestplate</item>
+    <item>diamond leggings</item>
+    <item>diamond boots</item>
+    <item>potion</item>
+</itemremove>
+</map>

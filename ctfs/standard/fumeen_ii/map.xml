@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Fumeen II</name>
+<version>1.1.2</version>
+<include src="void-death.xml"/>
+<objective>Capture and return the enemies flag 5 times.</objective>
+<authors>
+    <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2" contribution="Map author"/> <!--Doomyboy-->
+    <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="Map author"/> <!--Obelistics-->
+</authors>
+<time>18m</time>
+<teams>
+    <team id="red-team" color="dark red" max="8">Red</team>
+    <team id="blue-team" color="blue" max="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <clear-items/>
+        <item slot="0" material="stone sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="golden apple" amount="1"/>
+        <item slot="8" material="arrow" amount="16"/>
+        <effect amplifier="7" duration="5">instant_health</effect>
+        <leggings material="iron leggings" unbreakable="true"/>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <clear/>
+        <helmet color="993333" material="leather helmet" unbreakable="true" locked="true"/>
+        <chestplate color="993333" material="leather chestplate" unbreakable="true" locked="true"/>
+        <boots color="993333" material="leather boots" enchantment="protection_fall:2" unbreakable="true" locked="true"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <clear/>
+        <helmet color="334CB2" material="leather helmet" unbreakable="true" locked="true"/>
+        <chestplate color="334CB2" material="leather chestplate" unbreakable="true" locked="true"/>
+        <boots color="334CB2" material="leather boots" enchantment="protection_fall:2" unbreakable="true" locked="true"/>
+    </kit>
+    <kit id="reset-kit" force="true">
+        <effect duration="0" amplifier="10">slowness</effect>
+    </kit>
+    <kit id="red-flag-kit">
+        <effect duration="oo">slowness</effect>
+    </kit>
+    <kit id="blue-flag-kit">
+        <effect duration="oo">slowness</effect>
+    </kit>
+</kits>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+</filters>
+<regions>
+
+    <union id="only-red-region">
+        <rectangle min="-150,182" max="-143,175"/>
+    </union>
+    <union id="only-blue-region">
+        <rectangle min="-222,182" max="-215,175"/>
+    </union>
+    <union id="red-net">
+        <cuboid min="-135,12,186" max="-132,17,189"/>
+    </union>
+    <union id="blue-net">
+        <cuboid min="-230,12,189" max="-233,17,186"/>
+    </union>
+    <cuboid id="red-flag-jump" min="-127,6,181" max="-129,8,183"/>
+    <cuboid id="red-south-jump" min="-159,12,186" max="-162,14,-187"/>
+    <cuboid id="blue-south-jump" min="-203,12,186" max="-206,14,187"/>
+    <cuboid id="blue-flag-jump" min="-238,6,181" max="-236,8,183"/>
+    <!-- Applied -->
+    <apply region="only-red-region" enter="only-red"/>
+    <apply region="only-blue-region" enter="only-blue"/>
+    <apply block="never"/>
+    <apply velocity="0.2,1.4,0.2" region="blue-flag-jump"/>
+    <apply velocity="-0.2,1.4,0.2" region="red-flag-jump"/>
+    <!--
+        <apply velocity="0.0,0.7,1.8" region="blue-south-jump"/><apply velocity="0.0,0.7,1.8" region="red-south-jump"/>
+        -->
+</regions>
+<flags>
+    <!--Flag blue captures-->
+    <post id="red-flag-post" owner="red-team" recover-time="10s"  pickup-filter="only-blue">-134,12,187</post>
+    <flag id="red-flag" owner="red-team" name="Red Flag" color="red" post="red-flag-post" pickup-kit="red-flag-kit" drop-kit="reset-kit"/>
+    <net owner="blue-team" flag="red-flag" points="1" region="blue-net" capture-filter="only-blue"/>
+    <!--Flag red captures-->
+    <post owner="blue-team" id="blue-flag-post" recover-time="10s" pickup-filter="only-red">-232,12,187</post>
+    <flag owner="blue-team" id="blue-flag" name="Blue Flag" color="blue" post="blue-flag-post" pickup-kit="blue-flag-kit" drop-kit="reset-kit"/>
+    <net owner="red-team" flag="blue-flag" points="1" region="red-net" capture-filter="only-red"/>
+</flags>
+<score>
+    <limit>5</limit>
+</score>
+<spawns>
+    <spawn team="blue-team" kit="blue-kit" spread="true">
+        <regions>
+            <point yaw="-45">-218.5,40,178.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red-kit" spread="true">
+        <regions>
+            <point yaw="45">-146,40,178.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <point>-182.5,17,247</point>
+        </regions>
+    </default>
+</spawns>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>gold leggings</item>
+    <item>leather boots</item>
+    <item>chainmail leggings</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+</map>

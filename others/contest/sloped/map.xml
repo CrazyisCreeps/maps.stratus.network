@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Sloped</name>
+<version>1.0.0</version>
+<objective>Break the three enemy monuments!</objective>
+<!-- Map authors & contributors. -->
+<authors>
+    <author uuid="62d9830a-0b77-4e21-9d4f-de4b60c68fb5"/> <!-- Sharpie -->
+    <author uuid="ae5c1e91-745b-4a6f-a337-11484ede6957"/> <!-- Clijmart -->
+    <author uuid="450c2d83-1757-4021-9789-5e57b3d4cc58"/> <!-- BD33 -->
+</authors>
+<!-- Map modules, i.e. objectives, regions, spawns. -->
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+</filters>
+<regions>
+	<cuboid id="red-spawn" min="-25,0,-103" max="26,oo,-75"/>
+	<cuboid id="blue-spawn" min="-25,0,76" max="26,oo,104"/>
+	<rectangle id="blue-left-iron" min="-55,53" max="-26,75"/>
+	<rectangle id="blue-right-iron" min="56,53" max="27,75"/>
+	<rectangle id="red-left-iron" min="27,-74" max="56,-52"/>
+	<rectangle id="red-right-iron" min="-55,-74" max="-26,-52"/>
+	<point id="red-spawn-point" yaw="0">0.5,10.5,-95.5</point>
+	<point id="blue-spawn-point" yaw="0">0.5,10.5,96.5</point>
+	<!-- Applying filters -->
+	<apply region="blue-spawn" enter="only-blue" message="You may not enter the enemy spawn!"/>
+  <apply region="blue-spawn" block="never" message="You may not edit the spawn!"/>
+	<apply region="red-spawn" enter="only-red" message="You may not enter the enemy spawn!"/>
+  <apply region="red-spawn" block="never" message="You may not edit the spawn!"/>
+	<apply block="no-void" message="You may not modify the void area!"/>
+</regions>
+<renewables>
+    <renewable rate="2.5" grow="true" particles="true" sound="true" avoid-players="4">
+        <regions>
+            <union id="iron-areas"><region id="blue-right-iron"/><region id="blue-left-iron"/><region id="red-right-iron"/><region id="red-left-iron"/></union>
+        </regions>
+        <!-- These are the blocks that will renew -->
+        <renew-filter>
+            <any>
+                <material>iron block</material>
+            </any>
+        </renew-filter>
+    </renewable>
+</renewables>
+<teams>
+   <team id="red-team" color="red" max="16">Red</team>
+   <team id="blue-team" color="blue" max="16">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" material="iron sword"/>
+        <item slot="1" material="bow" unbreakable="true">
+        	<enchantment>infinity</enchantment>
+        </item>
+        <item slot="2" material="diamond pickaxe" unbreakable="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="4" amount="16" material="log" damage="1"/>
+        <item slot="5" amount="64" material="glass"/>
+        <item slot="6" material="golden apple"/>
+        <item slot="8" material="bucket"/>
+        <item slot="7" amount="32" material="golden carrot"/>
+        <item slot="9" amount="1" material="arrow"/>
+        <effect duration="5" amplifier="1">instant_health</effect>
+    </kit>
+    <kit id="red" parents="spawn">
+        <chestplate color="cd0000" material="leather chestplate"/>
+    </kit>
+    <kit id="blue" parents="spawn">
+        <chestplate color="0066cc" material="leather chestplate"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red-team" kit="red" yaw="0">
+    	<regions>
+        	<region id="red-spawn-point"/>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue" yaw="180">
+    	<regions>
+        	<region id="blue-spawn-point"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+        	<point id="obs-spawn" yaw="180">0.5,51.5,3.5</point>
+        </regions>
+    </default>
+</spawns>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" material="golden apple"/>
+        <item amount="8" material="glass"/>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>arrow</item>
+    <item>golden carrot</item>
+    <item>leather chestplate</item>
+    <item>log</item>
+    <item>glass</item>
+    <item>bucket</item>
+    <item>obsidian</item>
+    <item>emerald block</item>
+</itemremove>
+<toolrepair>
+	<tool>iron sword</tool>
+	<tool>bow</tool>
+	<tool>diamond pickaxe</tool>
+	<tool>iron axe</tool>
+  <tool>golden apple</tool>
+</toolrepair>
+<destroyables name="Left Emerald Monument" material="emerald block">
+    <destroyable owner="red-team">
+        <region><cuboid id="red-left-monument" min="45.4,24.5,-65.5" max="48.5,29.5,-62.5"/></region>
+    </destroyable>
+    <destroyable owner="blue-team">
+        <region><cuboid id="blue-left-monument" min="-48.5,24.5,62.5" max="-45.5,29.5,65.5"/></region>
+    </destroyable>
+</destroyables>
+<destroyables name="Right Emerald Monument" material="emerald block">
+    <destroyable owner="red-team">
+        <region><cuboid id="red-right-monument" min="-48.5,24.5,-65.5" max="-45.5,29.5,-62.5"/></region>
+    </destroyable>
+    <destroyable owner="blue-team">
+        <region><cuboid id="blue-right-monument" min="45.5,24.5,62.5" max="48.5,29.5,65.5"/></region>
+    </destroyable>
+</destroyables>
+<destroyables name="Obsidian Monument" material="obsidian">
+    <destroyable owner="red-team">
+        <region><cuboid id="red-obsidian-monument" min="-0.5,8.5,-30.5" max="0.5,11.5,-29.5"/></region>
+    </destroyable>
+    <destroyable owner="blue-team">
+        <region><cuboid id="blue-obsidian-monument" min="-0.5,8.5,29.5" max="0.5,11.5,30.5"/></region>
+    </destroyable>
+</destroyables>
+</map>

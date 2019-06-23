@@ -1,0 +1,148 @@
+<map proto="1.4.2">
+<name>Swamplands</name>
+<version>1.0.0</version>
+<objective>Capture the wool and return it to your victory monument</objective>
+<authors>
+	<author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- Strangey -->
+</authors>
+<teams>
+	<team id="red" color="dark red" max="14">Red</team>
+	<team id="blue" color="blue" max="14">Blue</team>
+</teams>
+<kits>
+	<kit id="spawn">
+        <clear/>
+		<item slot="0" unbreakable="true" material="iron sword"/>
+		<item slot="1" unbreakable="true" material="bow">
+            <enchantment level="1">arrow infinite</enchantment>
+        </item>
+		<item slot="2" unbreakable="true" material="diamond pickaxe"/>
+		<item slot="3" unbreakable="true" material="iron axe">
+            <enchantment level="1">dig speed</enchantment>
+        </item>
+		<item slot="4" amount="64" material="cooked beef"/>
+		<item slot="5" material="golden apple"/>
+		<item slot="6" amount="64" damage="5" material="wood"/>
+		<item slot="7" amount="32" material="glass"/>
+		<item slot="28" material="arrow"/>
+	</kit>
+	<kit id="red-kit" parents="spawn">
+		<helmet color="b02e26" unbreakable="true" material="leather helmet"/>
+		<chestplate color="b02e26" unbreakable="true" material="leather chestplate"/>
+		<boots color="b02e26" unbreakable="true" material="leather boots"/>
+	</kit>
+	<kit id="blue-kit" parents="spawn">
+		<helmet color="3c44aa" unbreakable="true" material="leather helmet"/>
+		<chestplate color="3c44aa" unbreakable="true" material="leather chestplate"/>
+		<boots color="3c44aa" unbreakable="true" material="leather boots"/>
+	</kit>
+</kits>
+<spawns>
+	<spawn team="red" kit="red-kit">
+		<regions>
+            <point yaw="-90">-28.5,5.5,86.5</point>
+		</regions>
+	</spawn>
+	<spawn team="blue" kit="blue-kit">
+		<regions>
+            <point yaw="90">28.5,5.5,-86.5</point>
+		</regions>
+	</spawn>
+	<default>
+		<regions angle="-56,30.5,-0">
+			<cuboid min="-51.5,29,1.5" max="-53.5,29,-1.5"/>
+		</regions>
+	</default>
+</spawns>
+<filters>
+	<team id="only-red">red</team>
+	<team id="only-blue">blue</team>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <all id="allow-iron-regeneration">
+        <not>
+            <cause>player</cause>
+        </not>
+        <material id="only-iron">iron block</material>
+    </all>
+</filters>
+<regions>
+    <union id="team-spawns">
+        <rectangle id="red-spawn" min="-3,77" max="-36,96"/>
+        <rectangle id="blue-spawn" min="3,-77" max="36,-96"/>
+    </union>
+    <union id="wool-rooms">
+        <rectangle id="red-wool-room" min="0,61" max="13,43"/>
+        <rectangle id="blue-wool-room" min="0,-61" max="-13,-43"/>
+    </union>
+    <apply region="team-spawns" block-place="allow-iron-regeneration" block-break="only-iron" message="You may only break iron in your spawn!"/>
+    <apply region="wool-rooms" block="never" message="You may not modify the wool room!"/>
+    <apply region="red-spawn" enter="only-red" message="You may not enter Red's spawn!"/>
+    <apply region="blue-spawn" enter="only-blue" message="You may not enter Blue's spawn!"/>
+    <apply region="red-wool-room" enter="only-blue" message="You may not enter your own wool room!"/>
+    <apply region="blue-wool-room" enter="only-red" message="You may not enter your own wool room!"/>
+	<apply block-place="deny-void" message="You may not build in the void!">
+        <region>
+            <negative>
+            	<rectangle min="36,-27" max="-36,27"/>
+				<rectangle min="-6,66" max="25,61"/>
+				<rectangle min="22,60" max="25,61"/>
+				<rectangle min="6,-66" max="-25,-61"/>
+				<rectangle min="-22,-60" max="-25,-61"/>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<maxbuildheight>24</maxbuildheight>
+<wools>
+    <wool team="red" color="orange" location="-4.5,12,-49.5">
+        <monument>
+            <block>-32,6,86</block>
+        </monument>
+    </wool>
+    <wool team="blue" color="purple" location="4.5,12,49.5">
+        <monument>
+            <block>31,6,-87</block>
+        </monument>
+    </wool>
+</wools>
+<renewables>
+    <renewable region="team-spawns" interval="10s">
+        <renew-filter>
+            <material>iron block</material>
+        </renew-filter>
+        <replace-filter>
+            <material>air</material>
+        </replace-filter>
+    </renewable>
+</renewables>
+<killreward>
+    <item material="golden apple"/>
+    <item material="wood" damage="5" amount="16"/>
+</killreward>
+<tool-repair>
+	<tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</tool-repair>
+<itemremove>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>leather boots</item>
+	<item>arrow</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>red rose</item>
+    <item>brown mushroom</item>
+    <item>red mushroom</item>
+    <item>long grass</item>
+    <item>double plant</item>
+	<item>cooked beef</item>
+	<item>wood</item>
+	<item>glass</item>
+	<item>golden apple</item>
+</itemremove>
+<respawn delay="5s"/>
+</map>

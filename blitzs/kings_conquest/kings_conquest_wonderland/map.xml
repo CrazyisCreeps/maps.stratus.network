@@ -1,0 +1,38 @@
+<map proto="1.4.0" game="Kill the King">
+<name>King's Conquest: Wonderland</name>
+<version>1.0</version>
+<authors>
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/>
+    <!--  AtlasGames  -->
+</authors>
+<spawns>
+    <spawn team="red" region="red-spawn" sequential="true" yaw="-90" kit="spawn" />
+    <spawn team="blue" region="blue-spawn" sequential="true" yaw="90" kit="spawn" />
+    <default region="default-spawn" yaw="0" kit="obs" />
+</spawns>
+<filters>
+    <not id="deny-break">
+        <any>
+            <material>stained clay</material>
+        </any>
+    </not>
+</filters>
+<regions>
+    <block id="red-spawn">101.5,55.5,0.5</block>
+    <block id="blue-spawn">278.5,55.5,-0.5</block>
+    <union id="spawns">
+        <cylinder base="101.5,54,0.5" radius="2" height="3" />
+        <cylinder base="278.5,54,-0.5" radius="2" height="3" />
+    </union>
+    <block id="default-spawn">190,82,-41.5</block>
+    <above id="build-limit" y="66" />
+    <below id="underground" y="49" />
+    <apply region="build-limit" block="never" message="`7You have reached the maximum build height! (`c35 Blocks`7)" />
+</regions>
+<flags>
+    <post id="red-post">101.5,55,0.5</post>
+    <post id="blue-post">278.5,55,-0.5</post>
+</flags>
+<timelock>on</timelock>
+<include src="king-classes.xml"/>
+</map>

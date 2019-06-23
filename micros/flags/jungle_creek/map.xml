@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Jungle Creek</name>
+<version>1.2.0</version>
+<objective>Capture and return the enemies flag 3 times!</objective>
+<authors>
+    <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9"/> <!--Obelistics-->
+    <author uuid="48924ea3-3aad-4e16-838c-368d8d9e0a25"/> <!--Matic0B-->
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6"/> <!--Rockmine-->
+</authors>
+<time result="objectives">7m</time>
+<teams>
+    <team id="red-team" color="dark red" max="4" max-overfill="5">Red</team>
+    <team id="blue-team" color="blue" max="4" max-overfill="5">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" material="stone sword" unbreakable="true">
+            <can-destroy>
+                <material>web</material>
+            </can-destroy>
+        </item>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="golden apple" amount="1"/>
+        <item slot="8" material="arrow" amount="32"/>
+        <effect amplifier="7" duration="2">resistance</effect>
+        <leggings material="gold leggings" unbreakable="true" locked="true"/>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <helmet color="993333" material="leather helmet" unbreakable="true" locked="true"/>
+        <chestplate color="993333" material="leather chestplate" unbreakable="true" locked="true"/>
+        <boots color="993333" material="leather boots" unbreakable="true" locked="true"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <helmet color="334CB2" material="leather helmet" unbreakable="true" locked="true"/>
+        <chestplate color="334CB2" material="leather chestplate" unbreakable="true" locked="true"/>
+        <boots color="334CB2" material="leather boots" unbreakable="true" locked="true"/>
+    </kit>
+    <kit id="flag-carrier" force="true">
+        <effect amplifier="1">slowness</effect>
+        <max-health>12</max-health>
+    </kit>
+    <kit id="drop-kit">
+        <effect amplifier="4" duration="1">regeneration</effect>
+    </kit>
+</kits>
+<killreward>
+    <item material="golden apple"/>
+    <item amount="12" material="arrow"/>
+</killreward>
+<hunger>
+  <depletion>off</depletion>
+</hunger>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <material id="only-web">web</material>
+</filters>
+<regions>
+    <union id="only-red-region">
+        <rectangle min="264,717" max="277,707"/>
+    </union>
+    <union id="only-blue-region">
+        <rectangle min="218,762" max="207,776"/>
+    </union>
+    <union id="red-net">
+        <cylinder base="253.5,13,740.5" radius="3" height="4"/>
+    </union>
+    <union id="blue-net">
+        <cylinder base="242.5,13,751.5" radius="3" height="4"/>
+    </union>
+    <apply enter="only-red" region="only-red-region" message="You cannot enter the `4Red `rSpawn!"/>
+    <apply enter="only-blue" region="only-blue-region" message="You cannot enter the `1Blue `rSpawn!"/>
+    <apply block="only-web"/>
+</regions>
+<flags>
+    <!--Flag blue captures-->
+    <flag id="red-flag" name="Blue Flag" color="blue" owner="red-team" pickup-filter="only-blue" carry-kit="flag-carrier" drop-kit="drop-kit">
+        <post recover-time="6s" respawn-time="12">253,14,740</post>
+        <net points="1" region="blue-net"/>
+    </flag>
+    <!--Flag red captures-->
+    <flag id="blue-flag" name="Red Flag" color="red" owner="blue-team" pickup-filter="only-red" carry-kit="flag-carrier" drop-kit="drop-kit">
+        <post recover-time="6s" respawn-time="12">242,14,751</post>
+        <net points="1" region="red-net"/>
+    </flag>
+</flags>
+<score>
+    <limit>3</limit>
+</score>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions>
+            <point yaw="90">272.5,8.5,710.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+            <point yaw="-180">212.5,8.5,770.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <point yaw="135">257.5,22,755.5</point>
+            <point yaw="135">257.5,22,755.5</point>
+        </regions>
+    </default>
+</spawns>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>gold leggings</item>
+    <item>leather boots</item>
+    <item>chainmail leggings</item>
+    <item>string</item>
+</itemremove>
+</map>

@@ -1,0 +1,272 @@
+﻿<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Fairy Tales 2 Redux: A Tale or Two</name>
+<version>1.1.1</version>
+<objective>Take the enemy's wool located in bedrock castles on the enemy's side and place it in your victory monument.</objective>
+<authors>
+    <author uuid="2e28d256-4656-4f37-bcdc-5fab21b0f70f"/> <!-- D347HxD -->
+</authors>
+<contributors>
+    <contributor uuid="82c796a5-c033-43be-af30-fa06496995f9" contribution="Team Spawn Beautification"/> <!-- IM_A_H0B0 -->
+    <contributor uuid="ccb7a66f-ed6c-4f8d-953e-78205c33abba" contribution="Map Design"/> <!-- GabeisAwesome199 -->
+</contributors>
+<teams>
+    <team id="blue-team" color="blue" max="32">Blue</team>
+    <team id="red-team" color="dark red" max="32">Red</team>
+</teams>
+<rules>
+    <rule>You many not make lava curtains near the wool rooms or across entire lanes.</rule>
+    <rule>You many not make obsidian walls near the wool rooms or across entire lanes.</rule>
+</rules>
+<broadcasts>
+  <alert after="10m" every="5m">Making lava curtains or obsidian walls near the wool rooms or across entire lanes is a punishable offense.</alert>
+</broadcasts>
+<spawns>
+    <spawn team="blue-team" yaw="0" kit="spawn-kit-blue" region="spawn-blue-team-1" filter="spawn-1"/>
+    <spawn team="red-team" yaw="180" kit="spawn-kit-red" region="spawn-red-team-1" filter="spawn-1"/>
+    <spawn team="blue-team" yaw="0" kit="spawn-kit-blue" region="spawn-blue-team-2" filter="spawn-2"/>
+    <spawn team="red-team" yaw="180" kit="spawn-kit-red" region="spawn-red-team-2" filter="spawn-2"/>
+    <default yaw="270" region="spawn-default"/>
+</spawns>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" enchantment="durability:2;dig speed:3">iron pickaxe</item>
+        <item slot="3" enchantment="durability:2;dig speed:1">iron axe</item>
+        <item slot="4" amount="64" damage="1">log</item>
+        <item slot="5" amount="32">snow ball</item>
+        <item slot="6" amount="64">cooked beef</item>
+        <item slot="7">golden apple</item>
+        <potion duration="6" amplifier="3">damage resistance</potion>
+        <effect duration="4" amplifier="1">heal</effect>
+        <item slot="8" amount="64">arrow</item>
+        <item slot="31" amount="32">glass</item>
+        <leggings material="chainmail leggings" unbreakable="true"/>
+    </kit>
+    <kit id="spawn-kit-red" parents="spawn-kit">
+        <chestplate color="993333" material="leather chestplate" unbreakable="true" enchantment="protection projectile"/>
+        <helmet color="993333" material="leather helmet" unbreakable="true"/>
+        <boots color="993333" material="leather boots" unbreakable="true"/>
+    </kit>
+    <kit id="spawn-kit-blue" parents="spawn-kit">
+        <chestplate color="334CB2" material="leather chestplate" unbreakable="true" enchantment="protection projectile"/>
+        <helmet color="334CB2" material="leather helmet" unbreakable="true"/>
+        <boots color="334CB2" material="leather boots" unbreakable="true"/>
+    </kit>
+</kits>
+<filters>
+    <not id="deny-blue">
+        <team id="only-blue">blue-team</team>
+    </not>
+    <not id="deny-red">
+        <team id="only-red">red-team</team>
+    </not>
+    <not id="deny-lava">
+      <any>
+        <material>lava</material>
+        <material>stationary lava</material>
+      </any>
+    </not>
+    <not id="wool-rooms-disabled">
+      <all>
+          <any>
+            <material>chest</material>
+            <material>sign post</material>
+            <material>wall sign</material>
+            <material>torch</material>
+            <material>ladder</material>
+            <material>redstone wire</material>
+            <material>redstone torch on</material>
+          </any>
+          <not>
+              <any>
+                  <material>leaves</material>
+                  <material>smooth brick</material>
+                  <material>iron fence</material>
+                  <material>glass</material>
+                  <material>step</material>
+                  <material>wool</material>
+                  <material>soul sand</material>
+              </any>
+          </not>
+        </all>
+    </not>
+    <all id="wool-rooms-disabled-red">
+      <filter id="wool-rooms-disabled"/>
+      <team>red-team</team>
+    </all>
+    <all id="wool-rooms-disabled-blue">
+      <filter id="wool-rooms-disabled"/>
+      <team>blue-team</team>
+    </all>
+    <not id="spawn-1">
+  		<time>1s</time>
+  	</not>
+  	<all id="spawn-2">
+  		<time>1s</time>
+  	</all>
+</filters>
+<regions>
+    <cylinder id="spawn-default" base="59.5,12,-4.5" radius="4" height="0"/>
+    <cylinder id="spawn-blue-team-1" base="-51,9,-94" radius="2.5" height="0"/>
+    <cylinder id="spawn-red-team-1" base="-51,9,84" radius="2.5" height="0"/>
+    <cylinder id="spawn-blue-team-2" base="-51,7.1,-94" radius="2.5" height="0"/>
+    <cylinder id="spawn-red-team-2" base="-51,7.1,84" radius="2.5" height="0"/>
+    <!-- blue wool room protection (these are the wools blue has to get) -->
+    <union id="blue-wool-rooms">
+        <rectangle id="light-gray-room" min="-147,44" max="-135,74"/>
+        <rectangle id="yellow-room" min="-66,117" max="-36,129"/>
+        <rectangle id="green-room" min="33,44" max="45,74"/>
+    </union>
+    <apply enter="only-blue" message="You may not enter your own wool room!" region="blue-wool-rooms"/>
+    <!-- red wool room protection (these are the wools red has to get) -->
+    <union id="red-wool-rooms">
+        <rectangle id="orange-room" min="-147,-84" max="-135,-54"/>
+        <rectangle id="cyan-room" min="-66,-139" max="-36,-127"/>
+        <rectangle id="magenta-room" min="33,-84" max="45,-54"/>
+    </union>
+    <union id="wizzard-houses">
+      <rectangle id="west-side-story" min="-152,-28" max="-86,18"/>
+      <rectangle id="east-side-story" min="-16,-28" max="50,18"/>
+    </union>
+    <union id="all-wool-rooms">
+      <region id="red-wool-rooms"/>
+      <region id="blue-wool-rooms"/>
+    </union>
+    <complement id="no-lava-place">
+        <union id="no-lava">
+            <rectangle id="blue-no-lava-main" min="-67,-102" max="-35,-87"/>
+            <rectangle id="blue-no-lava-stairs" min="-49,-87" max="-54,-73"/>
+            <rectangle id="red-no-lava-main" min="-67,77" max="-35,92"/>
+            <rectangle id="red-no-lava-stairs" min="-49,63" max="-53,77"/>
+        </union>
+        <region id="storage-rooms"/>
+    </complement>
+    <union id="storage-rooms">
+        <cuboid id="blue-storage-room" min="-67,6,-102" max="-35,13,-87"/>
+        <cuboid id="blue-storage-room-stairs" min="-49,6,-87" max="-54,14,-73"/>
+        <cuboid id="red-storage-room" min="-67,6,77" max="-35,13,92"/>
+        <cuboid id="red-storage-room-stairs" min="-49,14,63" max="-53,6,77"/>
+    </union>
+    <above y="200" id="warning-message"/>
+    <below y="8" id="warning-portal"/>
+    <rectangle id="playable" min="-152,-144" max="50,134"/>
+    <!-- Applies -->
+    <apply enter="only-red" message="You may not enter your own wool room!" region="red-wool-rooms"/>
+    <!-- some void protection -->
+	   <apply block="never" message="You may not bridge behind the wizard houses!" region="wizzard-houses"/>
+    <!-- supply room protection -->
+    <apply block="never" message="You may not modify the storage rooms!" region="storage-rooms"/>
+    <!-- no lava around the spawns -->
+    <apply block-place="deny-lava" message="You may place lava around the spawn area!" region="no-lava-place"/>
+    <!-- prevent teams from entering each other's spawns -->
+    <apply enter="only-red" message="You may not enter red's storage room!" region="red-storage-room"/>
+    <apply enter="only-blue" message="You may not enter blue's storage room!" region="blue-storage-room"/>
+    <apply block="never" enter="never" message="This region is disabled.">
+        <region>
+            <negative>
+                <region id="playable"/>
+            </negative>
+        </region>
+    </apply>
+	<!-- fix breaking in wool rooms -->
+    <apply block="wool-rooms-disabled-red" region="red-wool-rooms" message="This block is disabled"/>
+    <apply block="wool-rooms-disabled-blue" region="blue-wool-rooms" message="This block is disabled"/>
+    <apply enter="never" region="warning-message" message="`kk `r`cMaking lava curtains or obsidian walls near the wool rooms or across entire lanes is a `l`4punishable offense`r`c`k K`r`e ⚠"/>
+</regions>
+<maxbuildheight>38</maxbuildheight>
+<wools craftable="false">
+    <wool team="red-team" color="orange" location="-144.0,18.0,-69.0">
+      <monument><block>-51,8,90</block></monument>
+    </wool>
+    <wool team="red-team" color="cyan" location="-51.0,18.0,-137.0">
+      <monument><block>-52,9,90</block></monument>
+    </wool>
+    <wool team="red-team" color="magenta" location="42.0,18.0,-69.0">
+        <monument><block>-51,10,90</block></monument>
+    </wool>
+    <!-- Blue Team -->
+    <wool team="blue-team" color="green" location="43.0,18.0,59.0">
+        <monument><block>-51,8,-101</block></monument>
+    </wool>
+    <wool team="blue-team" color="silver" location="-145.0,18.0,59.0">
+        <monument><block>-51,10,-101</block></monument>
+    </wool>
+    <wool team="blue-team" color="yellow" location="-51.0,18,127.0">
+        <monument><block>-52,9,-101</block></monument>
+    </wool>
+</wools>
+<kill-rewards>
+    <kill-reward>
+        <item>golden apple</item>
+        <item amount="16">arrow</item>
+        <item amount="16">glass</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2" repeat="true"/>
+        </filter>
+        <item damage="4" material="ink sack"/>
+    </kill-reward>
+</kill-rewards>
+<portals>
+  <portal y="230" region="warning-portal" filter="spawn-1" observers="never" sound="false"/>
+</portals>
+<renewables>
+    <renewable
+      rate="0.5"
+      grow="true"
+      particles="true"
+      sound="true"
+      avoid-players="2"
+      region="everywhere">
+        <renew-filter>
+          <material>iron block</material>
+        </renew-filter>
+        <replace-filter>
+            <material>air</material>
+        </replace-filter>
+    </renewable>
+    <renewable
+      rate="10"
+      grow="false"
+      particles="false"
+      sound="false"
+      avoid-players="5"
+      region="everywhere">
+        <renew-filter>
+            <any>
+                <material>lava</material>
+                <material>stationary lava</material>
+            </any>
+        </renew-filter>
+        <replace-filter>
+            <any>
+                <material>lava</material>
+                <material>stationary lava</material>
+                <material>air</material>
+            </any>
+        </replace-filter>
+    </renewable>
+</renewables>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>iron pickaxe</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>snow ball</item>
+    <item>arrow</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>leather chestplate</item>
+    <item>ink sack</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>leather helmet</item>
+</itemremove>
+</map>

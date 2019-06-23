@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Tamblanor RAGE</name>
+<version>1.0.2</version>
+<objective>Be the team with the most amount of kills!</objective>
+<rage/>
+<authors>
+	<author uuid="bac7aaf9-888c-4522-8913-13a833527da6"/> <!-- drop_the_hammer -->
+</authors>
+<contributors>
+	<contributor uuid="57f5535d-6b9e-4013-ad71-e2cc63ec8d7c" contribution="XML"/> <!-- ItzaMeLuigi -->
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" max="8" max-overfill="10">Red</team>
+    <team id="purple-team" color="dark purple" max="8" max-overfill="10">Purple</team>
+    <team id="orange-team" color="gold" max="8" max-overfill="10">Orange</team>
+    <team id="blue-team" color="blue" max="8" max-overfill="10">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" enchantment="damage all:10">stone sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow damage:10;damage all:10">bow</item>
+		<item slot="2" amount="1">arrow</item>
+        <item slot="8" amount="16">cooked beef</item>
+        <potion duration="4" amplifier="5">resistance</potion>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <helmet color="ff0000" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="ff0000" unbreakable="true" locked="true">leather chestplate</chestplate>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+		<helmet color="0000ff" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="0000ff" unbreakable="true" locked="true">leather chestplate</chestplate>
+    </kit>
+	<kit id="orange-kit" parents="spawn-kit">
+		<helmet color="D87F33" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="D87F33" unbreakable="true" locked="true">leather chestplate</chestplate>
+    </kit>
+	<kit id="purple-kit" parents="spawn-kit">
+		<helmet color="7F3FB2" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="7F3FB2" unbreakable="true" locked="true">leather chestplate</chestplate>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="-90">
+            <cuboid min="-90.5,12,-182.5" max="-92.5,12,-180.5"/>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="90">
+            <cuboid min="33.5,12,-132.5" max="35.5,12,-134.5"/>
+        </regions>
+    </spawn>
+	<spawn team="orange-team" kit="orange-kit">
+        <regions yaw="-90">
+            <cuboid min="-90.5,12,-134.5" max="-92.5,12,-132.5"/>
+        </regions>
+    </spawn>
+	<spawn team="purple-team" kit="purple-kit">
+        <regions yaw="90">
+            <cuboid min="35.5,12,-180.5" max="33.5,12,-182.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <cuboid min="-41.5,29,-156.5" max="-40.5,29,-158.5"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <team id="only-orange">orange-team</team>
+    <team id="only-purple">purple-team</team>
+</filters>
+<regions>
+	<cuboid id="red-spawn" min="-84.5,11,-180.5" max="-84.5,16,-182.5"/>
+	<cuboid id="blue-spawn" min="27.5,11,-134.5" max="27.5,16,-132.5"/>
+	<cuboid id="orange-spawn" min="-84.5,11,-132.5" max="-84.5,16,-134.5"/>
+	<cuboid id="purple-spawn" min="27.5,11,-182.5" max="27.5,16,-180.5"/>
+    <apply enter="only-red" message="You may not enter the enemy spawn." region="red-spawn"/>
+    <apply enter="only-blue" message="You may not enter the enemy spawn." region="blue-spawn"/>
+    <apply enter="only-orange" message="You may not enter the enemy spawn." region="orange-spawn"/>
+    <apply enter="only-purple" message="You may not enter the enemy spawn." region="purple-spawn"/>
+    <apply block="never" message="You are not allowed to break blocks on this map" region="everywhere"/>
+</regions>
+<killreward>
+    <item amount="1">arrow</item>
+</killreward>
+<itemremove>
+    <item>cooked beef</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>stone sword</item>
+    <item>bow</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<time>7m</time>
+<score>
+    <kills>1</kills>
+    <deaths>0</deaths>
+</score>
+</map>

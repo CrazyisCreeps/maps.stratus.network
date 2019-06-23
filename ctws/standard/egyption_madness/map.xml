@@ -1,0 +1,184 @@
+<map proto="1.4.0">
+<name>Egyptian Madness</name>
+<version>1.0.1</version>
+<objective>Take the enemy's wool back to your side and place it on your victory monument!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b"/> <!-- _3Each -->
+</authors>
+<maxbuildheight>28</maxbuildheight>
+<timelock>on</timelock>
+<teams>
+    <team id="red" color="dark red" max="14">Red</team>
+    <team id="blue" color="blue" max="14">Blue</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <region yaw="-90">
+            <cylinder base="-25.5,16.5,15.5" radius="2" height="0"/>
+		</region>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <region yaw="90">
+            <cylinder base="148.5,16.5,15.5" radius="2" height="0"/>
+		</region>
+    </spawn>
+    <default>
+        <region yaw="180">
+			<cylinder base="61.5,33,85.5" radius="2" height="0"/>
+		</region>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" enchantment="dig speed:2" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" enchantment="dig speed:1" material="iron axe"/>
+        <item slot="4" amount="64" material="sandstone"/>
+        <item slot="5" amount="32" damage="1" material="wood"/>
+        <item slot="7" amount="1" material="golden_apple"/>
+        <item slot="8" amount="32" material="golden_carrot"/>
+        <item slot="28" amount="48" material="arrow"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+		<potion duration="4" amplifier="4">damage resistance</potion>
+        <potion duration="4" amplifier="4">heal</potion>
+	</kit>
+	<kit id="red-kit" parents="spawn">
+        <helmet color="993333" unbreakable="true" material="leather helmet"/>
+        <leggings color="993333" unbreakable="true" material="leather leggings"/>
+        <boots color="993333" unbreakable="true" material="leather boots"/>
+	</kit>
+	<kit id="blue-kit" parents="spawn">
+        <helmet color="334CB2" unbreakable="true" material="leather helmet"/>
+        <leggings color="334CB2" unbreakable="true" material="leather leggings"/>
+        <boots color="334CB2" unbreakable="true" material="leather boots"/>
+	</kit>
+</kits>
+<filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+	<all id="only-iron">
+		<material>iron block</material>
+	</all>
+    <all id="blue-break">
+		<team>blue</team>
+		<material>web</material>
+	</all>
+	<all id="red-break">
+		<team>red</team>
+		<material>web</material>
+	</all>
+	<not id="no-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+    <union id="allow-block-place">
+		<rectangle min="18,-28" max="105,-9"/>
+		<rectangle min="43,3" max="80,28"/>
+		<rectangle min="18,40" max="105,59"/>
+		<rectangle min="56,40" max="67,-9"/>
+    </union>
+	<negative id="void">
+		<region id="allow-block-place"/>
+	</negative>
+	<rectangle id="everything" min="oo,oo" max="-oo,-oo"/>
+	<union id="spawns">
+		<union id="red-spawn">
+			<rectangle min="120,24" max="155,7"/>
+		</union>
+		<union id="blue-spawn">
+			<rectangle min="-32,24" max="3,7"/>
+		</union>
+	</union>
+	<union id="blue-wool-rooms">
+		<rectangle min="-22,-14" max="-42,-28"/> <!-- green -->
+		<rectangle min="-22,59" max="-43,45"/> <!-- lime -->
+	</union>
+	<union id="red-wool-rooms">
+		<rectangle min="145,45" max="166,59"/> <!-- orange -->
+		<rectangle min="145,-28" max="166,-14"/> <!-- pink -->
+	</union>
+    <union id="wool-placements">
+        <block location="-25,17,10" id="orange-wool"/>
+        <block location="-25,17,20" id="pink-wool"/>
+        <block location="147,17,10" id="green-wool"/>
+        <block location="147,17,20" id="lime-wool"/>
+    </union>
+	<apply block-break="only-iron" block-place="only-iron" message="You may only break iron in the base!" region="spawns"/>
+	<apply enter="only-red" use="only-red" message="You may not enter the enemy spawn" region="red-spawn"/>
+	<apply enter="only-blue" use="only-blue" message="You may not enter the enemy spawn" region="blue-spawn"/>
+	<apply use="only-red" enter="only-red" message="You may not interact with your own wool room!" region="blue-wool-rooms"/>
+	<apply block="red-break" message="You may only break cobwebs in the wool room." region="blue-wool-rooms"/>
+	<apply use="only-blue" enter="only-blue" message="You may not interact with your own wool room!" region="red-wool-rooms"/>
+	<apply block="blue-break" message="You may only break cobwebs in the wool room." region="red-wool-rooms"/>
+	<apply use="only-blue" region="blue-wool-rooms"/>
+	<apply use="only-red" region="red-wool-rooms"/>
+	<apply block="no-void" message="You may not edit the void area!" region="void"/>
+</regions>
+<wools craftable="false">
+    <wool team="blue" color="orange" location="159,20,52" monument="orange-wool"/>
+    <wool team="blue" color="pink" location="159,20,-21" monument="pink-wool"/>
+    <wool team="red" color="green" location="-36,20,-21" monument="green-wool"/>
+    <wool team="red" color="lime" location="-36,20,52" monument="lime-wool"/>
+</wools>
+<destroyables mode-changes="true" show="false" required="false" completion="0%" materials="stained glass">
+	<destroyable name="bridge-lines" owner="red">
+		<region>
+			<cuboid min="18,0,-28" max="105,1,59"/>
+		</region>
+	</destroyable>
+</destroyables>
+<modes>
+    <mode show-before="0" material="air" after="0s"/>
+</modes>
+<renewables>
+    <renewable rate="0.8" grow="true" particles="true" sound="true" avoid-players="3">
+        <region>
+			<region id="spawns"/>
+        </region>
+        <renew-filter>
+            <material>iron block</material>
+        </renew-filter>
+        <replace-filter>
+            <material>air</material>
+        </replace-filter>
+    </renewable>
+</renewables>
+<item-mods>
+    <rule>
+        <match>
+            <material>diamond helmet</material>
+            <material>diamond boots</material>
+            <material>iron sword</material>
+            <material>iron spade</material>
+            <material>iron helmet</material>
+            <material>iron chestplate</material>
+            <material>iron leggings</material>
+            <material>iron boots</material>
+        </match>
+        <modify unbreakable="true"/>
+    </rule>
+</item-mods>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>sandstone</item>
+    <item>wood</item>
+    <item>golden carrot</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemremove>
+<killreward>
+    <item damage="1" amount="16">wood</item>
+    <item amount="16">arrow</item>
+    <item amount="1">golden apple</item>
+</killreward>
+</map>

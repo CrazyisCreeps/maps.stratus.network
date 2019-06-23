@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Rendezvous CTW</name>
+<version>1.0.0</version>
+<objective>Capture the two wools from the enemy base to win!</objective>
+<gamemode>ctw</gamemode>
+
+<!-- Map authors & contributors. -->
+<authors>
+  <author uuid="44df6b20-168f-4389-b7ac-434518207c2f"/> <!-- ParaPenguin -->
+  <author uuid="d9b4ffbc-11d0-453a-a93f-82dc59fca4b6"/> <!-- hugWulf -->
+  <author uuid="0b8f95fa-0f40-4f28-9fd0-b8e243bb6800"/> <!-- Fouled -->
+</authors>
+
+<!--Teams-->
+<teams>
+  <team id="green" color="green" max="20" max-overfill="25">Green</team>
+  <team id="blue" color="blue" max="20" max-overfill="25">Blue</team>
+</teams>
+
+<!--Spawns-->
+<spawns>
+    <spawn team="green" kit="green-kit">
+        <regions yaw="-90">
+            <point>-333.5,12,-11.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="90">
+            <point>-137.5,12,-11.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <point>-235.5,38,56.5</point>
+        </regions>
+    </default>
+</spawns>
+
+<!--Kits-->
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" material="iron sword"/>
+		<item slot="1" enchantment="infinity" material="bow"/>
+		<item slot="2" material="diamond pickaxe"/>
+		<item slot="3" amount="3" material="golden apple"/>
+		<item slot="4" amount="64" material="log"/>
+		<item slot="5" amount="32" material="glass"/>
+        <item slot="8" amount="32" material="bread"/>
+		<item slot="27" amount="1" material="arrow"/>
+        <effect duration="5" amplifier="5">damage resistance</effect>
+    </kit>
+    <kit id="green-kit" parents="spawn">
+        <helmet color="667F33" material="leather helmet"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <helmet color="0066cc" material="leather helmet"/>
+    </kit>
+</kits>
+
+<!--Wools-->
+<wools team="green">
+    <wool color="orange" location="-54,7,17">
+        <monument><block>-354,8,-11</block></monument>
+    </wool>
+    <wool color="yellow" location="-54,7,-41">
+        <monument><block>-354,8,-13</block></monument>
+    </wool>
+</wools>
+
+<wools team="blue">
+    <wool color="cyan" location="-418,7,17">
+        <monument><block>-118,8,-11</block></monument>
+    </wool>
+    <wool color="purple" location="-418,7,-41">
+        <monument><block>-118,8,-13</block></monument>
+    </wool>
+</wools>
+
+<filters>
+	<!--Wools-->
+	<apply enter="only-blue" region="cyan-wool" message="Only Blue may enter this wool room!"/>
+	<apply enter="only-blue" region="purple-wool" message="Only Blue may enter this wool room!"/>
+	<apply enter="only-green" region="yellow-wool" message="Only Green may enter this wool room!"/>
+	<apply enter="only-green" region="orange-wool" message="Only Green may enter this wool room!"/>
+	<!--blocks-->
+	<apply block="always" region="mid"/>
+	<apply block="always" region="1"/>
+	<apply block="always" region="2"/>
+	<apply block="never" region="green-spawn" message="You may not modify the spawn area!"/>
+	<apply block="never" region="blue-spawn" message="You may not modify the spawn area!"/>
+	<apply block="only-green" region="yellow-wool" message="You cant modify this area!"/>
+	<apply block="only-green" region="orange-wool" message="You cant modify this area!"/>
+	<apply block="only-blue" region="cyan-wool" message="You cant modify this area!"/>
+	<apply block="only-blue" region="purple-wool" message="You cant modify this area!"/>
+	<!--teams-->
+	<team id="only-blue">blue</team>
+	<team id="only-green">green</team>
+	<!--voids-->
+    <not id="no-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+
+	<!--orange wool-->
+		<cuboid id="orange-wool" min="-67.493,0,12.374" max="-51.263,36,22.562"/>
+	<!--yellow wool-->
+		<cuboid id="yellow-wool" min="-67.434,0,-45.636" max="-51.347,36,-35.380"/>
+	<!--purple wool-->
+		<cuboid id="purple-wool" min="-403.496,0,-35.5" max="-419.681,36,-45.660"/>
+	<!--cyan wool-->
+		<cuboid id="cyan-wool" min="-403.468,0,22.591" max="-419.440,36,12.357"/>
+	<!--spawns-->
+        <cuboid id="green-spawn" min="-323.3,0,-27.7" max="-343.453,36,4.7"/> <!--green spawn-->
+		<cuboid id="blue-spawn" min="-147.476,0,4.7" max="-127.479,36,-27.7"/> <!--blue spawn-->
+	<!--voids-->
+	<cuboid id="mid" min="-183.681,1,22.546" max="-286.669,36,-45.605"/>
+	<!--Irons-->
+		<cuboid id="1" min="-363.607,0,-20.326" max="-351.530,36,-3.607"/>
+		<cuboid id="2" min="-107.820,0,-3.518" max="-119.481,36,-19.468"/>
+	<!--Applys-->
+	<apply block="no-void" message="You may not modify the void area!">
+		<region>
+			<everywhere/>
+		</region>
+    </apply>
+</regions>
+
+ <!--ItemRemove-->
+<itemremove>
+  <item>iron sword</item>
+  <item>bow</item>
+  <item>diamond pickaxe</item>
+  <item>log</item>
+  <item>glass</item>
+  <item>bread</item>
+  <item>arrow</item>
+</itemremove>
+
+<!--Max Build Height-->
+<maxbuildheight>36</maxbuildheight>
+<!--Kill Reward-->
+<killreward>
+  <item>golden apple</item>
+</killreward>
+</map>

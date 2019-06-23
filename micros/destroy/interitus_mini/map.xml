@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<name>Interitus: Mini</name>
+<version>1.0.0</version>
+<objective>Destroy the enemy's monument!</objective>
+<authors>
+    <author uuid="bf331953-4f92-43ee-8abc-7544b8234936" contribution="Mini version"/> <!-- ViceTechnicolour -->
+    <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Original map"/> <!-- Plastix -->
+    <author uuid="1379cb6e-f291-4498-9807-e636f9674ac0" contribution="Original map"/> <!-- SH4D0W_HAWK -->
+    <author uuid="82c796a5-c033-43be-af30-fa06496995f9" contribution="Original map"/> <!-- IM_A_H0B0 -->
+    <author uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="Original map"/> <!-- ElectroidFilms -->
+</authors>
+<teams>
+    <team color="dark red" max="5" max-overfill="6">Red</team>
+    <team color="blue" max="5" max-overfill="6">Blue</team>
+</teams>
+<time>20m</time>
+<destroyables name="Monument" materials="ender stone" completion="100%" sparks="true">
+    <destroyable owner="blue">
+        <cuboid min="-42,20,-42" max="-46,12,-46"/>
+    </destroyable>
+    <destroyable owner="red">
+        <cuboid min="2,12,-42" max="-2,20,-46"/>
+    </destroyable>
+</destroyables>
+<filters>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="deny-beacon">
+        <deny>
+            <block>beacon</block>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <cuboid name="red-spawn-one" min="-5,2,-11" max="6,19,9"/>
+    <cuboid name="red-spawn-two" min="6,19,-97" max="-5,2,-77"/>
+    <rectangle name="red-spawn-e-two" min="5,-88" max="-5,-97"/>
+    <rectangle name="red-spawn-e-one" min="5,0" max="-5,9"/>
+
+    <cuboid name="blue-spawn-one" min="-38,2,-11" max="-49,19,9"/>
+    <cuboid name="blue-spawn-two" min="-38,2,-77" max="-49,19,-97"/>
+    <rectangle name="blue-spawn-e-two" min="-49,-88" max="-39,-97"/>
+    <rectangle name="blue-spawn-e-one" min="-39,9" max="-49,0"/>
+    <!-- Applied -->
+    <apply block="deny-all" message="Do not modify your spawn!">
+        <region name="red-spawn-one"/>
+        <region name="blue-spawn-one"/>
+        <region name="red-spawn-two"/>
+        <region name="blue-spawn-two"/>
+    </apply>
+    <apply enter="only-blue" message="Do not enter the enemy spawn!">
+        <region name="blue-spawn-e-one"/>
+        <region name="blue-spawn-e-two"/>
+    </apply>
+    <apply enter="only-red" message="Do not enter the enemy spawn!">
+        <region name="red-spawn-e-one"/>
+        <region name="red-spawn-e-two"/>
+    </apply>
+    <apply block="deny-all" message="Don't edit outside the map area!">
+        <negative>
+            <rectangle name="map" min="-49,9" max="6,-97"/>
+        </negative>
+    </apply>
+    <apply use="deny-beacon">
+        <region name="map"/>
+    </apply>
+</regions>
+<maxbuildheight>26</maxbuildheight>
+<kits>
+    <kit name="teams">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" unbreakable="true" enchantment="dig speed:2">iron pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="dig speed">iron axe</item>
+        <item slot="4" amount="64" damage="1">wood</item>
+        <item slot="5" amount="64" damage="1">wood</item>
+        <item slot="6" unbreakable="true" name="`rTNT Defuser - `o(Right Click)">shears</item>
+        <item slot="8" amount="64">golden carrot</item>
+        <potion duration="5">heal</potion>
+    </kit>
+    <kit name="red" parents="teams">
+        <helmet unbreakable="true" color="993333">leather helmet</helmet>
+        <chestplate unbreakable="true" color="993333" enchantment="protection explosions:3">leather chestplate</chestplate>
+    </kit>
+    <kit name="blue" parents="teams">
+        <helmet unbreakable="true" color="334CB2">leather helmet</helmet>
+        <chestplate unbreakable="true" color="334CB2" enchantment="protection explosions:3">leather chestplate</chestplate>
+    </kit>
+    <kit name="observer">
+        <potion duration="oo">night vision</potion>
+    </kit>
+</kits>
+<itemremove>
+    <item>sapling</item>
+    <item>leaves</item>
+    <item>wood</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>golden carrot</item>
+    <item>apple</item>
+    <item>ender stone</item>
+    <item>cobblestone</item>
+    <item>clay ball</item>
+    <item>beacon</item>
+    <item>wool</item>
+    <item>smooth brick</item>
+</itemremove>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+<timelock>on</timelock>
+<spawns>
+    <spawn team="red" kit="red">
+        <point yaw="0">0,10,-92</point>
+        <point yaw="-180">0,10,4</point>
+    </spawn>
+    <spawn team="blue" kit="blue">
+        <point yaw="-180">-44,10,4</point>
+        <point yaw="0">-44,10,-92</point>
+    </spawn>
+    <default yaw="0">
+        <cuboid min="-21,26,-108" max="-23,26,-110"/>
+    </default>
+</spawns>
+</map>

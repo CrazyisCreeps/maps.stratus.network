@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Sprout</name>
+<version>1.0.1</version>
+<objective>Capture the hills to gain points. First team to reach 500 points wins!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="bb628049-e368-4b1c-b8aa-d4557ae9416b"/> <!-- Anthonny -->
+    <author uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- PepsiDog  -->
+    <author uuid="df5fd9f4-4840-4293-9346-5c77bf7bc08f"/> <!-- Kaleeka -->
+</authors>
+<contributors>
+    <contributor uuid="ff0b4c92-edc5-4474-a145-04a433c9e485"/> <!-- MySquishyTurtle -->
+    <contributor uuid="2958ea4c-3501-404e-88cc-12e8632f68cc"/> <!-- NixaniaXi -->
+</contributors>
+<teams>
+    <team id="purple" color="dark purple" max="12">Purple</team>
+    <team id="yellow" color="yellow" max="12">Yellow</team>
+</teams>
+<score>
+    <limit>500</limit>
+</score>
+<control-points capture-rule="lead" neutral-state="true" points="1" capture-time="10s" required="false" show-progress="true">
+    <!-- Center -->
+    <control-point id="cp-center" name="Center">
+        <capture><region id="cap-center"/></capture>
+        <progress><region id="prog-center"/></progress>
+        <captured><region id="own-center"/></captured>
+    </control-point>
+    <!-- Near Purple Spawn -->
+    <control-point id="cp-north" name="North">
+        <capture><region id="cap-north"/></capture>
+        <progress><region id="prog-north"/></progress>
+        <captured><region id="own-north"/></captured>
+    </control-point>
+    <!-- Near Yellow Spawn -->
+    <control-point id="cp-south" name="South">
+        <capture><region id="cap-south"/></capture>
+        <progress><region id="prog-south"/></progress>
+        <captured><region id="own-south"/></captured>
+    </control-point>
+</control-points>
+<spawns>
+    <default>
+        <regions yaw="90">
+            <region id="spawn-default"/>
+        </regions>
+    </default>
+    <spawn team="purple" kit="kit-purple">
+        <regions yaw="180">
+            <region id="spawn-purple"/>
+        </regions>
+    </spawn>
+    <spawn team="yellow" kit="kit-yellow">
+        <regions yaw="0">
+            <region id="spawn-yellow"/>
+        </regions>
+    </spawn>
+</spawns>
+<kits>
+    <kit id="spawn" force="true">
+        <chestplate material="iron chestplate" unbreakable="true" locked="true">
+            <enchantment level="1">protection</enchantment>
+        </chestplate>
+        <leggings material="iron leggings" unbreakable="true" locked="true"/>
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" material="arrow" amount="32"/>
+        <item slot="8" material="golden carrot" amount="64"/>
+    </kit>
+    <kit id="kit-purple" parents="spawn">
+        <helmet material="leather helmet" color="7F3FB2" unbreakable="true" locked="true"/>
+        <boots material="leather boots" color="7F3FB2" unbreakable="true" locked="true"/>
+    </kit>
+    <kit id="kit-yellow" parents="spawn">
+        <helmet material="leather helmet" color="E5E533" unbreakable="true" locked="true"/>
+        <boots material="leather boots" color="E5E533" unbreakable="true" locked="true"/>
+    </kit>
+    <kit id="kit-killstreak">
+        <effect>speed</effect>
+    </kit>
+</kits>
+<filters>
+    <team id="only-purple">purple</team>
+    <team id="only-yellow">yellow</team>
+    <kill-streak id="4th-kill" count="4"/>
+</filters>
+<regions>
+    <!-- Region Definitons -->
+    <cuboid id="spawn-default" min="173,34,-54" max="177,34,-50"/>
+    <cuboid id="spawn-purple" min="97,21,-99" max="99,21,-97"/>
+    <cuboid id="spawn-yellow" min="70,21,-6" max="72,21,-4"/>
+    <cuboid id="spawn-prot-purple" min="91,21,-105" max="102,24,-102"/>
+    <cuboid id="spawn-prot-yellow" min="67,21,-1" max="78,24,2"/>
+    <cylinder id="cap-center" base="84.5,9,-51.5" radius="6.5" height="2"/>
+    <cylinder id="cap-north" base="50.5,23,-87.5" radius="5.5" height="2"/>
+    <cylinder id="cap-south" base="118.5,23,-15.5" radius="5.5" height="2"/>
+    <cylinder id="prog-center" base="84.5,8,-51.5" radius="6.5" height="1"/>
+    <cylinder id="prog-north" base="50.5,22,-87.5" radius="5.5" height="1"/>
+    <cylinder id="prog-south" base="118.5,22,-15.5" radius="5.5" height="1"/>
+    <union id="own-center">
+        <region id="prog-center"/>
+        <block>96,22,-107</block> <!-- Inside Purple Spawn House -->
+        <block>72,22,4</block> <!-- Inside Yellow Spawn House -->
+    </union>
+    <union id="own-north">
+        <region id="prog-north"/>
+        <block>95,22,-107</block>
+        <block>71,22,4</block>
+    </union>
+    <union id="own-south">
+        <region id="prog-south"/>
+        <block>97,22,-106</block>
+        <block>73,22,4</block>
+    </union>
+    <union id="jumps">
+        <cuboid id="jump-north" min="53,9,-72" max="55,10,-70"/>
+        <cuboid id="jump-south" min="114,9,-33" max="116,10,-31"/>
+    </union>
+    <!-- Filter Applications -->
+    <apply enter="only-purple" message="You may not enter the enemy team's spawn!">
+        <region id="spawn-prot-purple"/>
+    </apply>
+    <apply enter="only-yellow" message="You may not enter the enemy team's spawn!">
+        <region id="spawn-prot-yellow"/>
+    </apply>
+    <apply velocity="0,1.7,0" region="jumps"/>
+    <apply block="never"/>
+</regions>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow" amount="8"/>
+        <item material="golden apple"/>
+    </kill-reward>
+    <!--
+    OPTIONAL
+    <kill-reward>
+        <filter id="4th-kill"/>
+        <kit id="kit-killstreak"/>
+    </kill-reward>
+    -->
+</kill-rewards>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<armorkeep>
+    <item>leather helmet</item>
+    <item>iron chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+</armorkeep>
+<itemremove>
+    <item>golden carrot</item>
+    <item>arrow</item>
+</itemremove>
+</map>

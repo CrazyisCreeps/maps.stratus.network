@@ -1,0 +1,30 @@
+<map proto="1.4.0" game="Kill the King">
+<name>King's Conquest: Rampant</name>
+<version>1.0</version>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" /> <!-- mitchiii_ -->
+</authors>
+<spawns>
+    <spawn team="red" region="red-spawn" sequential="true" yaw="0" kit="spawn" />
+    <spawn team="blue" region="blue-spawn" sequential="true" yaw="180" kit="spawn" />
+    <default region="default-spawn" yaw="-90" kit="obs" />
+</spawns>
+<regions>
+    <block id="red-spawn">257.5,12,-25.5</block>
+    <block id="blue-spawn">256.5,12,121.5</block>
+    <union id="spawns">
+        <cylinder base="257.5,11,-25.5" radius="2" height="3" />
+        <cylinder base="256.5,11,121.5" radius="2" height="3" />
+    </union>
+    <block id="default-spawn">229.5,28,48</block>
+    <above id="build-limit" y="30" />
+    <below id="underground" y="3" />
+    <apply region="build-limit" block-place="never" message="`7You have reached the maximum build height! (`c30 Blocks`7)" />
+</regions>
+<flags>
+    <post id="red-post">257.5,12,-25.5</post>
+    <post id="blue-post">256.5,12,121.5</post>
+</flags>
+<timelock>on</timelock>
+<include src="king-classes.xml"/>
+</map>

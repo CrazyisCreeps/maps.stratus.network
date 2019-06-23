@@ -1,0 +1,116 @@
+<map proto="1.4.2">
+<name>Zao</name>
+<version>1.2.2</version>
+<objective>The team with the most amount of kills after 7 minutes wins!</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="ebd46993-37f5-46e3-9891-482d17d04206"/> <!-- Astronis -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="22">Red</team>
+    <team id="blue" color="blue" max="22">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" enchantment="dig_speed:2">stone pickaxe</item>
+        <item slot="3" amount="32">sandstone</item>
+        <item slot="7" amount="2">golden apple</item>
+        <item slot="8" amount="32">cooked beef</item>
+        <item slot="28" amount="1">arrow</item>
+        <effect amplifier="4" duration="5">heal</effect>
+        <effect amplifier="1" duration="5">increase damage</effect>
+		<leggings unbreakable="true" material="chainmail leggings"/>
+		<potion duration="oo" amplifier="1">speed</potion>
+    </kit>
+	<kit id="kit-red" parents="spawn">
+        <chestplate color="AA0000" unbreakable="true" material="leather chestplate"/>
+        <boots color="AA0000" unbreakable="true" material="leather boots"/>
+    </kit>
+    <kit id="kit-blue" parents="spawn">
+        <chestplate color="5555FF" material="leather chestplate"/>
+        <boots color="5555FF" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="kit-red">
+    	<region yaw="-90">
+        	<cylinder base="-113.5,6,0.5" radius="5" height="1"/>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="kit-blue">
+    	<region yaw="90">
+        	<cylinder base="115.5,6,0.5" radius="5" height="1"/>
+        </region>
+    </spawn>
+    <default>
+    	<region yaw="-180">
+       		<cylinder base="0.5,61,163.5" radius="2" height="1"/>
+       	</region>
+    </default>
+</spawns>
+<filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+	<any id="only-sandstone">
+		<material>sandstone</material>
+	</any>
+</filters>
+<regions>
+	<rectangle id="blarg" min="-161.5,-101.5" max="163.5,102.5"/>
+	<union id="spawns">
+		<cylinder id="red-spawn-interact" base="-113.5,0,0.5" radius="22" height="oo"/>
+		<cylinder id="blue-spawn-interact" base="115.5,0,0.5" radius="22" height="oo"/>
+	</union>
+	<cylinder id="red-spawn-enter" base="-113.5,0,0.5" radius="17" height="oo"/>
+	<cylinder id="blue-spawn-enter" base="115.5,0,0.5" radius="17" height="oo"/>
+	<apply region="red-spawn-enter" enter="only-red" message="You may not enter the other teams spawn."/>
+	<apply region="blue-spawn-enter" enter="only-blue" message="You may not enter the other teams spawn."/>
+	<apply region="spawns" block="never" message="You may not place sandstone in spawn."/>
+	<apply region="blarg" block="only-sandstone" message="You may only break sandstone on this map."/>
+	<apply region="everywhere" block="never" message="You may only break sandstone on this map."/>
+</regions>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+</toolrepair>
+<itemremove>
+    <item>iron sword</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>sandstone</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+</itemremove>
+<killreward>
+    <item amount="1">golden apple</item>
+    <item amount="8">sandstone</item>
+</killreward>
+<!-- after 2 kills -->
+<killreward>
+	<filter>
+        <kill-streak count="3"/>
+    </filter>
+	<kit force="true">
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+</killreward>
+<!-- after 5 kills -->
+<killreward>
+    <filter>
+        <kill-streak count="5"/>
+    </filter>
+    <kit force="true">
+        <item slot="0">iron sword</item>
+    </kit>
+</killreward>
+<maxbuildheight>95</maxbuildheight>
+<time>7m</time>
+<score>
+    <kills>1</kills>
+    <deaths>0</deaths>
+</score>
+</map>

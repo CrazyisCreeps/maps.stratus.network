@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Storm TE</name>
+<version>1.0.0</version>
+<objective>Capture hills to score 750 points.</objective>
+<include src="tutorial.xml"/>
+<authors>
+    <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8"/> <!-- Plastix -->
+    <author uuid="5986da63-a546-49c5-812d-d5c41a42510a"/> <!-- Lyzak -->
+    <author uuid="90e029a3-6873-46a7-8430-0ec3dbc42aba"/> <!-- SajinZero -->
+</authors>
+<teams>
+    <team id="red-team"  color="dark red" max="8" max-overfill="8" min="8">Red</team>
+    <team id="blue-team" color="blue"     max="8" max-overfill="8" min="8">Blue</team>
+</teams>
+<kits>
+    <kit id="kit-spawn">
+        <clear-items/>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="28" amount="1">arrow</item>
+        <item slot="3"  amount="1">golden apple</item>
+        <chestplate enchantment="protection projectile:1" unbreakable="true">iron chestplate</chestplate>
+        <effect duration="2">heal</effect>
+        <effect duration="4" amplifier="4">damage resistance</effect>
+    </kit>
+    <kit id="spawn-red" parents="kit-spawn">
+        <helmet   color="cd0000" unbreakable="true">leather helmet</helmet>
+        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+        <boots    color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="spawn-blue" parents="kit-spawn">
+        <helmet   color="0066cc" unbreakable="true">leather helmet</helmet>
+        <leggings color="0066cc" unbreakable="true">leather leggings</leggings>
+        <boots    color="0066cc" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+<filters>
+    <not id="no-gui">
+        <any>
+            <material>beacon</material>
+            <material>hopper</material>
+            <material>furnace</material>
+        </any>
+    </not>
+</filters>
+<regions>
+    <cylinder id="red-spawn"     base="49,4,66"   radius="4" height="0"/>
+    <cylinder id="blue-spawn"    base="-48,4,-65" radius="4" height="0"/>
+    <cylinder id="spawn-default" base="95,61,0"   radius="3" height="0"/>
+    <union id="forbidden">
+        <cuboid id="side-blue" min="31,3,57"  max="59,6,54"/>
+        <cuboid id="side-red"  min="-30,3,58" max="-58,6,55"/>
+    </union>
+    <apply enter="never" region="forbidden"/>
+    <apply block="never" use="no-gui"/>
+</regions>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>iron chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>ladder</item>
+    <item>baked potato</item>
+    <item>glass bottle</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+<spawns>
+    <spawn team="red-team"  kit="spawn-red"  yaw="180" region="red-spawn"/>
+    <spawn team="blue-team" kit="spawn-blue" yaw="0"   region="blue-spawn"/>
+    <default region="spawn-default" yaw="90"/>
+</spawns>
+<control-points incremental="true" show-progress="true" neutral-state="true" required="false">
+    <control-point name="Point A" points="1" capture-time="8s">
+        <capture>
+            <cuboid min="37,12,-38" max="46,15,-29"/>
+        </capture>
+        <progress>
+            <cuboid min="36,11,-39" max="48,17,-27"/>
+        </progress>
+        <captured>
+            <cuboid min="36,11,-39" max="48,17,-27"/>
+        </captured>
+    </control-point>
+    <control-point name="Middle" capture-time="10s" points="1.5">
+        <capture>
+            <cuboid min="-4,4,-4" max="5,7,5"/>
+        </capture>
+        <progress>
+            <cuboid min="-5,3,-5" max="6,10,6"/>
+        </progress>
+        <captured>
+            <cuboid min="-5,3,-5" max="5,10,5"/>
+        </captured>
+    </control-point>
+    <control-point name="Point B" points="1" capture-time="8s">
+        <capture>
+            <cuboid min="-45,12,30" max="-36,15,39"/>
+        </capture>
+        <progress>
+            <cuboid min="-46,11,29" max="-34,17,41"/>
+        </progress>
+        <captured>
+            <cuboid min="-46,11,29" max="-34,17,41"/>
+        </captured>
+    </control-point>
+</control-points>
+<score>
+    <limit>750</limit>
+</score>
+<respawn delay="6s" blackout="true"/>
+<hunger><depletion>off</depletion></hunger>
+<tutorial>
+    <stage title="King of the Hill">
+        <message>
+            <line>§rThis map is a §a§lKing of the Hill §r(KotH) map</line>
+            <line>You can win by having the most hills `bcontrolled `rat the end of the time limit.</line>
+        </message>
+        <teleport>
+            <point yaw="135" pitch="30">30.5,38,30.5</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn">
+        <message>
+            <line>This is the `cRed Team `rspawn. The `9Blue Team `rspawn is identical.</line>
+            <line>You spawn with gear ready to go into battle!</line>
+        </message>
+        <teleport>
+            <point yaw="125" pitch="10">59.5,7,73.5</point>
+        </teleport>
+    </stage>
+    <stage title="Hills">
+        <message>
+            <line>There is a `bhill `rin the `acenter`r, to the left is `aHill B`r, and to the right is `aHill A`r.</line>
+            <line>Hills are indicated with a `bbeacon.</line>
+            <line>The center hill will mostly be the most active.</line>
+        </message>
+        <teleport>
+            <point yaw="135" pitch="30">30.5,38,30.5</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Biggerfoot</name>
+<version>1.0.0</version>
+<objective>Capture and place the enemies wool</objective>
+<!--Authors-->
+<authors>
+    <author uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad" contribution="Map building and XML"/><!--AlmightyBread-->
+</authors>
+<!--Teams-->
+<teams>
+    <team id="red" color="dark_red" max="16" max-overfill="18">Red</team>
+    <team id="blue" color="blue" max="16" max-overfill="18">Blue</team>
+</teams>
+<!--Kits-->
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="iron pickaxe" unbreakeble="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="4" material="log" damage="1" amount="32"/>
+        <item slot="6" material="golden apple"/>
+        <item slot="7" material="bread" amount="64"/>
+        <item slot="8" material="arrow" amount="64"/>
+        <effect duration="3s" amplifier="5">resistance</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <chestplate material="leather chestplate" color="993333" unbreakable="true" prevent-sharing="true"/>
+        <boots material="leather boots" color="993333" unbreakable="true" prevent-sharing="true"/>
+        <helmet material="leather helmet" color="993333" unbreakable="true" prevent-sharing="true"/>
+        <item slot="5" material="stained clay" amount="32" damage="14"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <chestplate material="leather chestplate" color="334CB2" unbreakable="true" prevent-sharing="true"/>
+        <boots material="leather boots" color="334CB2" unbreakable="true" prevent-sharing="true"/>
+        <helmet material="leather helmet" color="334CB2" unbreakable="true" prevent-sharing="true"/>
+        <item slot="5" material="stained clay" amount="32" damage="11"/>
+    </kit>
+    <kit id="chainmail-kit">
+        <chestplate material="chainmail chestplate"/>
+    </kit>
+</kits>
+<!--Filters-->
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+    <not id="no-void">
+        <void/>
+    </not>
+    <all id="blue-wool-edit">
+        <filter id="only-blue"/>
+        <material>web</material>
+    </all>
+    <all id="red-wool-edit">
+        <filter id="only-red"/>
+        <material>web</material>
+    </all>
+    <any id="only-chests">
+        <material>chest</material>
+    </any>
+</filters>
+<!--Regions-->
+<regions>
+    <union id="wool-rooms">
+        <rectangle id="blue-wool-room" min="-318,318" max="-333,330"/><!--blue room-->
+        <rectangle id="red-wool-room" min="-153,213" max="-168,225"/><!--red room-->
+    </union>
+    <union id="spawn-rooms">
+        <rectangle id="red-spawn-room" min="-200,205" max="-211,215"/>
+        <rectangle id="blue-spawn-room" min="-289,338" max="-275,328"/>
+    </union>
+    <negative id="buildable">
+        <rectangle min="-213,309" max="-273,234"/>
+        <rectangle min="-198,294" max="-183,309"/>
+        <rectangle min="-168,294" max="-153,264"/>
+        <rectangle min="-288,234" max="-303,249"/>
+        <rectangle min="-318,249" max="-333,279"/>
+    </negative>
+    <!--Enter apply-->
+    <apply enter="only-red" region="blue-wool-room" message="You cannot enter your own wool room"/>
+    <apply enter="only-blue" region="red-wool-room" message="You cannot enter your own wool room"/>
+    <apply enter="only-red" region="red-spawn-room" message="You cannot enter the enemy's spawn"/>
+    <apply enter="only-blue" region="blue-spawn-room" message="You cannot enter the enemy's spawn"/>
+    <!--Block apply-->
+    <apply block="blue-wool-edit" region="red-wool-room" message="You cannot modify the wool room"/>
+    <apply block="red-wool-edit" region="blue-wool-room" message="You cannot modify the wool room"/>
+    <apply block="never" region="spawn-rooms" message="You cannot modify spawn regions"/>
+    <apply block="no-void" message="You cannot modify the void" region="buildable"/>
+    <!--Use apply-->
+    <apply use="never" region="spawn-rooms"/>
+    <apply use="only-chests" region="wool-rooms"/>
+</regions>
+<!--Wools-->
+<wools>
+  <wool team="red" color="red" craftable="false" location="-166,11,219">
+    <monument><block>-208.5,16.5,209.5</block></monument>
+    <!-- red wool can not be crafted, it must be picked up -->
+  </wool>
+  <wool team="blue" color="blue" craftable="false" location="-321,11,323">
+    <monument><block>-278,16,333</block></monument>
+    <!-- blue wool can not be crafted, it must be picked up -->
+  </wool>
+</wools>
+<!--Spawns-->
+<spawns>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="90">
+            <cuboid min="-203,15,208" max="-205,15,211"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="-90">
+            <cuboid min="-283,15,335" max="-280,15,332"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-45">
+            <cuboid min="-305,28,242" max="-307,28,244"/>
+        </regions>
+    </default>
+</spawns>
+<!--Kill reward-->
+<kill-reward>
+    <item material="golden apple"/>
+    <item material="arrow" amount="12"/>
+</kill-reward>
+<!--Item remove-->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>sugar cane</item>
+    <item>wheat</item>
+    <item>seeds</item>
+    <item>red rose</item>
+    <item>yellow flower</item>
+    <item>string</item>
+</itemremove>
+<!--Small things-->
+<timelock>on</timelock>
+<maxbuildheight>24</maxbuildheight>
+<crafting>
+    <disable>boat</disable>
+    <disable>boat spruce</disable>
+    <disable>boat birch</disable>
+    <disable>boat jungle</disable>
+    <disable>boat acacia</disable>
+    <disable>boat dark oak</disable>
+</crafting>
+<!--End of XML-->
+</map>

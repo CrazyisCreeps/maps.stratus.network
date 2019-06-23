@@ -1,0 +1,73 @@
+<map proto="1.4.0" game="`5`lOne in the Chamber">
+<name>Bill's Town OiTC</name>
+<version>1.1.2</version>
+<objective>Be the last Survivor!</objective>
+<authors>
+    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/> <!-- Yoyo_-->
+    <author uuid="f70b7a8f-93b2-480f-9d54-88e21485a042"/> <!-- Diamyx -->
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
+    <author uuid="715769c5-8c4c-4489-bdf8-f9cee2b2ae8a"/> <!-- amactus -->
+</authors>
+<players min="2" max="32"/>
+<score>
+    <limit>15</limit>
+    <kills>1</kills>
+</score>
+<spawns>
+    <spawn spread="true" safe="true" angle="916,10,-1208" kit="players">
+        <regions>
+			<union>
+				<cuboid min="962.5,16,-1169.5" max="869.5,0,-1247.5"/>
+				<cuboid min="868.5,17,-1247.5" max="858.5,0,-1216.5"/>
+				<cuboid min="963.5,17,-1169.5" max="973.5,0,-1200.5"/>
+			</union>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <point>968.5,6,-1194</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="players" force="true">
+        <item slot="0" locked="true" enchantment="arrow damage:10" material="bow"/>
+        <item slot="1" amount="1" material="arrow"/>
+		<effect amplifier="-4">health boost</effect>
+    </kit>
+</kits>
+<filters>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <not id="deny-ender-chest">
+        <material>ender chest</material>
+    </not>
+</filters>
+<regions>
+    <above id="height-limit" y="22"/>
+    <apply block="never" message="You may not modify this area!">
+        <region>
+            <cuboid min="964,5,-1198" max="971,9,-1192"/>
+        </region>
+    </apply>
+    <apply block="deny-void" message="You may not build outside of the playable region!"/>
+    <apply use="deny-ender-chest"/>
+</regions>
+<itemremove>
+    <item>obsidian</item>
+    <item>bow</item>
+    <item>arrow</item>
+</itemremove>
+<kill-rewards>
+	<kill-reward>
+        <filter>
+            <kill-streak count="1" repeat="false"/>
+        </filter>
+        <item material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+	<depletion>off</depletion>
+</hunger>
+</map>

@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Buckle Up: TE</name>
+<version>1.1.1</version>
+<objective>Reach 2000 points first!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Map aesthetics and build"/> <!-- Tywnis -->
+    <author uuid="e60895f7-f208-4a29-abcb-7c7fdfa8b2e0" contribution="Map layout and structure"/> <!-- Picajoluna -->
+</authors>
+<contributors>
+    <contributor uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="Map XML and lots of love"/> <!-- Crazy_ -->
+    <contributor uuid="76db4f74-9cf4-45b7-a3a8-ae96b5979bfd" contribution="Helped build the map (painstakingly)"/> <!-- stupid3700 -->
+    <contributor uuid="9c0cd42f-fd79-45ff-b123-7da044ab2a0c" contribution="Helped with build, gave suggestions and tips"/> <!-- Merlijn -->
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="5" max-overfill="5">Red</team>
+    <team id="blue" color="blue" max="5" max-overfill="5">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" amount="64" material="cooked beef"/>
+        <item slot="3" amount="24" material="arrow"/>
+        <helmet unbreakable="true" material="iron helmet"/>
+        <leggings unbreakable="true" color="474F52" material="leather leggings"/>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <chestplate unbreakable="true" color="B02E26" material="leather chestplate"/>
+        <boots unbreakable="true" color="B02E26" material="leather boots">
+            <enchantment>protection fall</enchantment>
+        </boots>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <chestplate unbreakable="true" color="3AB3DA" material="leather chestplate"/>
+        <boots unbreakable="true" color="3AB3DA" material="leather boots">
+            <enchantment>protection fall</enchantment>
+        </boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" yaw="-90" kit="red-kit">
+        <regions>
+            <point>-57.5,20.5,1.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue" yaw="90" kit="blue-kit">
+        <regions>
+            <point>78.5,20.5,1.5</point>
+        </regions>
+    </spawn>
+    <default yaw="90">
+        <regions>
+            <point>10.5,55.5,-60.5</point>
+        </regions>
+    </default>
+</spawns>
+<respawn delay="3s"/>
+<regions>
+    <everywhere/>
+    <union id="jump-pads">
+        <cuboid id="north-jump" min="9,5,-21" max="12,6,-24"/>
+        <cuboid id="south-jump" min="12,5,24" max="9,6,27"/>
+        <cuboid id="west-jump" min="-18,11,3" max="-21,12,0"/>
+        <cuboid id="east-jump" min="39,11,0" max="42,12,3"/>
+    </union>
+    <!-- Need to tweak -->
+    <apply velocity="0,1.70,0.4" region="north-jump"/>
+    <apply velocity="0,1.70,-0.4" region="south-jump"/>
+    <apply velocity="0.8,1.83,0" region="west-jump"/>
+    <apply velocity="-0.8,1.83,0" region="east-jump"/>
+    <apply block="never" region="everywhere"/>
+</regions>
+<portals>
+    <!-- Red Top -->
+    <portal yaw="@-135">
+        <region>
+            <cuboid min="-52,20,4" max="-51,21,5"/>
+        </region>
+        <destination>
+            <point>-15.5,25.5,23.5</point>
+        </destination>
+    </portal>
+    <!-- Red Bottom -->
+    <portal yaw="@-45">
+        <region>
+            <cuboid min="-52,20,-1" max="-50,21,-2"/>
+        </region>
+        <destination>
+            <point>-16.5,12.5,-20.5</point>
+        </destination>
+    </portal>
+    <!-- Blue Top -->
+    <portal yaw="@45">
+        <region>
+            <cuboid min="73,20,-1" max="72,21,-2"/>
+        </region>
+        <destination>
+            <point>36.5,25.5,-20.5</point>
+        </destination>
+    </portal>
+    <!-- Blue Bottom -->
+    <portal yaw="@135">
+        <region>
+            <cuboid min="73,20,4" max="72,21,5"/>
+        </region>
+        <destination>
+            <point>37.5,12.5,23.5</point>
+        </destination>
+    </portal>
+</portals>
+<control-points show-progress="true" required="false" neutral-state="true" incremental="true">
+    <control-point name="Top" capture-time="2s" points="2">
+        <capture>
+            <cuboid min="6,24,-2" max="15,26,5"/>
+        </capture>
+        <progress>
+            <cylinder base="10.5,23,1.5" radius="8" height="4"/>
+        </progress>
+    </control-point>
+    <control-point name="Bottom" capture-time="2s" points="3">
+        <capture>
+            <cylinder base="10.5,2,1.5" radius="5" height="3"/>
+        </capture>
+        <progress>
+            <cylinder base="10.5,1,1.5" radius="12" height="8"/>
+        </progress>
+    </control-point>
+</control-points>
+<score>
+    <limit>2000</limit>
+</score>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item material="arrow" amount="4"/>
+    </kill-reward>
+</kill-rewards>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>iron helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>cooked beef</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+</map>

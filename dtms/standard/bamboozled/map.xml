@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<!--Basic /map info-->
+<map proto="1.4.2">
+<name>Bamboozled</name>
+<version>1.0.4</version>
+<objective>Destroy the other team's obsidian monument!</objective>
+<gamemode>dtm</gamemode>
+
+<!--Authors and Contributors-->
+<authors>
+	<author uuid="c0f05391-054c-4cd4-9968-588fecbd4e16"/><!--Razrivon-->
+</authors>
+<!--Teams-->
+<teams>
+    <team id="red-team" color="dark red" max="20" >Red Team</team>
+    <team id="blue-team" color="blue" max="20" >Blue Team</team>
+</teams>
+
+<!--Kits-->
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" enchantment="infinity" unbreakable="true"/>
+        <item slot="2" material="diamond pickaxe" unbreakeble="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="4" material="iron spade" unbreakable="true"/>
+        <item slot="5" material="wood" amount="64"/>
+		<item slot="7" material="golden apple" amount="1"/>
+        <item slot="8" name="Sushi" material="cooked fish" amount="64"/>
+        <item slot="28" material="arrow" amount="1"/>
+        <effect duration="3s" amplifier="5">resistance</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <chestplate material="leather chestplate" color="993333" unbreakable="true" prevent-sharing="true"/>
+        <boots material="leather boots" color="993333" unbreakable="true" prevent-sharing="true"/>
+        <helmet material="leather helmet" color="993333" unbreakable="true" prevent-sharing="true"/>
+		<item slot="6" material="stained glass" damage="14" amount="64"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <chestplate material="leather chestplate" color="334CB2" unbreakable="true" prevent-sharing="true"/>
+        <boots material="leather boots" color="334CB2" unbreakable="true" prevent-sharing="true"/>
+        <helmet material="leather helmet" color="334CB2" unbreakable="true" prevent-sharing="true"/>
+		<item slot="6" material="stained glass" damage="11" amount="64"/>
+    </kit>
+</kits>
+
+<!--Filters-->
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="no-void">
+        <void/>
+    </not>
+</filters>
+
+<!--Defining Regions-->
+<regions>
+    <apply block="never" region="maxdestroyheight"/>
+	<above id="maxdestroyheight" y="54"/>
+	<apply block="never" region="red-spawn-room"/>
+	    <cuboid id="red-spawn-room" min="-130,21,11" max="-120,31,21"/>
+	<apply block="never" region="blue-spawn-room"/>
+	    <cuboid id="blue-spawn-room" min="-17,21,11" max="-7,31,21"/>
+		<apply block="never" region="playable"/>
+	<negative id="playable">
+	    <rectangle min="-139,6" max="2,103"/>
+	</negative>
+</regions>
+
+<!--Defining Monuments-->
+<destroyables name="Monument" materials="obsidian" completion="100%">
+    <destroyable owner="red-team">
+        <region>
+            <cuboid min="-125,29,90" max="-124,33,89" />
+        </region>
+    </destroyable>
+    <destroyable owner="blue-team">
+        <region>
+            <cuboid min="-13,29,88" max="-11,33,90" />
+        </region>
+    </destroyable>
+</destroyables>
+
+<!--Spawns-->
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="-180">
+            <cylinder base="-125,21,16" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="0">
+            <cylinder base="-12,21,16" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-45">
+            <cylinder base="-77,50,121" radius="1" height="0"/>
+        </regions>
+    </default>
+</spawns>
+
+<!--Kill reward-->
+<kill-reward> <item material="golden apple"/> </kill-reward>
+
+<!--Item remove-->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>iron axe</item>
+    <item>iron spade</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>cooked fish</item>
+	<item>stained glass</item>
+	<item>wood</item>
+</itemremove>
+
+<!--Small things-->
+<timelock>on</timelock>
+<maxbuildheight>53</maxbuildheight>
+<!--End of XML-->
+</map>

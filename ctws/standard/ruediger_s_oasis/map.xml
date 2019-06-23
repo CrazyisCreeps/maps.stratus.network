@@ -1,0 +1,217 @@
+<?xml version="1.0"?> <!-- created in september 2017 -->
+<map proto="1.4.2">
+<name>Ruediger's Oasis</name>
+<version>1.1.1</version>
+<objective>Take the enemy's wool and place it on your wool monument!</objective>
+<gamemode>ctw</gamemode>
+<timelock>on</timelock>
+<maxbuildheight>28</maxbuildheight>
+<authors>
+    <author uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30"/> <!--  Ruediger_LP  -->
+</authors>
+<teams>
+    <team id="pink-team" color="red" max="10">Pink</team>
+    <team id="lime-team" color="green" max="10">Lime</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" enchantment="arrow infinite:1" material="bow" unbreakable="true"/>
+        <item slot="2" material="iron pickaxe" unbreakable="true"/>
+        <item slot="3" material="stone axe" unbreakable="true"/>
+        <item slot="4" amount="64" material="sandstone" damage="2"/>
+        <item slot="5" amount="16" material="wood" damage="3"/>
+        <item slot="6" material="bucket"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" material="cooked mutton" amount="48"/>
+        <item slot="28" material="arrow"/>
+        <item slot="29" material="shears" unbreakable="true"/>
+        <item slot="30" material="iron spade" unbreakable="true"/>
+        <item slot="35" amount="24" material="vine"/>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+    </kit>
+    <kit id="pink-kit" parents="spawn-kit">
+        <leggings color="F10F59" unbreakable="true">leather leggings</leggings>
+        <boots color="C20B47" unbreakable="true" enchantment="protection fall">leather boots</boots>
+    </kit>
+    <kit id="lime-kit" parents="spawn-kit">
+      	<leggings color="42C20B" unbreakable="true">leather leggings</leggings>
+        <boots color="8AC20B" unbreakable="true" enchantment="protection fall">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="pink-team" kit="pink-kit">
+        <region yaw="-45">
+            <cylinder base="-30,6.5,-96" radius="2" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="lime-team" kit="lime-kit">
+        <region yaw="135">
+             <cylinder base="30,6.5,96" radius="2" height="0"/>
+        </region>
+    </spawn>
+    <default>
+        <region yaw="-55" pitch="-5">
+            <cylinder base="-3,9,-15" radius="2" height="0"/>
+        </region>
+        <region yaw="125" pitch="-5">
+            <cylinder base="3,9,15" radius="2" height="0"/>
+        </region>
+    </default>
+</spawns>
+<wools>
+    <wool team="pink-team" color="pink" location="-36,17.2,100">
+        <monument><block>-34,7,-100</block></monument>
+    </wool>
+    <wool team="lime-team" color="lime" location="36,17.2,-100">
+        <monument><block>33,7,99</block></monument>
+    </wool>
+</wools>
+<filters>
+	<not id="not-void"><void/></not>
+	<not id="pink-wool-filter">
+		<any>
+			<team id="only-lime">lime-team</team>
+			<all>
+				<team>pink-team</team>
+				<not>
+					<material>web</material>
+				</not>
+			</all>
+		</any>
+	</not>
+	<not id="lime-wool-filter">
+		<any>
+			<team id="only-pink">pink-team</team>
+			<all>
+				<team>lime-team</team>
+				<not>
+					<material>web</material>
+				</not>
+			</all>
+		</any>
+	</not>
+</filters>
+<regions>
+	<rectangle min="-20,94" max="-36,106" id="pink-wool"/>
+	<rectangle min="20,-94" max="36,-106" id="lime-wool"/>
+	<union id="spawns">
+		<circle center="-30,-96" radius="13.2" id="pink-spawn"/>
+		<circle center="30,96" radius="13.2" id="lime-spawn"/>
+	</union>
+	<apply enter="only-pink" region="pink-spawn" message="You may not enter the enemy's spawn!"/>
+	<apply enter="only-lime" region="lime-spawn" message="You may not enter the enemy's spawn!"/>
+	<apply enter="only-pink" region="pink-wool" message="You may not enter this wool room!"/>
+	<apply enter="only-lime" region="lime-wool" message="You may not enter this wool room!"/>
+	<apply block="pink-wool-filter" region="pink-wool" message="You may not edit the wool room!"/>
+	<apply block="lime-wool-filter" region="lime-wool" message="You may not edit the wool room!"/>
+	<apply block="never" region="spawns" message="You may not edit spawn!"/>
+	<apply block="not-void" region="everywhere" message="You may not edit the void!"/>
+</regions>
+<itemremove>
+    <item>sapling</item>
+    <item>web</item> 
+    <item>long grass</item>
+    <item>yellow flower</item>
+    <item>double plant</item>
+    <item>ink sack</item>
+    <item>string</item> 
+    <item>seeds</item> 
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<itemkeep>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>stone axe</item>
+    <item>iron spade</item>
+    <item>shears</item>
+    <item>arrow</item>
+    <item>vine</item>
+    <item>bucket</item>
+    <item>sandstone</item>
+    <item>wood</item>
+    <item>cooked mutton</item>
+</itemkeep>
+<toolrepair>
+	<tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>stone axe</tool>
+    <tool>iron spade</tool>
+    <tool>shears</tool>
+</toolrepair>
+<crafting>
+    <disable>gold axe</disable>
+   	<disable>gold nugget</disable>
+</crafting>
+<item-mods>
+    <rule>
+        <match>
+            <material>gold spade</material>
+            <material>gold pickaxe</material>
+        </match>
+        <modify unbreakable="true">
+            <enchantment level="1">Efficiency</enchantment>
+        </modify>
+    </rule>
+    <rule>
+        <match>
+            <material>gold helmet</material>
+            <material>gold leggings</material>
+        </match>
+        <modify unbreakable="true"/>
+    </rule>
+    <rule>
+    	<match>
+    		<material>gold boots</material>
+    	</match>
+    	<modify unbreakable="true">
+    		<enchantment level="1">protection fall</enchantment>
+    		<enchantment level="1">Protection</enchantment>
+    	</modify>
+    </rule>
+    <rule>
+    	<match>
+    		<material>gold chestplate</material>
+    	</match>
+    	<modify unbreakable="true">
+    		<enchantment level="1">thorns</enchantment>
+    		<enchantment level="1">Protection</enchantment>
+    	</modify>
+    </rule>
+</item-mods>
+<block-drops>
+    <rule region="everywhere">
+        <filter>
+            <any>
+                <material>grass</material>
+                <material>dirt</material>
+            </any>
+        </filter>
+        <drops>
+            <item material="wood" damage="3"/>
+        </drops>
+    </rule>
+    <rule region="everywhere">
+        <filter>
+        	<any>
+            	<material>sandstone</material>
+            	<material>stained clay</material>
+            </any>
+        </filter>
+        <drops>
+            <item material="sandstone" damage="2"/>
+        </drops>
+    </rule>
+</block-drops>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item material="sandstone" damage="2" amount="24"/>
+    </kill-reward>
+</kill-rewards>    
+</map>

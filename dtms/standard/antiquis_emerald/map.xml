@@ -1,0 +1,222 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<map proto="1.4.2">
+<include src="tutorial.xml"/>
+<name>Antiquis: Emerald</name>
+<version>1.1.0</version>
+<objective>Destroy the enemy's emerald monument!</objective>
+<authors>
+    <author uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- pepsidawg00 -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="12">Red</team>
+    <team id="blue" color="blue" max="12">Blue</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="spawn-blue">
+        <regions yaw="180">
+            <cylinder base="0.5,11.5,-61.5" radius="2" height="1"/>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="spawn-red">
+        <regions yaw="0">
+            <cuboid min="-2,11,70" max="2,12,66"/>
+            <cylinder base="0.5,11.5,62.5" radius="2" height="1"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <cuboid min="-72,20,-2" max="-68,21,2"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" unbreakable="true" lore="`r`7Pickaxe Level: `b1|`7Stars to Upgrade: `b2">stone pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="efficiency:1">stone axe</item>
+        <item slot="4" amount="32">wood</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <item slot="28">arrow</item>
+        <potion duration="6" amplifier="4">damage resistance</potion>
+        <potion duration="6" amplifier="4">heal</potion>
+    </kit>
+    <kit id="spawn-red" parents="spawn">
+        <helmet color="ff0000" unbreakable="true">leather helmet</helmet>
+        <chestplate color="ff0000" unbreakable="true" enchantment="protection projectile:2">leather chestplate</chestplate>
+        <leggings color="ff0000" unbreakable="true">leather leggings</leggings>
+        <boots color="ff0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="spawn-blue" parents="spawn">
+        <helmet color="0000ff" unbreakable="true">leather helmet</helmet>
+        <chestplate color="0000ff" unbreakable="true" enchantment="protection projectile:2">leather chestplate</chestplate>
+        <leggings color="0000ff" unbreakable="true">leather leggings</leggings>
+        <boots color="0000ff" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+</filters>
+<regions>
+    <circle id="playable" center="0.5,0.5" radius="51"/>
+    <rectangle id="redSpawnReg" min="-31,52" max="32,84"/>
+    <rectangle id="blueSpawnReg" min="-31,-84" max="32,-52"/>
+    <apply block="never">
+        <region>
+            <negative>
+                <region id="playable"/>
+            </negative>
+        </region>
+    </apply>
+    <apply enter="only-red" message="You may not enter the enemy team's base!">
+        <region>
+            <region id="redSpawnReg"/>
+        </region>
+    </apply>
+    <apply enter="only-blue" message="You may not enter the enemy team's base!">
+        <region>
+            <region id="blueSpawnReg"/>
+        </region>
+    </apply>
+</regions>
+<maxbuildheight>22</maxbuildheight>
+<timelock>on</timelock>
+<destroyables name="Monument" materials="emerald block" completion="100%" mode-changes="true">
+    <destroyable owner="red">
+        <region>
+            <cuboid min="-1,8,40" max="2,13,43"/>
+        </region>
+    </destroyable>
+    <destroyable owner="blue">
+        <region>
+            <cuboid min="-1,8,-42" max="2,13,-39"/>
+        </region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="10m" material="gold block"/>
+    <mode after="15m" material="lapis block"/>
+    <mode after="20m" material="packed ice"/>
+</modes>
+<item-mods>
+    <rule>
+        <match>
+            <material>gold sword</material>
+            <material>gold pickaxe</material>
+            <material>gold axe</material>
+            <material>gold spade</material>
+            <material>gold helmet</material>
+            <material>gold chestplate</material>
+            <material>gold leggings</material>
+            <material>gold boots</material>
+        </match>
+        <modify unbreakable="true"/>
+    </rule>
+    <rule>
+        <match>
+            <material>gold chestplate</material>
+        </match>
+        <modify unbreakable="true">
+            <enchantment level="2">protection projectile</enchantment>
+        </modify>
+    </rule>
+    <rule>
+        <match>
+            <material>gold pickaxe</material>
+        </match>
+        <modify lore="`r`7Pickaxe Level: `b2|`7Stars to Upgrade: `b4"/>
+    </rule>
+</item-mods>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>stone axe</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>cooked beef</item>
+    <item>obsidian</item>
+    <item>flint</item>
+    <item>arrow</item>
+    <item>apple</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>beacon</item>
+    <item>wood</item>
+    <item>emerald block</item>
+    <item>gold block</item>
+    <item>lapis block</item>
+    <item>packed ice</item>
+    <item>gold sword</item>
+    <item>gold axe</item>
+    <item>gold spade</item>
+    <item>gold helmet</item>
+    <item>gold chestplate</item>
+    <item>gold leggings</item>
+    <item>gold boots</item>
+    <item>stone pickaxe</item>
+</itemremove>
+<itemkeep>
+    <item>gold pickaxe</item>
+    <item>iron pickaxe</item>
+    <item>diamond pickaxe</item>
+    <item>nether star</item>
+</itemkeep>
+<kill-reward>
+	<item material="golden apple"/>
+	<item material="nether star" lore="`r`7Combine with your pickaxe to upgrade it!"/>
+	<item material="wood" amount="12"/>
+</kill-reward>
+<crafting>
+    <shapeless>
+        <ingredient lore="`r`7Combine with your pickaxe to upgrade it!" amount="2">nether star</ingredient>
+        <ingredient unbreakable="true" lore="`r`7Pickaxe Level: `b1|`7Stars to Upgrade: `b2">stone pickaxe</ingredient>
+        <result unbreakable="true" lore="`r`7Pickaxe Level: `b2|`7Stars to Upgrade: `b4">iron pickaxe</result>
+    </shapeless>
+    <shapeless>
+        <ingredient lore="`r`7Combine with your pickaxe to upgrade it!" amount="2">nether star</ingredient>
+        <ingredient>stone pickaxe</ingredient>
+        <result unbreakable="true" lore="`r`7Pickaxe Level: `b2|`7Stars to Upgrade: `b4">iron pickaxe</result>
+    </shapeless>
+    <shapeless>
+        <ingredient lore="`r`7Combine with your pickaxe to upgrade it!" amount="4">nether star</ingredient>
+        <ingredient unbreakable="true" lore="`r`7Pickaxe Level: `b2|`7Stars to Upgrade: `b4">iron pickaxe</ingredient>
+        <result unbreakable="true" lore="`r`7Pickaxe Level: `b3|`7Stars to Upgrade: `b8">diamond pickaxe</result>
+    </shapeless>
+    <shapeless>
+        <ingredient lore="`r`7Combine with your pickaxe to upgrade it!" amount="4">nether star</ingredient>
+        <ingredient unbreakable="true" lore="`r`7Pickaxe Level: `b2|`7Stars to Upgrade: `b4">gold pickaxe</ingredient>
+        <result unbreakable="true" lore="`r`7Pickaxe Level: `b3|`7Stars to Upgrade: `b8">diamond pickaxe</result>
+    </shapeless>
+    <shapeless>
+        <ingredient lore="`r`7Combine with your pickaxe to upgrade it!" amount="8">nether star</ingredient>
+        <ingredient unbreakable="true" lore="`r`7Pickaxe Level: `b3|`7Stars to Upgrade: `b8">diamond pickaxe</ingredient>
+        <result unbreakable="true" lore="`r`7Pickaxe Level: `64" enchantment="efficiency:1">diamond pickaxe</result>
+    </shapeless>
+</crafting>
+<broadcasts>
+    <tip after="30s" every="3m">Combine your Pickaxe with Nether Stars to upgrade it!</tip>
+</broadcasts>
+<tutorial>
+    <stage title="Destroy the Monument">
+        <message>
+            <line>`rThis map is a `a`lDestroy the Monument `r(DTM) map</line>
+            <line>The objective is to destory the other team's monument.</line>
+        </message>
+        <teleport>
+            <point yaw="-90" pitch="90">0.5,62,0.5</point>
+        </teleport>
+    </stage>
+    <stage title="Monument">
+        <message>
+            <line>`rThis is the `amonument`r. You must destroy it to win.</line>
+            <line>`rThe `amonument `ris made up of `b`l2 `remerald blocks.</line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="45">0.5,14,36</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

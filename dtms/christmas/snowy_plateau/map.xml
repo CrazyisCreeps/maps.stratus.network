@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Snowy Plateau</name>
+<version>1.0.0</version>
+<objective>Destroy the enemy team's obsidian monument!</objective>
+<authors>
+    <author uuid="a63de09d-6fa9-436f-9070-26f5e9a4d27b"/> <!-- dragonrider455 -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="14">Red</team>
+    <team id="blue" color="blue" max="14">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">stone axe</item>
+        <item slot="4" unbreakable="true">wood spade</item>
+        <item slot="5" amount="64">wood</item>
+        <item slot="6" amount="36">glass</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="64">golden carrot</item>
+        <item slot="28" amount="48">arrow</item>
+        <potion duration="3" amplifier="5">damage resistance</potion>
+        <potion duration="3" amplifier="5">heal</potion>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+        <chestplate color="cd0000" unbreakable="true" enchantment="protection projectile:2">leather chestplate</chestplate>
+        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+        <chestplate color="0066cc" unbreakable="true" enchantment="protection projectile:2">leather chestplate</chestplate>
+        <leggings color="0066cc" unbreakable="true">leather leggings</leggings>
+        <boots color="0066cc" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<crafting>
+    <disable>leather chestplate</disable>
+    <disable>leather helmet</disable>
+    <disable>leather leggings</disable>
+    <disable>leather boots</disable>
+</crafting>
+<block-drops>
+    <rule>
+        <filter>
+            <any>
+                <material>snow</material>
+                <material>snow block</material>
+            </any>
+        </filter>
+        <drops>
+            <item amount="1" chance="0.5">snow ball</item>
+        </drops>
+    </rule>
+</block-drops>
+<spawns>
+    <spawn team="red" kit="red-kit" yaw="45">
+        <region>
+            <point>204.5,8,-539</point>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="blue-kit" yaw="135">
+        <region>
+            <point>204.5,8,-413.5</point>
+        </region>
+    </spawn>
+    <default>
+        <region>
+            <point>199.5,38,-476.5</point>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+</filters>
+<regions>
+    <rectangle id="playable" min="155,-542" max="207,-411"/>
+    <rectangle id="blue-spawn" min="200,-411" max="207,-418"/>
+    <rectangle id="red-spawn" min="207,-535" max="200,-542"/>
+    <apply block="never" message="You may not build outside of the playing field!">
+        <region>
+            <negative>
+                <region id="playable"/>
+            </negative>
+        </region>
+    </apply>
+    <apply region="red-spawn" block="never" message="Don't break the spawns!"/>
+    <apply region="blue-spawn" block="never" message="Don't break the spawns!"/>
+    <apply region="red-spawn" enter="only-red" message="You may not enter `4Red`c's spawn area!"/>
+    <apply region="blue-spawn" enter="only-blue" message="You may not enter `9Blue`c's spawn area!"/>
+</regions>
+<destroyables name="Monument" materials="obsidian" completion="100%">
+    <destroyable owner="red">
+        <region>
+            <cuboid min="168,19,-534" max="167,17,-533"/>
+        </region>
+    </destroyable>
+    <destroyable owner="blue">
+        <region>
+            <cuboid min="168,19,-419" max="167,17,-420"/>
+        </region>
+    </destroyable>
+</destroyables>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>stone axe</item>
+    <item>wood spade</item>
+    <item>shears</item>
+    <item>seeds</item>
+    <item>flint</item>
+    <item>obsidian</item>
+    <item>glass</item>
+    <item>arrow</item>
+    <item>coal</item>
+    <item>redstone</item>
+    <item>351:4</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>ladder</item>
+    <item>golden carrot</item>
+    <item>emerald</item>
+    <item>dispenser</item>
+    <item>burning furnace</item>
+    <item>bucket</item>
+</itemremove>
+<killreward>
+    <item amount="1">golden apple</item>
+    <item amount="16">arrow</item>
+</killreward>
+<timelock>on</timelock>
+<maxbuildheight>29</maxbuildheight>
+</map>

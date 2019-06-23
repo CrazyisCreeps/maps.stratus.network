@@ -1,0 +1,124 @@
+<map proto="1.4.3">
+<name>Acajou</name>
+<version>1.0.2</version>
+<gamemode>koth</gamemode>
+<objective>Control the hills. First to 350 points!</objective>
+<authors>
+    <author uuid="48924ea3-3aad-4e16-838c-368d8d9e0a25"/> <!--Matic0B-->
+</authors>
+<contributors>
+    <contributor uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="XML"/> <!-- Crazy_ -->
+    <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Trees"/> <!-- rockymine -->
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="8" max-overfill="8">Red</team>
+    <team id="blue" color="blue" max="8" max-overfill="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" amount="8">arrow</item>
+        <item slot="3" amount="16">cooked beef</item>
+        <chestplate unbreakable="true">chainmail leggings</chestplate> 
+        <potion duration="oo" amplifier="15">damage resistance</potion>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <chestplate color="993333" unbreakable="true">leather chestplate</chestplate>    
+        <boots color="993333" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <chestplate color="334CB2" unbreakable="true">leather chestplate</chestplate>    
+        <boots color="334CB2" unbreakable="true">leather boots</boots>    
+    </kit>
+    <kit id="clear-potion" force="true">
+        <potion duration="1" amplifier="15">damage resistance</potion>
+    </kit>
+    <kit id="give-potion" force="true">
+        <potion duration="oo" amplifier="15">damage resistance</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="-45">
+            <point>-64.5,2.5,-0.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="45">
+            <point>-10.5,2.5,-0.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-180">
+            <point>-37.5,7,2.5</point>
+        </regions>
+    </default>
+</spawns>
+<respawn delay="3s"/>
+<regions>
+    <apply block="never">
+        <region>
+            <everywhere/>
+        </region>
+    </apply>
+    <negative id="play">
+        <union>
+            <cuboid id="blue-spawn" min="-69,0,-6" max="-59.5,10,7.5"/>
+            <cuboid id="red-spawn" min="-7,0,-6" max="-15.5,10,7.5"/>
+        </union>
+    </negative>
+    <apply region="red-spawn" enter="only-red" message="You may not enter the other team's spawn!"/>
+    <apply region="blue-spawn" enter="only-blue" message="You may not enter the other team's spawn!"/>
+    <apply kit="give-potion" region="red-spawn"/>
+    <apply kit="give-potion" region="blue-spawn"/>
+    <apply kit="clear-potion" region="play"/>
+</regions>
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+</filters>
+<control-points show-progess="true" required="false" neutral-state="true">
+    <control-point name="Top Hill" points="1.5" capture-time="4s">
+        <capture-region>
+            <cuboid min="-35,6,9" max="-40,8,4"/>
+        </capture-region>
+        <progress-display-region>
+            <cuboid min="-35,6,9" max="-40,8,4"/>
+        </progress-display-region>
+        <owner-display-region>
+            <cuboid min="-35,6,9" max="-40,8,4"/>
+        </owner-display-region>
+    </control-point>
+    <control-point name="Bottom Hill" points="1" capture-time="4s">
+        <capture-region>
+            <cuboid min="-40,1,26" max="-35,3,31"/>
+        </capture-region>
+        <progress-display-region>
+            <cuboid min="-40,1,26" max="-35,3,31"/>
+        </progress-display-region>
+        <owner-display-region>
+            <cuboid min="-40,1,26" max="-35,3,31"/>
+        </owner-display-region>
+    </control-point>
+</control-points>   
+<score>
+    <limit>350</limit>
+</score>
+<killreward>
+    <item>golden apple</item>
+    <item amount="4">arrow</item>
+</killreward>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>cooked beef</item>
+    <item>golden apple</item>
+</itemremove>
+</map>

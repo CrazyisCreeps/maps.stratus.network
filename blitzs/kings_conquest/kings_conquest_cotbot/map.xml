@@ -1,0 +1,41 @@
+<map proto="1.4.0" game="Kill the King">
+<name>King's Conquest: CotBot</name>
+<version>1.0</version>
+<authors>
+    <author uuid="878de754-59dd-4828-9328-2bb1b848dc43" contribution="Basic map layout and XML author"/> <!-- MrM00se -->
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="'Gayed' up the map (Aesthetics)"/> <!-- Stealth5061 -->
+    <author uuid="539d57c8-0a91-4800-9a09-b1fe789a8a87" contribution="General helper and on-hand bovine"/> <!-- MinimalCow -->
+    <author uuid="d2dfbb91-9bf7-400b-9d45-29800862a916" contribution="Moral support and minor aesthetics"/> <!-- FlavorfulGecko5 -->
+</authors>
+<spawns>
+    <spawn team="red" region="red-spawn" sequential="true" yaw="-90" kit="spawn" />
+    <spawn team="blue" region="blue-spawn" sequential="true" yaw="90" kit="spawn" />
+    <default region="default-spawn" yaw="0" kit="obs" />
+</spawns>
+<filters>
+    <not id="deny-break">
+        <any>
+            <material>sandstone</material>
+            <material>stone</material>
+        </any>
+    </not>
+</filters>
+<regions>
+    <block id="red-spawn">-57.5,11.5,-0.5</block>
+    <block id="blue-spawn">58.5,11.5,-0.5</block>
+    <union id="spawns">
+        <cylinder base="-57.5,10,-0.5" radius="2" height="3" />
+        <cylinder base="58.5,10,-0.5" radius="2" height="3" />
+    </union>
+    <block id="default-spawn">0.5,21,37.5</block>
+    <above id="build-limit" y="9" />
+    <below id="underground" y="8" />
+    <apply region="build-limit" block="never" message="`7You have reached the maximum build height! (`c35 Blocks`7)" />
+</regions>
+<flags>
+    <post id="red-post">-57.5,11,-0.5</post>
+    <post id="blue-post">58.5,11,-0.5</post>
+</flags>
+<timelock>on</timelock>
+<include src="king-classes.xml"/>
+</map>

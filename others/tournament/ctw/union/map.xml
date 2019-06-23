@@ -1,0 +1,151 @@
+<map proto="1.4.4">
+<name>Union</name>
+<version>1.1.0</version>
+<objective>Capture both of the enemy team's wools.</objective>
+<authors>
+    <author uuid="2958ea4c-3501-404e-88cc-12e8632f68cc"/> <!-- NixaniaXi -->
+    <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- Strangey -->
+</authors>
+<contributors>
+    <contributor uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042"/> <!-- triplezko -->
+    <contributor uuid="6bec5c3a-4934-4b19-9aa8-c7c569820f7d" contribution="Being a snake"/> <!-- Claf -->
+</contributors>
+<gamemode>CTW</gamemode>
+<time result="objectives">45m</time>
+<teams>
+    <team id="red-team" color="dark red" max="8" max-overfill="8">Red</team>
+    <team id="blue-team" color="blue" max="8" max-overfill="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="2" enchantment="dig speed:2" unbreakable="true">iron pickaxe</item>
+        <item slot="3" enchantment="dig speed:1" unbreakable="true">iron axe</item>
+		<item slot="4" amount="64">golden carrot</item>
+		<item slot="5">golden apple</item>
+        <item slot="6" amount="64" damage="1">wood</item>
+        <item slot="7" amount="64" damage="1">wood</item>
+        <item slot="8" amount="32">glass</item>
+        <item slot="28">arrow</item>
+        <effect duration="4" amplifier="5">resistance</effect>
+    </kit>
+</kits>
+<wools>
+    <wool team="red-team" color="green" location="14,9,57">
+        <monument>
+            <block>-50,8,-86</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="lime" location="-71,9,53">
+        <monument>
+            <block>-51,8,-86</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="purple" location="-97,9,-87">
+        <monument>
+            <block>-33,8,56</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="pink" location="-12,9,-83">
+        <monument>
+            <block>-32,8,56</block>
+        </monument>
+    </wool>
+</wools>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <not id="deny-burning-furnace">
+        <material>burning furnace</material>
+    </not>
+</filters>
+<regions>
+    <apply block="never" message="You may only modify spawn!">
+        <region>
+            <cuboid min="-55,15,-87" max="-45,5,-77"/>
+            <cuboid min="-27,15,58" max="-37,5,48"/>
+        </region>
+    </apply>
+    <apply block="only-red" enter="only-red" message="You may not enter or modify your own wool room!">
+        <region>
+            <rectangle min="21,63" max="9,51"/>
+            <rectangle min="-65,60" max="-76,48"/>
+        </region>
+    </apply>
+    <apply block="only-blue" enter="only-blue" message="You may not enter or modify your own wool room!">
+        <region>
+            <rectangle min="-103,-92" max="-91,-80"/>
+            <rectangle min="-17,-91" max="-6,-77"/>
+        </region>
+    </apply>
+    <apply block="deny-void" message="You may not build in the void!">
+        <region>
+            <negative>
+                <rectangle min="-65,-77" max="-36,-89"/>
+                <rectangle min="-100,-63" max="-88,-30"/>
+                <rectangle min="-78,-40" max="-66,-30"/>
+                <rectangle min="-100,-30" max="18,1"/>
+                <rectangle min="-17,48" max="-46,60"/>
+                <rectangle min="18,34" max="6,1"/>
+                <rectangle min="-4,11" max="-16,1"/>
+            </negative>
+        </region>
+    </apply>
+    <apply use="deny-burning-furnace"/>
+</regions>
+<spawns>
+    <spawn team="red-team" kit="spawn-kit">
+        <region yaw="0">
+            <point>-50,7,-83</point>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="spawn-kit">
+        <region yaw="180">
+            <point>-32,7,54</point>
+        </region>
+    </spawn>
+    <default>
+        <region yaw="180">
+            <point>-41,45,-13</point>
+        </region>
+    </default>
+</spawns>
+<crafting>
+    <disable>shield</disable>
+	<disable>minecart</disable>
+	<disable>boat</disable>
+	<disable>boat spruce</disable>
+	<disable>boat birch</disable>
+	<disable>boat jungle</disable>
+	<disable>boat acacia</disable>
+	<disable>boat dark oak</disable>
+</crafting>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>	
+</toolrepair>
+<itemremove>
+	<item>arrow</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>golden carrot</item>
+	<item>redstone</item>
+	<item>string</item>
+</itemremove>
+<killreward>
+	<item>golden apple</item>
+    <item amount="32" damage="1">wood</item>
+	<item amount="16">glass</item>	
+</killreward>
+<gamerules>
+    <doDaylightCycle>false</doDaylightCycle>
+</gamerules>
+<maxbuildheight>22</maxbuildheight>
+<respawn delay="5s"/>
+</map>

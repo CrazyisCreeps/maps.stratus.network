@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<objective>Be the last monster standing to win!</objective>
+<players min="2" max="12"/>
+<classes family="Monsters" sticky="false">
+    <class name="Banshee" description="Stealthy and deadly." icon="string" default="false">
+        <kit>
+            <item slot="0" enchantment="knockback:1">iron sword</item>
+            <item slot="2" amount="16">snow ball</item>
+            <item slot="8" amount="8">golden carrot</item>
+            <potion duration="oo" amplifier="3">speed</potion>
+            <potion duration="oo" amplifier="-2">health boost</potion>
+            <potion duration="2" amplifier="3">heal</potion>
+            <chestplate color="FFFFFF">leather chestplate</chestplate>
+            <boots color="FFFFFF">leather boots</boots>
+            <leggings color="000000">leather leggings</leggings>
+        </kit>
+    </class>
+    <class name="Flesh Golem" description="Its wounds simply melt away." icon="pork" default="false">
+        <kit>
+            <item slot="0" enchantment="damage_all:2;knockback:1">iron spade</item>
+            <item slot="1" damage="16421">potion</item>
+            <item slot="8" amount="8">golden carrot</item>
+            <potion duration="oo" amplifier="2">regeneration</potion>
+            <potion duration="oo" amplifier="-2">health boost</potion>
+            <potion duration="2" amplifier="3">heal</potion>
+            <chestplate color="E799A3">leather chestplate</chestplate>
+            <boots color="E799A3">leather boots</boots>
+            <leggings color="000000">leather leggings</leggings>
+        </kit>
+    </class>
+    <class name="Brood Mother" description="Swarm your foes." icon="spider eye" default="false">
+        <kit>
+            <item slot="0">iron sword</item>
+            <item slot="1" amount="2" damage="59">monster egg</item>
+            <item slot="8" amount="8">golden carrot</item>
+            <potion duration="oo" amplifier="1">speed</potion>
+            <potion duration="oo" amplifier="-1">health boost</potion>
+            <potion duration="2" amplifier="3">heal</potion>
+            <chestplate color="660000">leather chestplate</chestplate>
+            <boots color="660000">leather boots</boots>
+            <leggings color="000000">leather leggings</leggings>
+        </kit>
+    </class>
+    <class name="Dark Archer" description="Snipe from afar." icon="bow" default="false">
+        <kit>
+            <item slot="0">wood sword</item>
+            <item slot="1" enchantment="arrow_knockback:1">bow</item>
+            <item slot="28" amount="16">arrow</item>
+            <item slot="8" amount="8">golden carrot</item>
+            <potion duration="oo" amplifier="1">night vision</potion>
+            <potion duration="2" amplifier="3">heal</potion>
+            <chestplate color="000000">leather chestplate</chestplate>
+            <boots color="000000">leather boots</boots>
+            <leggings color="000000">leather leggings</leggings>
+        </kit>
+    </class>
+    <class name="Living Goo" default="true" description="I'm rubber you're glue." icon="slime_ball">
+        <kit>
+            <item slot="0" attributes="generic.attackDamage:add:4.5">stone sword</item>
+            <item slot="1" enchantment="knockback:2">slime_ball</item>
+            <item slot="8" amount="8">golden carrot</item>
+            <potion duration="oo" amplifier="1">jump</potion>
+            <potion duration="oo" amplifier="1">health boost</potion>
+            <potion duration="2" amplifier="3">heal</potion>
+            <chestplate color="66FF00">leather chestplate</chestplate>
+            <boots color="66FF00">leather boots</boots>
+            <leggings color="000000">leather leggings</leggings>
+        </kit>
+    </class>
+    <class name="Wisp" description="Feel the heat." icon="blaze powder" default="false">
+        <kit>
+            <item slot="0" enchantment="fire_aspect:2;durability:2">gold axe</item>
+            <item slot="1" amount="2">tnt</item>
+            <item slot="8" amount="8">golden carrot</item>
+            <potion duration="oo" amplifier="1">fire resistance</potion>
+            <potion duration="oo" amplifier="2">health boost</potion>
+            <potion duration="2" amplifier="3">heal</potion>
+            <chestplate color="FF9900">leather chestplate</chestplate>
+            <boots color="FF9900">leather boots</boots>
+            <leggings color="000000">leather leggings</leggings>
+        </kit>
+    </class>
+    <class name="Elemental" description="A living tank." icon="iron ingot" default="false">
+        <kit>
+            <item slot="0">iron axe</item>
+            <item slot="1">fishing rod</item>
+            <item slot="8" amount="8">golden carrot</item>
+            <potion duration="oo" amplifier="2">slow</potion>
+            <potion duration="oo" amplifier="3">health boost</potion>
+            <potion duration="2" amplifier="3">heal</potion>
+            <chestplate color="E7DDCB">leather chestplate</chestplate>
+            <boots color="E7DDCB">leather boots</boots>
+            <leggings color="000000">leather leggings</leggings>
+        </kit>
+    </class>
+</classes>
+<kits>
+    <kit id="halloween-nimbus-token-ghost" name="halloween-nimbus-token-ghost">
+        <any count="1">
+            <option weight="99" />
+            <option weight="1">
+                <head name="`r`c`lNimbus Token `r`7(Ghost)" lore="|`bClaiming this token will give you|`a5 days `bof the `1☆ Nimbus `bpremium rank!||`7Take a screenshot of this token|`7in your inventory and submit it at|`9`nstratus.network/halloween `7to claim|`7your reward!" prevent-sharing="true" uuid="3ddff292-8655-4055-b391-ea3b74d1b575" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGY3YTlkY2RkMWI5MDE4NzE5ZjI5N2I0MmU0NWI5MjViZjliMjg2ZWJiNTNmNjU0YjIxYmI1YTk4ZDhiZWNiNCJ9fX0=" />
+                <effect duration="3s">night vision</effect>
+            </option>
+        </any>
+    </kit>    
+</kits>
+<killreward kit="halloween-nimbus-token-ghost">
+    <item>golden apple</item>
+</killreward>
+<blitz>
+    <time>5m</time>
+    <lives>1</lives>
+    <title>Monster Mash</title>
+</blitz>
+<mobs>
+    <filter parents="deny-all">
+        <allow>
+            <spawn>spawner egg</spawn>
+        </allow>
+    </filter>
+</mobs>
+<itemremove>
+    <item>arrow</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>potion</item>
+    <item>stone sword</item>
+    <item>wood sword</item>
+    <item>iron sword</item>
+    <item>iron axe</item>
+    <item>gold axe</item>
+    <item>iron spade</item>
+    <item>snow ball</item>
+    <item>monster egg</item>
+    <item>bow</item>
+    <item>slime ball</item>
+    <item>tnt</item>
+    <item>spider eye</item>
+    <item>fishing rod</item>
+</itemremove>
+<timelock>on</timelock>
+<friendlyfire>on</friendlyfire>
+<tnt>
+    <instantignite>on</instantignite>
+    <blockdamage>off</blockdamage>
+</tnt>
+</map>

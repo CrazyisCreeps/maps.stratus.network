@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Shroom Trip</name>
+<version>1.6.8</version>
+<objective>Leak lava from the enemy's obsidian shroom into the void.</objective>
+<authors>
+    <author>Omnigarde</author> <!-- 8b210772-8b0c-44b4-a4e2-2b543707ffc6 -->
+</authors>
+<rules>
+    <rule>Carpet Bombing is illegal: The creation of a large pillar/structure made to drop seemingly endless quantities of TNT onto an enemy structure.</rule>
+</rules>
+<kits>
+    <kit id="blue-kit">
+        <helmet unbrakable="true" material="chainmail_helmet"/>
+    </kit>
+    <kit id="red-kit">
+        <helmet unbrakable="true" material="gold_helmet"/>
+    </kit>
+</kits>
+<teams>
+    <team id="red" color="dark red" max="32">Red</team>
+    <team id="blue" color="blue" max="32">Blue</team>
+</teams>
+<itemremove>
+    <item>obsidian</item>
+    <item>chainmail_helmet</item>
+    <item>gold_helmet</item>
+</itemremove>
+<spawns>
+    <spawn team="blue" kit="blue-kit" region="blue-spawn" yaw="180"/>
+    <spawn team="red" kit="red-kit" region="red-spawn" yaw="0"/>
+    <default region="spawn" yaw="90"/>
+</spawns>
+<regions>
+    <cuboid id="blue-spawn" min="-1047.5,74,-348.5" max="-1045.5,74,-346.5"/>
+    <cuboid id="red-spawn" min="-1047.5,74,-310.5" max="-1045.5,74,-308.5"/>
+    <cylinder id="spawn" base="-1046.5,74,-328.5" radius="3" height="0"/>
+
+    <cuboid id="blue-core" min="-981,84,-354" max="-986,90,-349"/>
+    <cuboid id="red-core" min="-981,84,-304" max="-986,90,-309"/>
+    <negative id="play">
+        <union>
+            <rectangle min="-1017,-400" max="-940,-270"/> <!-- main area -->
+            <rectangle min="-1031,-359" max="-1017,-298"/> <!-- area between spawn tunnels -->
+        </union>
+    </negative>
+    <apply block="never" region="play" message="You may not interact with blocks outside the playing field."/>
+</regions>
+<maxbuildheight>128</maxbuildheight>
+<cores material="obsidian" leak="5">
+    <core name="Core" team="blue" region="blue-core"/>
+    <core name="Core" team="red" region="red-core"/>
+</cores>
+</map>

@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>CotBot TDM</name>
+<version>1.0.1</version>
+<objective>Try to get the most kills before 7 minutes are up!</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="878de754-59dd-4828-9328-2bb1b848dc43" contribution="Basic map 
+
+layout and XML author"/> <!-- MrM00se -->
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="'Gayed' up 
+
+the map (Aesthetics)"/> <!-- Stealth5061 -->
+    <author uuid="539d57c8-0a91-4800-9a09-b1fe789a8a87" contribution="General 
+
+helper and on-hand bovine"/> <!-- MinimalCow -->
+    <author uuid="d2dfbb91-9bf7-400b-9d45-29800862a916" contribution="Moral 
+
+support and minor aesthetics"/> <!-- FlavorfulGecko5 -->
+</authors>
+<teams>
+    <team id="Cot" color="dark red" max="12">Cot</team>
+    <team id="Bot" color="blue" max="12">Bot</team>
+</teams>
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <kill-streak count="1"/>
+        </filter>
+        <item amount="2" material="gold ingot" slot="7"/>
+        <item amount="8" material="arrow" slot="8"/>
+        <item amount="1" damage="16421">potion</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak repeat="true" count="2"/>
+        </filter>
+        <item amount="2" material="gold ingot" slot="7"/>
+        <item amount="8" material="arrow" slot="8"/>
+        <item amount="1" damage="16421">potion</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="1"/>
+        </filter>
+        <kit force="true">
+            <item slot="0" material="stone sword"/>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2"/>
+        </filter>
+        <kit force="true">
+            <item slot="0" enchantment="damage all:1" material="stone sword"/>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="3"/>
+        </filter>
+        <kit force="true">
+            <item slot="0" enchantment="damage all:2" material="stone sword"/>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="4"/>
+        </filter>
+        <kit force="true">
+            <item slot="1" enchantment="arrow damage:2" material="bow"/>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="6"/>
+        </filter>
+        <kit>
+            <item slot="1" material="ender pearl"/>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="10"/>
+        </filter>
+        <kit force="true">
+            <item slot="0" material="diamond sword"/>
+        </kit>
+    </kill-reward>
+</kill-rewards>
+
+<tnt>
+    <instantignite>on</instantignite>
+    <fuse>4s</fuse>
+</tnt>
+
+<time>6m</time>
+<score>
+    <kills>1</kills>
+    <deaths>0</deaths>
+</score>
+
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true">wood sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" amount="12">cooked beef</item>
+        <item slot="3" damage="16453">potion</item>
+        <item slot="4" damage="16453">potion</item>
+        <item slot="5" damage="16453">potion</item>
+        <item slot="8" amount="16">arrow</item>
+    </kit>
+    <kit id="Cot-kit" parents="spawn">
+        <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+        <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+        <boots color="cd0000" enchantment="protection fall:4" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="Bot-kit" parents="spawn">
+        <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+        <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="0066cc" unbreakable="true">leather leggings</leggings>
+        <boots color="0066cc" enchantment="protection fall:4" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<itemremove>
+    <item>potion</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>ender pearl</item>
+    <item>leather helmet</item>
+    <item>glass bottle</item>
+    <item>potion</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <tool>wood sword</tool>
+    <tool>stone sword</tool>
+    <tool>iron sword</tool>
+    <tool>diamond sword</tool>
+</itemremove>
+<timelock>on</timelock>
+<toolrepair>
+    <tool>bow</tool>
+</toolrepair>
+<regions>
+    <apply block="never">
+        <region>
+            <rectangle id="main-area" min="-75,21" max="75,-23"/>
+        </region>
+    </apply>
+</regions>
+<spawns>
+    <spawn team="Cot" kit="Cot-kit" yaw="-90">
+        <regions>
+            <cuboid min="-55,12,-4" max="-61,12,2"/>
+        </regions>
+    </spawn>
+    <spawn team="Bot" kit="Bot-kit" yaw="90">
+        <regions>
+            <cuboid min="55,12,2" max="61,12,-4"/>
+        </regions>
+    </spawn>
+    <default yaw="180">
+        <regions>
+            <cuboid min="-2,22,38" max="2,22,35"/>
+        </regions>
+    </default>
+</spawns>
+</map>

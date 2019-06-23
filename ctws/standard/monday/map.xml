@@ -1,0 +1,196 @@
+<map proto="1.4.2">
+<name>Monday</name>
+<version>1.0.2</version>
+<objective>Capture the enemy wool and place it on your monument!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+	<author uuid="715769c5-8c4c-4489-bdf8-f9cee2b2ae8a"/> <!-- amactus -->
+</authors>
+<contributors>
+	<contributor uuid="57f5535d-6b9e-4013-ad71-e2cc63ec8d7c" contribution="XML, Feedback"/> <!-- ItzaMeLuigi -->
+</contributors>
+<teams>
+	<team id="red" color="dark red" max="8">Red</team>
+	<team id="blue" color="blue" max="8">Blue</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="180">
+        	<cuboid min="-24.5,25,57.5" max="-23.5,25,57.5"/>
+        </regions>
+		<regions yaw="0">
+        	<cuboid min="-24.5,25,23.5" max="-23.5,25,23.5"/>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="180">
+        	<cuboid min="42.5,25,57.5" max="43.6,25,57.5"/>
+        </regions>
+		<regions yaw="0">
+        	<cuboid min="42.5,25,23.5" max="43.5,25,23.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <cuboid min="10.5,20,6.5" max="8.5,20,6.5"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow" enchantment="infinity"/>
+        <item slot="2" material="iron pickaxe" enchantment="dig speed:1"/>
+        <item slot="3" material="iron axe" enchantment="durability:3;dig speed:2"/>
+		<item slot="4" material="smooth brick" amount="32"/>
+        <item slot="5" material="wood" amount="16"/>
+		<item slot="7" material="golden apple" amount="1"/>
+        <item slot="8" material="golden carrot" amount="64"/>
+        <item slot="28" material="arrow" amount="1"/>
+        <effect duration="5s" amplifier="5">resistance</effect>
+		<chestplate enchantment="protection projectile:2">chainmail chestplate</chestplate>
+        <boots>iron boots</boots>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <helmet color="cd0000">leather helmet</helmet>
+        <leggings color="cd0000">leather leggings</leggings>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <helmet color="0066cc">leather helmet</helmet>
+        <leggings color="0066cc">leather leggings</leggings>
+    </kit>
+</kits>
+<filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+	<not id="no-void">
+        <void/>
+    </not>
+	<all id="cobwebs-red">
+		<team>red</team>
+        <material>web</material>
+    </all>
+		<all id="cobwebs-blue">
+		<team>blue</team>
+		<material>web</material>
+	</all>
+</filters>
+<regions>
+	<union id="red-wool-room">
+		<rectangle min="82.5,42.5" max="65.5,38.5"/>
+		<rectangle min="81.5,43.5" max="65.5,37.5"/>
+		<rectangle min="80.5,45.5" max="66.5,35.5"/>
+		<rectangle min="78.5,46.5" max="68.5,34.5"/>
+		<rectangle min="76.5,47.5" max="70.5,33.5"/>
+	</union>
+	<union id="blue-wool-room">
+		<rectangle min="-63.5,38.5" max="-46.5,42.5"/>
+		<rectangle min="-62.5,37.5" max="-46.5,43.5"/>
+		<rectangle min="-61.5,35.5" max="-47.5,45.5"/>
+		<rectangle min="-59.5,34.5" max="-49.5,46.5"/>
+		<rectangle min="-57.5,33.5" max="-51.5,47.5"/>
+	</union>
+	<union id="red-spawn-enter">
+		<!-- Left -->
+		<rectangle min="41.5,53.5" max="44.5,57.5"/>
+		<rectangle min="40.5,54.5" max="45.5,56.5"/>
+		<!-- Right -->
+		<rectangle min="41.5,27.5" max="44.5,23.5"/>
+		<rectangle min="40.5,26.5" max="45.5,24.5"/>
+	</union>
+	<union id="blue-spawn-enter">
+		<!-- Left -->
+		<rectangle min="-22.5,27.5" max="-25.5,23.5"/>
+		<rectangle min="-21.5,26.5" max="-26.5,24.5"/>
+		<!-- Right -->
+		<rectangle min="-22.5,53.5" max="-25.5,57.5"/>
+		<rectangle min="-21.5,54.5" max="-26.5,56.5"/>
+	</union>
+	<union id="red-spawn-break">
+		<!-- Left -->
+		<rectangle min="41.5,53.5" max="44.5,51.5"/>
+		<rectangle min="40.5,54.5" max="45.5,56.5"/>
+		<rectangle min="44.5,50.5" max="42.5,50.5"/>
+		<!-- Right -->
+		<rectangle min="41.5,27.5" max="44.5,29.5"/>
+		<rectangle min="40.5,26.5" max="45.5,24.5"/>
+		<rectangle min="42.5,30.5" max="44.5,30.5"/>
+	</union>
+	<union id="blue-spawn-break">
+		<!-- Left -->
+		<rectangle min="-22.5,27.5" max="-25.5,29.5"/>
+		<rectangle min="-21.5,26.5" max="-26.5,24.5"/>
+		<rectangle min="-25.5,30.5" max="-23.5,30.5"/>
+		<!-- Right -->
+		<rectangle min="-22.5,53.5" max="-25.5,51.5"/>
+		<rectangle min="-21.5,54.5" max="-26.5,56.5"/>
+		<rectangle min="-25.5,50.5" max="-23.5,50.5"/>
+	</union>
+	<union id="wool-monument">
+		<rectangle min="-76.5,36.5" max="-68.5,44.5"/> <!-- red -->
+		<rectangle min="87.5,36.5" max="95.5,44.5"/> <!-- blue -->
+	</union>
+	<union id="wool-placements">
+		<block location="92,16,40" id="blue-wool"/>
+		<block location="-74,16,40" id="red-wool"/>
+	</union>
+	<cuboid id="top" min="-oo,19,-oo" max="oo,oo,oo"/>
+	<apply block="cobwebs-blue" message="You may not break blocks in the wool room" region="red-wool-room"/>
+	<apply block="cobwebs-red" message="You may not break blocks in the wool room" region="blue-wool-room"/>
+	<apply enter="only-blue" use="only-blue" message="You may not enter this wool room." region="red-wool-room"/>
+	<apply enter="only-red" use="only-red" message="You may not enter this wool room." region="blue-wool-room"/>
+	<apply enter="only-red" message="You may not enter the enemy spawn" region="red-spawn-enter"/>
+	<apply enter="only-blue" message="You may not enter the enemy spawn" region="blue-spawn-enter"/>
+	<apply block="never" message="You may not edit spawn" region="red-spawn-break"/>
+	<apply block="never" message="You may not edit spawn" region="blue-spawn-break"/>
+	<apply block="never" message="You may not break blocks near the wool monument" region="wool-monument"/>
+	<apply block-place="no-void" message="You may not place blocks in this area" region="everywhere"/>
+	<apply block-break="never" message="You may not break this block" region="top"/>
+</regions>
+<wools craftable="false">
+    <wool team="red" color="blue" location="92,16,40" monument="blue-wool"/>
+	<wool team="blue" color="red" location="-74,16,40" monument="red-wool"/>
+</wools>
+<killreward>
+    <item material="golden apple"/>
+    <item material="wood" amount="8"/>
+</killreward>
+<maxbuildheight>19</maxbuildheight>
+<itemremove>
+    <item>cooked beef</item>
+    <item>obsidian</item>
+    <item>smooth brick</item>
+    <item>wood</item>
+    <item>162</item>
+    <item>string</item>
+    <item>glowstone dust</item>
+    <item>cactus</item>
+    <item>skull</item>
+    <item>torch</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>sugar cane</item>
+    <item>clay ball</item>
+    <item>stone plate</item>
+    <item>sand</item>
+    <item>golden apple</item>
+	<item>leather helmet</item>
+	<item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+	<item>red rose</item>
+	<item>coal block</item>
+	<item>golden carrot</item>
+	<item>iron boots</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+</map>

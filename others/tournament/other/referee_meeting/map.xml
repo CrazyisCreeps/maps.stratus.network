@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Referee meeting</name>
+<version>1.0</version>
+<objective>Meetings and Stuff</objective>
+<authors>
+    <author>Equus</author>
+</authors>
+<teams>
+    <team id="majjus" color="dark_aqua" max="1">majjus_</team>
+    <team id="sr" color="dark_aqua" max="7">Senior Referees</team>
+    <team id="officials" color="aqua" max="2">Officials</team>
+    <team id="refs" color="dark_gray" max="28">Referees</team>
+    <team id="others" color="red" max="0">Others</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" amount="64" material="golden_carrot"/>
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+    <kit id="Apple" parents="spawn">
+        <item slot="0" enchantment="knockback:10" material="stick"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="majjus" kit="Apple" yaw="180" region="apple-spawn"/>
+    <spawn team="sr" yaw="0" kit="spawn" region="player-spawn"/>
+    <spawn team="officials" yaw="0" kit="spawn" region="player-spawn"/>
+    <spawn team="refs" yaw="0" kit="spawn" region="player-spawn"/>
+    <spawn team="others" yaw="0" kit="spawn" region="player-spawn"/>
+    <default yaw="0" kit="spawn" region="obs-spawn"/>
+</spawns>
+<filters>
+    <not>
+        <any id="block-protection">
+            <team>majjus</team>
+        </any>
+    </not>
+</filters>
+<regions>
+    <cuboid id="player-spawn" min="-46.5,65.5,-780.5" max="-43.5,65.5,-778"/>
+    <point id="apple-spawn">-45,45,-714</point>
+    <point id="obs-spawn">-45,54,-722.5</point>
+    <apply block="block-protection">
+        <rectangle max="oo,oo" min="-oo,-oo"/>
+    </apply>
+</regions>
+<maxbuildheight>120</maxbuildheight>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>

@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<map game="Micro Battle" proto="1.4.2">
+<name>Microbattle</name>
+<version>1.1.2</version>
+<objective>Kill the enemies before they kill you!</objective>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- Vice -->
+</authors>
+<time>6m</time>
+<gamerules>
+    <doDaylightCycle>false</doDaylightCycle>
+    <doFireTick>true</doFireTick>
+</gamerules>
+<rules>
+	<rule>Hiding is not allowed.</rule>
+	<rule>Crossteaming is allowed.</rule>
+</rules>
+<modes>
+    <mode after="8s" material="air" show-before="0s" name="`cGlass protection has been removed!"/>
+</modes>
+<maxbuildheight>18</maxbuildheight>
+<destroyables required="false" name="glass-mid" materials="stained glass" completion="0%" show="false" mode-changes="true">
+    <destroyable name="glass-remove" owner="red">
+       <region>
+           <cuboid min="-27,0,-27" max="27,16,27"/>
+       </region>
+   </destroyable>
+</destroyables>
+<tnt>
+    <instantignite>on</instantignite>
+    <fuse>5s</fuse>
+</tnt>
+<itemremove>
+    <item>apple</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>stone sword</item>
+    <item>wood sword</item>
+    <item>bow</item>
+    <item>stone pickaxe</item>
+    <item>stone spade</item>
+    <item>egg</item>
+    <item>tnt</item>
+</itemremove>
+<crafting>
+    <disable>boat</disable>
+    <disable>boat spruce</disable>
+    <disable>boat birch</disable>
+    <disable>boat jungle</disable>
+    <disable>boat acacia</disable>
+    <disable>boat dark oak</disable>
+</crafting>
+<broadcasts>
+    <alert after="0s">Glass will disappear in 8 seconds</alert>
+    <alert after="5s">Glass will disappear in 3 seconds</alert>
+    <alert after="6s">Glass will disappear in 2 seconds</alert>
+    <alert after="7s">Glass will disappear in 1 second</alert>
+    <alert after="15s" every="10m">Creating alliances with another team is allowed.</alert>
+    <alert after="50s">Border activating in 10 seconds</alert>
+    <alert after="55s">Border activating in 5 seconds</alert>
+    <alert after="56s">Border activating in 4 seconds</alert>
+    <alert after="57s">Border activating in 3 seconds</alert>
+    <alert after="58s">Border activating in 2 seconds</alert>
+    <alert after="59s">Border activating in 1 second</alert>
+    <alert after="1m">Border is now activated!</alert>
+</broadcasts>
+<projectiles>
+	<projectile id="slowball" name="Slowball" projectile="Egg" velocity="3.5" damage="0" throwable="true">
+		<potion duration="2" amplifier="10">blindness</potion>
+    	<potion duration="2" amplifier="5">slow</potion>
+	</projectile>
+</projectiles>
+<teams>
+    <team id="red" color="dark red" min="1" max="4" max-overfill="4">Red</team>
+    <team id="blue" color="blue" min="1" max="4" max-overfill="4">Blue</team>
+    <team id="green" color="green" min="1" max="4" max-overfill="4">Lime</team>
+    <team id="yellow" color="yellow" min="1" max="4" max-overfill="4">Yellow</team>
+</teams>
+<kits>
+    <kit id="obs">
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+    <kit id="void-death" force="true">
+        <health>1</health>
+    </kit>
+    <kit id="red-kit">
+         <helmet locked="true" color="cd0000" unbreakable="true">leather helmet</helmet>
+         <chestplate locked="true" color="cd0000" unbreakable="true">leather chestplate</chestplate>
+         <leggings locked="true" color="cd0000" unbreakable="true">leather leggings</leggings>
+         <boots locked="true" color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue-kit">
+         <helmet locked="true" color="0066cc" unbreakable="true">leather helmet</helmet>
+         <chestplate locked="true" color="0066cc" unbreakable="true">leather chestplate</chestplate>
+         <leggings locked="true" color="0066cc" unbreakable="true">leather leggings</leggings>
+         <boots locked="true" color="0066cc" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="green-kit">
+         <helmet locked="true" color="7FCC19" unbreakable="true">leather helmet</helmet>
+         <chestplate locked="true" color="7FCC19" unbreakable="true">leather chestplate</chestplate>
+         <leggings locked="true" color="7FCC19" unbreakable="true">leather leggings</leggings>
+         <boots locked="true" color="7FCC19" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="yellow-kit">
+         <helmet locked="true" color="E5E533" unbreakable="true">leather helmet</helmet>
+         <chestplate locked="true" color="E5E533" unbreakable="true">leather chestplate</chestplate>
+         <leggings locked="true" color="E5E533" unbreakable="true">leather leggings</leggings>
+         <boots locked="true" color="E5E533" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<classes family="microbattle">
+    <class name="Fighter" default="true" icon="stone sword" sticky="true" longdescription="Spawns with a stone sword and blindness grenades.">
+    <kit>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item projectile="slowball" name="`aSlowball" amount="4" slot="1">egg</item>
+        <item slot="8" amount="12">apple</item>
+        <potion duration="2" amplifier="3">confusion</potion>
+        <potion duration="2" amplifier="3">blindness</potion>
+        <potion duration="oo" amplifier="1">night vision</potion>
+        <potion duration="8" amplifier="8">heal</potion>
+        <potion duration="8" amplifier="8">glowing</potion>
+    </kit>
+    </class>
+    <class name="Archer" icon="bow" sticky="true" longdescription="Spawns with a bow and eight arrows.">
+    <kit>
+        <item slot="0" unbreakable="true">wood sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="8" amount="12">apple</item>
+        <item slot="7" amount="8">arrow</item>
+        <potion duration="2" amplifier="3">blindness</potion>
+        <potion duration="2" amplifier="3">confusion</potion>
+        <potion duration="oo" amplifier="1">night vision</potion>
+        <potion duration="8" amplifier="8">heal</potion>
+        <potion duration="8" amplifier="8">glowing</potion>
+    </kit>
+    </class>
+    <class name="Worker" icon="stone spade" sticky="true" longdescription="Spawns with a stone shovel and pickaxe.">
+    <kit>
+        <item slot="0" unbreakable="true">wood sword</item>
+        <item slot="1" unbreakable="true">stone pickaxe</item>
+        <item slot="2" unbreakable="true">stone spade</item>
+        <item slot="8" amount="12">apple</item>
+        <potion duration="2" amplifier="3">confusion</potion>
+        <potion duration="2" amplifier="3">blindness</potion>
+        <potion duration="oo" amplifier="1">night vision</potion>
+        <potion duration="8" amplifier="8">heal</potion>
+        <potion duration="8" amplifier="8">glowing</potion>
+    </kit>
+    </class>
+    <class name="Arsonist" icon="flint and steel" sticky="true" longdescription="Spawns with flint and steel, fire resistance, and TNT.">
+    <kit>
+        <item slot="0" unbreakable="true">wood axe</item>
+	<item slot="1" damage="62" lore="This object has three uses.">flint and steel</item>
+	<item slot="2" lore="This object automatically ignites.">tnt</item>
+        <item slot="8" amount="12">apple</item>
+	<item slot="3" material="potion">
+          <effect duration="1m">fire_resistance</effect>
+	</item>
+        <potion duration="2" amplifier="3">confusion</potion>
+        <potion duration="2" amplifier="3">blindness</potion>
+        <potion duration="oo" amplifier="1">night vision</potion>
+        <potion duration="8" amplifier="8">heal</potion>
+        <potion duration="8" amplifier="8">glowing</potion>
+    </kit>
+    </class>
+</classes>
+<portals>
+    <portal y="-64" sound="false">
+        <region><below y="-5"/></region>
+    </portal>
+</portals>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<regions>
+    <apply kit="void-death">
+        <region><below y="-5"/></region>
+    </apply>
+</regions>
+<hunger>
+    <depletion>on</depletion>
+</hunger>
+<spawns>
+    <spawn team="red" kit="red-kit">
+        <regions angle="0.6,6,0.5">
+            <point>-4,2,16</point> 
+            <point>-4,2,8</point> 
+            <point>-8,2,4</point> 
+            <point>-16,2,4</point> 
+        </regions>
+    </spawn>
+    <spawn team="green" kit="green-kit">
+        <regions angle="0.6,6,0.5">
+            <point>16,2,4</point> 
+            <point>8,2,4</point> 
+            <point>4,2,8</point> 
+            <point>4,2,16</point> 
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+        <regions angle="0.6,6,0.5">
+            <point>4,2,-16</point> 
+            <point>4,2,-8</point> 
+            <point>8,2,-4</point> 
+            <point>16,2,-4</point> 
+        </regions>
+    </spawn>
+    <spawn team="yellow" kit="yellow-kit">
+        <regions angle="0.6,6,0.5">
+            <point>-16,2,-4</point> 
+            <point>-8,2,-4</point> 
+            <point>-4,2,-8</point> 
+            <point>-4,2,-16</point> 
+        </regions>
+    </spawn>
+    <default kit="obs">
+        <regions yaw="90">
+            <cuboid min="0,7,0" max="0,7,0"/>
+        </regions>
+    </default>
+</spawns>
+<time>5m</time>
+<filters>
+    <not id="not-glass">
+        <material>stained glass</material>
+    </not>
+    <not id="countdown">
+        <time>5s</time>
+    </not>
+</filters>
+
+<world-borders center="0.5,0.5">
+    <world-border size="50.5"/>
+    <world-border size="8" after="1m" duration="5m"/>
+</world-borders>
+
+<regions>
+    <apply block="not-glass" region="everywhere" message="You may not break the glass!"/>
+</regions>
+<killreward>
+    <filter>
+        <all>
+            <kill-streak count="1" repeat="true"/>
+            <class>Fighter</class>
+        </all>
+    </filter>
+    <item projectile="slowball" name="`aSlowball" amount="2" slot="1">egg</item>
+</killreward>
+<killreward>
+    <filter>
+        <all>
+            <kill-streak count="1" repeat="true"/>
+            <class>Archer</class>
+        </all>
+    </filter>
+    <item amount="4">arrow</item>
+</killreward>
+<killreward>
+    <filter>
+        <all>
+            <kill-streak count="1" repeat="true"/>
+            <class>Arsonist</class>
+        </all>
+    </filter>
+    <item>tnt</item>
+</killreward>
+</map>

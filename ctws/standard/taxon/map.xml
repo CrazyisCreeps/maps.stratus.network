@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Capture the Wool">
+<name>Taxon</name>
+<version>1.0.0</version>
+<objective>Capture the enemy teams wool!</objective>
+<authors>
+    <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9"/><!--Obelistics-->
+</authors>
+<maxbuildheight>23</maxbuildheight>
+<timelock>on</timelock>
+<gamemode>ctw</gamemode>
+<teams>
+    <team id="red" color="dark red" max="8" max-overfill="10">Red</team>
+    <team id="blue" color="blue" max="8" max-overfill="10">Blue</team>        
+</teams>
+<spawns>
+    <spawn team="red" kit="red-spawn-kit">
+        <regions yaw="-180">
+            <point>-6.5,8.5,165.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-spawn-kit">
+        <regions yaw="0">
+            <point>-6.5,8.5,74.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <cuboid min="-20,32,118" max="-24,32,122"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn" force="true">
+        <potion duration="5" amplifier="1">heal</potion>
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" enchantment="arrow infinite" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">iron pickaxe</item>
+		<item slot="3" unbreakable="true">iron axe</item>
+        <item slot="6" amount="16">grilled pork</item>
+        <item slot="4" amount="48" damage="1">wood</item>
+		<item slot="7" amount="1">golden apple</item>
+	    <item slot="28">arrow</item>	
+    </kit>
+    <kit id="red-spawn-kit" parents="spawn">
+        <helmet unbreakable="true" color="ff0000">leather helmet</helmet>
+		<chestplate unbreakable="true" color="ff0000">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="ff0000">leather leggings</leggings>
+        <boots unbreakable="true" color="ff0000">leather boots</boots>
+        <item slot="5" amount="32" damage="14">stained clay</item>         
+    </kit>
+    <kit id="blue-spawn-kit" parents="spawn">
+        <helmet unbreakable="true" color="0000ff">leather helmet</helmet>
+		<chestplate unbreakable="true" color="0000ff">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="0000ff">leather leggings</leggings>
+        <boots unbreakable="true" color="0000ff">leather boots</boots>
+        <item slot="5" amount="32" damage="11">stained clay</item>               
+    </kit>
+</kits>
+<filters>
+	<not id="no-void">
+        <void/>
+    </not>
+    <team id="red-team">red</team>
+    <team id="blue-team">blue</team>
+    <any id="web-only">
+        <material>web</material>
+    </any>
+</filters>
+<regions>
+	<union id="build-region">
+		<rectangle min="1,101" max="16,139"/>
+		<!--BlueL-->
+		<rectangle min="-29,101" max="-14,139"/>
+		<!--BlueR-->
+	</union>
+	<union id="non-blue-region">
+		<rectangle min="-1,161" max="-12,170"/>
+		<!--Red spawn-->
+		<rectangle min="-14,15" max="1,0"/>
+		<!--Pink wool-->
+	</union>
+	<union id="non-red-region">
+		<rectangle min="1,225" max="-14,240"/>
+		<!--Green wool-->
+		<rectangle min="-1,70" max="-12,79"/>
+		<!--Blue spawn-->
+	</union>
+	<negative id="negative-build">
+		<region id="build-region"/>
+	</negative>
+	<apply block-place="never" block-break="web-only" region="non-blue-region" message="You cannot build here"/>
+	<apply block-place="never" block-break="web-only" region="non-red-region" message="You cannot build here"/>
+	<apply enter="red-team" region="non-blue-region" message="You cannot enter here"/>
+	<apply enter="blue-team" region="non-red-region" message="You cannot enter here"/>
+	<apply block="no-void" region="negative-build" message="You cannot build here"/>
+</regions>
+<toolrepair>
+    <tool>bow</tool>
+    <tool>iron sword</tool>
+    <tool>iron axe</tool>
+    <tool>arrow</tool>
+    <tool>iron pickaxe</tool>
+</toolrepair>
+<itemremove>
+	<item>golden apple</item>
+    <item>grilled pork</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+	<item>stained clay</item>
+</itemremove>
+<killreward>
+    <item amount="1">golden apple</item>
+</killreward>
+<wools team="blue">
+    <wool color="green" location="-6.5,12,233.5">
+	    <monument> 
+		    <block>-7,9,71</block>
+		</monument>
+	</wool>	
+</wools>
+<wools team="red">
+    <wool color="pink" location="-6.5,12,6.5">
+	    <monument> 
+		    <block>-7,9,168</block>
+		</monument>
+	</wool>	
+</wools>
+<block-drops>
+	<rule wrong-tool="true">
+		<region>
+			<rectangle min="-29,37" max="16,203"/>
+		</region>
+		<filter>
+			<any>
+				<material>iron ore</material>
+			</any>
+		</filter>
+		<drops>
+			<item material="chainmail chestplate"/>
+			<item material="chainmail leggings"/>
+			<item material="chainmail boots"/>
+			<item material="chainmail helmet"/>
+		</drops>
+	</rule>
+</block-drops>
+<broadcasts>
+	<tip after="5s" every="3m">Iron ore drops a full set of chainmail armour</tip>
+</broadcasts>
+</map>

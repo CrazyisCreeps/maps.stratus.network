@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<map proto="1.4.4">
+<name>We Sell Mushrooms</name>
+<version>1.1.1</version>
+<objective>Capture the enemy team's two wools.</objective>
+<authors>
+    <author uuid="6bec5c3a-4934-4b19-9aa8-c7c569820f7d"/> <!-- Claf -->
+    <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- Strangey -->
+</authors>
+<contributors>
+    <contributor uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042"/> <!-- triplezko -->
+    <contributor uuid="fd4e2236-23a7-4e3c-a6ab-a656cff18aea"/> <!-- east____ -->
+    <contributor uuid="d71152ca-187d-43c4-9901-ba001606c655"/> <!-- wylt -->
+    <contributor uuid="d563101f-4e74-4f14-8707-b8f32c54902b"/> <!-- Winneror -->
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" max="8" max-overfill="8">Red</team>
+    <team id="blue-team" color="blue" max="8" max-overfill="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" material="iron sword"/>
+        <item slot="1" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="2" material="diamond pickaxe" unbreakable="true"/>
+        <item slot="3" material="diamond axe" unbreakable="true"/>
+        <item slot="4" amount="64" material="golden carrot"/>
+		<item slot="5" material="golden apple"/>
+        <item slot="6" amount="64" damage="2" material="wood"/>
+        <item slot="33" amount="64" damage="2" material="wood"/>
+        <item slot="7" amount="64" material="glass"/>
+		<item slot="8" amount="16" material="smooth brick"/>
+        <item slot="28" material="arrow"/>
+        <item slot="9" material="mushroom soup"/>
+    </kit>
+</kits>
+<wools>
+    <wool team="red-team" color="lime" location="-271.5,23.5,135.5">
+        <monument>
+            <block>-219,24,-14</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="cyan" location="-368.5,23.5,38.5">
+        <monument>
+            <block>-220,24,-15</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="yellow" location="-225.5,23.5,-104.5">
+        <monument>
+            <block>-279,24,44</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="orange" location="-128.5,23.5,-7.5">
+        <monument>
+            <block>-278,24,45</block>
+        </monument>
+    </wool>
+</wools>
+<spawns>
+    <spawn team="blue-team" kit="spawn-kit">
+        <regions yaw="-135">
+            <point>-346.5,2.0625,113.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="spawn-kit">
+        <regions yaw="45">
+            <point>-150.5,2.0625,-82.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <point>-247.5,59,15.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <all id="only-red-wool">
+        <team>red-team</team>
+        <not>
+            <team>blue-team</team>
+        </not>
+        <not>
+            <cause>EXPLOSION</cause>
+        </not>
+    </all>
+    <all id="only-blue-wool">
+        <team>blue-team</team>
+        <not>
+            <team>red-team</team>
+        </not>
+        <not>
+            <cause>EXPLOSION</cause>
+        </not>
+    </all>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <material id="only-iron-break">iron block</material>
+    <not id="deny-player-place">
+        <participating/>
+    </not>
+</filters>
+<regions>
+    <apply block="never">
+        <region>
+            <block>-230,22,-4</block> <!-- spawners -->
+            <block>-268,22,34</block>
+            <cuboid min="-252,62,19" max="-245,55,12"/> <!-- obs spawn -->
+        </region>
+    </apply>
+    <apply block="only-blue-wool" enter="only-blue" message="You may not enter or modify your own wool room!">
+        <region>
+            <rectangle min="-232,-106" max="-219,-93"/> <!-- yellow -->
+            <rectangle min="-127,-14" max="-140,-1"/> <!-- orange -->
+        </region>
+    </apply>
+    <apply block="only-red-wool" enter="only-red" message="You may not enter or modify your own wool room!">
+        <region>
+            <rectangle min="-265,137" max="-278,124"/> <!-- lime -->
+            <rectangle min="-370,45" max="-357,32"/> <!-- cyan -->
+        </region>
+    </apply>
+    <apply block-break="only-iron-break" block-place="deny-player-place" message="You may only break iron in the spawn!">
+        <region>
+            <union id="spawns">
+                <rectangle min="-142,-91" max="-178,-55"/> <!-- red -->
+                <rectangle min="-355,122" max="-319,86"/> <!-- blue -->
+            </union>
+        </region>
+    </apply>
+    <apply block="deny-void" message="You may not build in the void!">
+        <region>
+            <negative>
+                <union>
+                    <rectangle min="-182,-51" max="-255,22"/> <!-- red -->
+                    <rectangle min="-315,82" max="-242,9"/> <!-- blue -->
+                    <rectangle min="-208,56" max="-243,21"/> <!-- mid islands -->
+                    <rectangle min="-289,-25" max="-254,10"/>
+                    <rectangle min="-235,-85" max="-216,-51"/> <!-- yellow -->
+                    <rectangle min="-148,-17" max="-182,2"/> <!-- orange -->
+                    <rectangle min="-262,116" max="-281,82"/> <!-- lime -->
+                    <rectangle min="-349,48" max="-315,29"/> <!-- cyan -->
+                </union>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<renewables>
+    <renewable interval="5s" grow="true" avoid-players="1" region="spawns">
+        <renew-filter>
+            <material>iron block</material>
+        </renew-filter>
+        <replace-filter>
+            <material>air</material>
+        </replace-filter>
+    </renewable>
+</renewables>
+<time results="objective">45m</time>
+<gamerules>
+    <doDaylightCycle>true</doDaylightCycle>
+</gamerules>
+<maxbuildheight>31</maxbuildheight>
+<crafting>
+    <disable>shield</disable>
+	<disable>minecart</disable>
+	<disable>boat</disable>
+	<disable>boat spruce</disable>
+	<disable>boat birch</disable>
+	<disable>boat jungle</disable>
+	<disable>boat acacia</disable>
+	<disable>boat dark oak</disable>
+</crafting>
+<block-drops>
+    <rule>
+        <filter>
+            <material>gravel</material>
+        </filter>
+        <drops>
+            <item>flint</item>
+        </drops>
+    </rule>
+</block-drops>
+<kill-reward>
+    <item>golden apple</item>
+    <item amount="32" damage="2" material="wood"/>
+    <item amount="16" material="glass"/>
+    <item amount="8" material="smooth brick"/>
+    <item>mushroom soup</item>
+</kill-reward>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>diamond axe</tool>
+</toolrepair>
+<itemremove>
+    <item>smooth brick</item>
+    <item>wood</item>
+    <item>golden carrot</item>
+    <item>stone</item>
+    <item>glowstone dust</item>
+    <item>banner</item>
+    <item>double step</item>
+    <item>apple</item>
+    <item>leaves</item>
+    <item>stained clay</item>
+    <item>mushroom soup</item>
+    <item>seeds</item>
+    <item>red_rose</item>
+    <item>yellow_flower</item>
+    <item>flower_pot_item</item>
+    <item>melon</item>
+    <item>mossy_cobblestone</item>
+    <item>glass</item>
+    <item>carpet</item>
+    <item>sand</item>
+    <item>sugar_cane</item>
+    <item>string</item>
+</itemremove>
+</map>

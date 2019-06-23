@@ -1,0 +1,180 @@
+<?xml version="1.0"?> <!-- built in march 2019 -->
+<map proto="1.4.2">
+<name>Come Summertime</name>
+<version>1.0.0</version>
+<objective>Capture the wool!</objective>
+<authors>
+    <author uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30"/> <!--  Ruediger_LP  -->
+</authors>
+<contributors>
+    <contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65" contribution="testing server"/> <!--  BGMP  -->   
+</contributors>
+<teams>
+    <team id="lime-team" color="green" max="5" max-overfill="6">Lime</team>
+    <team id="magenta-team" color="light purple" max="5" max-overfill="6">Magenta</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+    	<clear/>
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="diamond pickaxe" unbreakable="true"/>
+        <item slot="3" material="diamond axe" unbreakable="true"/>
+        <item slot="4" material="shears" unbreakable="true"/>
+        <item slot="5" material="leaves" damage="3" amount="48"/>        
+        <item slot="7" material="vine" amount="24"/>
+        <item slot="8" material="golden apple" amount="1"/>        
+        <item slot="28" material="arrow" amount="20"/>
+        <helmet unbreakable="true">gold helmet</helmet>
+        <chestplate unbreakable="true">gold chestplate</chestplate>
+    </kit>
+	<kit id="lime-kit" parents="spawn-kit">
+        <item slot="6" material="stained clay" damage="5" amount="24"/>
+        <leggings color="2ECC71" unbreakable="true" enchantment="protection fire">leather leggings</leggings>
+        <boots color="229954" unbreakable="true" enchantment="protection fire">leather boots</boots>
+    </kit>
+	<kit id="magenta-kit" parents="spawn-kit">
+        <item slot="6" material="stained clay" damage="2" amount="24"/>
+        <leggings color="A569BD" unbreakable="true" enchantment="protection fire">leather leggings</leggings>
+        <boots color="76448A" unbreakable="true" enchantment="protection fire">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="lime-team" kit="lime-kit" yaw="45" pitch="33">
+        <region>
+            <cylinder base="40.5,28,-24.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="magenta-team" kit="magenta-kit" yaw="-45" pitch="33">
+        <region>
+            <cylinder base="-40.5,28,-24.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <default>
+        <regions>
+            <cylinder base="-40.5,28,-24.5" radius="1.5" height="0" yaw="-45" pitch="33"/>
+            <cylinder base="40.5,28,-24.5" radius="1.5" height="0" yaw="45" pitch="33"/>
+        </regions>
+    </default>
+</spawns>
+<wools craftable="false">
+    <wool team="lime-team" color="lime" location="-58.5,9.2,25.5">
+        <monument><block>34,8,-19</block></monument>
+    </wool>
+    <wool team="magenta-team" color="magenta" location="58.5,9.2,25.5">
+        <monument><block>-35,8,-19</block></monument>
+    </wool>
+</wools>
+<filters>
+    <not id="no-void"><void/></not>
+    <not id="deny-pot">
+        <material>flower pot</material>
+    </not>
+    <team id="only-lime">lime-team</team>
+    <team id="only-magenta">magenta-team</team>
+    <any id="only-lime-filter">
+        <any>
+            <material>sand</material>
+            <material>redstone wire</material>
+        </any>
+        <all>
+            <material>web</material>
+            <team>lime-team</team>
+        </all>
+    </any>
+    <any id="only-magenta-filter">
+        <any>
+            <material>sand</material>
+            <material>redstone wire</material>
+        </any>
+        <all>
+            <material>web</material>
+            <team>magenta-team</team>
+        </all>
+    </any>
+	<not>
+		<any>
+			<material>mob spawner</material>
+			<material>gold plate</material>
+		</any>
+	</not>
+</filters>
+<regions>
+	<union id="lime-buildings">
+        <rectangle min="30,-34" max="50,-14" id="lime-spawn"/>
+        <rectangle min="-49,16" max="-68,35" id="lime-wool"/>
+    </union>
+    <cuboid min="-55,9,18" max="-62,20,19" id="lime-wool-enter"/>
+    <union id="magenta-buildings">
+        <rectangle min="-30,-34" max="-50,-14" id="magenta-spawn"/>
+        <rectangle min="49,16" max="68,35" id="magenta-wool"/>
+    </union>
+    <cuboid min="55,9,18" max="62,20,19" id="magenta-wool-enter"/>
+    <union id="allow-build">
+        <rectangle min="-24,-24" max="24,10"/>
+    </union>
+	<cuboid id="spawner" min="1,0,19" max="-1,4,21"/>
+    <apply enter="only-lime" region="lime-wool-enter" message="You may not enter the enemy's wool room!"/>
+    <apply enter="only-magenta" region="magenta-wool-enter" message="You may not enter the enemy's wool room!"/>
+    <apply block="always" region="allow-build"/>
+	<apply block="never" region="spawner"/>
+    <apply block="only-lime-filter" region="lime-buildings"/>
+    <apply block="only-magenta-filter" region="magenta-buildings"/>
+    <apply block="no-void" region="everywhere" message="You may not build in the void!"/>
+    <apply use="deny-pot" region="everywhere"/>
+</regions>
+<itemkeep>
+	<item>iron sword</item>
+	<item>bow</item>
+	<item>diamond pickaxe</item>
+	<item>diamond axe</item>
+	<item>shears</item>
+	<item>stained clay</item>
+    <item>leaves</item>
+	<item>vine</item>
+	<item>golden apple</item>
+	<item>arrow</item>
+	<item>gold helmet</item>
+	<item>gold chestplate</item>
+	<item>leather leggings</item>
+	<item>leather boots</item>
+</itemkeep>
+<itemremove>
+	<item>long grass</item>
+    <item>step</item>
+    <item>red rose</item>
+    <item>double plant</item>
+    <item>dirt</item>
+    <item>string</item>
+    <item>seeds</item>
+    <item>redstone</item>
+    <item>sand</item>
+</itemremove>
+<toolrepair>
+	<tool>iron sword</tool>
+	<tool>bow</tool>
+	<tool>diamond pickaxe</tool>
+	<tool>diamond axe</tool>
+    <tool>shears</tool>
+</toolrepair>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<maxbuildheight>14</maxbuildheight>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple" amount="1"/>
+        <item material="arrow" amount="15"/>
+        <item material="leaves" damage="3" amount="16"/>
+    </kill-reward>
+    <kill-reward filter="only-lime">
+        <item material="stained clay" damage="5" amount="8"/>
+    </kill-reward>
+    <kill-reward filter="only-magenta">
+        <item material="stained clay" damage="2" amount="8"/>
+    </kill-reward>
+</kill-rewards>
+</map>

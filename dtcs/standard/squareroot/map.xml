@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<phase>development</phase>
+<name>SquareRoot</name>
+<version>1.0.0</version>
+<authors>
+    <author uuid="8d812ffa-e5f1-4658-bb47-a18b785ccd27" /> <!-- HardstyleRaver -->
+</authors>
+<objective>Leak lava from the enemy's obsidian core into the void.</objective>
+<teams>
+    <team id="blue" color="blue" max="24">Blue Team</team>
+    <team id="red" color="dark red" max="24">Red Team</team>
+</teams>
+<kits>
+    <kit id="kspawn" force="true">
+        <item slot="0" unbreakable="true" material="iron_sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron_pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron_axe"/>
+        <item slot="4" amount="64" material="stone"/>
+        <item slot="5" amount="64" material="stone"/>
+        <item slot="6" amount="64" material="glass"/>
+        <item slot="7" amount="64" damage="1" material="log"/>
+        <item slot="8" amount="64" material="cooked_beef"/>
+        <item slot="28" material="arrow"/>
+    </kit>
+    <kit id="kblue" parents="kspawn">
+        <helmet color="0066cc" unbreakable="true" material="leather helmet"/>
+        <chestplate color="0066cc" unbreakable="true" material="leather chestplate"/>
+        <leggings color="0066cc" unbreakable="true" material="leather leggings"/>
+        <boots color="0066cc" unbreakable="true" material="leather boots"/>
+    </kit>
+    <kit id="kred" parents="kspawn">
+        <helmet color="cd0000" unbreakable="true" material="leather helmet"/>
+        <chestplate color="cd0000" unbreakable="true" material="leather chestplate"/>
+        <leggings color="cd0000" unbreakable="true" material="leather leggings"/>
+        <boots color="cd0000" unbreakable="true" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn region="blue-spawn" kit="kblue" team="blue" yaw="180"/>
+    <spawn region="red-spawn" kit="kred" team="red" yaw="0"/>
+    <default region="spawn" yaw="-90"/>
+</spawns>
+<filters>
+    <team id="blue-team">blue</team>
+    <team id="red-team">red</team>
+</filters>
+<regions>
+    <union id="blue-spawn-area">
+        <rectangle id="blue-spawn-block" min="0,80" max="17,97"/>
+        <rectangle id="blue-spawn-stairs" min="4,80" max="13,73"/>
+    </union>
+
+    <union id="red-spawn-area">
+        <rectangle id="red-spawn-block" min="0,-119" max="17,-102"/>
+        <rectangle id="red-spawn-stairs" min="4,-95" max="13,-102"/>
+    </union>
+
+    <negative id="play">
+        <union>
+            <rectangle id="blue-back-left" min="-36,72" max="-27,81"/>
+            <rectangle id="blue-back-right" min="44,72" max="53,81"/>
+            <rectangle id="blue-back-middle-left" min="-20,72" max="-11,81"/>
+            <rectangle id="blue-back-middle-right" min="26,72" max="37,81"/>
+
+            <rectangle id="red-back-left" min="44,-103" max="53,-94"/>
+            <rectangle id="red-back-right" min="-36,-103" max="-27,-94"/>
+            <rectangle id="red-back-middle-left" min="26,-103" max="37,-94"/>
+            <rectangle id="red-back-middle-right" min="-20,-103" max="-11,-94"/>
+
+            <rectangle id="main-play" min="-44,-95" max="61,73"/>
+            <rectangle id="wider-main" min="-52,-79" max="69,57"/>
+
+            <region id="blue-spawn-area"/>
+            <region id="red-spawn-area"/>
+        </union>
+    </negative>
+
+    <cuboid id="blue-core" min="5,17,41" max="12,24,48"/>
+    <cuboid id="red-core" min="5,17,-70" max="12,24,-63"/>
+
+    <cylinder id="spawn" base="-99.5,34,-11" radius="3" height="0"/>
+    <cuboid id="blue-spawn" min="7,10.5,87" max="10,10.5,90"/>
+    <cuboid id="red-spawn" min="7,10.5,-109" max="10,10.5,-112"/>
+
+    <apply enter="blue-team" region="blue-spawn-area" message="You may not enter the enemy spawn!"/>
+    <apply enter="red-team" region="red-spawn-area" message="You may not enter the enemy spawn!"/>
+    <apply block="never" region="blue-spawn-area" message="You may not modify the spawn area."/>
+    <apply block="never" region="red-spawn-area" message="You may not modify the spawn area."/>
+    <apply block="never" region="play" message="You may not interact with blocks outside the playing field."/>
+</regions>
+<destroyables materials="ENDER_STONE" completion="100%">
+    <destroyables owner="blue">
+        <destroyable name="Monument A">
+            <region><cuboid min="54,19,42" max="59,31,47"/></region>
+        </destroyable>
+        <destroyable name="Monument B">
+            <region><cuboid min="-37,19,42" max="-42,31,47"/></region>
+        </destroyable>
+    </destroyables>
+    <destroyables owner="red">
+        <destroyable name="Monument A">
+            <region><cuboid min="-37,19,-69" max="-42,31,-64"/></region>
+        </destroyable>
+        <destroyable name="Monument B">
+            <region><cuboid min="54,19,-69" max="59,31,-64"/></region>
+        </destroyable>
+    </destroyables>
+</destroyables>
+<cores material="obsidian" mode-changes="true" leak="5">
+    <core name="Blue Teams Core" team="blue" region="blue-core"/>
+    <core name="Red Teams Core" team="red" region="red-core"/>
+</cores>
+<modes>
+    <mode after="20m" material="gold block" name="GOLD CORE MODE"/>
+    <mode after="30m" material="Glass" name="GLASS CORE MODE"/>
+</modes>
+<maxbuildheight>50</maxbuildheight>
+<itemremove>
+    <item>iron_sword</item>
+    <item>bow</item>
+    <item>iron_pickaxe</item>
+    <item>iron_axe</item>
+    <item>cooked_beef</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>stone</item>
+    <item>glass</item>
+    <item>log</item>
+    <item>arrow</item>
+</itemremove>
+</map>

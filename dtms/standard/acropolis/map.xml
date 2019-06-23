@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Acropolis</name>
+<version>1.2.0</version>
+<objective>Destroy both of the opposing holy monuments to win!</objective>
+<authors>
+    <author uuid="a63de09d-6fa9-436f-9070-26f5e9a4d27b" contribuiton="Building, XML"/> <!-- dragonrider455 -->
+</authors>
+<contributors>
+    <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Ideas and tips"/> <!-- Rockymine -->
+</contributors>
+<teams>
+    <team id="blue-team" color="blue" max="24" max-overfill="28">Blue Priests</team>
+    <team id="red-team" color="dark red" max="24" max-overfill="28">Red Priests</team>
+</teams>
+<destroyables completion="100%" mode-changes="true"  materials="obsidian">
+	<destroyable owner="red-team" name="Left Monument">
+		<region>
+			<cuboid min="64,15,53" max="65,18,54"/>
+		</region>
+	</destroyable>
+	<destroyable owner="red-team" name="Right Monument">
+		<region>
+			<cuboid min="29,15,53" max="30,18,54"/>
+		</region>
+	</destroyable>
+	<destroyable owner="blue-team" name="Left Monument">
+		<region>
+			<cuboid min="29,15,-118" max="30,18,-117"/>
+		</region>
+	</destroyable>
+	<destroyable owner="blue-team" name="Right Monument">
+		<region>
+			<cuboid min="64,15,-118" max="65,18,-117"/>
+		</region>
+	</destroyable>
+</destroyables>
+<kits>
+    <kit id="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="28" amount="1">arrow</item>
+        <item slot="5" amount="32" damage="2">log</item>
+        <item slot="6" amount="64">bread</item>
+        <item slot="7" amount="1">golden apple</item>
+        <potion duration="5" amplifier="3">heal</potion>
+        <potion duration="5">damage resistance</potion>
+    </kit>
+	<kit id="red" parents="spawn">
+	    <helmet color="cd0000">leather helmet</helmet>
+        <boots color="cd0000">leather boots</boots>
+		<item slot="4" amount="24" damage="14">stained clay</item>
+    </kit>
+	<kit id="blue" parents="spawn">
+	    <helmet color="0066cc">leather helmet</helmet>
+        <boots color="0066cc">leather boots</boots>
+		<item slot="4" amount="24" damage="11">stained clay</item>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>bread</item>
+    <item>leather helmet</item>
+    <item>leather boots</item>
+    <item>bucket</item>
+	<item>log</item>
+	<item>arrow</item>
+	<item>stained clay</item>
+	<item damage="2">log</item>
+	<item damage="2">wood</item>
+	<item>obsidian</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+	    <item amount="16" damage="2" material="log"/>
+	</kill-reward>
+    <kill-reward>
+	    <item amount="1" material="golden apple"/>
+	</kill-reward>
+</kill-rewards>
+<maxbuildheight>33</maxbuildheight>
+<spawns>
+    <spawn team="red-team" kit="red">
+	    <regions yaw="0">
+			<cylinder base="47,9,110" radius="2" height="0"/>
+		</regions>
+	</spawn>
+	<spawn team="blue-team" kit="blue">
+	    <regions yaw="180">
+			<cylinder base="47,9,-175" radius="2" height="0"/>
+		</regions>
+	</spawn>
+    <default>
+	    <regions yaw="-90">
+		    <cylinder base="132.5,18,-32.5" radius="1.5" height="0.5"/>
+		</regions>
+	</default>
+</spawns>
+<modes>
+    <mode after="15m" material="beacon" name="`bBeacon `0Monument `6Mode"/>
+    <mode after="20m" material="gold block" name="`6Gold `0Monument `6Mode"/>
+    <mode after="30m" material="coal block" name="`0Coal `0Monument `6Mode"/>
+</modes>
+<regions>
+    <rectangle min="-9,-189" max="103,-125" id="playable"/>
+    <!-- Spawns -->
+    <!-- Blue Spawn -->
+	<apply enter="deny-red" block="deny-all" message="You may not modify or enter the spawns!">
+	    <region>
+            <rectangle min="40,-189" max="54,-167"/>
+		</region>
+	</apply>
+    <!-- Red Spawn -->
+	<apply enter="deny-blue" block="deny-all" message="You may not modify or enter the spawns!">
+	    <region>
+			<rectangle min="54,125" max="40,103"/>
+		</region>
+	</apply>
+	<apply block="never" message="You may not modify this area.">
+        <region>
+			<rectangle min="40.5,-166.5" max="53.5,-102.5"/>
+			<rectangle min="40.5,102.5" max="53.5,38.5"/>
+		</region>
+	</apply>
+	<apply block="deny-void" message="You may not modify the void area.">
+        <region>
+            <union>
+        		<negative>
+  				    <region id="playable"/>
+    					<rectangle min="53.5,115.5" max="91.5,-179.5"/>
+    					<rectangle min="40.5,-179.5" max="2.5,115.5"/>
+    					<rectangle min="39.6,39.5" max="53.5,-101.5"/>
+                </negative>
+            </union>
+		</region>
+	</apply>
+    <!-- Void Regions -->
+</regions>
+<filters>
+    <not id="deny-all">
+		<any>
+			<team>red-team</team>
+			<team>blue-team</team>
+		</any>
+	</not>
+	<not id="deny-blue">
+	    <team>blue-team</team>
+	</not>
+	<not id="deny-red">
+	    <team>red-team</team>
+	</not>
+	<not id="deny-void">
+	    <void/>
+	</not>
+</filters>
+</map>

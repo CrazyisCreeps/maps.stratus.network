@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<map proto="1.4.1">
+<name>Trail Mix</name>
+<version>1.0.0</version>
+<objective>Capture both enemies wools</objective>
+<!--Map Authors-->
+<authors>
+	<author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="Map making and XML"/>
+</authors>
+<!--Teams-->
+<teams>
+	<team id="cyan" color="dark_aqua" max="16" max-overfill="16">Cyan</team>
+	<team id="orange" color="gold" max="16" max-overfill="16">Orange</team>
+</teams>
+<!--Kits-->
+<kits>
+	<kit id="spawn" force="true">
+		<item slot="0" material="iron sword" unbreakable="true"/>
+		<item slot="1" material="bow"  unbreakable="true">
+			<enchantment level="1">infinity</enchantment>
+		</item>
+		<item slot="2" material="iron pickaxe"  unbreakable="true"/>
+		<item slot="3" material="iron axe"  unbreakable="true"/>
+		<item slot="4" material="log 2" damage="1" amount="32"/>
+		<item slot="7" material="golden apple" amount="2"/>
+		<item slot="8" material="cooked beef" amount="24"/>
+		<item slot="28" material="arrow"/>
+		<potion amplifier="5" duration="3">resistance</potion>
+	</kit>
+	<kit id="cyan_kit" parents="spawn">
+		<item slot="5" material="stained clay" damage="11" amount="48"/>
+	</kit>
+	<kit id="orange_kit" parents="spawn">
+		<item slot="5" material="stained clay" damage="1" amount="48"/>
+	</kit>
+</kits>
+<!--Wools-->
+<wools team="cyan">
+	<wool color="yellow" location="963,12,-666">
+		<monument><block>1092.5,15,-543.5</block></monument>
+	</wool>
+	<wool color="red" location="937,12,-601">
+		<monument><block>1094.5,15,-543.5</block></monument>
+	</wool>
+</wools>
+<wools team="orange">
+	<wool color="blue" location="1093,12,-666">
+		<monument>
+			<block>964.5,15,-543.5</block>
+		</monument>
+	</wool>
+	<wool color="light blue" location="1119,12,-601">
+		<monument>
+			<block>962.5,15,-543.5</block>
+		</monument>
+	</wool>
+</wools>
+<filters>
+	<team id="only-cyan">cyan</team>
+	<team id="only-orange">orange</team>
+	<not id="no-void">
+		<void/>
+	</not>
+</filters>
+<regions>
+	<union id="cyan-wools"><!--Wools Orange Capture-->
+		<rectangle min="1087,-659" max="2000,-672 "/>
+		<rectangle min="1113,-607" max="1126,-594"/>
+	</union>
+	<union id="orange-wools"><!--Wools Cyan Capture-->
+		<rectangle min="944,-594" max="931,-607"/>
+		<rectangle min="957,-659" max="970,-672"/>
+	</union>
+	<apply block-place="no-void" block-break="always" message="You may not build in the void">
+        <region>
+	       <negative>
+		      <region id="build"/>
+	       </negative>
+	   </region>
+    </apply>
+	<apply enter="only-cyan" message="You may not enter!"><!--Only Cyan Enters Spawn and O Wools-->
+		<region>
+			<region id="orange-wools"/>
+			<rectangle min="1087,-581" max="2000,-542"/>
+		</region>
+	</apply>
+	<apply enter="only-orange" message="You may not enter!"><!--Only Orange Enters Spawn and C Wools-->
+		<region>
+			<region id="cyan-wools"/>
+			<rectangle min="957,-581" max="970,-542"/>
+		</region>
+	</apply>
+	<apply block="only-orange" message="You cannot edit the blocks here!">
+		<region>
+			<region id="cyan-wools"/>
+		</region>
+	</apply>
+	<apply block="only-cyan" message="You cannot edit the blocks here!">
+		<region>
+			<region id="orange-wools"/>
+		</region>
+	</apply>
+	<!--Build Regions-->
+	<union id="build">
+		<rectangle min="970,-581" max="957,-594"/>
+		<rectangle min="944,-607" max="931,-620"/>
+		<rectangle min="957,-633" max="970,-620"/>
+		<rectangle min="970,-620" max="983,-607"/>
+		<rectangle min="983,-607" max="996,-594"/>
+		<rectangle min="970,-568" max="983,-581"/>
+		<rectangle min="996,-621" max="1009,-633"/>
+		<rectangle min="1009,-594" max="1022,-581"/>
+		<rectangle min="1022,-607" max="1035,-620"/>
+		<rectangle min="1035,-581" max="1048,-594"/>
+		<rectangle min="1048,-620" max="1061,-633"/>
+		<rectangle min="1061,-607" max="1074,-594"/>
+		<rectangle min="1074,-568" max="1087,-581"/>
+		<rectangle min="1087,-607" max="1074,-620"/>
+		<rectangle min="1087,-633" max="2000,-581"/>
+		<rectangle min="1113,-620" max="1126,-607"/>
+	</union>
+</regions>
+<!--Applying Kits-->
+<regions>
+	<apply kit="orange_kit">
+		<region>
+			<cuboid min="965,21,-550" max="962,27,-547"/>
+		</region>
+	</apply>
+	<apply kit="cyan_kit">
+		<region>
+			<cuboid min="1092,21,-550" max="1095,27,-547"/>
+		</region>
+	</apply>
+</regions>
+<!--Spawns-->
+<spawns>
+	<spawn team="cyan">
+		<regions yaw="180">
+			<cylinder base="1093.5,76,-548.5" radius="1" height="2"/>
+		</regions>
+	</spawn>
+	<spawn team="orange">
+		<regions yaw="180">
+			<cylinder base="963.5,76,-548.5" radius="1" height="2"/>
+		</regions>
+	</spawn>
+	<default>
+		<regions yaw="180">
+			<cylinder base="1028.5,28,-551.5" radius="4" height="1"/>
+		</regions>
+	</default>
+</spawns>
+<itemremove>
+	<item>iron sword</item>
+	<item>bow</item>
+	<item>iron pickaxe</item>
+	<item>iron axe</item>
+</itemremove>
+<broadcasts>
+	<tip after="10s" every="5m" count="oo">You can find water and defense supplies on the islands next to spawn</tip>
+</broadcasts>
+<!--Timelock & buildheight-->
+<maxbuildheight>25</maxbuildheight>
+<timelock>on</timelock>
+<!--End Of XML-->
+</map>

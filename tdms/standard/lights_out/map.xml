@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<include src="tutorial.xml"/>
+<include src="kill-rewards.xml"/>
+<name>Lights Out</name>
+<version>1.1</version>
+<objective>Be the team with the most points after 12 minutes.</objective>
+<authors>
+    <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="Overall Map Design and XML Code"/> <!-- Mikeg542 -->
+</authors>
+<contributors>
+    <contributor uuid="10946c56-7961-42c1-a1d3-102c9f937cf8" contribution="build slave"/> <!-- Stephen012 -->
+    <contributor uuid="8e0b87e1-2369-4c3e-9819-c9e93cd4f8eb" contribution="build slave"/> <!-- TheDrewGuy -->
+</contributors>
+<teams>
+    <team id="purple-team" color="dark purple" max="28">Purple</team>
+    <team id="orange-team" color="gold" max="28">Orange</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="2" amount="64">bread</item>
+        <item slot="28" amount="1">arrow</item>
+    </kit>
+    <kit name="orange" parents="spawn">
+        <helmet color="D87F33" unbreakable="true">leather helmet</helmet>
+        <chestplate color="D87F33" unbreakable="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <boots color="D87F33" enchantment="protection fall:2" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="purple" parents="spawn">
+        <helmet color="7F3FB2" unbreakable="true">leather helmet</helmet>
+        <chestplate color="7F3FB2" unbreakable="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <boots color="7F3FB2" enchantment="protection fall:2" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<itemremove>
+    <item>bread</item>
+    <item>bow</item>
+    <item>stone sword</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>374</item>
+    <item damage="8197">potion</item>
+</itemremove>
+<spawns>
+    <spawn team="orange-team" kit="orange" yaw="180">
+        <region>
+            <cylinder base="39,16,174" radius="1" height="1"/>
+        </region>
+    </spawn>
+    <spawn team="purple-team" kit="purple" yaw="0">
+        <region>
+            <cylinder base="39,16,-12" radius="1" height="1"/>
+        </region>
+    </spawn>
+    <default yaw="-90">
+        <region>
+            <cylinder base="-11,71,82" radius="2" height="1"/>
+        </region>
+    </default>
+</spawns>
+<score>
+    <kills>1</kills>
+</score>
+<time>420</time>
+<regions>
+    <apply block="never"/>
+</regions>
+<timelock>on</timelock>
+<tutorial>
+    <stage title="Team Death Match">
+        <message>
+            <line>This map is a `a`lTeam Death Match `r(TDM) map</line>
+            <line>The objective is to get the most points within 12 minutes.</line>
+        </message>
+        <teleport>
+            <point yaw="-90" pitch="45">1,76,83</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn">
+        <message>
+            <line>This is where you spawn when the match starts or you die. Go through the holes to get to the fight.</line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="0">40,16,-13</point>
+        </teleport>
+    </stage>
+    <stage title="Spawners">
+        <message>
+            <line>There is a spawner in the center of the map. Use them to get the edge in a fight.</line>
+            <line>There are also potions in the two towers on either side.</line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="0">40,20,64</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

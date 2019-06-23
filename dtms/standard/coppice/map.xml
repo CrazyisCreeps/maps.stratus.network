@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Coppice</name>
+<version>1.0.2</version>
+<objective>Destroy the enemy team's monument.</objective>
+<authors>
+    <author uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad"/> <!-- AlmightyBread -->
+</authors>
+<contributors>
+    <contributor uuid="04415962-13e2-4010-b5f1-6d5ed7e537d4" contribution="XML"/> <!-- Poseidons -->
+</contributors>
+<gamemode>dtm</gamemode>
+<teams>
+    <team id="red-team" color="red" max="14" max-overfill="16">Red</team>
+    <team id="blue-team" color="blue" max="14" max-overfill="16">Blue</team>
+</teams>
+<kits>
+    <kit id="night-vision-kit">
+        <effect duration="oo">night vision</effect>
+    </kit>
+	<kit id="spawn-kit">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" enchantment="dig speed:1" unbreakable="true">iron axe</item>
+        <item slot="4" unbreakable="true">iron spade</item>
+		<item slot="6" amount="32">dirt</item>
+		<item slot="7" amount="16" damage="1">log</item>
+		<item slot="8" amount="64">cooked chicken</item>
+        <item slot="28" amount="1">arrow</item>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+    	<helmet color="cd0000" material="leather helmet" unbreakable="true"/>
+    	<chestplate color="cd0000" material="leather chestplate" unbreakable="true"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+    	<helmet color="0066cc" material="leather helmet" unbreakable="true"/>
+    	<chestplate color="0066cc" material="leather chestplate" unbreakable="true"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions>
+            <point yaw="0">156,14.5,409</point>
+            <point yaw ="180">156,14.5,416</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+        	<point yaw="180">347,14.5,416</point>
+            <point yaw ="0">347,14.5,409</point>
+        </regions>
+    </spawn>
+    <default kit="night-vision-kit">
+        <regions yaw="-180">
+            <point>251.5,43.1,412.5</point>
+        </regions>
+    </default>
+</spawns>
+<destroyables name="Monument" material="obsidian" mode-changes="true">
+    <destroyable owner="blue-team">
+        <region>
+            <cuboid min="300,13,411" max="303,17,414"/>
+        </region>
+    </destroyable>
+    <destroyable owner="red-team">
+        <region>
+            <cuboid min="200,13,411" max="203,17,414"/>
+        </region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="25m" material="emerald block"/>
+    <mode after="35m" material="coal block"/>
+</modes>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <material id="only-iron">iron block"</material>>
+</filters>
+<regions>
+	<union id="iron-in-spawns">
+    	<!-- Red spawn -->
+    	<rectangle min="147,404" max="152,421"/>
+    	<!-- Blue spawn -->
+        <rectangle min="351,404" max="356,421"/>
+    </union>
+    <union id="spawns">
+        <rectangle id="red-spawn" min="147,404" max="163,421"/>
+        <rectangle id="blue-spawn" min="340,404" max="356,421"/>
+    </union>
+    <apply block="only-iron" region="iron-in-spawns" message="You can only break iron blocks inside spawn!"/>
+    <apply block="never" region="spawns" message="You can only break iron blocks inside spawn!"/>
+    <apply enter="only-red" region="red-spawn" message="You can't enter the other team's spawn!"/>
+    <apply enter="only-blue" region="blue-spawn" message="You can't enter the other team's spawn!"/>
+    <apply block="never" message="You can't build here!">
+        <region>
+            <union>
+                <negative>
+                    <union>
+                        <!--Vertical-->
+                        <rectangle min="210,374" max="293,390"/>
+                        <rectangle min="210,404" max="293,421"/>
+                        <rectangle min="210,435" max="293,451"/>
+                        <!--Horizontal-->
+                        <rectangle min="225,374" max="241,451"/>
+                        <rectangle min="262,374" max="278,451"/>
+                        <!--Monument/Spawn-->
+                        <rectangle min="163,374" max="210,451"/>
+                        <rectangle min="293,374" max="340,451"/>
+                    </union>
+                </negative>
+            </union>
+        </region>
+    </apply>
+</regions>
+<renewables>
+    <renewable region="spawns" sound="false" interval="10s">
+        <renew-filter>
+            <any>
+                <material>iron block</material>
+            </any>
+        </renew-filter>
+        <replace-filter>
+            <any>
+                <material>air</material>
+            </any>
+        </replace-filter>
+    </renewable>
+</renewables>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<itemremove>
+	<item>dirt</item>
+	<item>log</item>
+	<item>cooked chicken</item>
+    <item>obsidian</item>
+    <item>coal block</item>
+    <item>emerald block</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>arrow</item>
+    <item>flint</item>
+</itemremove>
+<killreward>
+	<item>golden apple</item>
+	<item amount="16" damage="1">wood</item>
+	<item amount="16">glass</item>
+</killreward>
+<timelock>on</timelock>
+<respawn delay="4s"/>
+<autorespawn/>
+<maxbuildheight>32</maxbuildheight>
+</map>

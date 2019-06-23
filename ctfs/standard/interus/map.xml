@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Interus</name>
+<version>1.1.1</version>
+<gamemode>rage</gamemode>
+<gamemode>ctf</gamemode>
+<objective>Capture the other team's flag 4 times to win.</objective>
+<authors>
+    <author uuid="24cedca6-721d-4eb7-9c4c-2cab0a14caa3"/> <!-- Rendivious -->
+</authors>
+<teams>
+   <team id="purple" color="dark purple" max="14" max-overfill="20">Purple</team>
+   <team id="blue" color="blue" max="14" max-overfill="20">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" unbreakable="true" enchantment="damage all:10" material="iron sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow damage:10" material="bow"/>
+        <item slot="8" amount="3" material="arrow"/>
+        <game-mode>adventure</game-mode>
+        <potion duration="3" amplifier="5">damage resistance</potion>
+        <potion duration="3">absorption</potion>
+    </kit>
+    <kit id="purple-kit" parents="spawn">
+        <chestplate color="7F3FB2" material="leather chestplate"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <chestplate color="334CB2" material="leather chestplate"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="purple" kit="purple-kit" filter="deny-purple-spawn">
+        <regions yaw="-135">
+            <point>-1.5,30,19.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit" filter="deny-blue-spawn">
+        <regions yaw="45">
+            <point>81.5,30,-63.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="135">
+            <point>56.5,19,-5.5</point>
+        </regions>
+    </default>
+</spawns>
+<respawn delay="3s"/>
+<rage/>
+<score>
+    <limit>4</limit>
+</score>
+<filters>
+    <team id="purple-only">purple</team>
+    <team id="blue-only">blue</team>
+    <not id="no-beacon">
+        <material>beacon</material>
+    </not>
+    <not id="deny-purple-spawn">
+        <flag-carried>blue-flag</flag-carried>
+    </not>
+    <not id="deny-blue-spawn">
+        <flag-carried>purple-flag</flag-carried>
+    </not>
+</filters>
+<regions>
+    <apply velocity="@0,1,-0.5">
+        <region>
+            <cuboid min="63,11,-15" max="66,12,-13"/>
+        </region>
+    </apply>
+    <apply velocity="@-0.5,1,0">
+        <region>
+            <cuboid min="47,11,4" max="49,12,1"/>
+        </region>
+    </apply>
+    <apply velocity="@0,1,0.5">
+        <region>
+            <cuboid min="17,11,-29" max="14,12,-31"/>
+        </region>
+    </apply>
+    <apply velocity="@0.5,1,0">
+        <region>
+            <cuboid min="33,11,-48" max="31,12,-45"/>
+        </region>
+    </apply>
+    <apply block="never"/>
+</regions>
+<killreward>
+    <filter>
+        <kill-streak count="1" repeat="true"/>
+    </filter>
+    <item amount="3">arrow</item>
+</killreward>
+<flags>
+    <flag id="purple-flag" name="Purple Flag" color="purple" owner="purple">
+        <post pickup-filter="blue-only">24.5,25,-6.5</post>
+        <net points="1">
+            <region>
+                <cylinder base="55.5,25,-37.5" radius="2" height="2"/>
+            </region>
+            <capture-filter>
+                <not>
+                    <flag-carried>blue-flag</flag-carried>
+                </not>
+            </capture-filter>
+        </net>
+    </flag>
+    <flag id="blue-flag" name="Blue Flag" color="blue" owner="blue">
+        <post pickup-filter="purple-only">55.5,25,-37.5</post>
+        <net points="1">
+            <region>
+                <cylinder base="24.5,25,-6.5" radius="2" height="2"/>
+            </region>
+            <capture-filter>
+                <not>
+                    <flag-carried>purple-flag</flag-carried>
+                </not>
+            </capture-filter>
+        </net>
+    </flag>
+</flags>
+<killreward>
+    <kit>
+        <item amount="3" material="arrow"/>
+        <effect duration="5" amplifier="1">speed</effect>
+    </kit>
+</killreward>
+<itemremove>
+  <item>arrow</item>
+  <item>leather chestplate</item>
+  <item>bow</item>
+  <item>iron sword</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<gamerules>
+    <doDaylightCycle>false</doDaylightCycle>
+</gamerules>
+</map>

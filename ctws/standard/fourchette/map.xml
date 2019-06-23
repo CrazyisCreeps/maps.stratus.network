@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Fourchette</name>
+<version>2.0.4</version>
+<objective>Capture all three wools to win.</objective>
+<authors>
+    <author uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9" contribution="Main Author"/> <!-- Timothee38 -->
+    <author uuid="260004f0-996b-4539-ba21-df4ee6336b63" contribution="Map Updates"/> <!-- Captain_Elliott -->
+    <author uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Tywnisification"/> <!-- Tywnis -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="26">Red</team>
+    <team id="blue" color="blue" max="26">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" enchantment="durability:3;dig speed:1">iron pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4" amount="64" damage="1">log</item>
+        <item slot="5" amount="64">glass</item>
+        <item slot="6">bucket</item>
+        <item slot="7">golden apple</item>
+        <item slot="8" amount="64">cooked fish</item>
+        <potion duration="10s" amplifier="2">regeneration</potion>
+        <potion duration="5" amplifier="10">heal</potion>
+    </kit>
+</kits>
+<spawns safe="true">
+    <spawn team="red" kit="spawn">
+        <regions yaw="90"><cuboid min="150,7.5,187" max="146,7.5,182"/></regions>
+    </spawn>
+    <spawn team="blue" kit="spawn">
+        <regions yaw="-90"><cuboid min="-32,7.5,181" max="-28,7.5,187"/></regions>
+    </spawn>
+    <default>
+        <regions yaw="180"><cuboid min="60,48,183" max="58,48,185"/></regions>
+    </default>
+</spawns>
+<wools team="blue">
+    <wool color="orange" location="182,9,276">
+        <monument><block>-24,8,188</block></monument>
+    </wool>
+    <wool color="lime" location="182,9,92">
+        <monument><block>-24,8,184</block></monument>
+    </wool>
+    <wool color="magenta" location="232,9,184">
+        <monument><block>-24,8,180</block></monument>
+    </wool>
+</wools>
+<wools team="red">
+    <wool color="green" location="-64,9,276">
+        <monument><block>142,8,180</block></monument>
+    </wool>
+    <wool color="light blue" location="-114,9,184">
+        <monument><block>142,8,184</block></monument>
+    </wool>
+    <wool color="yellow" location="-64,9,92">
+        <monument><block>142,8,188</block></monument>
+    </wool>
+</wools>
+<timelock>off</timelock>
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+    <any id="only-blue">
+        <team>blue</team>
+    </any>
+    <any id="only-red">
+        <team>red</team>
+    </any>
+    <not id="deny-spawn-place">
+        <cause>player</cause>
+    </not>
+    <all id="only-iron">
+        <material>iron block</material>
+    </all>
+    <all id="wool-room-red">
+        <any>
+            <material>web</material>
+            <material>stained glass</material>
+        </any>
+        <team>red</team>
+    </all>
+    <all id="wool-room-blue">
+        <any>
+            <material>web</material>
+            <material>stained glass</material>
+        </any>
+        <team>blue</team>
+    </all>
+</filters>
+<regions>
+    <union id="spawns">
+        <rectangle id="red-spawn" min="126,168" max="152,199"/>
+        <rectangle id="blue-spawn" min="-8,198" max="-34,167"/>
+    </union>
+    <union id="red-side-woolrooms">
+        <rectangle id="1r" min="167,106" max="201,74"/>
+        <rectangle id="2r" min="219,167" max="253,202"/>
+        <rectangle id="3r" min="199,263" max="165,289"/>
+    </union>
+    <union id="blue-side-woolrooms">
+        <rectangle id="1b" min="-48,263" max="-82,288"/>
+        <rectangle id="2b" min="-100,201" max="-127,164"/>
+        <rectangle id="3b" min="-78,106" max="-43,75"/>
+    </union>
+    <union id="iron">
+        <cuboid id="blue-iron" min="-32,11,178" max="-17,18,190"/>
+        <cuboid id="red-iron" min="135,11,178" max="150,18,190"/>
+    </union>
+    <complement id="map">
+        <rectangle id="main" min="-oo,-oo" max="oo,oo"/>
+        <rectangle id="mid" min="11,171" max="107,198"/>
+    </complement>
+    <!--Apply-->
+    <apply enter="only-red" message="You may not enter the enemy spawn" region="red-spawn"/>
+    <apply enter="only-blue" message="You may not enter the enemy spawn" region="blue-spawn"/>
+    <apply enter="only-red" message="You may not enter/edit your wool rooms" region="blue-side-woolrooms"/>
+    <apply enter="only-blue" message="You may not enter/edit your wool rooms" region="red-side-woolrooms"/>
+    <apply block="wool-room-blue" region="red-side-woolrooms" message="You may only break webs and stained glass in the wool rooms"/>
+    <apply block="wool-room-red" region="blue-side-woolrooms" message="You may only break webs and stained glass in the wool rooms"/>
+    <apply block-break="only-iron" block-place="deny-spawn-place" message="You may only edit iron in the spawn area!" region="spawns"/>
+    <apply block="no-void" region="map" message="You may not modify the void area!"/>
+</regions>
+<game-mode>ctw</game-mode>
+<renewables>
+    <renewable rate="1.5" particles="true" sound="true" avoid-entites="true" region="iron">
+    </renewable>
+</renewables>
+<itemremove>
+    <item>log</item>
+    <item>wood</item>
+    <item>bucket</item>
+    <item>cooked fish</item>
+    <item>golden apple</item>
+    <item>glass</item>
+    <item>string</item>
+    <item>redstone lamp off</item>
+    <item>diode</item>
+    <item>stained clay</item>
+    <item>quartz block</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>brown mushroom</item>
+    <item>wool:14</item>
+    <item>wool:11</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>bow</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+<maxbuildheight>26</maxbuildheight>
+</map>

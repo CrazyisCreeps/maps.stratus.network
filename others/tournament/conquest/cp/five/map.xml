@@ -1,0 +1,280 @@
+<map proto="1.4.2">
+<name>Five TE</name>
+<version>1.0.0</version>
+<objective>Capture all five control points or be the team with the most points captured by the end of the timer.</objective>
+<authors>
+    <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b"/> <!--  Jexel  -->
+</authors>
+<time result="objectives">12m</time>
+<teams>
+    <team id="red"  color="dark red" min="6" max="8" max-overfill="8">Red</team>
+    <team id="blue" color="blue"     min="6" max="8" max-overfill="8">Blue</team>
+</teams>
+<respawn delay="3s" auto="true"/>
+<spawns>
+    <spawn team="red"  filter="spawn-1" kit="kit-red">
+        <regions yaw="-90"><region id="spawn-red-1"/></regions>
+    </spawn>
+    <spawn team="red"  filter="spawn-2" kit="kit-red">
+        <regions yaw="-90"><region id="spawn-red-2"/></regions>
+    </spawn>
+    <spawn team="red"  filter="spawn-3" kit="kit-red">
+        <regions yaw="-90"><region id="spawn-red-3"/></regions>
+    </spawn>
+    <spawn team="red"  filter="spawn-4" kit="kit-red">
+        <regions yaw="-90"><region id="spawn-red-4"/></regions>
+    </spawn>
+    <spawn team="red"  filter="spawn-5" kit="kit-red">
+        <regions yaw="-90"><region id="spawn-red-5"/></regions>
+    </spawn>
+    <spawn team="red"  filter="spawn-6" kit="kit-red">
+        <regions yaw="-90"><region id="spawn-red-6"/></regions>
+    </spawn>
+    <spawn team="blue" filter="spawn-1" kit="kit-blue">
+        <regions yaw="90"><region id="spawn-blue-1"/></regions>
+    </spawn>
+    <spawn team="blue" filter="spawn-2" kit="kit-blue">
+        <regions yaw="90"><region id="spawn-blue-2"/></regions>
+    </spawn>
+    <spawn team="blue" filter="spawn-3" kit="kit-blue">
+        <regions yaw="90"><region id="spawn-blue-3"/></regions>
+    </spawn>
+    <spawn team="blue" filter="spawn-4" kit="kit-blue">
+        <regions yaw="90"><region id="spawn-blue-4"/></regions>
+    </spawn>
+    <spawn team="blue" filter="spawn-5" kit="kit-blue">
+        <regions yaw="90"><region id="spawn-blue-5"/></regions>
+    </spawn>
+    <spawn team="blue" filter="spawn-6" kit="kit-blue">
+        <regions yaw="90"><region id="spawn-blue-6"/></regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <region id="spawn-default"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <game-mode>adventure</game-mode>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="4" amount="1">golden apple</item>
+        <item slot="8" amount="32">arrow</item>
+        <chestplate enchantment="protection projectile:3;protection fire:3" unbreakable="true">chainmail chestplate</chestplate>
+        <boots      enchantment="protection fall" unbreakable="true">iron boots</boots>
+    </kit>
+    <kit id="kit-red" parents="spawn">
+        <clear-items/>
+        <helmet   color="cd0000" unbreakable="true">leather helmet</helmet>
+        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+    </kit>
+    <kit id="kit-blue" parents="spawn">
+        <clear-items/>
+        <helmet   color="0066cc" unbreakable="true">leather helmet</helmet>
+        <leggings color="0066cc" unbreakable="true">leather leggings</leggings>
+    </kit>
+    <lend kit="kit-spawn-prot" filter="prot-spawns"/>
+    <kit id="kit-spawn-prot">
+        <effect amplifier="2">regeneration</effect>
+        <effect amplifier="5">resistance</effect>
+        <knockback-reduction>0</knockback-reduction>
+    </kit>
+</kits>
+<killreward>
+    <item>golden apple</item>
+    <item amount="8">arrow</item>
+</killreward>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <!-- Portal Filters -->
+    <objective id="filter-portals-blue-capped-blue-2nd" team="blue">blue-2nd</objective>
+    <objective id="filter-portals-red-capped-blue-2nd"  team="red">blue-2nd</objective>
+    <objective id="filter-portals-blue-capped-red-2nd"  team="blue">red-2nd</objective>
+    <objective id="filter-portals-red-capped-red-2nd"   team="red">red-2nd</objective>
+    <objective id="filter-portals-red-capped-mid"       team="red">mid</objective>
+    <objective id="filter-portals-blue-capped-mid"      team="blue">mid</objective>
+    <not id="red-neutral">
+        <any>
+            <filter id="filter-portals-red-capped-red-2nd"/>
+            <filter id="filter-portals-blue-capped-red-2nd"/>
+        </any>
+    </not>
+    <not id="blue-neutral">
+        <any>
+            <filter id="filter-portals-red-capped-blue-2nd"/>
+            <filter id="filter-portals-blue-capped-blue-2nd"/>
+        </any>
+    </not>
+    <!--Point Filters -->
+    <any id="prot-spawns">
+        <all>
+            <filter id="only-blue"/>
+            <region id="spawn-blue"/>
+        </all>
+        <all>
+            <filter id="only-red"/>
+            <region id="spawn-red"/>
+        </all>
+    </any>
+    <any id="filter-red-last">
+        <objective id="capped-red-2nd">red-2nd</objective>
+        <filter id="only-red"/>
+    </any>
+    <any id="filter-red-2nd">
+        <objective>red-last</objective>
+        <objective>mid</objective>
+    </any>
+    <any id="filter-mid">
+        <objective>red-2nd</objective>
+        <objective>blue-2nd</objective>
+    </any>
+    <any id="filter-blue-last">
+        <objective id="capped-blue-2nd">blue-2nd</objective>
+        <filter id="only-blue"/>
+    </any>
+    <any id="filter-blue-2nd">
+        <objective id="capped-mid">mid</objective>
+        <objective>blue-last</objective>
+    </any>
+    <!-- Time Filters -->
+    <not id="spawn-1">
+        <time>2m</time>
+    </not>
+    <all id="spawn-2">
+        <time>2m</time>
+        <not>
+            <time>4m</time>
+        </not>
+    </all>
+    <all id="spawn-3">
+        <time>4m</time>
+        <not>
+            <time>6m</time>
+        </not>
+    </all>
+    <all id="spawn-4">
+        <time>6m</time>
+        <not>
+            <time>8m</time>
+        </not>
+    </all>
+    <all id="spawn-5">
+        <time>8m</time>
+        <not>
+            <time>10m</time>
+        </not>
+    </all>
+    <all id="spawn-6">
+        <time>10m</time>
+    </all>
+</filters>
+<regions>
+    <point id="spawn-red-1">-114.5,29.5,0.5</point>
+    <point id="spawn-red-2">-114.5,65.5,0.5</point>
+    <point id="spawn-red-3">-114.5,101.5,0.5</point>
+    <point id="spawn-red-4">-114.5,149.5,0.5</point>
+    <point id="spawn-red-5">-114.5,197.5,0.5</point>
+    <point id="spawn-red-6">-114.5,235.5,0.5</point>
+    <!-- -->
+    <point id="spawn-blue-1">115.5,29.5,0.5</point>
+    <point id="spawn-blue-2">115.5,65.5,0.5</point>
+    <point id="spawn-blue-3">115.5,101.5,0.5</point>
+    <point id="spawn-blue-4">115.5,149.5,0.5</point>
+    <point id="spawn-blue-5">115.5,197.5,0.5</point>
+    <point id="spawn-blue-6">115.5,235.5,0.5</point>
+    <cuboid id="spawn-default" min="2,24.1,31"  max="-1,24.1,35"/>
+    <cuboid id="spawn-red"     min="-102,12,-4" max="-113,oo,5"/>
+    <cuboid id="spawn-blue"    min="103,12,-4"  max="114,oo,5"/>
+    <!--indicators-->
+    <union id="indicators-mid">
+        <block id="indicator-red-mid">-109,14,0</block>
+        <block id="indicator-blue-mid">109,14,0</block>
+        <cuboid id="indicator-cp-mid" min="1,22,1" max="0,25,0"/>
+    </union>
+    <union id="indicators-red-2nd">
+        <block id="indicator-red-red-2nd">-109,14,-3</block>
+        <block id="indicator-blue-red-2nd">109,14,-3</block>
+        <cuboid min="-44,11,-4" max="-51,12,4"/>
+        <cuboid id="indicator-cp-red-2nd" min="-46,22,1" max="-47,25,0"/>
+    </union>
+    <union id="indicators-blue-2nd">
+        <block id="indicator-red-blue-2nd">-109,14,3</block>
+        <block id="indicator-blue-blue-2nd">109,14,3</block>
+        <cuboid min="45,11,5" max="52,12,-4"/>
+        <cuboid id="indicator-cp-blue-2nd" min="47,22,1" max="48,25,0"/>
+    </union>
+    <cuboid id="indicator-cp-red-last" min="-78,22,1" max="-77,25,0"/>
+    <cuboid id="indicator-cp-blue-last" min="78,22,1" max="79,25,0"/>
+    <!--control points-->
+    <cuboid id="cp-red-last" min="-82,10,5" max="-73,12,-4"/>
+    <cuboid id="cp-red-2nd" min="-42,13,5" max="-51,12,-4"/>
+    <cuboid id="cp-red-2nd-capture" min="-42,15,5" max="-51,13,-4"/>
+    <cuboid id="cp-mid" min="5,7,5" max="-4,1,-4"/>
+    <cuboid id="cp-blue-2nd" min="43,13,5" max="52,12,-4"/>
+    <cuboid id="cp-blue-2nd-capture" min="43,15,5" max="52,13,-4"/>
+    <cuboid id="cp-blue-last" min="83,10,5" max="74,12,-4"/>
+    <!-- Red Portals -->
+    <cuboid id="portal-red-red-2nd" min="-109,12,-3" max="-108,15,-2"/>
+    <cuboid id="portal-red-mid" min="-109,12,0" max="-108,15,1"/>
+    <cuboid id="portal-red-blue-2nd" min="-109,12,3" max="-108,15,4"/>
+    <!-- Blue Portals-->
+    <cuboid id="portal-blue-blue-2nd" min="109,12,3" max="110,15,4"/>
+    <cuboid id="portal-blue-mid" min="109,12,0" max="110,15,1"/>
+    <cuboid id="portal-blue-red-2nd" min="109,12,-3" max="110,15,-2"/>
+    <!-- -->
+    <cuboid id="region-water" min="1,11,1" max="0,13,0"/>
+    <apply enter="only-blue" region="spawn-blue"/>
+    <apply enter="only-red"  region="spawn-red"/>
+    <apply block="never"/>
+</regions> <!-- -->
+<control-points incremental="true" neutral-state="true" show-progress="true" scaled-time="true" time-multiplier="0.25">
+    <control-point initial-owner="red"  id="red-last"  name="Red Last"  capture-time="4s"   capture="cp-red-last"          progress="cp-red-last"  captured="indicator-cp-red-last"  player-filter="filter-red-last"/>
+    <control-point initial-owner="red"  id="red-2nd"   name="Red 2nd"   capture-time="5.5s" capture="cp-red-2nd-capture"   progress="cp-red-2nd"   captured="indicators-red-2nd"     player-filter="filter-red-2nd"/>
+    <control-point                      id="mid"       name="Mid"       capture-time="5.5s" capture="cp-mid"               progress="cp-mid"       captured="indicators-mid"         player-filter="filter-mid"/>
+    <control-point initial-owner="blue" id="blue-2nd"  name="Blue 2nd"  capture-time="5.5s" capture="cp-blue-2nd-capture"  progress="cp-blue-2nd"  captured="indicators-blue-2nd"    player-filter="filter-blue-2nd"/>
+    <control-point initial-owner="blue" id="blue-last" name="Blue Last" capture-time="4s"   capture="cp-blue-last"         progress="cp-blue-last" captured="indicator-cp-blue-last" player-filter="filter-blue-last"/>
+</control-points>
+<portals>
+    <!-- Red Portals -->
+    <portal x="@-69"   y="@10.1" z="@37"  yaw="@180" region="portal-red-red-2nd"  filter="capped-red-2nd"/>
+    <portal x="@-36.5" y="@12.1" z="@0.5" yaw="@-90" region="portal-red-mid" filter="capped-mid"/>
+    <portal x="@12" y="@7.1" z="@8" yaw="@-90" region="portal-red-blue-2nd" filter="capped-blue-2nd"/>
+    <!-- Blue Portals -->
+    <portal x="@70"   y="@10.1" z="@-36" yaw="@0"  region="portal-blue-blue-2nd"  filter="capped-blue-2nd"/>
+    <portal x="@37.5" y="@12.5" z="@0.5" yaw="@90" region="portal-blue-mid" filter="capped-mid"/>
+    <portal x="@-11" y="@7.1" z="@-7" yaw="@90" region="portal-blue-red-2nd" filter="capped-red-2nd"/>
+</portals>
+<structures>
+    <structure id="water" region="region-water"/>
+    <!-- Red 2nd Portals -->
+    <dynamic structure="water" location="-109,12,-3" trigger="filter-portals-red-capped-red-2nd"/>
+    <dynamic structure="water" location="109,12,-3"  trigger="filter-portals-blue-capped-red-2nd"/>
+    <!-- Mid Portals -->
+    <dynamic structure="water" location="-109,12,0" trigger="filter-portals-red-capped-mid"/>
+    <dynamic structure="water" location="109,12,0"  trigger="filter-portals-blue-capped-mid"/>
+    <!-- Blue 2nd Portals -->
+    <dynamic structure="water" location="-109,12,3" trigger="filter-portals-red-capped-blue-2nd"/>
+    <dynamic structure="water" location="109,12,3"  trigger="filter-portals-blue-capped-blue-2nd"/>
+</structures>
+<timelock>true</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

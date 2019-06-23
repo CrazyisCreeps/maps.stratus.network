@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Wit's Ending</name>
+<version>1.1.3</version>
+<objective>Capture the enemy team's wools and return them to your victory monument.</objective>
+<!-- This map uses AGBT -->
+<authors>
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
+</authors>
+<contributors>
+    <contributor uuid="dbe909c6-2b15-4528-b12a-c77ed4031496" contribution="Building Help"/> <!-- teheggy -->
+</contributors>
+<gamerules>
+    <doDaylightCycle>true</doDaylightCycle>
+</gamerules>
+<teams>
+    <team id="blue" color="blue" max="20">Blue</team>
+    <team id="red" color="dark red" max="20">Red</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true" material="bow"/>
+        <item slot="2" enchantment="durability:3;dig speed:2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" amount="64" material="quartz block"/>
+        <item slot="4" amount="64" material="glass"/>
+        <item slot="5" amount="64" damage="2" material="wood"/>
+        <item slot="6" amount="16" material="ladder"/>
+        <item slot="7" amount="1" material="golden_apple"/>
+        <item slot="8" amount="32" material="golden_carrot"/>
+        <item slot="28" material="arrow"/>
+		        <potion duration="4" amplifier="4">damage resistance</potion>
+        <potion duration="4" amplifier="4">heal</potion>
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+	<kit id="obs">
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue" kit="spawn">
+        <region yaw="90">
+			<cylinder base="90,4,0" radius="3" height="0"/>
+		</region>
+    </spawn>
+    <spawn team="red" kit="spawn">
+        <region yaw="-90">
+			<cylinder base="-90,4,0" radius="3" height="0"/>
+		</region>
+    </spawn>
+    <default kit="obs">
+        <region yaw="0">
+			<cylinder base="0,30,-53" radius="1" height="0"/>
+		</region>
+    </default>
+</spawns>
+<filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+	<all id="only-gold">
+		<material>gold block</material>
+	</all>
+	<not id="deny-spawner">
+		<material>mob spawner</material>
+	</not>
+	<not id="only-red-usage">
+        <all>
+            <any>
+                <material>chest</material>
+                <material>workbench</material>
+                <material>trap door</material>
+            </any>
+            <team>blue</team>
+        </all>
+    </not>
+    <not id="only-blue-usage">
+        <all>
+            <any>
+                <material>chest</material>
+                <material>workbench</material>
+                <material>trap door</material>
+            </any>
+            <team>red</team>
+        </all>
+    </not>
+	<not id="no-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+	<union id="chests">
+		<!-- Light Blue -->
+		<cuboid min="83.5,4,-46.5" max="84.5,6,-46.5"/>
+		<cuboid min="83.5,4,-49.5" max="84.5,6,-49.5"/>		
+		<!-- Cyan -->
+		<cuboid min="83.5,4,46.5" max="84.5,6,46.5"/>
+		<cuboid min="83.5,4,49.5" max="84.5,6,49.5"/>		
+		<!-- Orange -->
+		<cuboid min="-83.5,4,46.5" max="-84.5,6,46.5"/>
+		<cuboid min="-83.5,4,-49.5" max="-84.5,6,-49.5"/>		
+		<!-- Cyan -->
+		<cuboid min="-83.5,4,-46.5" max="-84.5,6,-46.5"/>
+		<cuboid min="-83.5,4,-49.5" max="-84.5,6,-49.5"/>
+	</union>
+    <union id="allow-block-place">
+		<rectangle min="76.5,29.5" max="-77.5,-29.5"/>
+		<!-- Behind Spawns -->
+		<rectangle min="-113.5,-5.5" max="-102.5,5.5"/>
+		<rectangle min="113.5,5.5" max="102.5,-5.5"/>
+		<!-- Front of wool rooms -->
+		<rectangle min="-78.5,-41.5" max="-89.5,-18.5"/>
+		<rectangle min="-89.5,18.5" max="-78.5,41.5"/>
+		<rectangle min="78.5,-41.5" max="89.5,-18.5"/>
+		<rectangle min="78.5,41.5" max="89.5,18.5"/>
+    </union>
+	<negative id="void">
+		<region id="allow-block-place"/>
+	</negative>
+	<rectangle id="everything" min="oo,oo" max="-oo,-oo"/>
+	<union id="spawns">
+		<rectangle id="red-spawn" min="-97,-10" max="-77,10"/>
+		<rectangle id="blue-spawn" min="97,-10" max="77,10"/>
+	</union>
+	<union id="blue-wool-rooms">
+		<rectangle min="-78,42" max="-90,54"/>
+		<rectangle min="-78,-54" max="-90,-42"/>
+	</union>
+	<union id="red-wool-rooms">
+		<rectangle min="78,42" max="90,54"/>
+		<rectangle min="78,-54" max="90,-42"/>
+	</union>
+	<complement>	
+		<region id="spawns"/>
+		<region id="wool-placements"/>
+	</complement>
+    <union id="wool-placements">
+        <block location="-94,5,4" id="cyan-wool"/>
+        <block location="-94,5,-5" id="light_blue-wool"/>
+        <block location="93,5,-5" id="yellow-wool"/>
+        <block location="93,5,4" id="orange-wool"/>
+    </union>
+	<apply block="never" message="You may not break the wool room chests!" region="chests"/>
+	<apply block-break="only-gold" block-place="only-gold" message="You may only break gold in the base!" region="spawns"/>
+	<apply enter="only-red" use="only-red-usage" message="You may not enter the enemy spawn" region="red-spawn"/>
+	<apply enter="only-blue" use="only-blue-usage" message="You may not enter the enemy spawn" region="blue-spawn"/>
+	<apply block="only-red" use="only-red-usage" message="You may not interact with your own wool room!" region="red-wool-rooms"/>
+	<apply block="only-blue" use="only-blue-usage" message="You may not interact with your own wool room!" region="blue-wool-rooms"/>
+	<apply enter="only-red" message="You may not enter your own wool room" region="red-wool-rooms"/>
+	<apply enter="only-blue" message="You may not enter your own wool room" region="blue-wool-rooms"/>
+	<apply use="only-blue" region="blue-wool-rooms"/>
+	<apply use="only-red" region="red-wool-rooms"/>
+	<apply block="no-void" message="You may not edit the void area!" region="void"/>
+	<apply block="deny-spawner" message="Don't destroy the TNT spawner!" region="everything"/>
+</regions>
+<renewables>
+    <renewable rate="1.5" grow="true" particles="true" sound="true" avoid-players="3">
+        <region>
+			<region id="spawns"/>
+        </region>
+        <renew-filter>
+                <material>gold block</material>
+        </renew-filter>
+        <replace-filter>
+                <material>air</material>
+        </replace-filter>
+    </renewable>
+</renewables>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <fuse>2.5s</fuse>
+    <power>5</power>
+</tnt>
+<wools craftable="false">
+    <wool team="red" color="cyan" location="-94,5,4" monument="cyan-wool"/>
+    <wool team="red" color="light blue" location="-94,5,-5" monument="light_blue-wool"/>
+    <wool team="blue" color="yellow" location="93,5,-5" monument="yellow-wool"/>
+    <wool team="blue" color="orange" location="93,5,4" monument="orange-wool"/>
+</wools>	
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>golden carrot</item>
+    <item>string</item>
+    <item>obsidian</item>
+    <item>beacon</item>
+    <item>quartz block</item>
+</itemremove>
+<killreward>
+    <item material="golden apple"/>
+</killreward>
+<maxbuildheight>25</maxbuildheight>
+<timelock>on</timelock>
+</map>

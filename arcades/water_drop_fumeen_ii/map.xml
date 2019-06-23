@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<map proto="1.4.2" game="Water Drop">
+<name>Water Drop: Fumeen II</name>
+<version>1.2.2</version>
+<objective>Get to the flag!</objective>
+<gamemode>Arcade</gamemode>
+<authors>
+    <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2" contribution="Map author"/> <!--Doomyboy-->
+    <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="Map author"/> <!--Obelistics-->
+</authors>
+<players min="1" max="60" colors="true"/>
+<spawns>
+    <spawn kit="players" yaw="90" region="spawn"/>
+    <default kit="obs" yaw="90" region="spawn"/> 
+</spawns>
+<kits>
+    <kit id="obs">
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+    <kit id="players">
+        <health>6</health>
+        <max-health>6</max-health>
+        <clear/>
+        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <boots color="7fcc19" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <effect duration="3s" amplifier="5">resistance</effect>
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit id="removal" force="true">
+        <clear/>
+        <item slot="0" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="1" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="2" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <boots color="993333" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="force-kill">
+        <potion duration="1" amplifier="100">harm</potion>
+    </kit>
+</kits>
+<filters>
+    <all id="water">
+        <any>
+            <material>water</material>
+            <material>stationary water</material>
+        </any>
+        <not>
+            <cause>world</cause>
+        </not>
+    </all>
+</filters>
+<regions>
+    <cylinder id="spawn" base="-13.5,221,141.5" radius="1.5" height="0"/>
+    <cylinder id="spawn-drop" base="-13.5,211,141.5" radius="3" height="10"/>
+    <apply block="never" region="spawn-drop"/>
+    <apply block-place="water" block-break="water" block-physics="never"/>
+</regions>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>leather boots</item>
+    <item>barrier</item>
+</itemremove>
+<flags>
+    <flag id="blue-flag" name="Flag" color="red">
+        <post yaw="-90">25.5,30,232.5</post>
+        <net points="1">
+            <region>
+                <cylinder base="25.5,30,232.5" radius="2" height="2"/>
+            </region>
+        </net>
+    </flag>
+</flags>
+<score>
+    <limit>1</limit>
+</score>
+</map>

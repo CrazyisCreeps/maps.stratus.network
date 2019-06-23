@@ -1,0 +1,116 @@
+<map proto="1.4.2">
+<name>Take Out</name>
+<version>1.1</version>
+<objective>Capture the flag more than the opponent in twelve minutes!</objective>
+<authors>
+    <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- Strangey -->
+</authors>
+<contributors>
+    <contributor uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9" contribution="New XML"/> <!-- Xerocoles -->
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" max="5">Red</team>
+    <team id="blue-team" color="blue" max="5">Blue</team>
+</teams>
+<spawns>
+    <default yaw="180">
+        <region>
+            <cuboid min="3.5,18,-1.5" max="-4.5,18,-1.5"/>
+        </region>
+    </default>
+    <spawn team="red-team" kit="red-kit" yaw="0">
+        <region>
+            <cuboid min="9,7,-85" max="6,7,-82"/>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit" yaw="180">
+        <region>
+            <cuboid min="-10,7,82" max="-7,7,70"/>
+        </region>
+    </spawn>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="8" amount="20">arrow</item>
+        <leggings unbreakable="true">iron leggings</leggings>
+        <effect duration="3" amplifier="1">heal</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <chestplate color="993333" material="leather chestplate"/>
+        <helmet color="993333" material="leather helmet"/>
+        <boots color="993333" material="leather boots"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <chestplate color="334CB2" material="leather chestplate"/>
+        <helmet color="334CB2" material="leather helmet"/>
+        <boots color="334CB2" material="leather boots"/>
+    </kit>
+    <kit id="red-flag-kit">
+        <potion duration="oo" amplifier="-2" ambient="true">health boost</potion>
+        <potion duration="oo">slowness</potion>
+    </kit>
+    <kit id="blue-flag-kit">
+        <potion duration="oo" amplifier="-2" ambient="true">health boost</potion>
+        <potion duration="oo">slowness</potion>
+    </kit>
+    <kit id="reset-kit" force="true">
+        <potion duration="1" amplifier="0">health boost</potion>
+        <potion duration="0" amplifier="10">slowness</potion>
+    </kit>
+</kits>
+<filters>
+    <time id="flag-respawns">0</time>
+    <team id="red-only">red-team</team>
+    <team id="blue-only">blue-team</team>
+</filters>
+<regions>
+    <apply block="never"/>
+    <cuboid id="red-net" min="-6,18.5,-59" max="-7,19.5,-58"/>
+    <cuboid id="blue-net" min="6,18.5,55" max="5,19.5,56"/>
+</regions>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<flags flag-proximity-metric="closest player">
+    <flag id="red-flag" name="Red Flag" owner="red-team" pickup-kit="red-flag-kit" drop-kit="reset-kit">
+        <post pickup-filter="blue-only" recover-time="20s" respawn-time="5s">-6.5,18,-58.5</post>
+    </flag>
+    <flag id="blue-flag" name="Blue Flag" owner="blue-team" pickup-kit="blue-flag-kit" drop-kit="reset-kit">
+        <post pickup-filter="red-only" recover-time="20s" respawn-time="5s">5.5,18,55.5</post>
+    </flag>
+    <flags points="1">
+        <net region="red-net" flag="blue-flag" respawn-filter="flag-respawns"/>
+        <net region="blue-net" flag="red-flag" respawn-filter="flag-respawns"/>
+    </flags>
+</flags>
+<time>12m</time>
+<score>
+    <kills>0</kills>
+    <deaths>0</deaths>
+</score>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8">arrow</item>
+    </kill-reward>
+    <kill-reward>
+        <item>golden apple</item>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<timelock>on</timelock>
+</map>

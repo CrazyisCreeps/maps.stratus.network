@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<include src="kill-rewards.xml"/>
+<name>Quadrival</name>
+<version>1.0.4</version>
+<objective>Capture hills to earn points. Earn 2000 points to win!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="a43135a4-d7b9-49ab-ac8d-a16bb2513c8d" contribution="Design and XML"/> <!-- Ny_ -->
+    <author uuid="c9932db0-e742-4b91-b678-09bc10b0b9b2" contribution="Building and Design"/> <!-- Subir -->
+    <author uuid="c62a6655-2165-4d6b-a68e-ac20fe52a038"/> <!-- AdamChen -->
+</authors>
+<contributors>
+    <contributor uuid="5ecdf615-b142-4cd7-97fb-4ede125da843"/> <!-- mench -->
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" max="10">Red</team>
+    <team id="yellow-team" color="yellow" max="10">Yellow</team>
+    <team id="blue-team" color="blue" max="10">Blue</team>
+    <team id="green-team" color="dark green" max="10">Green</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <game-mode>adventure</game-mode>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite">bow</item>
+        <item slot="2">golden apple</item>
+        <item slot="27">arrow</item>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <effect duration="3" amplifier="25">heal</effect>
+        <effect duration="3" amplifier="25">damage resistance</effect>
+        <effect duration="oo">night vision</effect>
+    </kit>
+    <kit id="red" parents="spawn">
+        <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="yellow" parents="spawn">
+        <helmet color="e5e533" unbreakable="true">leather helmet</helmet>
+        <leggings color="e5e533" unbreakable="true">leather leggings</leggings>
+        <boots color="e5e533" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue" parents="spawn">
+        <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+        <leggings color="0066cc" unbreakable="true">leather leggings</leggings>
+        <boots color="0066cc" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="green" parents="spawn">
+        <helmet color="667f33" unbreakable="true">leather helmet</helmet>
+        <leggings color="667f33" unbreakable="true">leather leggings</leggings>
+        <boots color="667f33" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red-team" kit="red">
+        <regions yaw="-135">
+            <cuboid min="-64,5.0125,-33" max="-61,5.0125,-36"/>
+        </regions>
+    </spawn>
+    <spawn team="yellow-team" kit="yellow">
+        <regions yaw="135">
+            <cuboid min="75,5.0125,-33" max="72,5.0125,-36"/>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue">
+        <regions yaw="-45">
+            <cuboid min="-64,5.0125,-172" max="-61,5.0125,-169"/>
+        </regions>
+    </spawn>
+    <spawn team="green-team" kit="green">
+        <regions yaw="45">
+            <cuboid min="75,5.0125,-172" max="72,5.0125,-169"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <cuboid min="7,6.0125,-104" max="4,6.0125,-101"/>
+        </regions>
+    </default>
+</spawns>
+<regions>
+  <!-- Red Jump Pads -->
+    <apply velocity=".5,1.7,-.5">
+        <region>
+            <cuboid id="red-jump-pad" min="-46,8,-51" max="-42,9,-55"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.6,0">
+        <region>
+            <cuboid id="south-red-jump-pad" min="-11,8,-55" max="-14,9,-58"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.6,0">
+        <region>
+            <cuboid id="west-red-jump-pad" min="-42,8,-86" max="-39,9,-83"/>
+        </region>
+    </apply>
+    <apply velocity="0.25,1.4,-0.25">
+        <region>
+            <cuboid id="mid-red-jump-pad" min="-5,6,-92" max="-1,7,-96"/>
+        </region>
+    </apply>
+    <!-- Yellow Jump Pads -->
+    <apply velocity="-.5,1.7,-.5">
+        <region>
+            <cuboid id="yellow-jump-pad" min="57,8,-51" max="53,9,-55"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.6,0">
+        <region>
+            <cuboid id="east-yellow-jump-pad" min="53,8,-86" max="50,9,-83"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.6,0">
+        <region>
+            <cuboid id="south-yellow-jump-pad" min="22,8,-55" max="25,9,-58"/>
+        </region>
+    </apply>
+    <apply velocity="-0.25,1.4,-0.25">
+        <region>
+            <cuboid id="mid-yellow-jump-pad" min="16,6,-92" max="12,7,-96"/>
+        </region>
+    </apply>
+    <!-- Green Jump Pads -->
+    <apply velocity="-.5,1.7,.5">
+        <region>
+            <cuboid id="green-jump-pad" min="57,8,-154" max="53,9,-150"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.6,0">
+        <region>
+            <cuboid id="north-green-jump-pad" min="22,8,-150" max="25,9,-147"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.6,0">
+        <region>
+            <cuboid id="east-green-jump-pad" min="53,8,-119" max="50,9,-122"/>
+        </region>
+    </apply>
+    <apply velocity="-0.25,1.4,0.25">
+        <region>
+            <cuboid id="mid-green-jump-pad" min="16,6,-113" max="12,7,-109"/>
+        </region>
+    </apply>
+    <!-- Blue Jump Pads -->
+    <apply velocity=".5,1.7,.5">
+        <region>
+            <cuboid id="blue-jump-pad" min="-46,8,-154" max="-42,9,-150"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.6,0">
+        <region>
+            <cuboid id="west-blue-jump-pad" min="-42,8,-119" max="-39,9,-122"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.6,0">
+        <region>
+            <cuboid id="north-blue-jump-pad" min="-11,8,-150" max="-14,9,-147"/>
+        </region>
+    </apply>
+    <apply velocity="0.25,1.4,0.25">
+        <region>
+            <cuboid id="mid-blue-jump-pad" min="-5,6,-113" max="-1,7,-109"/>
+        </region>
+    </apply>
+</regions>
+<control-points show-progress="true" decay="0" required="false">
+    <control-point id="mid" name="Mid" neutral-state="false" capture-time="12s" points="3">
+        <capture>
+            <cylinder base="5.5,13,-102.5" radius="5.25" height="4"/>
+        </capture>
+        <progress>
+            <cylinder base="5.5,9,-102.5" radius="5.25" height="100"/>
+        </progress>
+    </control-point>
+    <control-point id="north" name="North Hill" neutral-state="true" capture-time="5s" points="1.75">
+        <capture>
+            <cylinder base="5.5,9,-160.5" radius="3.5" height="4"/>
+        </capture>
+        <progress>
+            <cylinder base="5.5,9,-160.5" radius="3.5" height="100"/>
+        </progress>
+    </control-point>
+    <control-point id="east" name="East Hill" neutral-state="true" capture-time="5s" points="1.75">
+        <capture>
+            <cylinder base="63.5,9,-102.5" radius="3.5" height="4"/>
+        </capture>
+        <progress>
+            <cylinder base="63.5,9,-102.5" radius="3.5" height="100"/>
+        </progress>
+    </control-point>
+    <control-point id="south" name="South Hill" neutral-state="true" capture-time="5s" points="1.75">
+        <capture>
+            <cylinder base="5.5,9,-44.5" radius="3.5" height="4"/>
+        </capture>
+        <progress>
+            <cylinder base="5.5,9,-44.5" radius="3.5" height="100"/>
+        </progress>
+    </control-point>
+    <control-point id="west" name="West Hill" neutral-state="true" capture-time="5s" points="1.75">
+        <capture>
+            <cylinder base="-52.5,9,-102.5" radius="3.5" height="4"/>
+        </capture>
+        <progress>
+            <cylinder base="-52.5,9,-102.5" radius="3.5" height="100"/>
+        </progress>
+    </control-point>
+</control-points>
+<score>
+    <limit>2000</limit>
+</score>
+<timelock>on</timelock>
+</map>

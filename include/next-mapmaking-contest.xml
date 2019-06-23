@@ -1,0 +1,6 @@
+<!-- An Include to prevent having to add the rating broadcast in every map's xml for future contests -->
+<map>
+	<!-- When the contest gets to it's end, just remove the MODULE bellow -->
+
+	<!-- If there's no module above, that means the contest has ended -->
+</map>

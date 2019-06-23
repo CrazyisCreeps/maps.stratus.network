@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.3.6">
+   <name>Fort Aqua</name>
+   <version>1.0.0</version>
+   <objective>Break all of the wool off of the enemy team's monument.</objective>
+   <authors>
+      <author uuid="bf331953-4f92-43ee-8abc-7544b8234936" />
+      <!--  ViceTechnicolour  -->
+   </authors>
+   <teams>
+      <team id="red-team" color="dark red" max="16" max-overfill="20">Red Team</team>
+      <team id="blue-team" color="blue" max="16" max-overfill="20">Blue Team</team>
+   </teams>
+   <rules>
+      <rule>Do not access the spectator spawn of the map.</rule>
+      <rule>Do not shoot into the enemy team's spawn.</rule>
+   </rules>
+   <spawns>
+      <spawn team="red" kit="red">
+         <regions yaw="180">
+            <cylinder base="-47,7,86.5" height="0" radius="0" />
+         </regions>
+      </spawn>
+      <spawn team="blue" kit="blue">
+         <regions yaw="0">
+            <cylinder base="-47,7,-21.5" height="0" radius="0" />
+         </regions>
+      </spawn>
+      <default yaw="108">
+         <regions yaw="0">
+            <cylinder base="-2,14,33.5" height="0" radius="0" />
+         </regions>
+      </default>
+   </spawns>
+   <kits>
+      <kit name="spawn">
+         <item slot="0" unbreakable="true">iron sword</item>
+         <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+         <item slot="28" amount="32">arrow</item>
+         <item slot="2" enchantment="dig speed:1" unbreakable="true">iron pickaxe</item>
+         <item slot="3" enchantment="dig speed:1" unbreakable="true">stone axe</item>
+         <item slot="4" amount="24" damage="1">log</item>
+         <item slot="5" amount="2">golden apple</item>
+         <item slot="6" amount="32">golden carrot</item>
+         <potion duration="2" amplifier="1">heal</potion>
+         <potion duration="5" amplifier="1">damage resistance</potion>
+      </kit>
+      <kit name="red" parents="spawn">
+         <helmet unbreakable="true">iron helmet</helmet>
+         <chestplate unbreakable="true">gold chestplate</chestplate>
+         <leggings unbreakable="true">chainmail leggings</leggings>
+         <boots unbreakable="true" color="cd0000">leather boots</boots>
+      </kit>
+      <kit name="blue" parents="spawn">
+         <helmet unbreakable="true">iron helmet</helmet>
+         <chestplate unbreakable="true">gold chestplate</chestplate>
+         <leggings unbreakable="true">chainmail leggings</leggings>
+         <boots unbreakable="true" color="0066cc">leather boots</boots>
+      </kit>
+   </kits>
+   <filters>
+      <filter name="deny-access">
+         <not>
+            <block>beacon</block>
+         </not>
+      </filter>
+      <filter name="only-red">
+         <team>red</team>
+      </filter>
+      <filter name="only-blue">
+         <team>blue</team>
+      </filter>
+	  <filter name="only-iron">
+        <block>iron block</block>
+    </filter>
+   </filters>
+   <regions>
+	  <union name="bases">
+          <cuboid name="red-base" min="-34,0,68" max="-60,oo,89"/>
+          <cuboid name="blue-base" min="-61,0,-2" max="-34,oo,-24"/>
+      </union>
+	  <union name="int-bases">
+          <cuboid name="int-red-base" min="-34,0,68" max="-60,oo,89"/>
+          <cuboid name="int-blue-base" min="-61,0,-2" max="-34,oo,-24"/>
+      </union>
+	    <apply block-break="deny-all" block-place="deny-all">
+		</apply>
+      <apply use="deny-access" message="You may not access this block">
+         <rectangle min="-oo,-oo" max="oo,oo" />
+      </apply>
+	      <apply enter="only-red" message="You cannot enter the enemy base!">
+        <region name="int-red-base"/>
+    </apply>
+    <apply enter="only-blue" message="You cannot enter the enemy base!">
+        <region name="int-blue-base"/>
+    </apply>
+	    <apply block-break="only-iron" block-place="deny-all" message="You may not destroy the base!">
+        <region name="bases"/>
+    </apply>
+      <apply block="deny-all" message="You may not build in the void">
+         <negative>
+            <rectangle min="10,90" max="-103,-24" />
+         </negative>
+      </apply>
+      <rectangle name="playable" min="-31,-57" max="31,57" />
+      <cylinder id="red-spawn" base="-47,1,82" radius="6" height="11" />
+      <cylinder id="blue-spawn" base="-46,1,-17" radius="6" height="11" />
+
+   </regions>
+   <tnt>
+      <instantignite>on</instantignite>
+   </tnt>
+   <toolrepair>
+      <tool>iron sword</tool>
+      <tool>iron pickaxe</tool>
+      <tool>stone axe</tool>
+      <tool>bow</tool>
+   </toolrepair>
+   <kill-rewards>
+      <kill-reward>
+         <filter>
+            <all>
+               <kill-streak count="3" />
+            </all>
+         </filter>
+         <item material="tnt" />
+      </kill-reward>
+   </kill-rewards>
+   <maxbuildheight>30</maxbuildheight>
+   <difficulty>easy</difficulty>
+   <itemremove>
+      <item>arrow</item>
+      <item>iron helmet</item>
+      <item>chainmail leggings</item>
+      <item>gold chestplate</item>
+      <item>leather boots</item>
+      <item>wood</item>
+      <item>log</item>
+      <item>apple</item>
+      <item>beacon</item>
+      <item>shears</item>
+      <item>wool</item>
+   </itemremove>
+   <destroyables materials="wool:11;wool:14" completion="100%">
+      <destroyables owner="blue-team">
+         <destroyable name="Right">
+            <region>
+               <cuboid min="-1,6,-3" max="4,13,2" />
+            </region>
+         </destroyable>
+         <destroyable name="Left">
+            <region>
+               <cuboid min="-98,6,-4" max="-92,13,2" />
+            </region>
+         </destroyable>
+      </destroyables>
+      <destroyables owner="red-team">
+         <destroyable name="Right">
+            <region>
+               <cuboid min="-92,6,69" max="-97,13,64" />
+            </region>
+         </destroyable>
+         <destroyable name="Left">
+            <region>
+               <cuboid min="4,6,69" max="-1,13,64" />
+            </region>
+         </destroyable>
+      </destroyables>
+   </destroyables>
+</map>

@@ -1,0 +1,181 @@
+<?xml version="1.0"?> <!-- crated in august 2017 -->
+<map proto="1.4.2">
+<name>Omega DTC</name>
+<version>1.0.1</version>
+<objective>Leak the enemy's core!</objective>
+<authors>
+    <author uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30"/> <!--  Ruediger_LP  -->
+</authors>
+<contributors>
+    <contributor uuid="67fcfbe9-eb49-4c6f-94fd-0586c046aa20" contribution="testing server"/> <!--oiskoltaxd-->
+</contributors>
+<timelock>on</timelock>
+<gamemode>dtc</gamemode>
+<maxbuildheight>26</maxbuildheight>
+<teams>
+    <team id="blue-team" color="dark aqua" max="20">Blue</team>
+    <team id="red-team" color="red" max="20">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+    	<clear/>
+        <item slot="0" material="stone sword" unbreakable="true"/>
+        <item slot="1" material="bow" enchantment="arrow infinite:1" unbreakable="true"/>
+        <item slot="2" material="diamond pickaxe" unbreakable="true"/>
+        <item slot="3" material="wood axe" unbreakable="true"/>
+        <item slot="4" material="stone" amount="64" damage="5"/>
+        <item slot="5" material="vine" amount="48"/>
+        <item slot="6" material="web" amount="2"/>
+        <item slot="7" material="golden apple" amount="2"/>
+        <item slot="8" material="bread" amount="32"/>
+        <item slot="28" material="arrow"/>
+        <item slot="30" material="iron spade" unbreakable="true"/>
+        <item slot="31" material="stone" amount="64" damage="5"/>
+        <boots unbreakable="true" enchantment="protection fall">iron boots</boots>
+        <leggings color="F0E68C" unbreakable="true">leather leggings</leggings>
+        <effect duration="1" amplifier="100">resistance</effect>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <chestplate color="1E90FF" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <chestplate color="DC143C" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue-team" kit="blue-kit">
+        <region yaw="0">
+            <cylinder base="0,9.5,37" radius="0" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="red-team" kit="red-kit">
+        <region yaw="180">
+             <cylinder base="0,9.5,-37" radius="0" height="0"/>
+        </region>
+    </spawn>
+    <default>
+        <region yaw="0">
+            <cylinder base="0,30,0" radius="0" height="0"/>
+        </region>
+    </default>
+</spawns>
+<filters>
+	<not id="not-void"><void/></not>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <material id="only-iron">iron block</material>
+    <any id="base-filter">
+    	<material>stone</material>
+    	<material>web</material>
+    	<material>vine</material>
+    	<material>iron fence</material>
+    	<material>fence</material>
+    	<material>stone button</material>
+    	<material>stone plate</material>
+    	<material>workbench</material>
+    	<material>beacon</material>
+    </any>
+</filters>
+<regions>
+	<union id="intire-base">
+		<cuboid min="-13,0,46" max="13,25,28"/> <!-- blue base -->
+        <cuboid min="-13,0,-46" max="13,25,-28"/> <!-- red base -->
+	</union>
+	<union id="iron">
+		<cuboid min="2,15,33" max="-2,19,41" id="blue-iron"/>
+	    <cuboid min="2,15,-33" max="-2,19,-41" id="red-iron"/>
+	</union>
+	<cuboid min="-2,9,44" max="2,13,43" id="blue-spawn-enter"/>
+	<cuboid min="-2,9,-44" max="2,13,-43" id="red-spawn-enter"/>
+   	<union id="bases">
+   		<cuboid min="-4,0,44" max="4,19,31"/> <!-- inside blue -->
+   		<cuboid min="-8,0,42" max="8,19,32"/>
+   		<cuboid min="-11,0,41" max="11,19,33"/>
+   		<cuboid min="-4,0,-44" max="4,19,-31"/> <!-- inside red -->
+   		<cuboid min="-8,0,-42" max="8,19,-32"/>
+   		<cuboid min="-11,0,-41" max="11,19,-33"/>
+        <cuboid min="3,13,44" max="-3,0,50"/> <!-- blue bridge -->
+        <cuboid min="3,13,-44" max="-3,0,-50"/> <!-- red bridge -->
+   	</union>
+   	<union id="under-the-bedrock">
+   		<cylinder base="0,0,0" radius="32" height="8"/>
+   		<cylinder base="0,0,0" radius="38" height="7"/>
+   		<cylinder base="0,0,0" radius="44" height="6"/>
+   		<cylinder base="0,0,0" radius="60" height="3"/>
+   		<cylinder base="0,0,0" radius="66" height="2"/>
+   	</union>
+   	<apply block-break="only-iron" region="iron"/>
+   	<apply block="never" region="under-the-bedrock" message="`6You may not edit the void!"/>
+   	<apply block="never" region="bases" message="`6You may not edit spawn!"/>
+   	<apply block="base-filter" region="intire-base" message="`6You may not edit spawn!"/>
+   	<apply block="not-void" region="everywhere" message="`6You may not edit the void!"/>
+    <apply enter="only-blue" region="blue-spawn-enter" message="`6You may not enter the enemy's spawn!"/>
+    <apply enter="only-red" region="red-spawn-enter" message="`6You may not enter the enemy's spawn!"/>
+</regions>
+<cores material="obsidian" leak="5" name="Core">
+    <core team="blue-team">
+        <region>
+            <cuboid min="-3,15,84" max="3,21,90"/>
+        </region>
+    </core>
+    <core team="red-team">
+        <region>
+            <cuboid min="-3,15,-84" max="3,21,-90"/>
+        </region>
+    </core>
+</cores>
+<itemkeep>
+	<item>stone sword</item>
+	<item>bow</item>
+	<item>diamond pickaxe</item>
+	<item>wood axe</item>
+	<item>iron spade</item>
+	<item>arrow</item>
+	<item>vine</item>
+	<item>web</item>
+	<item>golden apple</item>
+	<item>bread</item>
+</itemkeep>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>wood axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<itemremove>
+    <item>1</item>
+    <item>3</item> 
+    <item>6</item> 
+    <item>17</item> 
+    <item>18</item>
+    <item>31</item> 
+    <item>38</item> 
+    <item>44</item> 
+    <item>49</item> 
+    <item>65</item> 
+    <item>98</item> 
+    <item>109</item> 
+    <item>126</item> 
+    <item>139</item> 
+    <item>168</item>
+    <item>175</item> 
+    <item>190</item>
+    <item>287</item> 
+    <item>295</item> 
+    <item>299</item>
+    <item>300</item>
+    <item>309</item>
+    <item>360</item> 
+    <item>390</item>
+</itemremove>
+<crafting>
+	<disable>iron nugget</disable>
+</crafting>
+<kill-rewards>
+    <kill-reward>
+         <item material="stone" amount="32" damage="5"/>
+         <item material="golden apple" amount="2"/>
+    </kill-reward>
+</kill-rewards>  
+</map>

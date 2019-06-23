@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Dune DTM</name>
+<version>2.1.1</version>
+<objective>Destroy the enemy monument before they destroy yours!</objective>
+<authors>
+    <author uuid="a63de09d-6fa9-436f-9070-26f5e9a4d27b" contribuiton="Building, XML, Decor, Gameplay thinking, Updates"/> <!-- dragonrider455 -->
+    <author uuid="85c49c6e-76cc-4af7-82b9-c31cf355c1c4" contribution="Map Brute Force, Pallete Help"/> <!-- Technixaga -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue" max="12">Blue Cowboys</team>
+    <team id="red-team" color="dark red" max="12">Red Cowboys</team>
+</teams>
+<destroyables owner="blue-team" materials="obsidian" completion="100%" mode-changes="true">
+    <destroyable name="Monument">
+	    <region><cuboid min="20,20,24" max="21,23,23"/></region>
+	</destroyable>
+</destroyables>
+<destroyables owner="red-team" materials="obsidian" completion="100%" mode-changes="true">
+    <destroyable name="Monument">
+	    <region><cuboid min="20,20,-74" max="21,23,-75"/></region>
+	</destroyable>
+</destroyables>
+<kits>
+    <kit id="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4">iron spade</item>
+        <item slot="28" amount="32">arrow</item>
+        <item slot="5" amount="32">log</item>
+        <item slot="6" amount="64">bread</item>
+        <item slot="7" amount="1">golden apple</item>
+        <potion duration="5" amplifier="3">heal</potion>
+        <potion duration="5">damage resistance</potion>
+    </kit>
+	<kit id="red" parents="spawn">
+	    <helmet color="cd0000">leather helmet</helmet>
+        <boots color="cd0000">leather boots</boots>
+    </kit>
+	<kit id="blue" parents="spawn">
+	    <helmet color="0066cc">leather helmet</helmet>
+        <boots color="0066cc">leather boots</boots>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+	<tool>iron spade</tool>
+</toolrepair>
+<itemremove>
+    <item>bread</item>
+    <item>leather helmet</item>
+    <item>leather boots</item>
+    <item>bucket</item>
+	<item>log</item>
+	<item>arrow</item>
+	<item>sand</item>
+	<item>flint</item>
+	<item>flint and steel</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+	    <item amount="16" material="log"/>
+	</kill-reward>
+    <kill-reward>
+	    <item amount="1" material="golden apple"/>
+	</kill-reward>
+    <kill-reward>
+	    <item amount="16" material="arrow"/>
+	</kill-reward>
+</kill-rewards>
+<maxbuildheight>35</maxbuildheight>
+<spawns>
+    <spawn team="red-team" kit="red">
+	    <regions yaw="0">
+			<union>
+			    <point>20.5,19,-121.5</point>
+			</union>
+		</regions>
+	</spawn>
+	<spawn team="blue-team" kit="blue">
+	    <regions yaw="180">
+			<union>
+			    <point>20.5,19,70.5</point>
+		    </union>
+		</regions>
+	</spawn>
+    <default>
+	    <regions>
+		    <point id="obs-spawn">20.5,58.5,-30.5</point>
+		</regions>
+	</default>
+</spawns>
+<filters>
+    <not id="deny-void">
+	    <void/>
+	</not>
+    <not id="deny-all">
+        <any>
+            <team>red-team</team>
+		    <team>blue-team</team>
+        </any>
+	</not>
+	<not id="deny-red">
+	    <team>red-team</team>
+	</not>
+	<not id="deny-blue">
+	    <team>blue-team</team>
+	</not>
+</filters>
+<regions>
+	<union id="buildarea">
+		<rectangle min="57,-64" max="38,13"/>
+		<rectangle min="3,13" max="-16,-64"/>
+		<rectangle min="-16,-34" max="57,-17"/>
+	</union>
+    <rectangle min="58,61" max="-17,-121" id="playable"/>
+	<!-- Spawns -->
+    <!-- Red Spawns -->
+	<apply enter="deny-blue" block="always" message="You may not modify or enter the spawns!">
+	    <region>
+            <union>
+				<rectangle min="-17,-115" max="-6,-127"/>
+			    <rectangle min="47,-155" max="58,-127"/>
+			</union>
+		</region>
+	</apply>
+    <!-- Blue Spawns -->
+	<apply enter="deny-red" block="always" message="You may not modify or enter the spawns!">
+	    <region>
+            <union>
+				<rectangle min="-17,76" max="-6,64"/>
+			    <rectangle min="58,64" max="47,76"/>
+			</union>
+		</region>
+	</apply>
+	<apply block="always" region="buildarea"/>
+    <apply block="deny-void" message="Do not attempt to build here!"/>
+    <apply block="deny-all" message="Dont try to enter areas restricted by the map.">
+	    <region>
+            <union>
+			    <rectangle min="38,-45" max="3,-56"/>
+			    <rectangle min="3,-15" max="38,-4"/>
+		    </union>
+        </region>
+    </apply>
+</regions>
+<modes>
+    <mode after="10m" material="beacon" name="Beacon Monument Mode"/>
+	<mode after="20m" material="coal block" name="Coal Monument Mode"/>
+</modes>
+</map>

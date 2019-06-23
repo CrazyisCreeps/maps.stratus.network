@@ -1,0 +1,55 @@
+<map proto="1.4.0" game="Kill the King">
+<name>King's Conquest: Apocalypse Ensues</name>
+<version>1.0</version>
+<authors>
+    <author uuid="e37f18f1-117b-47db-8806-6d3a0854b518" /> <!-- Chicky -->
+    <author uuid="9d87acbf-81f0-4c18-b2aa-67a8900d6d08" /> <!-- redalex -->
+</authors>
+<contributors>
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="XML And Maptesting" /> <!-- ElectroidFilms -->
+    <contributor uuid="e5eea785-51c1-40fe-a2d0-f83d4c035cd9" contribution="XML" /> <!-- pikpikmerchant -->
+    <contributor uuid="fe19a0fe-5961-46e1-b98e-b2b6658f8ba2" contribution="Landscaping and Feedback" /> <!-- YukonAppleGeek -->
+</contributors>
+<spawns>
+    <spawn team="red" region="red-spawn" sequential="true" yaw="180" kit="spawn" />
+    <spawn team="blue" region="blue-spawn" sequential="true" yaw="0" kit="spawn" />
+    <default region="default-spawn" yaw="90" kit="obs" />
+</spawns>
+<filters>
+    <not id="deny-break">
+        <any>
+            <material>grass</material>
+            <material>dirt</material>
+            <material>stone</material>
+            <material>cobblestone</material>
+            <material>gravel</material>
+            <material>stained clay</material>
+            <material>step</material>
+            <material>coal block</material>
+            <material>soul sand</material>
+            <material>sandstone</material>
+            <material>gravel</material>
+            <material>double step</material>
+            <material>snow block</material>
+        </any>
+    </not>
+</filters>
+<regions>
+    <block id="red-spawn">-1.5,7,-86.5</block>
+    <block id="blue-spawn">-1.5,7,89.5</block>
+    <union id="spawns">
+        <cylinder base="-1.5,6,-86.5" radius="2" height="3" />
+        <cylinder base="-1.5,6,89.5" radius="2" height="3" />
+    </union>
+    <block id="default-spawn">38,42,1</block>
+    <above id="build-limit" y="30" />
+    <below id="underground" y="2" />
+    <apply region="build-limit" block="never" message="`7You have reached the maximum build height! (`c30 Blocks`7)" />
+</regions>
+<flags>
+    <post id="red-post">-1.5,7,-86.5</post>
+    <post id="blue-post">-1.5,7,89.5</post>
+</flags>
+<timelock>on</timelock>
+<include src="king-classes.xml"/>
+</map>

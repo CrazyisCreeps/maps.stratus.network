@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<time result="objectives">45m</time>
+<name>Mushdoom</name>
+<version>1.0.1</version>
+<objective>Break the other two monuments to win</objective>
+<gamemode>dtm</gamemode>
+<authors>
+	<author uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b"/> <!-- _3Each -->
+</authors>
+<contributors>
+	<contributor uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="XML"/> <!-- Crazy_ -->
+</contributors>
+<teams>
+	<team id="blue" name="Blue" color="blue" max="8" max-overfill="8"/>
+	<team id="red" name="Red" color="dark red" max="8" max-overfill="8"/>
+</teams>
+<kits>
+	<kit id="play">
+		<item slot="0" unbreakable="true">iron sword</item>
+		<item slot="1" echantment="infinity:1"  unbreakable="true">bow</item>
+		<item slot="2" unbreakable="true">diamond pickaxe</item>
+		<item slot="3" echantment="dig speed:2" unbreakable="true">iron axe</item>
+		<item slot="4" amount="64">wood</item>
+		<item slot="5" amount="64">glass</item>
+		<item slot="6" amount="32">ladder</item>
+		<item slot="7">golden apple</item>
+		<item slot="8" amount="32">cooked beef</item>
+		<item slot="22" amount="64">wood</item>
+		<item slot="28">arrow</item>
+		<item slot="31" amount="64">wood</item>
+		<effect duration="8" amplifier="5">damage resistance</effect>
+	</kit>
+</kits>
+<spawns>
+	<spawn kit="play" team="blue" yaw="-90">
+		<regions><point>-91,16.5,203</point></regions>
+	</spawn>
+	<spawn kit="play" team="red" yaw="90">
+		<regions><point>119,16.5,203</point></regions>
+	</spawn>
+	<default>
+		<regions><point>14,50.5,140</point></regions>
+	</default>
+</spawns>
+<regions>
+	<negative id="map">
+		<rectangle min="86,151" max="-57,256"/>
+	</negative>
+	<union id="spawns">
+		<cuboid id="blue-spawn" min="-94,14,206" max="-52,20,201"/>
+		<cuboid id="red-spawn" min="122,14,206" max="81,20,201"/>
+	</union>
+	<union id="above-spawns">
+		<!-- Blue -->
+		<cuboid min="121,18,201" max="83,oo,206"/>
+		<!-- Red -->
+		<cuboid min="-93,18,201" max="-54,oo,206"/>
+	</union>
+	<apply enter="never" region="above-spawns" message="You may not go out above the spawn tunnels!"/>
+	<apply enter="only-blue" region="blue-spawn" message="You may not enter `9Blue`r team's spawn tunnel!"/>
+	<apply enter="only-red" region="red-spawn" message="You may not enter `4Red`r team's spawn tunnel!"/>
+	<apply block="never" region="spawns"/>
+	<apply block="never" region="map" message="You may not build in the void!"/>
+</regions>
+<filters>
+	<team id="only-blue">blue</team>
+	<team id="only-red">red</team>
+</filters>
+<destroyables materials="ender stone" sparks="true" show-progress="true">
+	<!-- Blue Left -->
+	<destroyable owner="blue" name="Left Monument">
+		<region><cuboid min="-19,24,178" max="-23,29,182"/></region>
+	</destroyable>
+	<!-- Blue Right -->
+	<destroyable owner="blue" name="Right Monument">
+		<region><cuboid min="-19,24,228" max="-23,29,224"/></region>
+	</destroyable>
+	<!-- Red Left -->
+	<destroyable owner="red" name="Left Monument">
+		<region><cuboid min="47,24,228" max="51,29,224"/></region>
+	</destroyable>
+	<!-- Red Right -->
+	<destroyable owner="red" name="Right Monument">
+		<region><cuboid min="47,24,178" max="51,29,182"/></region>
+	</destroyable>
+</destroyables>
+<destroyables materials="stained glass:6" name="glass" show="false" required="false" owner="blue" mode-changes="true" completion="0%">
+	<destroyable>
+		<region><cuboid min="86,7,151" max="-57,9,256"/></region>
+	</destroyable>
+</destroyables>
+<modes>
+    <mode after="0s" material="air" show-before="0"/>
+</modes>
+<maxbuildheight>42</maxbuildheight>
+<killreward>
+	<item>golden apple</item>
+</killreward>
+<itemremove>
+	<item>cooked beef</item>
+	<item>arrow</item>
+</itemremove>
+<toolrepair>
+	<tool>iron sword</tool>
+	<tool>bow</tool>
+	<tool>iron pickaxe</tool>
+	<tool>iron axe</tool>
+</toolrepair>
+</map>

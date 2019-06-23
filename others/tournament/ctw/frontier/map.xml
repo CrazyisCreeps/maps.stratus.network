@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Frontier</name>
+<version>1.0.0</version>
+<objective>Capture the enemy wool!</objective>
+<authors>
+    <author uuid="cef67055-9c27-4b58-a16f-278d793ff6bc"/>
+</authors>
+<teams>
+    <team id="red-team" color="dark red" max="5" max-overfill="5">Red</team>
+    <team id="blue-team" color="blue" max="5" max-overfill="5">Blue</team>
+</teams>
+<respawn delay="5s" blackout="true"/>
+<kits>
+<kit id="spawn-kit" force="true">
+    <item slot="0" unbreakable="true" show-attributes="false">stone sword</item>
+    <item slot="1" unbreakable="true" show-attributes="false">bow</item>
+    <item slot="2" enchantment="efficiency:1" unbreakable="true" show-attributes="false">iron pickaxe</item>
+	<item slot="3" enchantment="efficiency:1" unbreakable="true" show-attributes="false">iron axe</item>
+    <item slot="4" amount="64">smooth brick</item>
+    <item slot="5" amount="32" damage="1">wood</item>
+	<item slot="6" amount="1">golden apple</item>
+    <item slot="7" amount="64">golden carrot</item>
+    <item slot="28" amount="35">arrow</item>
+    <potion duration="5" amplifier="3">heal</potion>
+    <potion duration="5" amplifier="3">damage resistance</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue-team" kit="spawn-kit">
+        <regions yaw="90">
+            <point>185,4,-3</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="spawn-kit">
+        <regions yaw="-90">
+            <point>3,4,-3</point>
+        </regions>
+    </spawn>
+	<default>
+        <regions yaw="0">
+            <point>94.5,40.5,40.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <not id="no-teams">
+        <any>
+            <team id="only-red">red-team</team>
+            <team id="only-blue">blue-team</team>
+        </any>
+    </not>
+    <not id="no-void">
+        <void/>
+    </not>
+	<all id="only-gold">
+		<material>gold block</material>
+	</all>
+</filters>
+<regions>
+<!--spawns-->
+    <apply block-break="only-gold" block-place="no-teams" message="You may only break gold blocks in spawn!">
+        <region>
+            <cuboid id="spawn-blue" min="180,0,-9" max="189,25,1"/>
+            <cuboid id="spawn-red" min="-1,0,-9" max="9,25,1"/>
+        </region>
+    </apply> <!--Red team's side's wool room-->
+	<apply block="only-blue" message="You may not modify the wool room!">
+        <region>
+            <union id="wool-red">
+                <cuboid min="33,6,-8" max="42,26,1"/>
+            </union>
+        </region>
+    </apply>
+    <apply enter="only-blue" message="You may not enter your own wool room!">
+		<region>
+            <cuboid min="33,6,-8" max="42,26,1"/>
+		</region>
+    </apply> <!-- Blue team's side's wool room-->
+    <apply block="only-red" message="You may not modify the wool room!">
+        <region>
+            <cuboid id="wool-blue" min="147,6,-8" max="156,25,1"/>
+		    <union id="gold-blocks">
+                <cuboid min="180,0,-9" max="189,25,1"/>
+    			<cuboid min="-1,0,-9" max="9,25,1"/>
+            </union>
+        </region>
+    </apply>
+    <apply enter="only-red" message="You may not enter your own wool room!">
+        <region>
+            <cuboid min="147,6,-8" max="156,25,1"/>
+        </region>
+    </apply> <!--No building outside map-->
+	<apply block="no-void" message="You may not build in the void!">
+        <region>
+            <negative>
+                <union id="void">
+                    <rectangle min="9,-32" max="179,24"/>
+					<region id="spawn-red"/>
+					<region id="spawn-blue"/>
+                </union>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<renewables>
+    <renewable rate="3" avoid-players="2" region="gold-blocks">
+        <renew-filter>
+            <any>
+                <material>gold block</material>
+            </any>
+    </renew-filter>
+    <replace-filter>
+        <any>
+            <material>air</material>
+        </any>
+    </replace-filter>
+    </renewable>
+</renewables>
+<wools>
+    <wool team="blue-team" color="red" location="-10.5,13.5,-1265.5">
+        <monument>
+            <block>184,5,-1</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="blue" location="83.5,13.5,-1289.5">
+        <monument>
+            <block>4,5,-7</block>
+        </monument>
+    </wool>
+</wools>
+<maxbuildheight>25</maxbuildheight>
+<itemremove>
+    <item>golden carrot</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+        <item amount="12">arrow</item>
+		<item amount="32">smooth brick</item>
+		<item amount="12" damage="1">wood</item>
+    </kill-reward>
+</kill-rewards>
+</map>

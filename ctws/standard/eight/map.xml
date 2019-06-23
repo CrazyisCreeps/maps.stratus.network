@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Eight</name>
+<version>1.0.1</version>
+<objective>Capture the wools and return them to your victory monument.</objective>
+<authors>
+    <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b" contribution="Building, XML, Gameplay"/> <!-- Jexel -->
+</authors>
+<timelock>on</timelock>
+<gamemode>ctw</gamemode>
+<maxbuildheight>20</maxbuildheight>
+<respawn auto="true" delay="2s"/>
+<teams>
+    <team id="red-team"  color="dark red" max="10">Red</team>
+    <team id="blue-team" color="blue" max="10">Blue</team>
+</teams>
+<kits>
+    <kit id="default">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn" parents="default">
+        <clear/>
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" enchantment="durability:2;dig speed:1">iron pickaxe</item>
+        <item slot="3" enchantment="durability:2;dig speed:1">stone axe</item>
+        <item slot="30" enchantment="durability:1">iron spade</item>
+        <item slot="7">golden apple</item>
+        <item slot="8"  amount="64">cooked fish</item>
+        <item slot="28" amount="32">arrow</item>
+        <leggings enchantment="protection_projectile:2" unbreakable="true">iron leggings</leggings>
+    </kit>
+	<kit id="kit-red" parents="spawn">
+        <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+        <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+        <item slot="4" amount="48" damage="14">stained clay</item>
+        <boots enchantment="feather_falling" locked="true" lore="No Shoe Gang!" damage="14">stained clay</boots>
+    </kit>
+    <kit id="kit-blue" parents="spawn">
+        <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+	    <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
+        <item slot="4" amount="48" damage="11">stained clay</item>
+        <boots enchantment="feather_falling" locked="true" lore="No Shoe Gang!" damage="11">stained clay</boots>
+    </kit>
+</kits>
+<!--Spawns-->
+<spawns>
+    <spawn team="red-team"  yaw="-90" region="spawn-red" kit="kit-red"/>
+    <spawn team="blue-team" yaw="90"  region="spawn-blue" kit="kit-blue"/>
+    <default region="spawn-default" kit="default"/>
+</spawns>
+<wools craftable="false">
+    <wool
+        color="pink"
+        team="red-team"
+        location="-47.5,18,0.5"
+        monument="wool-monument-pink"/>
+    <wool
+        color="lime"
+        team="blue-team"
+        location="48.5,18,0.5"
+        monument="wool-monument-lime"/>
+</wools>
+<filters>
+    <material id="only-iron">iron block</material>
+    <material id="only-web">web</material>
+    <material id="only-chest">chest</material>
+    <any id="only-glass">
+        <material>stained glass:5</material>
+        <material>stained glass:6</material>
+    </any>
+    <material id="only-tnt">tnt</material>
+    <not id="no-nether-brick">
+        <material>112</material>
+    </not>
+    <not id="no-void">
+        <void/>
+    </not>
+    <not id="no-red">
+        <team id="only-red">red-team</team>
+    </not>
+    <not id="no-blue">
+        <team id="only-blue">blue-team</team>
+    </not>
+    <any id="woolroom-material">
+        <filter id="only-web"/>
+        <filter id="only-glass"/>
+    </any>
+    <all id="only-red-use">
+        <filter id="only-chest"/>
+        <filter id="only-red"/>
+    </all>
+    <all id="only-blue-use">
+        <filter id="only-chest"/>
+        <filter id="only-blue"/>
+    </all>
+    <all id="only-red-break">
+        <filter id="woolroom-material"/>
+        <filter id="only-red"/>
+    </all>
+    <all id="only-blue-break">
+        <filter id="woolroom-material"/>
+        <filter id="only-blue"/>
+    </all>
+</filters>
+<regions>
+    <point id="spawn-red">48.5,60,0.5</point>
+    <point id="spawn-blue">-47.5,60,0.5</point>
+    <point id="spawn-default">0.5,19.1,-57.5</point>
+    <block id="wool-monument-pink">46,11,0</block>
+    <block id="wool-monument-lime">-46,11,0</block>
+    <union id="spawners">
+        <block id="spawner">0,8,0</block>
+        <block id="pressure-plate">0,9,0</block>
+    </union>
+    <cuboid id="spawn-prot-blue" min="-53,10,6" max="-42,14,-5"/>
+    <cuboid id="spawn-prot-red" min="54,10,-5" max="43,14,6"/>
+    <union id="wool-rooms">
+        <union id="wool-rooms-blue">
+            <cuboid id="wool-room-pink" min="-53,15,6" max="-42,oo,-5"/>
+        </union>
+        <union id="wool-rooms-red">
+            <cuboid id="wool-room-lime" min="54,15,-5" max="43,oo,6"/>
+        </union>
+    </union>
+    <below id="nether-region" y="2"/>
+    <!-- Applies -->
+    <apply enter="only-red" use="only-red-use" region="spawn-prot-red" message="You may not enter or modify the enemy's spawn"/>
+    <apply enter="only-blue" use="only-blue-use" region="spawn-prot-blue" message="You may not enter or modify the enemy's spawn"/>
+    <apply
+        block-break="only-red-break"
+        block-place="never"
+        use="only-red"
+        region="wool-rooms-blue"
+        message="You may not modify this wool room."/>
+    <apply enter="no-blue" region="wool-rooms-blue" message="You may not enter your own wool room."/>
+    <apply
+        block-break="only-blue-break"
+        block-place="never"
+        use="only-blue"
+        region="wool-rooms-red"
+        message="You may not modify this wool room."/>
+    <apply block="never" region="spawners"/>
+    <apply enter="no-red" region="wool-rooms-red" message="You may not enter your own wool room."/>
+    <apply block-break="no-nether-brick" region="nether-region" message="This block is disabled."/>
+    <apply block="no-void" message="You may not modify the void area."/>
+</regions>
+<toolrepair>
+    <tool>iron spade</tool>
+    <tool>iron pickaxe</tool>
+    <tool>bow</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<itemkeep>
+    <item>stone sword</item>
+    <item>golden apple</item>
+    <item>iron chestplate</item>
+    <item>stained glass</item>
+</itemkeep>
+<itemremove>
+    <item>redstone</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+    <item>string</item>
+    <item>chainmail helmet</item>
+    <item>gold boots</item>
+    <item>stained clay</item>
+    <item>cooked fish</item>
+    <item>114</item><!-- nether brick stairs -->
+    <item>112</item><!-- nether brick -->
+</itemremove>
+<tnt>
+    <instantignite>true</instantignite>
+</tnt>
+<item-mods>
+	<rule>
+		<match><material>stone sword</material></match>
+		<modify unbreakable="true"/>
+	</rule>
+	<rule>
+		<match><material>iron chestplate</material></match>
+		<modify unbreakable="true"/>
+	</rule>
+</item-mods>
+<kill-rewards>
+    <kill-reward filter="only-red">
+        <item amount="1" material="golden apple"/>
+        <item amount="8" damage="14" material="stained clay"/>
+    </kill-reward>
+    <kill-reward filter="only-blue">
+        <item amount="1" material="golden apple"/>
+        <item amount="8" damage="11" material="stained clay"/>
+    </kill-reward>
+</kill-rewards>
+</map>

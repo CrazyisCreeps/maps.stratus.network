@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Marketplace</name>
+<version>1.1.0</version>
+<objective>Get the most kills in 6 minutes</objective>
+<authors>
+	<author uuid="105f6a09-f533-412b-93cb-501601763c11"/>
+	<!-- JTerwiesch -->
+</authors>
+<contributors>
+	<contributor uuid="62c41f0e-133d-4192-ad33-f0896f47d23a" contribution="XML"/>
+	<!-- nixter1029 -->
+	<contributor uuid="76cf5483-a7ea-4b5d-8830-385f768c4807" contribution="Interior Design"/>
+	<!-- xannallax33 -->
+</contributors>
+<teams>
+	<team color="dark red" max="16">Red</team>
+	<team color="dark aqua" max="16">Cyan</team>
+</teams>
+<maxbuildheight>75</maxbuildheight>
+<score>
+	<time>6m</time>
+	<kills>1</kills>
+</score>
+<spawns>
+	<spawn team="red" kit="red" yaw="180">
+		<cuboid min="-4.5,21,188.5" max="-6.5,21,185.5"/>
+	</spawn>
+	<spawn team="cyan" kit="cyan" yaw="0">
+		<cuboid min="3.5,21,68.5" max="5.5,21,70.5"/>
+	</spawn>
+	<default yaw="90">
+		<cuboid min="71.5,60,130.5" max="79.5,60,125.5"/>
+	</default>
+</spawns>
+<playable>
+	<rectangle min="63,191" max="-65,64"/>
+</playable>
+<filters>
+	<filter name="only-cyan" parents="deny-players deny-world">
+		<allow>
+			<team>cyan</team>
+		</allow>
+	</filter>
+	<filter name="only-red" parents="deny-players deny-world">
+		<allow>
+			<team>red</team>
+		</allow>
+	</filter>
+</filters>
+<regions>
+	<apply block="deny-all">
+        <rectangle min="oo,oo" max="-oo,-oo"/>
+    </apply>
+</regions>
+<kits>
+	<kit name="spawn">
+		<item slot="0">stone sword</item>
+		<item slot="1">bow</item>
+		<item slot="2" amount="48">arrow</item>
+		<item slot="6">boat</item>
+		<item slot="7">golden apple</item>
+		<item slot="8" amount="64">bread</item>
+		<potion duration="2" amplifier="1">heal</potion>
+		<potion duration="4">damage resistance</potion>
+		<leggings>iron leggings</leggings>
+	</kit>
+	<kit name="red" parents="spawn">
+		<helmet color="993333">leather helmet</helmet>
+		<chestplate color="993333">leather chestplate</chestplate>
+		<boots color="993333">leather boots</boots>
+	</kit>
+	<kit name="cyan" parents="spawn">
+		<helmet color="6699D8">leather helmet</helmet>
+		<chestplate color="6699D8">leather chestplate</chestplate>
+		<boots color="6699D8">leather boots</boots>
+	</kit>
+</kits>
+<killreward>
+	<item>golden apple</item>
+	<item amount="8">arrow</item>
+</killreward>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>stone axe</tool>
+	<tool>bow</tool>
+</toolrepair>
+<itemremove>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>iron leggings</item>
+	<item>leather boots</item>
+	<item>5</item>
+	<item>bread</item>
+	<item>obsidian</item>
+</itemremove>
+</map>

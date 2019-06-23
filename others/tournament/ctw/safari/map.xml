@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Safari</name>
+<version>1.2</version>
+<objective>Capture the enemy team's wools.</objective>
+<gamemode>CTW</gamemode>
+<time results="objective">45m</time>
+<authors>
+	<author uuid="2958ea4c-3501-404e-88cc-12e8632f68cc"/>
+    <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/>
+</authors>
+<contributors>
+	<contributor uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042"/>
+</contributors>
+<broadcasts>
+    <alert after="1s">`rYou may not break `b`lStained Clay</alert>
+</broadcasts>
+<teams>
+    <team id="red-team" color="dark red" max="8" max-overfill="8">Red</team>
+    <team id="blue-team" color="blue" max="8" max-overfill="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="2" enchantment="dig speed:2" unbreakable="true">iron pickaxe</item>
+        <item slot="3" enchantment="dig speed:1" unbreakable="true">iron axe</item>
+		<item slot="4" amount="64">golden carrot</item>
+		<item slot="5">golden apple</item>
+        <item slot="6" amount="64" damage="4">wood</item>
+        <item slot="7" amount="64" damage="4">wood</item>
+        <item slot="8" amount="32">glass</item>
+        <item slot="28">arrow</item>
+        <effect duration="4" amplifier="5">resistance</effect>
+    </kit>
+</kits>
+<wools>
+    <wool team="red-team" color="green" location="-122,15,63">
+        <monument>
+            <block>46,15,37</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="lime" location="-122,15,9">
+        <monument>
+            <block>46,15,35</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="purple" location="36,15,63">
+        <monument>
+            <block>-132,15,37</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="pink" location="36,15,9">
+        <monument>
+            <block>-132,15,35</block>
+        </monument>
+    </wool>
+</wools>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <material id="only-iron">iron block</material>
+    <not id="deny-void">
+        <void/>
+    </not>
+	<not id="bedrock">
+        <any>
+            <material>stained clay:7</material>
+			<material>stained clay:12</material>
+        </any>
+    </not>
+</filters>
+<regions>
+    <apply block-break="only-iron" block-place="never" message="You may only break iron blocks in your spawn!">
+        <region>
+            <cuboid min="-138,11,56" max="-116,0,73"/>
+			<cuboid min="-137,11,56" max="-131,0,50"/>
+            <cuboid min="-138,11,17" max="-116,0,0"/>
+			<cuboid min="-137,11,17" max="-131,0,23"/>
+			<cuboid min="53,11,56" max="31,0,73"/>
+			<cuboid min="52,11,56" max="46,0,50"/>
+            <cuboid min="53,11,17" max="31,0,0"/>
+			<cuboid min="52,11,17" max="46,0,23"/>
+			<cuboid min="-116,0,28" max="-171,oo,45"/>
+            <cuboid min="31,0,28" max="88,oo,45"/>
+        </region>
+    </apply>
+    <apply block="only-red" enter="only-red" message="You may not enter or modify your own wool room!">
+        <region>
+            <cuboid min="-127,24,56" max="-116,15,65"/>
+            <cuboid min="-127,24,17" max="-116,15,8"/>
+        </region>
+    </apply>
+    <apply block="only-blue" enter="only-blue" message="You may not enter or modify your own wool room!">
+        <region>
+            <cuboid min="42,24,17" max="31,15,8"/>
+            <cuboid min="42,24,56" max="31,15,65"/>
+        </region>
+    </apply>
+	<apply block="only-red" enter="only-red" message="You may not enter or modify the enemy spawn!">
+        <region>
+            <cuboid min="38,11,66" max="31,0,73"/>
+            <cuboid min="38,11,7" max="31,0,0"/>
+        </region>
+    </apply>
+    <apply block="only-blue" enter="only-blue" message="You may not enter or modify the enemy spawn!">
+        <region>
+            <cuboid min="-123,11,66" max="-116,0,73"/>
+            <cuboid min="-123,11,7" max="-116,0,0"/>
+        </region>
+    </apply>
+    <apply block-place="deny-void" message="You may not build in the void!">
+        <region>
+            <negative>
+            	<rectangle min="20,73" max="-105,0"/>
+            </negative>
+        </region>
+    </apply>
+	<apply block-break="bedrock"/>
+</regions>
+<spawns>
+    <spawn team="red-team" kit="spawn-kit">
+        <regions yaw="90">
+            <point>80.5,3,36.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="spawn-kit">
+        <regions yaw="-90">
+            <point>-165.5,3,36.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <point>-42.5,26,-15.5</point>
+        </regions>
+    </default>
+</spawns>
+<portals>
+    <!-- Blue Portals -->
+    <portal x="@-134.5" y="@5" z="@17.5" yaw="@-170">
+        <region>
+            <cuboid min="-159.5,4,34.5" max="-161,7,33"/>
+        </region>
+    </portal>
+	<portal x="@-134.5" y="@5" z="@55.5" yaw="@-10">
+        <region>
+            <cuboid min="-159.5,4,38.5" max="-161,7,40"/>
+        </region>
+    </portal>
+	<portal x="@-134.5" y="@5" z="@17.5" yaw="@-170">
+        <region>
+            <cuboid min="-136,5,53" max="-133,8,52"/>
+        </region>
+    </portal>
+	<portal x="@-134.5" y="@5" z="@55.5" yaw="@-10">
+        <region>
+            <cuboid min="-136,5,20" max="-133,8,21"/>
+        </region>
+    </portal>
+	<!-- Red Portals -->
+    <portal x="@49.5" y="@5" z="@55.5" yaw="@10">
+        <region>
+            <cuboid min="74,7,38.5" max="76,4,40"/>
+        </region>
+    </portal>
+	<portal x="@49.5" y="@5" z="@17.5" yaw="@170">
+        <region>
+             <cuboid min="74,7,34.5" max="76,4,33"/>
+        </region>
+    </portal>
+	<portal x="@49.5" y="@5" z="@55.5" yaw="@10">
+        <region>
+            <cuboid min="51,5,20" max="48,8,21"/>
+        </region>
+    </portal>
+	<portal x="@49.5" y="@5" z="@17.5" yaw="@170">
+        <region>
+             <cuboid min="51,5,53" max="48,8,52"/>
+        </region>
+    </portal>
+</portals>
+<respawn delay="7s"/>
+<maxbuildheight>28</maxbuildheight>
+<timelock>on</timelock>
+<crafting>
+    <disable>shield</disable>
+	<disable>minecart</disable>
+	<disable>boat</disable>
+	<disable>boat spruce</disable>
+	<disable>boat birch</disable>
+	<disable>boat jungle</disable>
+	<disable>boat acacia</disable>
+	<disable>boat dark oak</disable>
+</crafting>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>	
+</toolrepair>
+<itemremove>
+	<item>arrow</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>golden carrot</item>
+	<item>string</item>
+</itemremove>
+<killreward>
+    <item>golden apple</item>
+    <item amount="32" damage="4">wood</item>
+	<item amount="16">glass</item>
+</killreward>
+</map>

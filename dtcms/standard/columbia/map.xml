@@ -1,0 +1,151 @@
+<map proto="1.4.2">
+<name>Columbia</name>
+<version>1.0.0</version>
+<objective>Destroy the enemy monument and core</objective>
+<authors>
+    <!--rockymine-->
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6" />
+    <!--yoyo_-->
+    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527" />
+</authors>
+<contributors>
+    <!--samsafari-->
+    <contributor uuid="5c0d744e-2561-4e24-966c-2f5ca4a8f8eb" />
+</contributors>
+<teams>
+    <team id="blue_team" color="blue" max="24" max-overfill="28" plural="true">The Founders</team>
+    <team id="red_team" color="dark red" max="24" max-overfill="28" plural="true">Vox Populi</team>
+</teams>
+<regions>
+    <union id="gold_regen">
+        <cuboid id="blue_gold_regen" min="472,149,391" max="463,143,382" />
+        <cuboid id="red_gold_regen" min="269,149,238" max="278,143,247" />
+    </union>
+    <union id="spawn_islands">
+        <union id="blue_spawn_islands">
+            <rectangle min="428,426" max="477,406" />
+            <!--island-->
+            <rectangle min="451,407" max="442,396" />
+            <!--bridge-->
+        </union>
+        <union id="red_spawn_islands">
+            <rectangle min="313,203" max="264,223" />
+            <!--island-->
+            <rectangle min="290,222" max="299,233" />
+            <!--bridge-->
+        </union>
+    </union>
+    <union id="monuments">
+        <cuboid id="blue_monument" min="394,147,379" max="393,150,378" />
+        <cuboid id="red_monument" min="347,150,251" max="348,147,250" />
+    </union>
+    <union id="cores">
+        <cuboid id="blue_core" min="452,160,311" max="459,165,318" />
+        <cuboid id="red_core" min="289,160,318" max="282,165,311" />
+    </union>
+    <!--artificial void, used to simulate void damage so fall time is shortened -->
+    <below id="void_region" y="1" />
+    <union id="playable">
+        <rectangle min="499,450" max="242,179" />
+        <!--main region-->
+        <above y="100" />
+        <below y="171" />
+    </union>
+    <!--applying to regions-->
+    <apply block="never" region="spawn_islands" />
+    <apply block="never">
+        <region>
+            <negative>
+                <region id="playable" />
+            </negative>
+        </region>
+    </apply>
+    <apply enter="not_blue" region="red_spawn_islands" message="You can't enter the enemy team's spawn" />
+    <apply enter="not_red" region="blue_spawn_islands" message="You can't enter the enemy team's spawn" />
+</regions>
+<filters>
+    <not id="not_blue">
+        <team>blue_team</team>
+    </not>
+    <not id="not_red">
+        <team>red_team</team>
+    </not>
+</filters>
+<renewables>
+    <renewable region="gold_regen" rate="3.5" grow="true" particles="true" sound="true">
+        <renew-filter>
+            <material>gold block</material>
+        </renew-filter>
+    </renewable>
+</renewables>
+<cores material="obsidian" leak="4" mode-changes="true">
+    <core team="blue_team" region="blue_core" />
+    <core team="red_team" region="red_core" />
+</cores>
+<destroyables name="Monument" materials="obsidian" mode-changes="true">
+    <destroyable owner="blue_team" region="blue_monument" />
+    <destroyable owner="red_team" region="red_monument" />
+</destroyables>
+<modes>
+    <mode after="10m" material="gold block" />
+    <mode after="30m" material="glass" />
+</modes>
+<kits>
+    <kit id="parent_kit" force="true">
+        <item slot="0" material="stone sword" unbreakable="true" />
+        <item slot="1" material="bow" unbreakable="true" />
+        <item slot="2" material="diamond pickaxe" unbreakable="true" />
+        <item slot="3" material="diamond axe" unbreakable="true" />
+        <item slot="4" material="log" amount="32" />
+        <item slot="26" amount="64" material="arrow" />
+        <leggings material="iron leggings" />
+    </kit>
+    <kit id="blue_kit" parents="parent_kit">
+        <helmet color="0066cc" material="leather helmet" />
+        <chestplate color="0066cc" material="leather chestplate" />
+        <boots color="0066cc" material="leather boots" />
+    </kit>
+    <kit id="red_kit" parents="parent_kit">
+        <helmet color="cd0000" material="leather helmet" />
+        <chestplate color="cd0000" material="leather chestplate" />
+        <boots color="cd0000" material="leather boots" />
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue_team" kit="blue_kit">
+        <regions yaw="-135">
+            <point>436.5,145,417.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red_team" kit="red_kit">
+        <regions yaw="45">
+            <point>304.5,145,211.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <point>354.5,9,314.5</point>
+        </regions>
+    </default>
+</spawns>
+<portals>
+    <!--teleport players further into void so to speed up void death-->
+    <portal y="-50" observers="never" region="void_region" sound="false" smooth="true" />
+</portals>
+<itemremove>
+    <item>obsidian</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>iron block</item>
+    <item>arrow</item>
+</itemremove>
+<toolrepair>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron leggings</tool>
+</toolrepair>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

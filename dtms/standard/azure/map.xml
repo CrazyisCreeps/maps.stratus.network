@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Azure</name>
+<version>1.1.0</version>
+<objective>Destroy the other teams monuments to win!</objective>
+<!-- Major map authors. -->
+<authors>
+    <author uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b"/> <!-- _3Each -->
+    <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9"/> <!-- Obelistics -->
+</authors>
+<gamemode>dtm</gamemode>
+<teams>
+   <team id="red" color="dark red" max="18">Red</team>
+   <team id="blue" color="blue" max="18">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="-90">
+            <cuboid min="-93.5,16.5,318.5" max="-92.5,16.5,321.5"/>
+        </regions>
+		<regions yaw="90">
+            <cuboid min="-95.5,16.5,318.5" max="-96.5,16.5,321.5"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="-90">
+            <cuboid min="-93.5,16.5,173.5" max="-92.5,16.5,176.5"/>
+        </regions>
+		<regions yaw="90">
+            <cuboid min="-95.5,16.5,176.5" max="-96.5,16.5,173.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions angle="-187.5,35.5,247">
+        	<cylinder base="-192.5,34,247.5" radius="3" height="0" />
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" enchantment="infinity" unbreakable="true"/>
+        <item slot="2" material="stone pickaxe" enchantment="dig_speed:3" unbreakable="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+		<item slot="4" material="wood" amount="48"/>
+        <item slot="5" material="glass" amount="24"/>
+		<item slot="7" material="golden apple" amount="1"/>
+        <item slot="8" material="cooked beef" amount="64"/>
+        <item slot="28" material="arrow" amount="1"/>
+        <effect duration="5s" amplifier="5">resistance</effect>
+        <leggings>chainmail leggings</leggings>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <chestplate color="cd0000">leather chestplate</chestplate>
+        <boots color="cd0000">leather boots</boots>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <chestplate color="0066cc">leather chestplate</chestplate>
+        <boots color="0066cc">leather boots</boots>
+    </kit>
+</kits>
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+    <not id="no-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+	<union id="playable">
+		<rectangle min="-28.5,209.5" max="-79.5,285.5"/>
+		<rectangle min="-109.5,209.5" max="-160.5,285.5"/>
+	</union>
+	<union id="spawn-break">
+		<cuboid min="-109.5,6,313.5" max="-80.5,oo,326.5"/>
+		<cuboid min="-109.5,6,168.5" max="-80.5,oo,181.5"/>
+	</union>
+	<cuboid id="red-spawn" min="-105.5,13,323.5" max="-83.5,oo,306.5"/>
+	<cuboid id="blue-spawn" min="-105.5,13,171.5" max="-83.5,oo,178.5"/>
+	<apply block="never" message="You may not break blocks around spawn" region="spawn-break"/>
+	<apply enter="only-red" message="You may not enter the other teams spawn" region="red-spawn"/>
+	<apply enter="only-blue" message="You may not enter the other teams spawn" region="blue-spawn"/>
+	<apply block="always" region="playable"/>
+	<apply block-place="no-void" message="You may not place blocks in this area"/>
+</regions>
+<destroyables name="West Monument" materials="gold block" completion="100%" mode-changes="true" show-progress="true">
+    <destroyable owner="blue">
+		<region>
+			<cuboid min="-135.5,13,179.5" max="-141.5,23,185.5"/>
+		</region>
+    </destroyable>
+    <destroyable owner="red">
+		<region>
+			<cuboid min="-135.5,13.5,309.5" max="-141.5,23,315.5"/>
+		</region>
+    </destroyable>
+</destroyables>
+<destroyables name="East Monument" materials="gold block" completion="100%" mode-changes="true" show-progress="true">
+    <destroyable owner="blue">
+		<region>
+			<cuboid min="-47.5,13,179.5" max="-53.5,23,185.5"/>
+		</region>
+    </destroyable>
+    <destroyable owner="red">
+		<region>
+			<cuboid min="-47.5,13.5,309.5" max="-53.5,23,315.5"/>
+		</region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="15m" material="coal block" name="`8Coal `0Monument `6Mode"/>
+    <mode after="30m" material="stained clay" name="`FStained `FClay `0Monument `6Mode"/>
+</modes>
+<maxbuildheight>28</maxbuildheight>
+<killreward>
+    <item amount="12">wood</item>
+    <item amount="1">golden apple</item>
+</killreward>
+<itemremove>
+    <item>cooked beef</item>
+    <item>flint</item>
+    <item>stained clay</item>
+    <item>leaves</item>
+    <item>37</item>
+    <item>38</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>string</item>
+    <item>seeds</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>obsidian</item>
+    <item>gold block</item>
+    <item>coal block</item>
+    <item>beacon</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+</map>

@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Twilight Zone: Redux</name>
+<version>1.0.0</version>
+<objective>Kill the enemy players as much as you can before time runs out.</objective>
+<authors>
+    <author uuid="b8e37008-a61d-4452-9375-fb9872f5bfea" contribution="Map planner, terraforming, and ideas"/> <!-- daeshik -->
+</authors>
+<contributors>
+    <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="XML"/> <!-- Dinner1111 -->
+    <contributor contribution="Ideas, planning, and spawn kits">pelll</contributor> <!-- pelll -->
+    <contributor contribution="Ideas, and buildings">UnPhair</contributor> <!-- UnPhair -->
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="40">Red</team>
+    <team id="blue" color="blue" max="40">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <game-mode>adventure</game-mode>
+        <item slot="0" enchantment="damage all:1">diamond sword</item>
+        <item slot="1" enchantment="arrow damage:1">bow</item>
+        <item slot="2" damage="16421">potion</item> <!-- Splash of Healing II -->
+        <item slot="3" damage="16421">potion</item> <!-- Splash of Healing II -->
+        <item slot="4" damage="16421">potion</item> <!-- Splash of Healing II -->
+        <item slot="5" damage="8226">potion</item> <!-- Speed II -->
+        <item slot="7" amount="2">368</item>
+        <item slot="8" amount="32">cooked beef</item>
+        <item slot="28" amount="16">arrow</item>
+        <item slot="30" damage="8193">potion</item> <!-- Regen -->
+        <item slot="31" damage="8193">potion</item> <!-- Regen -->
+        <item slot="32" damage="8226">potion</item> <!-- Speed II -->
+        <item slot="13" damage="16394">potion</item> <!-- Splash of slowness -->
+        <item slot="22" damage="16394">potion</item> <!-- Splash of slowness -->
+        <item slot="14" damage="16394">potion</item> <!-- Splash of slowness -->
+        <item slot="23" damage="16394">potion</item> <!-- Splash of slowness -->
+        <helmet material="diamond helmet" unbreakable="true"/>
+        <chestplate material="diamond chestplate" unbreakable="true"/>
+        <leggings material="diamond leggings" unbreakable="true"/>
+        <boots enchantment="protection fall:1" material="diamond boots" unbreakable="true"/>
+        <effect amplifier="4" duration="5">heal</effect>
+        <effect amplifier="1" duration="15">increase damage</effect>
+    </kit>
+</kits>
+<killreward>
+    <item damage="16421">potion</item> <!-- Splash of Healing II -->
+    <item damage="8226">potion</item> <!-- Speed II -->
+    <item damage="8193">potion</item> <!-- Regen -->
+    <item damage="16388">potion</item> <!-- Splash Poison :33 -->
+    <item damage="16394">potion</item> <!-- Splash of slowness -->
+</killreward>
+<filters>
+    <any id="no-brew">
+        <material>brewing stand</material>
+    </any>
+</filters>
+<spawns>
+    <spawn team="red" kit="spawn" yaw="0" region="spawn-red"/>
+    <spawn team="blue" kit="spawn" yaw="180" region="spawn-blue"/>
+    <default yaw="270" region="spawn-obs"/>
+</spawns>
+<regions>
+    <cuboid id="spawn-red" min="190,18,-97" max="182,18,-101"/>
+    <cuboid id="spawn-blue" min="50,18,96" max="58,18,100"/>
+    <cuboid id="spawn-obs" min="1,55,-0" max="-0,55,1"/>
+    <rectangle id="playable" min="32.0,-118.0" max="209.0,117.0"/>
+    <apply block="never" region="playable"/>
+    <apply use="no-brew" region="everywhere" message="You may not interact with this material"/>
+</regions>
+<toolrepair>
+    <tool>diamond sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>diamond helmet</item>
+    <item>diamond chestplate</item>
+    <item>diamond leggings</item>
+    <item>diamond boots</item>
+    <item>cooked beef</item>
+    <item>glass bottle</item>
+    <item>ender pearl</item>
+    <item>potion</item>
+</itemremove>
+<timelock>on</timelock>
+<score>
+    <kills>3</kills>
+    <deaths>0</deaths>
+</score>
+<time>8m</time>
+</map>

@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Glina</name>
+<version>1.2.2</version>
+<objective>
+Captured the enemy's two wools and place them on your victory monument
+</objective>
+<authors>
+    <author uuid="205d1aad-c619-499b-9885-b91c372b1c13"/>
+    <author uuid="48924ea3-3aad-4e16-838c-368d8d9e0a25"/>
+</authors>
+<teams>
+    <team color="blue" max="20" id="blue">Blue Team</team>
+    <team color="dark red" max="20" id="red">Red Team</team>
+</teams>
+<spawns>
+    <spawn kit="spawn" team="blue">
+        <regions yaw="-90">
+            <block name="blue-spawn-point">14.5,15,-9.5</block>
+        </regions>
+    </spawn>
+    <spawn kit="spawn" team="red">
+        <regions yaw="90">
+            <block id="red-spawn-point">189.5,15,-4.5</block>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <block id="obs-spawn">100.5,37,-62.5</block>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true" enchantment="durability:3;dig speed:1">iron pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="durability:3;dig speed:2">iron axe</item>
+        <item slot="4" amount="48">wood</item>
+        <item slot="5" amount="32">glass</item>
+        <item slot="8" amount="64">golden carrot</item>
+        <item slot="28" amount="32">arrow</item>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <effect amplifier="10" duration="5">damage resistance</effect>
+    </kit>
+</kits>
+<filters>
+    <any id="only-blue">
+        <team>blue</team>
+    </any>
+    <any id="only-red">
+        <team>red</team>
+    </any>
+    <not id="no-void">
+        <void/>
+    </not>
+	<all id="only-iron">
+		<material>iron block</material>
+	</all>
+</filters>
+<regions>
+    <!--   Wool rooms blue need to enter   -->
+    <union id="blue-wool-rooms">
+        <rectangle id="pink-wool" min="212,37" max="226,48"/>
+        <rectangle id="purple-wool" min="213,-58" max="226,-46"/>
+    </union>
+    <!--   Wool rooms red need to enter   -->
+    <union id="red-wool-rooms">
+        <rectangle id="lime-wool" min="-23,-63" max="-10,-52"/>
+        <rectangle id="yellow-wool" min="-23,44" max="-10,33"/>
+    </union>
+	<!-- Spawn Stuff -->
+	<union id ="spawns">
+		<rectangle id="spawn-b" min="1.5,-15.5" max="25.5,-2.5"/>
+        <rectangle id="spawn-r" min="177.5,2.5" max="201.5,-11.5"/>
+	</union>
+	<union id ="spawn-enter">
+		<cuboid id="spawn-enter-r" min="2.5,14,-15.5" max="25.5,oo,-3.5"/>
+        <cuboid id="spawn-enter-b" min="177.5,14,1.5" max="201.5,oo,-10.5"/>
+	</union>
+	<!-- Weakness Potion -->
+	<apply block-break="only-iron" block-place="only-iron" message="You may only break iron blocks inside the spawns" region="spawns"/>
+	<apply enter="only-red" message="You may not enter the enemy spawn" region="spawn-enter-b"/>
+	<apply enter="only-blue" message="You may not enter the enemy spawn" region="spawn-enter-r"/>
+	<apply enter="only-red" message="You may not enter or modify your own wool rooms!">
+        <region><region id="red-wool-rooms"/></region>
+    </apply>
+    <apply block="only-red" message="You may not enter or modify your own wool rooms!">
+        <region><region id="red-wool-rooms"/></region>
+    </apply>
+    <apply enter="only-blue" message="You may not enter or modify your own wool rooms!">
+        <region><region id="blue-wool-rooms"/></region>
+    </apply>
+    <apply block="only-blue" message="You may not enter or modify your own wool rooms!">
+        <region><region id="blue-wool-rooms"/></region>
+    </apply>
+	<apply block="never" message="Height limit reached!">
+    <region><cuboid id="height-limit" min="-oo,24,-oo" max="oo,oo,oo"/></region>
+    </apply>
+    <apply block="no-void" message="You may not build in the void">
+        <region>
+        <negative>
+            <rectangle id="frontline" min="26,16" max="158,-30"/>
+        </negative>
+        </region>
+    </apply>
+</regions>
+<renewables>
+    <renewable rate=".5" grow="false" particles="true" sound="false">
+        <regions>
+            <cuboid id="blue-iron"  min="-19,15,-17" max="6,22,-2"/>
+            <cuboid id="red-iron"  min="178,15,-11" max="201,23,3"/>
+        </regions>
+        <renew>iron block</renew>
+        <replace>air</replace>
+    </renewable>
+</renewables>
+<wools>
+    <wool team="blue" color="pink" location="219.5,11,45.5">
+        <monument><block>15.5,10,-9.5</block></monument>
+    </wool>
+    <wool team="blue" color="purple" location="219.5,11,-54.5">
+        <monument><block>11.5,10,-9.5</block></monument>
+    </wool>
+    <wool team="red" color="lime" location="-36.5,11,-59.5">
+        <monument><block>191.5,10,-4.5</block></monument>
+    </wool>
+    <wool team="red" color="yellow" location="-36.5,1,40.5">
+        <monument><block>187.5,10,-4.5</block></monument>
+    </wool>
+</wools>
+<killreward>
+    <item amount="1">golden apple</item>
+    <item amount="8">arrow</item>
+</killreward>
+<itemremove>
+    <item>string</item>
+    <item>golden carrot</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>chainmail chestplate</item>
+    <item>bucket</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+</map>

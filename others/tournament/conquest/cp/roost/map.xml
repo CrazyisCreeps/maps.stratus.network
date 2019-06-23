@@ -1,0 +1,120 @@
+<map proto="1.4.2">
+<name>Roost</name>
+<version>1.1</version>
+<objective>Be the first team to reach 750 points!</objective>
+<authors>
+    <author uuid="9116d3fa-1400-4ada-aecd-2eae1d73e383"/> <!-- Xuph -->
+    <author uuid="0b8f95fa-0f40-4f28-9fd0-b8e243bb6800"/> <!-- Fouled -->
+</authors>
+<contributors>
+    <contributor uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9" contribution="New XML"/> <!-- Xerocoles -->
+</contributors>
+<teams>
+    <team id="blue-team" color="blue" max="5">Blue</team>
+    <team id="red-team" color="dark red" max="5">Red</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="8" amount="20" material="arrow"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" enchantment="protection fall:2" material="iron boots"/>
+        <effect duration="2" amplifier="10">resistance</effect>
+        <effect duration="2" amplifier="10">regeneration</effect>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <helmet unbreakable="true" color="334CB2" material="leather helmet"/>
+        <leggings unbreakable="true" color="334CB2" material="leather leggings"/>
+    </kit>
+    <kit id="red-kit"  parents="spawn">
+        <helmet unbreakable="true" color="993333" material="leather helmet"/>
+        <leggings unbreakable="true" color="993333" material="leather leggings"/>
+    </kit>
+</kits>
+<spawns>
+    <default yaw="90">
+        <region>
+            <cuboid min="200.5,56,49.5" max="198.5,56,47.5"/>
+        </region>
+    </default>
+    <spawn team="red-team" kit="red-kit" yaw="45">
+        <region>
+            <cuboid min="190.5,26,-18.5" max="188.5,26,-16.5"/>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit" yaw="135">
+        <region>
+            <cuboid min="190.5,26,117.5" max="188.5,26,115.5"/>
+        </region>
+    </spawn>
+</spawns>
+<regions>
+    <apply block="never"/>
+    <union id="mid-hill">
+        <cuboid min="171,15,53" max="164,17,46"/>
+        <cuboid min="165,15,45" max="170,17,54"/>
+        <cuboid min="172,15,52" max="163,17,47"/>
+    </union>
+    <union id="a-hill">
+        <cuboid min="192,23,28" max="197,25,21"/>
+        <cuboid min="198,23,22" max="191,25,27"/>
+    </union>
+    <union id="b-hill">
+        <cuboid min="191,23,72" max="198,25,77"/>
+        <cuboid min="197,23,78" max="192,25,71"/>
+    </union>
+</regions>
+<control-points capture-time="5s" incremental="true" neutral-state="true" show-progress="true" required="false"
+scaled-time="true">
+    <control-point name="Point A" points="1">
+        <capture>
+            <region id="a-hill"/>
+        </capture>
+        <progress>
+            <region id="a-hill"/>
+        </progress>
+    </control-point>
+    <control-point name="Middle" points="1">
+        <capture>
+            <region id="mid-hill"/>
+        </capture>
+        <progress>
+            <region id="mid-hill"/>
+        </progress>
+    </control-point>
+     <control-point name="Point B" points="1">
+        <capture>
+            <region id="b-hill"/>
+        </capture>
+        <progress>
+            <region id="b-hill"/>
+        </progress>
+    </control-point>
+</control-points>
+<kill-rewards>
+    <kill-reward>
+        <item>golden apple</item>
+    </kill-reward>
+    <kill-reward>
+        <item amount="8">arrow</item>
+    </kill-reward>
+</kill-rewards>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<score>
+    <limit>750</limit>
+</score>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<respawn delay="4s"/>
+</map>

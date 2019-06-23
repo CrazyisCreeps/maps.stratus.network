@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Poise</name>
+<version>1.0.0</version>
+<objective>Capture the other team's wools to win.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+		<author uuid="7dee9c20-f1c4-4577-bf57-6f392e398b6d" contribution="Design and aesthetics"/> <!-- Crafthappy_ -->
+		<author uuid="a63de09d-6fa9-436f-9070-26f5e9a4d27b" contribution="Aesthetics and gameplay editing"/> <!-- Duckrider455 -->
+</authors>
+<contributors>
+		<contributor uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="XML"/> <!-- Crazy_ -->
+</contributors>
+<teams>
+		<team id="blue" color="blue" max="8">Blue</team>
+		<team id="green" color="green" max="8">Green</team>
+</teams>
+<kits>
+		<kit id="play">
+				<item unbreakable="true" slot="0">iron sword</item>
+				<item unbreakable="true" slot="1">bow</item>
+				<item unbreakable="true" slot="2" enchantment="efficiency:1">iron pickaxe</item>
+				<item slot="3" amount="32" damage="2">log</item>
+				<item slot="4" amount="64">glass</item>
+				<item slot="7">golden apple</item>
+				<item slot="8" amount="64">golden carrot</item>
+				<item slot="28" amount="32">arrow</item>
+				<effect duration="10" amplifier="5">damage resistance</effect>
+				<effect duration="10" amplifier="5">haste</effect>
+		</kit>
+</kits>
+<spawns>
+		<spawn kit="play" team="blue" yaw="180">
+				<regions>
+						<point>-70,2.5,234</point>
+				</regions>
+		</spawn>
+		<spawn kit="play" team="green" yaw="0">
+				<regions>
+						<point>-191,2.5,145</point>
+				</regions>
+		</spawn>
+		<default yaw="180">
+				<regions>
+						<cuboid min="-132,51,191" max="-129,52,188"/>
+				</regions>
+		</default>
+</spawns>
+<wools team="blue">
+    <wool color="yellow" location="-196,10,113">
+        <monument><block>-87,9,228</block></monument>
+    </wool>
+    <wool color="orange" location="-84,18,146">
+        <monument><block>-87,9,226</block></monument>
+    </wool>
+</wools>
+<wools team="green">
+    <wool color="red" location="-65,10,226">
+        <monument><block>-174,9,151</block></monument>
+    </wool>
+    <wool color="purple" location="-117,18,233">
+        <monument><block>-174,9,153</block></monument>
+    </wool>
+</wools>
+<regions>
+	<union id="map">
+		<union id="bridge">
+				<!-- Green Side -->
+				<rectangle min="-188,142" max="-194,120"/>
+				<rectangle min="-170,134" max="-178,126"/>
+				<rectangle min="-152,162" max="-144,173"/>
+				<rectangle min="-116,163" max="-109,173"/>
+				<!-- Blue Side -->
+				<rectangle min="-72,238" max="-66,260"/>
+				<rectangle min="-82,254" max="-90,246"/>
+				<rectangle min="-108,206" max="-116,218"/>
+				<rectangle min="-144,218" max="-152,206"/>
+				<!-- Middle -->
+				<rectangle min="-162,174" max="-98,206"/>
+		</union>
+		<union id="lanes">
+				<!-- Anything with no y=0 on Green side -->
+				<cuboid min="-162,1,174" max="-152,oo,162"/>
+				<cuboid min="-144,1,174" max="-134,oo,155"/>
+				<cuboid min="-126,7,174" max="-116,oo,155"/>
+				<cuboid min="-109,7,174" max="-98,oo,162"/>
+				<cuboid min="-116,8,156" max="-126,oo,125"/>
+				<cuboid min="-117,8,141" max="-107,oo,151"/>
+				<cuboid min="-109,9,141" max="-101,oo,151"/>
+				<cuboid min="-102,10,141" max="-93,oo,151"/>
+				<cuboid min="-93,11,153" max="-80,oo,139"/>
+				<cuboid min="-170,1,118" max="-179,oo,108"/>
+				<cuboid min="-178,2,118" max="-187,oo,108"/>
+				<cuboid min="-186,3,106" max="-199,oo,120"/>
+				<!-- Lower this past y=16? -->
+				<cuboid min="-142,16,108" max="-139,oo,94"/>
+				<cuboid min="-151,16,108" max="-153,oo,94"/>
+				<!-- Anything with no y=0 on Blue side -->
+				<cuboid min="-109,1,206" max="-98,oo,218"/>
+				<cuboid min="-127,1,206" max="-116,oo,224"/>
+				<cuboid min="-152,7,206" max="-162,oo,218"/>
+				<cuboid min="-144,7,206" max="-134,oo,224"/>
+				<cuboid min="-144,8,254" max="-134,oo,223"/>
+				<cuboid min="-144,8,239" max="-154,oo,229"/>
+				<cuboid min="-153,9,239" max="-161,oo,229"/>
+				<cuboid min="-160,10,239" max="-168,oo,298"/>
+				<cuboid min="-167,11,241" max="-180,oo,227"/>
+				<cuboid min="-91,1,262" max="-82,oo,272"/>
+				<cuboid min="-83,2,262" max="-74,oo,272"/>
+				<cuboid min="-74,3,260" max="-61,oo,274"/>
+				<!-- Lower this past y=16? -->
+				<cuboid min="-119,16,271" max="-121,oo,286"/>
+				<cuboid min="-110,16,271" max="-107,oo,286"/>
+		</union>
+	</union>
+		<union id="green-wools">
+			<!-- Mid supply room -->
+			<cuboid min="-139,16,105" max="-153,oo,94"/>
+			<!-- Yellow wool -->
+			<rectangle min="-186,120" max="-199,106"/>
+			<!-- Orange wool -->
+			<rectangle min="-93,139" max="-80,153"/>
+		</union>
+		<union id="blue-wools">
+			<!-- Mid suply room -->
+			<cuboid min="-121,16,275" max="-107,oo,286"/>
+			<!-- Red wool -->
+			<rectangle min="-74,260" max="-61,274"/>
+			<!-- Purple wool -->
+			<rectangle min="-180,227" max="-167,241"/>
+		</union>
+		<!-- The spawn structure -->
+		<union id="green-spawn">
+			<cuboid min="-194,0,159" max="-171,13,142"/>
+			<cuboid min="-188,13,159" max="-171,27,142"/>
+		</union>
+		<union id="blue-spawn">
+			<cuboid min="-66,0,220" max="-90,13,237"/>
+			<cuboid min="-72,13,220" max="-90,27,237"/>
+		</union>
+		<!-- This is the area the other team can't enter -->
+		<union id="green-spawn-bottom">
+			<cuboid min="-185,0,157" max="-193,8,152"/>
+			<cuboid min="-189,0,152" max="-193,8,143"/>
+		</union>
+		<union id="blue-spawn-bottom">
+			<cuboid min="-75,0,222" max="-68,8,227"/>
+			<cuboid min="-72,0,227" max="-68,8,236"/>
+		</union>
+		<union id="spawners">
+				<cuboid id="spawner-west" min="-154,10,189" max="-152,11,191"/>
+				<cuboid id="spawner-gapple" min="-129,10,189" max="-131,11,191"/>
+				<cuboid id="spawner-east" min="-106,10,189" max="-108,11,191"/>
+		</union>
+		<negative id="no-bridge"><region id="map"/></negative>
+		<apply block="blue-bottom-spawn-prot" message="Blue may only break iron down here!" region="blue-spawn-bottom"/>
+		<apply block="green-bottom-spawn-prot" message="Green may only break iron down here!" region="green-spawn-bottom"/>
+		<apply block="spawn-prot" message="You may only break and place certain blocks in spawn!" region="green-spawn"/>
+		<apply block="spawn-prot" message="You may only break and place certain blocks in spawn!" region="blue-spawn"/>
+		<apply enter="only-green" region="green-spawn-bottom" message="You may not enter this area of the other team's spawn!"/>
+		<apply enter="only-blue" region="blue-spawn-bottom" message="You may not enter this area of the other team's spawn!"/>
+		<apply enter="only-blue" region="green-wools" message="You may not enter the other team's wool and supply rooms!"/>
+		<apply enter="only-green" region="blue-wools" message="You may not enter the other team's wool and supply rooms!"/>
+		<apply block="green-webs" message="You may not interact with the other team's wool and supply rooms!" region="blue-wools"/>
+		<apply block="blue-webs" message="You may not interact with the other team's wool and supply rooms!" region="green-wools"/>
+		<apply block="never" message="You can't destroy spawners!" region="spawners"/>
+		<apply block="no-void" message="You may not edit the void!" region="no-bridge"/>
+</regions>
+<filters>
+		<team id="only-blue">blue</team>
+	    <team id="only-green">green</team>
+	    <all id="spawn-prot">
+	    	<any>
+		    	<material>iron block</material>
+		    	<material>wool</material>
+		    	<material>wood</material>
+		    	<material>log</material>
+		    	<material>glass</material>
+		    </any>
+	    </all>
+	    <all id="blue-bottom-spawn-prot">
+	    		<team>blue</team>
+	    		<material>iron block</material>
+	    </all>
+	    <all id="green-bottom-spawn-prot">
+	    		<team>green</team>
+	    		<material>iron block</material>
+	    </all>
+	    <all id="blue-webs">
+	    		<team>blue</team>
+	    		<material>web</material>
+	    </all>
+	    <all id="green-webs">
+		    	<team>green</team>
+		    	<material>web</material>
+	    </all>
+	    <not id="no-void">
+	        <void/>
+	    </not>
+</filters>
+<maxbuildheight>24</maxbuildheight>
+<itemremove>
+		<item>iron sword</item>
+		<item>bow</item>
+		<item>iron pickaxe</item>
+		<item>golden carrot</item>
+</itemremove>
+</map>

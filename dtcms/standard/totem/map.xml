@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Totem</name>
+<version>1.1.1</version>
+<objective>Destroy the enemies monument and core.</objective>
+<authors>
+    <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="Map building and XML"/>
+    <!--Obelistics-->
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Map design and building"/>
+    <!--Rockymine-->
+</authors>
+<teams>
+    <team id="red-team" color="dark_red" max="20">Red</team>
+    <team id="blue-team" color="blue" max="20">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true" enchantment="infinity"/>
+        <item slot="2" material="diamond pickaxe" unbreakeble="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="4" material="wood" damage="2" amount="48"/>
+        <item slot="6" material="golden apple"/>
+        <item slot="7" material="bread" amount="64"/>
+        <item slot="28" material="arrow" amount="1"/>
+        <item slot="8" material="shears" unbreakable="true" amplifier="1" enchantment="efficiency"/>
+        <effect duration="3s" amplifier="5">resistance</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <chestplate material="leather chestplate" color="993333" unbreakable="true" prevent-sharing="true"/>
+        <boots material="leather boots" color="993333" unbreakable="true" prevent-sharing="true"/>
+        <helmet material="leather helmet" color="993333" unbreakable="true" prevent-sharing="true"/>
+        <item slot="5" material="stained clay" damage="14" amount="24"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <chestplate material="leather chestplate" color="334CB2" unbreakable="true" prevent-sharing="true"/>
+        <boots material="leather boots" color="334CB2" unbreakable="true" prevent-sharing="true"/>
+        <helmet material="leather helmet" color="334CB2" unbreakable="true" prevent-sharing="true"/>
+        <item slot="5" material="stained clay" damage="11" amount="24"/>
+    </kit>
+</kits>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="no-void">
+        <void/>
+    </not>
+    <all id="iron-only">
+        <material>iron block</material>
+    </all>
+    <any id="leaves">
+        <material>leaves</material>
+        <material>log</material>
+    </any>
+</filters>
+<regions>
+    <union id="build-region">
+        <rectangle min="-208,-189" max="-220,-177"/>
+        <rectangle min="-232,-177" max="-220,-153"/>
+        <rectangle min="-232,-177" max="-244,-189"/>
+        <rectangle min="-232,-189" max="-220,-195"/>
+        <rectangle min="-232,-129" max="-256,-141"/>
+        <rectangle min="-208,-93" max="-232,-81"/>
+        <rectangle min="-232,-69" max="-244,-45"/>
+        <rectangle min="-232,-45" max="-220,-33"/>
+        <rectangle min="-232,-33" max="-244,-27"/>
+        <rectangle min="-244,-33" max="-256,-45"/>
+    </union>
+    <union id="red-block-region">
+        <rectangle min="-196,-45" max="-184,-21"/>
+    </union>
+    <union id="red-spawn-region">
+        <rectangle min="-160,-21" max="-184,-45"/>
+    </union>
+    <union id="blue-block-region">
+        <rectangle min="-267,-177" max="-280,-201"/>
+    </union>
+    <union id="blue-spawn-region">
+        <rectangle min="-280,-177" max="-304,-201"/>
+    </union>
+    <apply block-place="never" block-break="iron-only" region="blue-spawn-region" message="You can only break iron blocks in spawn."/>
+    <apply block-place="never" block-break="iron-only" region="red-spawn-region" message="You can only break iron blocks in spawn."/>
+    <apply block-break="always" block-place="always" region="build-region"/>
+    <apply block-break="always" region="everywhere"/>
+    <apply block="no-void" message="You cannot modify the void"/>
+    <apply enter="only-blue" region="blue-spawn-region" message="You cannot enter Blue spawn"/>
+    <apply enter="only-red" region="red-spawn-region" message="You cannot enter Red spawn"/>
+</regions>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="135">
+            <cuboid min="-178.5,15,-28.5" max="-175.5,15,-25.5"/>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="-45">
+            <cuboid min="-285.5,15,-193.5" max="-288.5,15,-196.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-45">
+            <cylinder base="-232,56,-111" radius="3" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<destroyables name="Monument" materials="emerald block" completion="100%">
+    <destroyable owner="red-team">
+        <region>
+            <cuboid min="-213,23,-5" max="-211,20,-3"/>
+        </region>
+    </destroyable>
+    <destroyable owner="blue-team">
+        <region>
+            <cuboid min="-251,23,-217" max="-253,20,-219"/>
+        </region>
+    </destroyable>
+</destroyables>
+<cores material="obsidian" leak="4" mode-changes="true">
+    <core team="blue-team">
+        <region>
+            <cuboid min="-200,18,-169" max="-204,14,-173"/>
+        </region>
+    </core>
+    <core team="red-team">
+        <region>
+            <cuboid min="-264,18,-53" max="-260,14,-49"/>
+        </region>
+    </core>
+</cores>
+<kill-reward>
+    <item material="golden apple"/>
+    <item material="wood" damage="2" amount="16"/>
+</kill-reward>
+<itemremove>
+    <item>stone</item>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron axe</item>
+    <item>leaves</item>
+    <item>31</item>
+    <item>seeds</item>
+    <item>stained clay</item>
+    <item>emerald block</item>
+    <item>dirt</item>
+    <item>grass</item>
+    <item>step</item>
+    <item>double step</item>
+    <item>wool</item>
+    <item>clay</item>
+    <item>coal block</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>leather helmet</item>
+    <item>shears</item>
+    <item>obsidian</item>
+    <item>diamond pickaxe</item>
+    <item>clay ball</item>
+    <item>bread</item>
+</itemremove>
+<timelock>on</timelock>
+<maxbuildheight>40</maxbuildheight>
+<broadcasts>
+    <tip after="1m" every="4m">Iron can only be found next to spawn</tip>
+</broadcasts>
+</map>

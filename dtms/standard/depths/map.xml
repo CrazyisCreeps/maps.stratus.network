@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Depths</name>
+<version>1.0.2</version>
+<objective>Destory the enemies 2 monuments</objective>
+<!--Authors-->
+<authors>
+	<author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9"/><!--Obe-->
+</authors>
+<!--Teams-->
+<teams>
+	<team id="red-team" color="dark red" max="20">Red</team>
+	<team id="blue-team" color="blue" max="20">Blue</team>
+</teams>
+<!--Filters-->
+<filters>
+	<team id="only-red">red-team</team>
+	<team id="only-blue">blue-team</team>
+	<deny id="no-void"><void/></deny>
+	<any id="only-gold">
+		<material>gold block</material>
+	</any>
+</filters>
+<!--Regions-->
+<regions>
+	<union id="red-right-monument">
+		<cuboid min="988,22,-1029" max="985,29,-1026"/>
+	</union>
+	<union id="red-left-monument">
+		<cuboid min="988,29,-918" max="985,22,-921"/>
+	</union>
+	<union id="blue-right-monument">
+		<cuboid min="905,22,-921" max="908,29,-918"/>
+	</union>
+	<union id="blue-left-monument">
+		<cuboid min="905,22,-1029" max="908,29,-1026"/>
+	</union>
+	<union id="red-spawn">
+		<cylinder base="986.5,11,-973.5" radius="12" height="9"/>
+	</union>
+	<union id="blue-spawn">
+		<cylinder base="906.5,11,-973.5" radius="12" height="9"/>
+	</union>
+	<!--Applying filters-->
+	<apply block-break="only-gold" block-place="never" region="red-spawn" message="You cannot edit spawn!"/>
+	<apply block-break="only-gold" block-place="never" region="blue-spawn" message="You cannot edit spawn!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemies spawn"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemies spawn"/>
+    <apply block="no-void" region="everywhere" message="You cannot edit the void!"/>
+</regions>
+<!--Monuments-->
+<destroyables name="Emerald Monument" materials="emerald block" completion="100%">
+	<destroyable owner="red-team" region="red-left-monument"/>
+	<destroyable owner="blue-team" region="blue-left-monument"/>
+</destroyables>
+<destroyables name="Coal Monument" materials="coal block" completion="100%">
+	<destroyable owner="red-team" region="red-right-monument"/>
+	<destroyable owner="blue-team" region="blue-right-monument"/>
+</destroyables>
+<!--Kits-->
+<kits>
+	<kit id="spawn-kit" force="true">
+		<item slot="0" material="iron sword" unbreakable="true"/>
+		<item slot="1" material="bow" unbreakable="true"/>
+		<item slot="2" material="iron pickaxe" unbreakable="true"/>
+		<item slot="3" material="iron axe" unbreakable="true"/>
+		<item slot="4" material="log 2" damage="1" amount="16"/>
+		<item slot="6" material="golden apple" amount="1"/>
+		<item slot="7" material="cooked fish" damage="1" amount="64"/>
+		<item slot="28" material="arrow" amount="48"/>
+	</kit>
+	<kit id="red-spawn-kit" parents="spawn-kit">
+		<item slot="5" material="stained clay" damage="14" amount="24"/>
+	</kit>
+	<kit id="blue-spawn-kit" parents="spawn-kit">
+		<item slot="5" material="stained clay" damage="11" amount="24"/>
+	</kit>
+</kits>
+<!--Spawns-->
+<spawns>
+	<spawn team="red-team" kit="red-spawn-kit">
+		<regions yaw="-90">
+			<cylinder base="986.5,14.5,-973.5" radius="2" height="0"/>
+		</regions>
+	</spawn>
+	<spawn team="blue-team" kit="blue-spawn-kit">
+		<regions yaw="90">
+			<cylinder base="906.5,14.5,-973.5" radius="2" height="0"/>
+		</regions>
+	</spawn>
+	<default>
+		<regions yaw="180">
+			<cylinder base="946.5,37,-973.5" radius="3" height="1"/>
+		</regions>
+	</default>
+</spawns>
+<!--Kill-reward-->
+<kill-rewards>
+	<kill-reward>
+        <item amount="1" material="golden apple"/>
+        <item amount="12" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<!--Item remove-->
+<toolrepair>
+	<tool>iron sword</tool>
+	<tool>bow</tool>
+	<tool>iron pickaxe</tool>
+	<tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+	<item>coal block</item>
+	<item>emerald block</item>
+	<item>cooked fish</item>
+	<item>sand</item>
+	<item>stained clay</item>
+	<item>double step</item>
+	<item>step</item>
+	<item>leaves</item>
+	<item>melon</item>
+	<item>huge mushroom 1</item>
+	<item>brown mushroom</item>
+	<item>ender stone</item>
+	<item>cobble wall</item>
+</itemremove>
+<!--Timelock and Maxbuildheight-->
+<timelock>on</timelock>
+<maxbuildheight>30</maxbuildheight>
+<!--Ending Map element-->
+</map>

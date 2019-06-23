@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>SICKO MODE</name>
+<version>1.0.1</version>
+<objective>Destroy both of the enemy team's monuments.</objective>
+<gamemode>DTM</gamemode>
+<time result="objectives">45m</time>
+<respawn delay="2s"/>
+
+<authors>
+    <author uuid="a43135a4-d7b9-49ab-ac8d-a16bb2513c8d" contribution="Layout + XML"/> <!--Ny_-->
+    <author uuid="fcc883e6-a618-40e3-b602-1a56ff6c62b4" contribution="Layout"/> <!--DivineWolv-->
+    <author uuid="4ed106c2-12b9-43d2-83c7-2e963440444f" contribution="Aesthetics"/> <!--ItsCal-->
+</authors>
+
+<contributors>
+    <contributor contribution="ft. Drake">Travis Scott</contributor>
+</contributors>
+
+<teams>
+    <team id="red-team" color="dark red" max="8" max-overfill="8">Red Team</team>
+    <team id="blue-team" color="blue" max="8" max-overfill="8">Blue Team</team>
+</teams>
+
+<kits>
+    <kit id="red-kit">
+        <chestplate material="leather chestplate" unbreakable="true" color="B02E26"/>
+		<boots material="leather boots" enchantment="protection fall:1" unbreakable="true" color="B02E26"/>
+    </kit>
+    <kit id="blue-kit">
+        <chestplate material="leather chestplate" unbreakable="true" color="3C44AA"/>
+		<boots material="leather boots" enchantment="protection fall:1" unbreakable="true" color="3C44AA"/>
+    </kit>
+</kits>
+
+<destroyables show-progress="false" repairable="false">
+    <!-- Bridge Guide -->
+    <destroyable name="bridge-guide" materials="stained glass" completion="0%" required="false" show="false" mode-changes="true" owner="red-team">
+       <region>
+          <cuboid min="90,0,-49" max="-33,1,120"/>
+       </region>
+    </destroyable>
+
+    <!-- Red Monuments -->
+    <destroyable name="Back Monument" materials="emerald block;beacon" mode-changes="false" owner="red-team">
+       <region>
+          <cuboid min="9,13,88" max="12,20,91"/>
+       </region>
+    </destroyable>
+    <destroyable name="Front Monument" materials="emerald block;beacon" mode-changes="false" owner="red-team">
+       <region>
+          <cuboid min="83,18,58" max="86,25,61"/>
+       </region>
+    </destroyable>
+
+    <!-- Blue Monuments -->
+    <destroyable name="Back Monument" materials="emerald block;beacon" mode-changes="false" owner="blue-team">
+       <region>
+          <cuboid min="48,13,-17" max="45,20,-20"/>
+       </region>
+    </destroyable>
+    <destroyable name="Front Monument" materials="emerald block;beacon" mode-changes="false" owner="blue-team">
+       <region>
+          <cuboid min="-26,18,13" max="-29,25,10"/>
+       </region>
+    </destroyable>
+</destroyables>
+
+<modes>
+    <mode after="0s" material="air" show-before="0" name="Good Luck!"/>
+</modes>
+
+<filters>
+
+    <!-- Block Filters -->
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <any id="spawn-breakables">
+        <material>iron block</material>
+        <material>stained glass</material>
+    </any>
+    <all id="only-red-spawn">
+        <filter id="only-red"/>
+        <filter id="spawn-breakables"/>
+    </all>
+    <all id="only-blue-spawn">
+        <filter id="only-blue"/>
+        <filter id="spawn-breakables"/>
+    </all>
+</filters>
+
+<regions>
+    <union id="spawns">
+        <union id="red-spawn">
+            <rectangle id="red-base" min="54,120" max="29,90"/>
+            <rectangle id="red-spawn-lane" min="46,84" max="37,90"/>
+        </union>
+        <union id="blue-spawn">
+            <rectangle id="blue-base" min="3,-49" max="28,-19"/>
+            <rectangle id="blue-spawn-lane" min="20,-19" max="11,-13"/>
+        </union>
+    </union>
+
+    <rectangle id="playable-area" min="-33,-49" max="90,120"/>
+
+    <!--Red Spawn-->
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy team's spawn!"/>
+    <apply block="only-red-spawn" region="red-base" message="You may only break windows and iron in the spawn!"/>
+    <apply block="only-red" region="red-spawn-lane" message="You may not build in the other team's spawn lane!"/>
+    <!-- Blue Spawn-->
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy team's spawn!"/>
+    <apply block="only-blue-spawn" region="blue-base" message="You may only break windows and iron in the spawn!"/>
+    <apply block="only-blue" region="blue-spawn-lane" message="You may not build in the other team's spawn lane!"/>
+
+    <apply block-place="never" message="You may not build in the void region!">
+        <region>
+            <negative id="void-region">
+                <region id="playable-area"/>
+            </negative>
+        </region>
+    </apply>
+</regions>
+
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <region yaw="180">
+            <point>41.5,200,116.5</point>
+        </region>
+    </spawn>
+
+    <spawn team="blue-team" kit="blue-kit">
+        <region yaw="0">
+            <point>15.5,200,-45.5</point>
+        </region>
+    </spawn>
+
+    <default>
+        <region yaw="90" pitch="15">
+            <cuboid min="96,64,38" max="95,64,33"/>
+        </region>
+    </default>
+</spawns>
+
+<crafting>
+    <disable>shield</disable>
+</crafting>
+<itemremove>
+    <item>redstone</item>
+    <item>redstone torch off</item>
+    <item>redstone torch on</item>
+    <item>leather chestplate</item>
+	<item>leather boots</item>
+    <item>tnt</item>
+</itemremove>
+<block-drops>
+    <rule wrong-tool="true">
+      <region>
+          <everywhere/>
+      </region>
+        <filter>
+            <material>gravel</material>
+        </filter>
+        <drops>
+            <item material="flint"/>
+        </drops>
+    </rule>
+</block-drops>
+<kill-rewards>
+    <kill-reward>
+        <item>golden apple</item>
+		<item amount="32">arrow</item>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>32</maxbuildheight>
+</map>

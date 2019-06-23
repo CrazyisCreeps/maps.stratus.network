@@ -1,0 +1,99 @@
+<map proto="1.4.2">
+<name>Green</name>
+<version>1.0.2</version>
+<objective>Be the first team to reach 750 points!</objective>
+<authors>
+    <author uuid="2958ea4c-3501-404e-88cc-12e8632f68cc"/> <!-- NixaniaXi -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue" max="16">Blue</team>
+    <team id="red-team" color="dark red" max="16">Red</team>
+</teams>
+<kits>
+    <kit id="main-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="7" amount="16" material="arrow"/>
+        <item slot="8" amount="64" material="golden carrot"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="4" amplifier="10">resistance</effect>
+        <effect duration="4" amplifier="10">regeneration</effect>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <helmet unbreakable="true" color="0066cc" material="leather helmet"/>
+        <leggings unbreakable="true" color="0066cc" material="leather leggings"/>
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <helmet unbreakable="true" color="cd0000" material="leather helmet"/>
+        <leggings unbreakable="true" color="cd0000" material="leather leggings"/>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <regions>
+            <point yaw="-135">-33.5,23,34.5</point>
+        </regions>
+    </default>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+            <point yaw="-45">-37,6,-37</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red-kit">
+        <regions>
+            <point yaw="135">38,6,38</point>
+        </regions>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+</filters>
+<regions>
+    <apply block="never">
+        <region>
+            <everywhere/>
+        </region>
+    </apply>
+</regions>
+<control-points incremental="true" show-progress="true">
+    <control-point name="Point A" neutral-state="true" required="false" capture-time="5s" points="1">
+        <capture><cylinder base="-26.5,8,27.5" radius="6" height="2"/></capture>
+        <progress><cylinder base="-26.5,7,27.5" radius="6" height="1"/></progress>
+        <captured><cuboid min="-28,45,29" max="-25,51,26"/></captured>
+    </control-point>
+    <control-point name="Middle" neutral-state="true" required="false" capture-time="5s" points="1">
+        <capture><cylinder base="0.5,15,0.5" radius="6" height="2"/></capture>
+        <progress><cylinder base="0.5,14,0.5" radius="6" height="1"/></progress>
+        <captured><cuboid min="-1,45,2" max="2,51,-1"/></captured>
+    </control-point>
+    <control-point name="Point B" neutral-state="true" required="false" capture-time="5s" points="1">
+        <capture><cylinder base="27.5,9,-26.5" radius="6" height="2"/></capture>
+        <progress><cylinder base="27.5,8,-26.5" radius="6" height="1"/></progress>
+        <captured><cuboid min="26,45,-25" max="29,51,-28"/></captured>
+    </control-point>
+</control-points>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>arrow</item>
+</itemremove>
+<score>
+    <limit>750</limit>
+</score>
+</map>

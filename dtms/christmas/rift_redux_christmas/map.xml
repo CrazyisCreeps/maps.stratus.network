@@ -1,0 +1,387 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<include src="tutorial.xml"/> 
+<name>Rift Redux: Winter</name>
+<version>1.0.0</version>
+<objective>Destroy the enemy's three Inhibitor Crystals and one large Nexus Crystal to win!</objective>
+<authors>
+    <author uuid="5986da63-a546-49c5-812d-d5c41a42510a"/>
+    <!--  Lyzak  -->
+</authors>
+<contributors>
+    <contributor contribution="Building Assistance">Torn_Ares</contributor>
+</contributors>
+<teams>
+   <team id="cyan" color="dark aqua" max="75">Cyan</team>
+   <team id="purple" color="dark purple" max="75">Purple</team>
+</teams>
+<kits>
+    <kit id="heal">
+        <effect duration="10" amplifier="4">damage resistance</effect>
+        <effect duration="5" amplifier="1">heal</effect>
+        <effect duration="oo" amplifier="1">mining_fatigue</effect>
+    </kit>
+    <kit id="spawn" parents="heal">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" amount="32">bread</item>
+        <item slot="8" amount="1">emerald</item>
+    </kit>
+    <kit id="cyan-kit" parents="spawn">
+        <helmet color="00acac" unbreakable="true">leather helmet</helmet>
+        <chestplate color="00acac" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+    <kit id="purple-kit" parents="spawn">
+        <helmet color="cc00ff" unbreakable="true">leather helmet</helmet>
+        <chestplate color="cc00ff" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+    <lend kit="fatigue" filter="apply-fatigue"/>
+    <kit id="fatigue">
+        <effect>slow digging</effect>
+    </kit>
+</kits>
+<tnt>
+    <instantignite>true</instantignite>
+    <yield>0</yield>
+	<power>3</power>
+</tnt>
+<mobs>
+    <filter>
+        <spawn>spawner</spawn>
+    </filter>
+</mobs>
+<timelock>on</timelock>
+<difficulty>hard</difficulty>
+<filters>
+    <any id="any-team">
+        <team id="only-cyan">cyan</team>
+        <team id="only-purple">purple</team>
+    </any>
+    <any id="block-whitelist">
+        <material>glass</material>
+        <material>packed ice</material>
+        <material>stained glass</material>
+        <material>redstone ore</material>
+        <material>glowing redstone ore</material>
+        <material>tnt</material>
+        <material>beacon</material>
+    </any>
+    <any id="destroy-cyan-towers">
+        <all>
+            <filter id="only-purple"/>
+            <cause>player</cause>
+            <any>
+                <material>redstone ore</material>
+                <material>glowing redstone ore</material>
+            </any>
+            <not>
+                <cause>explosion</cause>
+            </not>
+        </all>
+        <all>
+            <cause>world</cause>
+            <not>
+                <filter id="any-team"/>
+            </not>
+        </all>
+    </any>
+    <any id="destroy-purple-towers">
+        <all>
+            <filter id="only-cyan"/>
+            <cause>player</cause>
+            <any>
+                <material>redstone ore</material>
+                <material>glowing redstone ore</material>
+            </any>
+            <not>
+                <cause>explosion</cause>
+            </not>
+        </all>
+        <all>
+            <cause>world</cause>
+            <not>
+                <filter id="any-team"/>
+            </not>
+        </all>
+    </any>
+    <all id="allow-cyan-base-block-interactions">
+        <filter id="only-purple"/>
+        <filter id="block-whitelist"/>
+    </all>
+    <all id="allow-purple-base-block-interactions">
+        <filter id="only-cyan"/>
+        <filter id="block-whitelist"/>
+    </all>
+    <all id="apply-fatigue">
+        <time>1s</time>
+        <not>
+            <time>3m</time>
+        </not>
+    </all>
+    <all id="allow-cyan-nexus">
+        <completed>cyan-left</completed>
+        <completed>cyan-middle</completed>
+        <completed>cyan-right</completed>
+    </all>
+    <all id="allow-purple-nexus">
+        <completed>purple-left</completed>
+        <completed>purple-middle</completed>
+        <completed>purple-right</completed>
+    </all>
+    <not id="deny-anvil">
+        <material>anvil</material>
+    </not>
+</filters>
+<regions>
+    <!-- Region Definitions -->
+    <cuboid id="default-spawn" min="-144,49,-1" max="-141,50,2"/>
+    <cylinder id="cyan-spawn" base="96,12.5,96" radius="4" height="0"/>
+    <circle id="cyan-base" center="96,96" radius="17"/>
+    <circle id="cyan-platform" center="96,96" radius="73"/>
+    <cuboid id="cyan-tower-1" min="56,9,74" max="65,25,83"/>
+    <cuboid id="cyan-tower-2" min="74,9,56" max="83,25,65"/>
+    <union id="cyan-towers">
+        <cuboid id="cyan-tower-3" min="28,9,92" max="37,25,101"/>
+        <cuboid id="cyan-tower-4" min="42,9,42" max="51,25,51"/>
+        <cuboid id="cyan-tower-5" min="92,9,28" max="101,25,37"/>
+        <cuboid id="cyan-tower-6" min="-21,6,78" max="-12,22,87"/>
+        <cuboid id="cyan-tower-7" min="28,6,8" max="37,22,17"/>
+        <cuboid id="cyan-tower-8" min="87,6,-36" max="96,22,-27"/>
+    </union>
+    <cuboid id="cyan-teleport-1" min="60,20,78" max="61,22,79"/>
+    <cuboid id="cyan-teleport-2" min="78,20,60" max="79,22,61"/>
+    <cuboid id="cyan-teleport-3" min="32,20,96" max="33,22,97"/>
+    <cuboid id="cyan-teleport-4" min="46,20,46" max="47,22,47"/>
+    <cuboid id="cyan-teleport-5" min="96,20,32" max="97,22,33"/>
+    <cuboid id="cyan-teleport-6" min="-17,17,82" max="-16,19,83"/>
+    <cuboid id="cyan-teleport-7" min="32,17,12" max="33,19,13"/>
+    <cuboid id="cyan-teleport-8" min="91,17,-32" max="92,19,-31"/>
+    <cuboid id="cyan-nexus" min="71,13,71" max="80,21,80"/>
+    <cuboid id="cyan-l-inhibitor" min="44,7,94" max="49,12,99"/>
+    <cuboid id="cyan-m-inhibitor" min="55,8,55" max="60,18,60"/>
+    <cuboid id="cyan-r-inhibitor" min="94,7,44" max="99,12,49"/>
+    <cylinder id="purple-spawn" base="-96,12,-96" radius="4" height="0"/>
+    <circle id="purple-base" center="-96,-96" radius="17"/>
+    <circle id="purple-platform" center="-96,-96" radius="73"/>
+    <cuboid id="purple-tower-1" min="-64,9,-82" max="-55,25,-73"/>
+    <cuboid id="purple-tower-2" min="-82,9,-64" max="-73,25,-55"/>
+    <union id="purple-towers">
+        <cuboid id="purple-tower-3" min="-36,9,-100" max="-27,25,-91"/>
+        <cuboid id="purple-tower-4" min="-50,9,-50" max="-41,25,-41"/>
+        <cuboid id="purple-tower-5" min="-100,9,-36" max="-91,25,-27"/>
+        <cuboid id="purple-tower-6" min="13,6,-86" max="22,22,-77"/>
+        <cuboid id="purple-tower-7" min="-36,6,-16" max="-27,22,-7"/>
+        <cuboid id="purple-tower-8" min="-95,6,28" max="-86,22,37"/>
+    </union>
+    <cuboid id="purple-teleport-1" min="-60,20,-78" max="-59,22,-77"/>
+    <cuboid id="purple-teleport-2" min="-78,20,-60" max="-77,22,-59"/>
+    <cuboid id="purple-teleport-3" min="-32,20,-96" max="-31,22,-95"/>
+    <cuboid id="purple-teleport-4" min="-46,20,-46" max="-45,22,-45"/>
+    <cuboid id="purple-teleport-5" min="-96,20,-32" max="-95,22,-31"/>
+    <cuboid id="purple-teleport-6" min="17,17,-82" max="18,19,-81"/>
+    <cuboid id="purple-teleport-7" min="-32,17,-12" max="-31,19,-11"/>
+    <cuboid id="purple-teleport-8" min="-91,17,32" max="-90,19,33"/>
+    <cuboid id="purple-nexus" min="-79,13,-79" max="-70,21,-70"/>
+    <cuboid id="purple-l-inhibitor" min="-48,7,-98" max="-43,12,-93"/>
+    <cuboid id="purple-m-inhibitor" min="-59,8,-59" max="-54,18,-54"/>
+    <cuboid id="purple-r-inhibitor" min="-98,7,-48" max="-93,12,-43"/>
+    <cuboid id="cyan-pit-escape" min="40,3,-32" max="41,4,-31"/>
+    <cuboid id="purple-pit-escape" min="-40,3,32" max="-39,4,33"/>
+    <union id="cyan-portals">
+        <region id="cyan-teleport-1"/>
+        <region id="cyan-teleport-2"/>
+        <region id="cyan-teleport-3"/>
+        <region id="cyan-teleport-4"/>
+        <region id="cyan-teleport-5"/>
+        <region id="cyan-teleport-6"/>
+        <region id="cyan-teleport-7"/>
+        <region id="cyan-teleport-8"/>
+    </union>
+    <union id="purple-portals">
+        <region id="purple-teleport-1"/>
+        <region id="purple-teleport-2"/>
+        <region id="purple-teleport-3"/>
+        <region id="purple-teleport-4"/>
+        <region id="purple-teleport-5"/>
+        <region id="purple-teleport-6"/>
+        <region id="purple-teleport-7"/>
+        <region id="purple-teleport-8"/>
+    </union>
+    <complement id="no-trees">
+        <cuboid id="above-10" min="-oo,15,-oo" max="oo,oo,oo"/>
+        <circle id="no-tree-cyan-base" center="112,112" radius="102"/>
+        <circle id="no-tree-purple-base" center="-111,-111" radius="102"/>
+        <region id="cyan-tower-1"/>
+        <region id="cyan-tower-2"/>
+        <region id="cyan-tower-3"/>
+        <region id="cyan-tower-4"/>
+        <region id="cyan-tower-5"/>
+        <region id="cyan-tower-6"/>
+        <region id="cyan-tower-7"/>
+        <region id="cyan-tower-8"/>
+        <region id="purple-tower-1"/>
+        <region id="purple-tower-2"/>
+        <region id="purple-tower-3"/>
+        <region id="purple-tower-4"/>
+        <region id="purple-tower-5"/>
+        <region id="purple-tower-6"/>
+        <region id="purple-tower-7"/>
+        <region id="purple-tower-8"/>
+    </complement>
+    <!-- Filter Applications -->
+    <apply use="deny-anvil"/>
+    <apply enter="never" region="no-trees" message="The tree tops are off limits!"/>
+    <apply enter="only-cyan" region="cyan-base" message="You may not enter the enemy team's base!"/>
+    <apply enter="only-purple" region="purple-base" message="You may not enter the enemy team's base!"/>
+    <apply enter="only-cyan" region="cyan-portals" kit="heal" message="You may not enter the enemy team's base!"/>
+    <apply enter="only-purple" region="purple-portals" kit="heal" message="You may not enter the enemy team's base!"/>
+    <apply block="destroy-cyan-towers" region="cyan-towers" message="You may not destroy your own towers!"/>
+    <apply block="destroy-purple-towers" region="purple-towers" message="You may not destroy your own towers!"/>
+    <apply block-break="allow-cyan-nexus" region="cyan-nexus" message="You must destroy all 3 Inhibitors before the Nexus!" />
+    <apply block-break="allow-purple-nexus" region="purple-nexus" message="You must destroy all 3 Inhibitors before the Nexus!" />
+    <apply block="allow-cyan-base-block-interactions" region="cyan-platform"/>
+    <apply block="allow-purple-base-block-interactions" region="purple-platform"/>
+    <apply block="block-whitelist" message="You may not interact with that block!"/>
+</regions>
+<portals>
+    <portal x="@95" y="@12.5" z="@95" yaw="@135" filter="only-cyan" region="cyan-portals"/>
+    <portal x="@-95" y="@12.5" z="@-95" pitch="@0" yaw="@-45" filter="only-purple" region="purple-portals"/>
+    <portal x="@54" y="@8" z="@-20" region="cyan-pit-escape"/>
+    <portal x="@-53" y="@8" z="@21" region="purple-pit-escape"/>
+</portals>
+<spawns>
+    <spawn team="cyan" kit="cyan-kit" yaw="135" region="cyan-spawn"/>
+    <spawn team="purple" kit="purple-kit" yaw="-45" region="purple-spawn"/>
+    <default yaw="-90" region="default-spawn"/>
+</spawns>
+<destroyables materials="glass;packed ice;stained glass">
+    <destroyable id="cyan-nex" name="Nexus" owner="cyan" show-progress="true" region="cyan-nexus"/>
+    <destroyable id="cyan-left" name="Left Inhibitor" owner="cyan" region="cyan-l-inhibitor"/>
+    <destroyable id="cyan-middle" name="Middle Inhibitor" owner="cyan" region="cyan-m-inhibitor"/>
+    <destroyable id="cyan-right" name="Right Inhibitor" owner="cyan" region="cyan-r-inhibitor"/>
+    <destroyable id="pruple-nex" name="Nexus" owner="purple" show-progress="true" region="purple-nexus"/>
+    <destroyable id="purple-left" name="Left Inhibitor" owner="purple" region="purple-l-inhibitor"/>
+    <destroyable id="purple-middle" name="Middle Inhibitor" owner="purple" region="purple-m-inhibitor"/>
+    <destroyable id="purple-right" name="Right Inhibitor" owner="purple" region="purple-r-inhibitor"/>
+</destroyables>
+<itemremove>
+    <item>stone sword</item>
+    <item>leather chestplate</item>
+    <item>leather helmet</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>bow</item>
+    <item>gold sword</item>
+    <item>iron sword</item>
+    <item>diamond sword</item>
+    <item>leather leggings</item>
+    <item>iron leggings</item>
+    <item>diamond leggings</item>
+    <item>iron chestplate</item>
+    <item>diamond chestplate</item>
+    <item>gold chestplate</item>
+    <item>wood pickaxe</item>
+    <item>stone pickaxe</item>
+    <item>diamond pickaxe</item>
+    <item>bread</item>
+    <item>glass bottle</item>
+    <item>ladder</item>
+    <item>anvil</item>
+    <item>skull item</item>
+</itemremove>
+<killreward>
+    <item amount="2">emerald</item>
+</killreward>
+<block-drops>
+    <rule>
+        <filter>
+            <all>
+                <cause>explosion</cause>
+                <material>glass</material>
+            </all>
+        </filter>
+        <replacement>stained glass</replacement>
+    </rule>
+    <rule>
+        <filter>
+            <all>
+                <cause>explosion</cause>
+                <material>stained glass:0</material>
+            </all>
+        </filter>
+        <replacement>stained glass:3</replacement>
+    </rule>
+</block-drops>
+<falling-blocks>
+    <rule>
+        <filter>
+            <all>
+                <any>
+                    <region id="cyan-towers"/>
+                    <region id="purple-towers"/>
+                </any>
+                <any>
+                    <material>quartz</material>
+                    <material>quartz stairs</material>
+                    <material>dark oak fence</material>
+                    <material>cobblestone</material>
+                    <material>wood</material>
+                    <material>dark oak stairs</material>
+                    <material>cobble wall</material>
+                    <material>glowstone</material>
+                    <material>ladder</material>
+                    <material>iron trapdoor</material>
+                    <material>step</material>
+                    <material>obsidian</material>
+                    <material>sign</material>
+                    <material>water</material>
+                    <material>stationary water</material>
+                </any>
+            </all>
+        </filter>
+        <sticky>
+            <any>
+                <material>wool</material>
+            </any>
+        </sticky>
+    </rule>
+</falling-blocks>
+<tutorial> 
+    <stage title="Rift: DTM with a twist">
+        <message> 
+            <line>This map is a `bDTM`r, with a `bvillager trading system.</line> 
+            <line>The objective is to destroy the `athree inhibitors `rand `aone nexus `rin the other team's base. This is the `bnexus`r.</line> 
+        </message> 
+        <teleport> 
+            <point yaw="-45" pitch="40">-79,21,-79</point> 
+        </teleport> 
+    </stage> 
+    <stage title="Villager trading system"> 
+        <message> 
+            <line>This map has a `bvillager trading system.</line> 
+            <line>`cKill people `rto get `aemeralds `rto trade with the `cvilagers`r.</line> 
+            <line>Be careful, because if you `4die `ryou `close `rall your `aemeralds`r!</line> 
+        </message> 
+        <teleport> 
+            <point yaw="225" pitch="30">-89.5,15,-99.5</point> 
+        </teleport> 
+    </stage> 
+    <stage title="Getting back to spawn"> 
+        <message> 
+            <line>Use any one of the `d8 towers `rin your base to get `cback to spawn`r.</line> 
+            <line>`cDestroy `rthe other team's towers by mining the `4redstone ore `rat the bottom.</line> 
+        </message> 
+        <teleport> 
+            <point yaw="-45" pitch="25">-51,20,-51</point> 
+        </teleport> 
+    </stage> 
+    <stage title="The Baron"> 
+        <message> 
+            <line>`5Beware of the Baron! `rHe is `dsuper overpowered`r. Don't attack him unless you have the gear.</line> 
+            <line>However, he drops a `2very good potion `rif you manage to kill him.</line> 
+        </message> 
+        <teleport> 
+            <point yaw="135" pitch="40">50.5,9,-21.5</point> 
+        </teleport> 
+    </stage> 
+</tutorial> 
+</map>

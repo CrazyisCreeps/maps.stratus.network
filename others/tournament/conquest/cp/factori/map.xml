@@ -1,0 +1,115 @@
+<map proto="1.4.2">
+<name>Factori</name>
+<version>1.1</version>
+<gamemode>koth</gamemode>
+<objective>Be the first team to reach 750 points!</objective>
+<authors>
+    <author uuid="0b8f95fa-0f40-4f28-9fd0-b8e243bb6800"/> <!-- Fouled -->
+    <author uuid="9116d3fa-1400-4ada-aecd-2eae1d73e383"/> <!-- Xuph -->
+</authors>
+<contributors>
+	<contributor uuid="3a64dcf4-5d71-4664-80bf-4e5c54e41b86" contribution="Replicated latest update"/> <!-- Zaquez -->
+	<contributor uuid="2910d3c7-41b7-44f4-b0d3-ad055f5fcd2a" contribution="Replicated latest update"/> <!-- Sharkskill -->
+</contributors>
+<gamerules> 
+    <doFireTick>false</doFireTick>
+</gamerules>
+<timelock>on</timelock>
+<teams>
+    <team id="red" color="dark red" max="5">Red</team>
+    <team id="blue" color="blue" max="5">Blue</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="0">
+            <point>-11.5,9.0625,-59.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="180">
+            <point>-75.5,9.0625,-3.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <point>-24,27,-31.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="8" amount="16">arrow</item>
+        <potion duration="4" amplifier="3">heal</potion>
+        <potion duration="4">damage resistance</potion>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+        <leggings color="0066cc" unbreakable="true">leather leggings</leggings>
+    </kit>
+</kits>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
+<regions>
+    <apply block="never">
+        <region>
+            <everywhere/>
+        </region>
+    </apply>
+    <any id="only-wool">
+        <material>wool</material>
+    </any>
+</regions>
+<control-points incremental="true" show-progress="true" visual-materials="only-wool">
+    <control-point name="Point A" neutral-state="true" required="false" capture-time="5s" points="1">
+        <capture><cuboid min="-57,10,-54" max="-52,12,-49"/></capture>
+        <progress><cylinder base="-54.5,9,-51.5" radius="3" height="1"/></progress>
+        <captured>
+			<cuboid min="-52,29,-52" max="-57,23,-51"/>
+		</captured>
+    </control-point>
+    <control-point name="Middle" neutral-state="true" required="false" capture-time="5s" points="1">
+        <capture><cuboid min="-47,6,-35" max="-40,8,-28"/></capture>
+        <progress><cylinder base="-43.5,5,-31.5" radius="5" height="1"/></progress>
+    </control-point>
+    <control-point name="Point B" neutral-state="true" required="false" capture-time="5s" points="1">
+        <capture><cuboid min="-30,10,-9" max="-35,12,-14"/></capture>
+        <progress><cylinder base="-32.5,9,-11.5" radius="3" height="1"/></progress>
+        <captured>
+			<cuboid min="-35,29,-11" max="-30,23,-12"/>
+		</captured>
+    </control-point>
+</control-points>
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<score>
+    <limit>750</limit>
+</score>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<respawn delay="5s"/>
+</map>

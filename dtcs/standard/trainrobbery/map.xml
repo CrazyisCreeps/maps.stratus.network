@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.4.3">
+   <name>Train Robbery</name>
+   <version>1.1.3</version>
+   <gamemode>dtc</gamemode>
+   <authors>
+      <author>Skipp2kill</author>
+   </authors>
+   <objective>Leak lava from the enemy's obsidian core.</objective>
+   <teams>
+      <team id="fish" color="blue" max="24">Blue</team>
+      <team id="butter" color="dark red" max="24">Red</team>
+   </teams>
+   <spawns>
+      <spawn region="fish-spawn" kit="blue" team="fish" yaw="180" />
+      <spawn region="butter-spawn" kit="red" team="butter" yaw="0" />
+      <default region="spawn" yaw="-90" />
+   </spawns>
+<kits>
+    <kit id="spawnkit" name="spawnkit">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="dig speed:1">iron axe</item>
+        <item slot="4" unbreakable="true" enchantment="dig speed:1">iron spade</item>
+        <item slot="5">golden apple</item>
+        <item slot="6" amount="64">wood</item>
+        <item slot="7" amount="64">glass</item>
+        <item slot="8" amount="32">cooked fish</item>
+        <potion duration="3" amplifier="10">heal</potion>
+        <potion duration="3">damage resistance</potion>
+    </kit>
+    <kit id="red" name="red" parents="spawnkit">
+        <helmet color="993333" unbreakable="true">leather helmet</helmet>
+        <chestplate color="993333" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="993333" unbreakable="true">leather leggings</leggings>
+        <boots color="993333" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue" name="blue" parents="spawnkit">
+        <helmet color="334CB2" unbreakable="true">leather helmet</helmet>
+        <chestplate color="334CB2" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="334CB2" unbreakable="true">leather leggings</leggings>
+        <boots color="334CB2" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>glass</item>
+    <item>wood</item>
+    <item>diamond pickaxe</item>
+    <item>iron axe</item>
+    <item>golden apple</item>
+    <item>iron spade</item>
+    <item>cooked fish</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+   <filters />
+   <regions>
+      <apply block="never" region="spawn-area" message="You may not build inside the spawn" />
+      <apply block="never" region="fish-spawn" message="You may not build inside the spawn" />
+      <apply block="never" region="butter-spawn" message="You may not build inside the spawn" />
+      <apply message="You may not build inside the spawn">
+         <region name="fish-spawn"/>
+         <region name="butter-spawn"/>
+      </apply>
+      <union id="spawn-area">
+         <cuboid id="fish-pipe" min="-20,49,172" max="-24,45,180" />
+         <cuboid id="butter-pipe" min="-24,49,68" max="-20,45,60" />
+      </union>
+      <cuboid id="fish-core" min="24,49,146" max="18,53,152" />
+      <cuboid id="butter-core" min="24,53,88" max="18,49,94" />
+      <cylinder id="spawn" base="42.5,68,120.5" radius="3" height="0" />
+      <cuboid id="fish-spawn" min="-22.5,47,178.5" max="-22.5,47,178.5" />
+      <cuboid id="butter-spawn" min="-22.5,47,62.5" max="-22.5,47,62.5" />
+   </regions>
+   <cores material="obsidian" leak="4" mode-changes="true">
+      <core name="Core" team="fish" region="fish-core" />
+      <core name="Core" team="butter" region="butter-core" />
+   </cores>
+   <modes>
+      <mode after="10m" material="gold block" name="GOLD CORE MODE"/>
+      <mode after="15m" material="glass" name="GLASS CORE MODE"/>
+   </modes>
+   <maxbuildheight>60</maxbuildheight>
+</map>

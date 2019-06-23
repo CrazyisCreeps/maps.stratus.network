@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<time result="objectives">45m</time>
+<name>Mars Odyssey</name>
+<version>1.0.3</version>
+<objective>Leak the enemy team's obsidian core and break their monument.</objective>
+<authors>
+    <author uuid="3143b9d9-cea7-465f-97fc-8de59fbbb3a4"/> <!-- DiamondAx -->
+    <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- Strangey -->
+    <author uuid="6bec5c3a-4934-4b19-9aa8-c7c569820f7d"/> <!-- Claf -->
+</authors>
+<contributors>
+    <contributor uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042" contribution="XML"/> <!-- triplezko -->
+    <contributor uuid="d9043554-2d3d-439d-ac14-8bf70db77bfb" contribution="Helped"/> <!-- adahy -->
+    <contributor uuid="459fd919-0d58-401a-9601-6cab1eb721ab" contribution="Helped"/> <!-- Reshif -->
+    <contributor uuid="7ab24d14-0801-48ba-8fea-147ddf400067" contribution="Helped"/> <!-- samthecat43 -->
+</contributors>
+<gamemode>dtc</gamemode>
+<gamemode>dtm</gamemode>
+<teams>
+    <team id="lime-team" color="green" max="8" max-overfill="8">Lime</team>
+    <team id="purple-team" color="dark purple" max="8" max-overfill="8">Purple</team>
+</teams>
+<kits>
+    <kit id="night-vision-kit">
+        <effect duration="oo">night vision</effect>
+    </kit>
+	<kit id="spawn-kit">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" enchantment="dig speed:2" unbreakable="true">iron axe</item>
+        <item slot="4" amount="64" damage="1">wood</item>
+		<item slot="22" amount="64" damage="1">wood</item>
+		<item slot="31" amount="64" damage="1">wood</item>
+		<item slot="5" amount="64">glass</item>
+		<item slot="6" amount="32">ladder</item>
+		<item slot="7">golden apple</item>
+		<item slot="8" amount="64">golden carrot</item>
+        <item slot="28" amount="1">arrow</item>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="lime-team" kit="spawn-kit">
+        <regions yaw="180">
+            <point>-34.5,6,-127.5</point>
+        </regions>
+    </spawn>
+    <spawn team="purple-team" kit="spawn-kit">
+        <regions yaw="0">
+            <point>-34.5,6,-339.5</point>
+        </regions>
+    </spawn>
+    <default kit="night-vision-kit">
+        <regions yaw="-90">
+            <point>-100.5,76,-233.5</point>
+        </regions>
+    </default>
+</spawns>
+<cores material="obsidian" leak="3" mode-changes="true">
+    <core team="lime-team">
+        <region>
+            <cuboid min="-29,25,-188" max="-36,18,-195"/>
+        </region>
+    </core>
+    <core team="purple-team">
+        <region>
+            <cuboid min="-36,25,-279" max="-29,18,-272"/>
+        </region>
+    </core>
+</cores>
+<modes>
+    <mode after="10m" material="gold block"/>
+    <mode after="25m" material="packed ice"/>
+</modes>
+<destroyables name="Monument" materials="ender stone;beacon">
+    <destroyable owner="lime-team">
+       <region>
+           <cuboid min="13,26,-196" max="9,22,-200"/>
+       </region>
+    </destroyable>
+    <destroyable owner="purple-team">
+       <region>
+           <cuboid min="13,26,-271" max="9,22,-267"/>
+       </region>
+    </destroyable>
+</destroyables>
+<filters>
+    <team id="only-lime">lime-team</team>
+    <team id="only-purple">purple-team</team>
+</filters>
+<regions>
+    <apply block="never" message="You may not modify the portal room!">
+        <region>
+            <cuboid min="-84,70,-246" max="-113,105,-221"/>
+        </region>
+    </apply>
+    <apply block="never" message="You may not modify the spawn tunnel!">
+        <region>
+            <!-- Lime -->
+            <union>
+                <rectangle min="-21,-120" max="-40,-158"/>
+                <cuboid min="-31,14,-158" max="-37,0,-164"/>
+                <cuboid min="-32,0,-164" max="-37,14,-165"/>
+                <cuboid min="-33,0,-165" max="-36,14,-166"/>
+                <cuboid min="-23,26,-158" max="-30,38,-161"/>
+                <cuboid min="-24,26,-161" max="-29,38,-162"/>
+                <cuboid min="-25,26,-162" max="-28,38,-163"/>
+            </union>
+            <!-- Purple -->
+            <union>
+                <rectangle min="-40,-347" max="-28,-309"/>
+                <cuboid min="-38,14,-309" max="-31,0,-303"/>
+                <cuboid min="-37,0,-303" max="-32,14,-302"/>
+                <cuboid min="-36,0,-302" max="-33,14,-301"/>
+                <cuboid min="-30,26,-309" max="-23,38,-306"/>
+                <cuboid min="-29,26,-306" max="-24,38,-305"/>
+                <cuboid min="-28,26,-305" max="-25,38,-304"/>
+            </union>
+        </region>
+    </apply>
+    <apply enter="only-lime" message="You may not enter the enemy team's spawn!">
+        <region>
+            <rectangle min="-21,-120" max="-40,-158"/>
+        </region>
+    </apply>
+    <apply enter="only-purple" message="You may not enter the enemy team's spawn!">
+        <region>
+            <rectangle min="-40,-347" max="-28,-309"/>
+        </region>
+    </apply>
+    <apply block="never" message="You may not build outside of the playable area!">
+        <region>
+            <negative>
+                <rectangle min="-71,-309" max="31,-158"/>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+	<item>wood</item>
+	<item>glass</item>
+	<item>ladder</item>
+	<item>golden carrot</item>
+    <item>obsidian</item>
+    <item>gold block</item>
+    <item>ender stone</item>
+    <item>iron fence</item>
+</itemremove>
+<killreward>
+	<item>golden apple</item>
+	<item amount="32" damage="1">wood</item>
+	<item amount="32">glass</item>
+</killreward>
+<!-- <tnt>
+    <dispenser-tnt-limit>0</dispenser-tnt-limit>
+    <dispenser-tnt-multiplier>0</dispenser-tnt-multiplier>
+</tnt> -->
+<crafting>
+    <disable>shield</disable>
+	<disable>iron fence</disable>
+    <disable>anvil</disable>
+    <disable>iron trapdoor</disable>
+</crafting>
+<timelock>on</timelock>
+<respawn delay="4s"/>
+<autorespawn/>
+<maxbuildheight>45</maxbuildheight>
+</map>

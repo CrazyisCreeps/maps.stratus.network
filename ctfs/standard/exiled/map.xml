@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Exiled</name>
+<version>1.1</version>
+<objective>Control the flag for 200 seconds to win!</objective>
+<authors>
+    <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- Strangey -->
+    <author uuid="3143b9d9-cea7-465f-97fc-8de59fbbb3a4"/> <!-- DiamondAx -->
+    <author uuid="6bec5c3a-4934-4b19-9aa8-c7c569820f7d"/> <!-- Claf -->
+    <author uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042"/> <!-- triplezko -->
+    <author uuid="2958ea4c-3501-404e-88cc-12e8632f68cc"/> <!-- NixaniaXi -->
+</authors>
+<contributors>
+    <contributor uuid="d9043554-2d3d-439d-ac14-8bf70db77bfb" contribution="Helped"/> <!-- adahy -->
+</contributors>
+<teams>
+    <team id="red-team" color="red" max="20">Red</team>
+    <team id="blue-team" color="blue" max="20">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="2" amount="64">golden carrot</item>
+        <item slot="3">golden apple</item>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <boots unbreakable="true" enchantment="protection fall:2">gold boots</boots>
+        <effect duration="7" amplifier="2">speed</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="outside-spawn">
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="8" amount="32">arrow</item>
+    </kit>
+    <kit id="red-kit" parents="outside-spawn">
+        <helmet color="AF002A" unbreakable="true">leather helmet</helmet>
+        <leggings color="AF002A" unbreakable="true">leather leggings</leggings>
+    </kit>
+    <kit id="blue-kit" parents="outside-spawn">
+        <helmet color="6E6EF9" unbreakable="true">leather helmet</helmet>
+        <leggings color="6E6EF9" unbreakable="true">leather leggings</leggings>
+    </kit>
+    <kit id="flag-kit" force="true">
+        <potion duration="oo" amplifier="-3">health boost</potion>
+        <potion duration="3" amplifier="2">absorption</potion>
+        <potion duration="oo">glowing</potion>
+    </kit>
+    <kit id="reset-health-kit" force="true">
+        <potion duration="1" amplifier="0">health boost</potion>
+        <potion duration="1" amplifier="10">regeneration</potion>
+        <potion duration="1">glowing</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red-team" kit="spawn-kit">
+        <regions yaw="-90">
+            <point>-197.5,11,-100.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="spawn-kit">
+        <regions yaw="90">
+            <point>-41.5,11,-100.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <cylinder base="-119.5,34,-19.5" radius="1" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<flags>
+    <post id="post" return-time="0s" respawn-time="25s">
+        <block>-119.5,19,-100.5</block>
+        <block>-119.5,19,-136.5</block>
+        <block>-119.5,19,-64.5</block>
+    </post>
+    <flag id="flag" name="Flag" color="purple" shared="true" post="post" points-rate="1" pickup-kit="flag-kit" drop-kit="reset-health-kit" pickup-filter="always" flag-proximity-metric="closest player"/>
+</flags>
+<score>
+    <limit>200</limit>
+</score>
+<filters>
+    <any id="has-flag">
+       <carrying-flag>flag</carrying-flag>
+       <not>
+           <same-team>
+               <carrying-flag>flag</carrying-flag>
+           </same-team>
+       </not>
+    </any>
+    <not id="deny-right-click">
+        <any>
+           <material>chest</material>
+           <material>trap door</material>
+           <material>wooden door</material>
+           <material>workbench</material>
+           <material>furnace</material>
+           <material>anvil</material>
+           <material>beacon</material>
+        </any>
+    </not>
+    <not id="deny-red">
+        <team>red-team</team>
+    </not>
+    <not id="deny-blue">
+        <team>blue-team</team>
+    </not>
+</filters>
+<regions>
+    <apply leave="has-flag" message="You may not leave spawn while your teammate has the flag!">
+        <region>
+            <union>
+                <rectangle min="-182,-88" max="-203,-113"/>
+                <rectangle min="-57,-113" max="-36,-88"/>
+            </union>
+        </region>
+    </apply>
+    <apply kit="red-kit">
+        <region>
+            <rectangle id="red-spawn-exit" min="-181,-110" max="-182,-91"/>
+        </region>
+    </apply>
+    <apply kit="blue-kit">
+        <region>
+            <rectangle id="blue-spawn-exit" min="-58,-91" max="-57,-110"/>
+        </region>
+    </apply>
+    <apply enter="deny-red" region="blue-spawn-exit"/>
+    <apply enter="deny-blue" region="red-spawn-exit"/>
+    <apply use="deny-right-click" block="never"/>
+</regions>
+<respawn blackout="true"/>
+<timelock>on</timelock>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>gold boots</item>
+    <item>chainmail chestplate</item>
+    <item>arrow</item>
+    <item>golden carrot</item>
+    <item>golden apple</item>
+</itemremove>
+<kill-reward>
+    <item>golden apple</item>
+    <item amount="16">arrow</item>
+</kill-reward>
+</map>

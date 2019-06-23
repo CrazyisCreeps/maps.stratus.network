@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<map proto="1.4.2" game="Water Drop">
+<name>Water Drop: Directrix</name>
+<version>1.2.2</version>
+<objective>Carry the flag to the end!</objective>
+<gamemode>Arcade</gamemode>
+<authors>
+    <author uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0"/> <!-- ElectroidFilms -->
+</authors>
+<contributors>
+    <contributor contribution="Inspiration">NOVA 2</contributor>
+</contributors>
+<players min="1" max="60" colors="true"/>
+<spawns>
+    <spawn kit="players" yaw="90" region="spawn"/>
+    <default kit="obs" yaw="90" region="spawn"/> 
+</spawns>
+<kits>
+    <kit id="obs">
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+    <kit id="players">
+        <health>6</health>
+        <max-health>6</max-health>
+        <clear/>
+        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <boots color="7fcc19" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <effect duration="3s" amplifier="5">resistance</effect>
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit id="removal" force="true">
+        <clear/>
+        <item slot="0" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="1" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="2" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <boots color="993333" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="force-kill">
+        <potion duration="1" amplifier="100">harm</potion>
+    </kit>
+</kits>
+<filters>
+    <all id="water">
+        <any>
+            <material>water</material>
+            <material>stationary water</material>
+        </any>
+        <not>
+            <cause>world</cause>
+        </not>
+    </all>
+</filters>
+<regions>
+    <cylinder id="spawn" base="-4.5,200.5,60.5" radius="3" height="1"/>
+    <below id="dead" y="100"/>
+    <apply block-place="water" block-break="water" block-physics="never"/>
+    
+    <apply velocity="-0.3,2,0">
+        <region>
+            <cuboid min="-17,201,59" size="1,3,3"/>
+        </region>
+    </apply>
+    <apply velocity="0,2,0.4">
+        <region>
+            <cuboid min="-58,183,71" max="-61,186,73"/>
+        </region>
+    </apply>
+    <apply velocity="-1.2,1.5,0">
+        <region>
+            <cuboid min="-65,178,103" size="1,3,3"/>
+        </region>
+    </apply>
+    <apply velocity="0,0.9,-2.1">
+        <region>
+            <cuboid min="-81,178,99" max="-84,181,100"/>
+        </region>
+    </apply>
+    <apply velocity="0,0.8,-2">
+        <region>
+            <cuboid min="-81,178,77" max="-84,181,78"/>
+        </region>
+    </apply>
+    <apply velocity="-1,1.3,0">
+        <region>
+            <cuboid min="-88,178,58" size="1,3,3"/>
+        </region>
+    </apply>
+    <apply velocity="-2,0.8,0">
+        <region>
+            <cuboid min="-175,117,58" size="1,3,3"/>
+        </region>
+    </apply>
+    <apply velocity="-1,1,0">
+        <region>
+            <cuboid min="-192,118,58" size="3,1,3"/>
+        </region>
+    </apply>
+    <apply velocity="1,2,0">
+        <region>
+            <cuboid min="-195,122,58" size="1,3,3"/>
+        </region>
+    </apply>
+</regions>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>leather boots</item>
+    <item>barrier</item>
+</itemremove>
+<portals>
+    <portal region="dead" y="-1000"/>
+</portals>
+<flags>
+    <flag id="blue-flag" name="Flag" color="blue">
+        <post yaw="-90" recover-time="oo">-10.5,200,60.5</post>
+        <net points="1">
+            <region>
+                <cylinder base="-181.5,128,59.5" radius="2" height="2"/>
+            </region>
+        </net>
+    </flag>
+</flags>
+<score>
+    <limit>1</limit>
+</score>
+</map>

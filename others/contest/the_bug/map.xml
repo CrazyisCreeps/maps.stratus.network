@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>The Bug</name>
+<version>1.0.0</version>
+<objective>Leak the enemy core!</objective>
+<authors>
+    <author uuid="62d9830a-0b77-4e21-9d4f-de4b60c68fb5"/> <!-- shaarpie -->
+</authors>
+<contributors>
+    <contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65" contribution="XML fixing and polishing"/> <!-- BGMP -->
+</contributors>
+<!-- Map modules, i.e. objectives, regions, spawns. -->
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+    <team id="red-team-filter">red-team</team>
+    <team id="blue-team-filter">blue-team</team>
+    <all id="red-block-filter">
+        <team>red-team</team>
+        <any>
+            <material>gold block</material>
+        </any>
+    </all>
+    <all id="blue-block-filter">
+        <team>blue-team</team>
+        <any>
+            <material>gold block</material>
+        </any>
+    </all>
+</filters>
+<regions>
+    <negative id="main-area">
+        <union id="spawns">
+            <cuboid id="red-spawn" min="31,0,20" max="45,17,31"/>
+            <cuboid id="blue-spawn" min="-44,0,20" max="-30,17,31"/>
+        </union>
+    </negative>
+    <apply block="no-void" message="You may not modify the void area!" region="main-area"/>
+    <apply enter="red-team-filter" block="red-block-filter" region="red-spawn"/>
+    <apply enter="blue-team-filter" block="blue-block-filter" region="blue-spawn"/>
+</regions>
+<blockdrops>
+    <rule wrong-tool="true">
+        <region>
+            <region id="spawns"/>
+        </region>
+        <filter>
+            <any>
+                <material>gold block</material>
+            </any>
+        </filter>
+        <kit force="true">
+            <helmet unbreakable="true" material="gold helmet"/>
+            <chestplate unbreakable="true" material="gold chestplate"/>
+            <leggings unbreakable="true" material="gold leggings"/>
+            <boots unbreakable="true" material="gold boots"/>
+        </kit>
+    </rule>
+</blockdrops>
+<maxbuildheight>21</maxbuildheight>
+<broadcasts>
+    <tip after="30s" every="5m">You get a TNT every 5 kills streak!</tip>
+</broadcasts>
+<teams>
+   <team id="red-team" color="red" max="4">Red</team>
+   <team id="blue-team" color="blue" max="4">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red-team" kit="red">
+        <regions yaw="180">
+            <point>38.5,7,26.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue">
+        <regions yaw="180">
+            <point>-37.5,7,27.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <point>0.5,37.1,-4.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" material="stone sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="stone pickaxe" unbreakable="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="4" material="wood" amount="48" damage="5"/>
+        <item slot="5" material="glass" amount="16"/>
+        <item slot="6" material="water bucket"/>
+        <item slot="7" material="golden apple" amount="1"/>
+        <item slot="8" material="golden carrot" amount="32"/>
+        <item slot="9" material="arrow" amount="12"/>
+        <effect duration="3" amplifier="1">instant_health</effect>
+    </kit>
+    <kit id="red" parents="spawn">
+        <helmet color="cd0000" material="leather helmet"/>
+		<chestplate color="cd0000" material="leather chestplate"/>
+    </kit>
+    <kit id="blue" parents="spawn">
+        <helmet color="0066cc" material="leather helmet"/>
+		<chestplate color="0066cc" material="leather chestplate"/>
+    </kit>
+</kits>
+<itemremove>
+    <item>arrow</item>
+    <item>golden carrot</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>water bucket</item>
+    <item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>gold helmet</item>
+	<item>gold chestplate</item>
+	<item>gold leggings</item>
+	<item>gold boots</item>
+	<item>red rose</item>
+	<item>double plant</item>
+	<item>water lily</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>golden apple</tool>
+</toolrepair>
+<tnt>
+    <instantignite>on</instantignite>
+    <fuse>3s</fuse>
+</tnt>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" material="golden apple"/>
+        <item amount="6" material="arrow"/>
+        <item amount="8" material="wood" damage="5"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <all>
+                <kill-streak count="5"/>
+            </all>
+        </filter>
+        <item material="tnt"/>
+    </kill-reward>
+</kill-rewards>
+<cores material="gold block" leak="3" mode-changes="true">
+    <core team="blue-team">
+        <region><cuboid min="-38,11,-24" max="-35.5,16.5,-21.5"/></region>
+    </core>
+    <core team="red-team">
+        <region><cuboid min="36,11,-24" max="38.5,16.5,-21.5"/></region>
+    </core>
+</cores>
+<modes>
+    <mode after="10m" material="coal block"/>
+    <mode after="16m" material="packed ice"/>
+</modes>
+<time result="objectives">20m</time>
+</map>

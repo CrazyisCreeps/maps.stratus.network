@@ -1,0 +1,246 @@
+<?xml version="1.0"?> <!-- created in august 2018 -->
+<map proto="1.4.2">
+<name>Ruediger's Spooky Garden</name> <!-- Halloween version of "Ruediger's Garden II" -->
+<version>1.0.0</version> <!-- equivalent to version 1.0.6 of "Ruediger's Garden II" -->
+<objective>Take the enemy's wool and place it on your wool monument!</objective>
+<gamemode>ctw</gamemode>
+<timelock>on</timelock>
+<maxbuildheight>32</maxbuildheight>
+<authors>
+    <author uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30"/> <!--  Ruediger_LP  -->
+</authors>
+<contributors>
+    <contributor uuid="67fcfbe9-eb49-4c6f-94fd-0586c046aa20" contribution="testing server"/> <!--oiskoltaxd-->
+    <contributor uuid="3141839d-38a7-4c15-8222-64255e0c0a66" contribution="feedback"/> <!-- XxAngelRavenxX -->
+    <contributor uuid="2910d3c7-41b7-44f4-b0d3-ad055f5fcd2a" contribution="feedback"/> <!-- Sharkskill -->
+</contributors>
+
+<teams>
+    <team id="purple-team" color="dark_purple" max="16">Purple</team>
+    <team id="orange-team" color="gold" max="16">Orange</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" enchantment="arrow infinite:1" material="bow" unbreakable="true"/>
+        <item slot="2" material="iron pickaxe" unbreakable="true"/>
+        <item slot="3" material="stone axe" unbreakable="true"/>
+        <item slot="4" amount="64" material="stone" damage="3" name="`rBlockyfied Pigeon"/>
+        <item slot="5" amount="24" material="wood" damage="1" name="`rGhost Wood"/>
+        <item slot="6" amount="24" material="vine"/>
+        <item slot="8" material="bread" amount="64" name="`rBarm Brack"/>
+        <item slot="28" material="arrow"/>
+        <item slot="30" material="stone spade" unbreakable="true"/>
+        <item slot="35" material="shears" unbreakable="true"/>
+    </kit>
+    <kit id="orange-kit" parents="spawn-kit">
+        <helmet color="F4A76C" unbreakable="true" name="`rPumpkin Shell">leather helmet</helmet>
+        <chestplate color="E67E22" unbreakable="true" name="`rPumpkin Chestplate">leather chestplate</chestplate>
+        <boots color="BA4A00" unbreakable="true" name="`rSpooky Boots">leather boots</boots>
+    </kit>
+    <kit id="purple-kit" parents="spawn-kit">
+        <helmet color="B888F1" unbreakable="true" name="`rSlimey Goo">leather helmet</helmet>
+        <chestplate color="8E44AD" unbreakable="true" name="`rGooy Chestplate">leather chestplate</chestplate>
+        <boots color="512E5F" unbreakable="true" name="`rScary Boots">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="purple-team" kit="purple-kit">
+        <regions yaw="90">
+            <cylinder base="64,14.5,0" radius="0" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="orange-team" kit="orange-kit">
+        <regions yaw="-90">
+             <cylinder base="-64,14.5,0" radius="0" height="0"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0" pitch="90">
+            <cylinder base="0,32,0" radius="0" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<wools>
+    <wool team="purple-team" color="magenta" location="-80,23.2,36">
+        <monument><block>67,15,3</block></monument>
+    </wool>
+    <wool team="purple-team" color="silver" location="-80,23.2,-36">
+        <monument><block>67,15,-4</block></monument>
+    </wool>
+    <wool team="orange-team" color="cyan" location="80,23.2,36">
+        <monument><block>-68,15,3</block></monument>
+    </wool>
+    <wool team="orange-team" color="lime" location="80,23.2,-36">
+        <monument><block>-68,15,-4</block></monument>
+    </wool>
+</wools>
+<filters>
+    <not id="no-void"><void/></not>
+    <not id="deny-purple">
+        <team>purple-team</team>
+    </not>
+    <not id="deny-orange">
+        <team>orange-team</team>
+    </not>
+    <not id="deny-purple-chest">
+    	<all>
+    		<team>purple-team</team>
+	        <material>chest</material>
+	    </all>
+    </not>
+    <not id="deny-orange-chest">
+    	<all>
+    		<team>orange-team</team>
+	        <material>chest</material>
+	    </all>
+    </not>
+    <not id="cyan-and-lime-filter">
+    	<any>
+	    	<all>
+	        	<team>orange-team</team>
+	        	<material>chest</material>
+	        </all>
+	        <team>purple-team</team>
+	    </any>
+    </not>
+    <not id="magenta-and-silver-filter">
+    	<any>
+	    	<all>
+	        	<team>purple-team</team>
+	        	<material>chest</material>
+	        </all>
+	        <team>orange-team</team>
+	    </any>
+    </not>
+</filters>
+<regions>
+    <cylinder base="0,32,0" radius="200" height="100" id="crystal-protection"/>
+    <rectangle min="73,29" max="87,43" id="cyan-wool"/>
+    <rectangle min="73,-29" max="87,-43" id="lime-wool"/>
+    <rectangle min="-73,-29" max="-87,-43" id="silver-wool"/>
+    <rectangle min="-73,29" max="-87,43" id="magenta-wool"/> 
+    <cuboid min="-56,14,2" max="-57,17,-2" id="orange-spawn-entry"/>
+    <cuboid min="56,14,2" max="57,17,-2" id="purple-spawn-entry"/>
+    <union id="spawns">
+        <cylinder base="64,0,0" radius="13" height="100"/> <!-- purple spawn -->
+        <cylinder base="-64,0,0" radius="13" height="100"/> <!-- orange spawn --> 
+    </union>
+    <apply block="never" region="crystal-protection"/>
+    <apply enter="deny-purple" region="cyan-wool" message="`7You may not enter your own wool room!"/>
+    <apply enter="deny-purple" region="lime-wool" message="`7You may not enter your own wool room!"/>
+    <apply enter="deny-orange" region="silver-wool" message="`7You may not enter your own wool room!"/>
+    <apply enter="deny-orange" region="magenta-wool" message="`7You may not enter your own wool room!"/>
+    <apply block="cyan-and-lime-filter" region="cyan-wool" message="`7You may not edit this!"/>
+    <apply block="cyan-and-lime-filter" region="lime-wool" message="`7You may not edit this!"/>
+    <apply block="magenta-and-silver-filter" region="magenta-wool" message="`7You may not edit this!"/>
+    <apply block="magenta-and-silver-filter" region="silver-wool" message="`7You may not edit this!"/>
+    <apply use="deny-purple-chest" region="cyan-wool" message="`7You may not open this chest!"/>
+    <apply use="deny-purple-chest" region="lime-wool" message="`7You may not open this chest!"/>
+    <apply use="deny-orange-chest" region="silver-wool" message="`7You may not open this chest!"/>
+    <apply use="deny-orange-chest" region="magenta-wool" message="`7You may not open this chest!"/>
+    <apply enter="deny-purple" region="orange-spawn-entry" message="`7You may not enter the enemy's spawn!"/>
+    <apply enter="deny-orange" region="purple-spawn-entry" message="`7You may not enter the enemy's sapwn!"/>
+    <apply block="never" region="spawns" message="`7You may not edit spawn!"/>
+    <apply block="no-void" message="`7You may not edit the void!"/>
+</regions>
+<crafting>
+    <disable>gold axe</disable>
+    <shapeless override="true">
+        <result material="wood button" amount="4"/>
+        <ingredient>wood</ingredient>
+    </shapeless>
+</crafting>
+<itemremove>
+    <item>sapling</item>
+    <item>web</item> 
+    <item>long grass</item>
+    <item>yellow flower</item>
+    <item>red rose</item>
+    <item>apple</item>
+    <item>string</item> 
+    <item>seeds</item> 
+    <item>bread</item>
+    <item>redstone</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+</itemremove>
+<itemkeep>
+    <item>stone:3</item>
+    <item>wood</item>
+    <item>vine</item>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>shears</item>
+    <item>stone axe</item>
+    <item>stone spade</item>
+    <item>arrow</item>
+</itemkeep>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>    
+    <tool>shears</tool>
+    <tool>stone axe</tool>
+    <tool>stone spade</tool>
+</toolrepair>
+<item-mods>
+    <rule>
+        <match>
+            <material>gold spade</material>
+            <material>gold pickaxe</material>
+        </match>
+        <modify unbreakable="true">
+            <enchantment level="1">Efficiency</enchantment>
+        </modify>
+    </rule>
+    <rule>
+        <match>
+            <material>gold helmet</material>
+            <material>gold chestplate</material>
+            <material>gold leggings</material>
+            <material>gold boots</material>
+        </match>
+        <modify unbreakable="true">
+        </modify>
+    </rule>
+    <rule>
+        <match>
+            <material>424</material>
+        </match>
+        <modify name="`rVegan Mutton" lore="`r`9100% Pumpkin">
+        </modify>
+    </rule>
+    <rule>
+        <match>
+            <material>potion</material>
+        </match>
+        <modify name="`rBottled Wool Ghost">
+        </modify>
+    </rule>
+    <rule>
+        <match>
+            <material>wood</material>
+        </match>
+        <modify name="`rGhost Wood">
+        </modify>
+    </rule>
+    <rule>
+        <match>
+            <material>stone</material>
+        </match>
+        <modify name="`rBlockyfied Pigeon">
+        </modify>
+    </rule>
+</item-mods>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple" name="`rCaramel Apple"/>
+        <item material="wood" amount="16"/>
+        <item material="jack o lantern" lore="`r`9Obligatory Pumpkin"/>
+    </kill-reward>
+</kill-rewards>    
+</map>

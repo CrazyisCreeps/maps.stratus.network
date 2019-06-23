@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.4.1">
+   <name>Hallcrest</name>
+   <version>1.0.1</version>
+   <objective>Keep the flag the longest to win!</objective>
+   <authors>
+      <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" />
+      <author uuid="0347bb56-8ade-410e-9f32-31d54eb10598" />
+   </authors>
+   <respawn spectate="true" delay="5s">
+      <message>{translate:"death.respawn.confirmed.waiting.flagDropped"}</message>
+   </respawn>
+   <contributors>
+      <contributor uuid="cc67ec01-4b98-4e65-b0ed-49c14c6cb88b" contribution="XML" />
+      <contributor uuid="dff980ed-9f69-491e-b79c-30c21350baf2" contribution="XML Help" />
+   </contributors>
+   <gamemode>ctf</gamemode>
+   <rules>
+      <rule>Fall damage is disabled.</rule>
+   </rules>
+   <teams>
+      <team id="red" color="blue" max="14" max-overfill="15">Blue</team>
+      <team id="blue" color="dark red" max="14" max-overfill="15">Red</team>
+   </teams>
+   <spawns>
+      <default yaw="180" kit="obs">
+         <regions>
+            <cylinder base="9536.5,21,-239.5" radius="2" height="0" />
+         </regions>
+      </default>
+      <spawns team="blue" kit="blue-spawn">
+         <spawn>
+            <regions yaw="180">
+               <cylinder base="9505.5,9.5,-196.5" radius="1" height="1" />
+            </regions>
+         </spawn>
+         <spawn>
+            <regions yaw="-90">
+               <cylinder base="9493.5,9.5,-208.5" radius="1" height="1" />
+            </regions>
+         </spawn>
+      </spawns>
+      <spawns team="red" kit="red-spawn" yaw="-90">
+         <spawn>
+            <regions yaw="0">
+               <cylinder base="9567.5,9.5,-282.5" radius="1" height="1" />
+            </regions>
+         </spawn>
+         <spawn>
+            <regions yaw="90">
+               <cylinder base="9579.5,9.5,-270.5" radius="1" height="1" />
+            </regions>
+         </spawn>
+      </spawns>
+      <filter>
+         <not>
+            <same-team>
+               <carrying-flag>flag</carrying-flag>
+            </same-team>
+         </not>
+      </filter>
+   </spawns>
+   <kits>
+      <kit id="spawn">
+         <item slot="0" unbreakable="true">stone sword</item>
+         <item slot="1" unbreakable="true">bow</item>
+         <item slot="8" amount="16">arrow</item>
+         <chestplate unbreakable="true">iron chestplate</chestplate>
+         <effect duration="oo" amplifier="1">night vision</effect>
+      </kit>
+      <kit id="blue-spawn" parents="spawn">
+         <helmet color="AF002A" unbreakable="true">leather helmet</helmet>
+         <leggings color="AF002A" unbreakable="true">leather leggings</leggings>
+         <boots color="AF002A" unbreakable="true">leather boots</boots>
+      </kit>
+      <kit id="red-spawn" parents="spawn">
+         <helmet color="6E6EF9" unbreakable="true">leather helmet</helmet>
+         <leggings color="6E6EF9" unbreakable="true">leather leggings</leggings>
+         <boots color="6E6EF9" unbreakable="true">leather boots</boots>
+      </kit>
+      <kit id="obs">
+         <effect duration="oo" amplifier="1">night vision</effect>
+      </kit>
+      <kit id="flag-kit" force="true">
+         <potion duration="oo" amplifier="-3">health boost</potion>
+         <potion duration="3" amplifier="2">absorption</potion>
+      </kit>
+      <kit id="reset-health" force="true">
+         <potion duration="1" amplifier="0">health boost</potion>
+         <potion duration="1" amplifier="10">regeneration</potion>
+      </kit>
+   </kits>
+   <itemremove>
+      <item>leather helmet</item>
+      <item>iron chestplate</item>
+      <item>leather leggings</item>
+      <item>leather boots</item>
+      <item>stone sword</item>
+      <item>banner</item>
+      <item>bow</item>
+      <item>arrow</item>
+      <item>golden apple</item>
+   </itemremove>
+   <score>
+      <limit>300</limit>
+      <deaths>0</deaths>
+      <kills>0</kills>
+   </score>
+   <flags>
+      <flag id="flag" name="Flag" post="post" points-rate="1" shared="true" pickup-kit="flag-kit" drop-kit="reset-health">
+         <post id="post" return-time="0s" respawn-time="7s">
+            <block>9536.5,3,-239.5</block>
+            <block>9555.5,4,-220.5</block>
+            <block>9517.5,4,-258.5</block>
+         </post>
+      </flag>
+   </flags>
+   <filters>
+      <team id="only-blue">blue</team>
+      <team id="only-red">red</team>
+   </filters>
+   <regions>
+      <union id="spawns">
+         <cuboid min="9503,7,-209" max="9506,7,-209.5" />
+         <cuboid min="9569,7,-270" max="9566,7,-269.5" />
+      </union>
+      <apply block="never">
+         <rectangle min="-oo,-oo" max="oo,oo" />
+      </apply>
+      <!--Spawn JumpPads-->
+      <apply velocity="0,0.5,1.5">
+         <region>
+            <cylinder base="9567.5,7,-250.5" radius="0.5" height="2" />
+         </region>
+      </apply>
+      <apply velocity="0,0.5,-1.5">
+         <region>
+            <cylinder base="9505.5,7,-228.5" radius="0.5" height="2" />
+         </region>
+      </apply>
+      <apply velocity="1.5,0.5,0.0">
+         <region>
+            <cylinder base="9525.5,7,-208.5" radius="0.5" height="2" />
+         </region>
+      </apply>
+      <apply velocity="-1.5,0.5,0.0">
+         <region>
+            <cylinder base="9547.5,7,-270.5" radius="0.5" height="2" />
+         </region>
+      </apply>
+      <!-- Tower Jump -->
+      <apply velocity="-0,1.1,0.1">
+         <region>
+            <cylinder base="9536.5,2,-272.5" radius="0.5" height="2" />
+         </region>
+      </apply>
+      <apply velocity="0,1.1,-0.1">
+         <region>
+            <cylinder base="9536.5,2,-206.5" radius="0.5" height="2" />
+         </region>
+      </apply>
+      <apply velocity="0.1,1.1,0">
+         <region>
+            <cylinder base="9503.5,2,-239.5" radius="0.5" height="2" />
+         </region>
+      </apply>
+      <apply velocity="0.1,1.1,0">
+         <region>
+            <cylinder base="9503.5,2,-239.5" radius="0.5" height="2" />
+         </region>
+      </apply>
+      <apply velocity="-0.1,1.1,0">
+         <region>
+            <cylinder base="9569.5,2,-239.5" radius="0.5" height="2" />
+         </region>
+      </apply>
+      <!-- Spawn Pads -->
+      <apply velocity="-0.4,1.2,-0.4">
+         <region>
+            <cylinder base="9569.5,2,-206.5" radius="0.5" height="2" />
+         </region>
+      </apply>
+      <apply velocity="0.4,1.2,0.4">
+         <region>
+            <cylinder base="9503.5,2,-272.5" radius="0.5" height="2" />
+         </region>
+      </apply>
+   </regions>
+   <timelock>on</timelock>
+   <disabledamage>
+      <damage>fall</damage>
+   </disabledamage>
+   <hunger>
+      <depletion>off</depletion>
+   </hunger>
+   <killreward>
+      <item>golden apple</item>
+      <item amount="4">arrow</item>
+   </killreward>
+</map>

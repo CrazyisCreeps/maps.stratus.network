@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Starscraper</name>
+<version>1.0.1</version>
+<objective>Capture the other team's wools!</objective>
+<authors>
+	<author uuid="c0f05391-054c-4cd4-9968-588fecbd4e16"/><!--Razrivon-->
+</authors>
+<contributors>
+	<contributor uuid="bf331953-4f92-43ee-8abc-7544b8234936" contribution="Manual Labor"/><!--ViceTechnicolour-->
+	<contributor uuid="57f5535d-6b9e-4013-ad71-e2cc63ec8d7c" contribution="Gameplay Balancing"/><!--Itzameluigi-->
+	<contributor uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="XML Coding"/><!--Obelistics-->
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" max="25">Red Team</team>
+    <team id="blue-team" color="blue" max="25">Blue Team</team>
+</teams>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" enchantment="infinity" unbreakable="true"/>
+        <item slot="2" material="iron pickaxe" unbreakeble="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+		<item slot="4" material="wood" amount="64"/>
+        <item slot="6" material="shears" unbreakable="true"/>
+		<item slot="7" material="golden apple" amount="1"/>
+        <item slot="8" name="Star Fish" material="cooked fish" amount="64"/>
+        <item slot="28" material="arrow" amount="1"/>
+        <effect duration="3s" amplifier="5">resistance</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <chestplate material="leather chestplate" color="993333" unbreakable="true" prevent-sharing="true"/>
+        <boots material="leather boots" color="993333" unbreakable="true" prevent-sharing="true"/>
+        <helmet material="leather helmet" color="993333" unbreakable="true" prevent-sharing="true"/>
+		<item slot="6" material="stained glass" damage="14" amount="64"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <chestplate material="leather chestplate" color="334CB2" unbreakable="true" prevent-sharing="true"/>
+        <boots material="leather boots" color="334CB2" unbreakable="true" prevent-sharing="true"/>
+        <helmet material="leather helmet" color="334CB2" unbreakable="true" prevent-sharing="true"/>
+		<item slot="6" material="stained glass" damage="11" amount="64"/>
+    </kit>
+</kits>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="no-void">
+        <void/>
+    </not>
+	<any id="only-iron">
+        <material>iron block</material>
+    </any>
+    <all id="cobwebs-red">
+				<team>red-team</team>
+        <material>web</material>
+    </all>
+		<all id="cobwebs-blue">
+				<team>blue-team</team>
+				<material>web</material>
+		</all>
+</filters>
+<regions>
+		<union id="wool-monument">
+				<cuboid min="-82.5,16,-198.5" max="-78.5,21,-200.5"/>
+				<cuboid min="-82.5,17,-202.5" max="-78.5,22,-204.5"/>
+				<cuboid min="-82.5,16,25.5" max="-78.5,21,23.5"/>
+				<cuboid min="-82.5,17,27.5" max="-78.5,22,29.5"/>
+		</union>
+		<union id="red-wool-rooms">
+				<rectangle min="-143.5,57.5" max="-159.5,41.5"/> <!--orange-->
+				<rectangle min="-17.5,41.5" max="-1.5,57.5"/> <!--yellow-->
+		</union>
+		<union id="blue-wool-rooms">
+				<rectangle min="-17.5,-232.5" max="-1.5,-216.5"/> <!--magenta-->
+				<rectangle min="-143.5,-216.5" max="-159.5,-232.5"/> <!--light blue-->
+		</union>
+		<union id="red-wool-room-front">
+				<cuboid min="-138.5,22,42.5" max="-142.5,oo,56.5"/> <!--orange-->
+				<cuboid min="-22.5,22,56.5" max="-18.5,oo,42.5"/> <!--yellow-->
+		</union>
+		<union id="blue-wool-room-front">
+				<cuboid min="-22.5,22,-217.5" max="-18.5,oo,-231.5"/> <!--magenta-->
+				<cuboid min="-138.5,22,-231.5" max="-142.5,oo,-217.5"/> <!--light blue-->
+		</union>
+		<union id="red-spawn-room">
+				<cylinder base="-80.5,0,73.5" radius="16" height="oo"/>
+				<rectangle min="-72.5,59.5" max="-88.5,53.5"/>
+				<rectangle min="-86.5,52.5" max="-74.5,42.5"/>
+		</union>
+		<union id="blue-spawn-room">
+				<cylinder base="-80.5,0,-248.5" radius="16" height="oo"/>
+				<rectangle min="-88.5,-234.5" max="-72.5,-228.5"/>
+				<rectangle min="-74.5,-227.5" max="-86.5,-217.5"/>
+	  </union>
+		<union id="wool-placements">
+		    <block location="-81,19,24" id="magenta-wool"/>
+		    <block location="-81,20,28" id="light-blue-wool"/>
+		    <block location="-81,19,-200" id="orange-wool"/>
+			  <block location="-81,20,-204" id="yellow-wool"/>
+	  </union>
+		<union id="spawn-rooms">
+				<region id="red-spawn-room"/>
+				<region id="blue-spawn-room"/>
+		</union>
+        <union id="spawn-points">
+            <cuboid id="red-spawn" min="-81.5,29,77.5" max="-79.5,34,79.5"/>
+            <cuboid id="blue-spawn" min="-81.5,29,-252.5" max="-79.5,34,-254.5"/>
+        </union>
+		<above id="above-37" y="37"/>
+        <apply block="never" message="You may not place blocks on the spawn points." region="spawn-points"/>
+		<apply block="only-iron" message="You may only break iron at spawn." region="spawn-rooms"/>
+		<apply enter="only-red" message="You may not enter the other teams spawn." region="red-spawn-room"/>
+		<apply enter="only-blue" message="You may not enter the other teams spawn." region="blue-spawn-room"/>
+		<apply block="cobwebs-blue" message="You may not break the wool room." region="red-wool-rooms"/>
+		<apply block="cobwebs-red" message="You may not break the wool room." region="blue-wool-rooms"/>
+		<apply enter="only-red" message="You may enter your own wool room." region="blue-wool-rooms"/>
+		<apply enter="only-blue" message="You may enter your own wool room." region="red-wool-rooms"/>
+		<apply block="only-red" enter="only-red" message="You may not break the wool room." region="blue-wool-room-front"/>
+		<apply block="only-blue" enter="only-blue" message="You may not break the wool room." region="red-wool-room-front"/>
+		<apply block="never" message="You may not edit the wool monument." region="wool-monument"/>
+		<apply block="never" message="You may not modify this region" region="above-37"/>
+		<apply block-place="no-void" message="You may not place blocks in this area"/>
+</regions>
+<wools craftable="false">
+    <wool team="red-team" color="magenta" location="-81,19,24" monument="magenta-wool"/>
+	<wool team="red-team" color="light blue" location="-81,20,28" monument="light-blue-wool"/>
+	<wool team="blue-team" color="orange" location="-81,19,-200" monument="orange-wool"/>
+    <wool team="blue-team" color="yellow" location="-81,20,-204" monument="yellow-wool"/>
+</wools>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="-180">
+            <cylinder base="-80,30,78" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="0">
+            <cylinder base="-80,30,-253" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-45">
+            <cylinder base="-80,45,-87" radius="2" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<kill-reward>
+	<item material="golden apple"/>
+</kill-reward>
+<renewables>
+    <renewable rate="2.5" grow="false" particles="true" sound="true" avoid-players="4">
+        <region>
+            <cuboid min="-91,0,47" max="-68,37,83"/> <!--red base respawn-->
+            <cuboid min="-71,0,-223" max="-94,37,-259"/> <!--blue base respawn-->
+        </region>
+        <renew-filter>
+            <any>
+                <material>iron block</material>
+            </any>
+        </renew-filter>
+        <replace-filter>
+            <any>
+                <material>air</material>
+            </any>
+        </replace-filter>
+    </renewable>
+</renewables>
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>shears</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>cooked fish</item>
+	<item>stained glass</item>
+	<item>wood</item>
+</itemremove>
+<timelock>on</timelock>
+<maxbuildheight>37</maxbuildheight>
+</map>

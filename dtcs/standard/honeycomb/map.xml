@@ -1,0 +1,176 @@
+<map proto="1.4.2">
+<name>Honeycomb</name>
+<version>1.1.0</version>
+<objective>Leak the enemy's core 4 blocks.</objective>
+<phase>development</phase>
+<authors>
+	<author uuid="c0f05391-054c-4cd4-9968-588fecbd4e16"/> <!-- Razrivon -->
+</authors>
+<contributors>
+	<contributor uuid="57f5535d-6b9e-4013-ad71-e2cc63ec8d7c" contribution="XML"/> <!-- ItzaMeLuigi -->
+</contributors>
+<teams>
+	<team id="red" color="dark red" max="30">Red</team>
+	<team id="blue" color="blue" max="30">Blue</team>
+</teams>
+<kits>
+	<kit id="spawn">
+		<item slot="0" material="iron sword"/>
+		<item slot="1" enchantment="arrow infinite" material="bow"/>
+		<item slot="2" material="diamond pickaxe"/>
+		<item slot="3" enchantment="durability:2;dig speed:1" material="iron axe"/>
+		<item slot="4" amount="64" material="smooth brick"/>
+		<item slot="5" amount="32" material="glass"/>
+		<item slot="6" material="water_bucket"/>
+		<item slot="7" material="golden apple"/>
+		<item slot="8" amount="64" material="cooked beef"/>
+		<item slot="27" amount="32" material="wood"/>
+		<item slot="28" material="arrow"/>
+	</kit>
+	<kit id="red-kit" parents="spawn">
+		<helmet color="b02e26" unbreakable="true" enchantment="protection explosions:1" material="leather helmet"/>
+		<chestplate color="b02e26" enchantment="protection explosions:1" unbreakable="true" material="leather chestplate"/>
+		<boots color="b02e26" unbreakable="true" material="leather boots"/>
+	</kit>
+	<kit id="blue-kit" parents="spawn">
+		<helmet color="3c44aa" unbreakable="true" enchantment="protection explosions:1" material="leather helmet"/>
+		<chestplate color="3c44aa" enchantment="protection explosions:1" unbreakable="true" material="leather chestplate"/>
+		<boots color="3c44aa" unbreakable="true" material="leather boots"/>
+	</kit>
+</kits>
+<spawns>
+	<spawn team="red" kit="red-kit">
+		<region yaw="0">
+			<cuboid min="22.5,23,-33.5" max="20.5,23,-31.5"/>
+		</region>
+	</spawn>
+	<spawn team="blue" kit="blue-kit">
+		<region yaw="180">
+			<cuboid min="-95.5,23,32.5" max="-93.5,23,30.5"/>
+		</region>
+	</spawn>
+	<default>
+		<region yaw="180">
+			<cuboid min="-37.5,51,76.5" max="-34.5,51,72.5"/>
+		</region>
+	</default>
+</spawns>
+<filters>
+	<team id="only-red">red</team>
+	<team id="only-blue">blue</team>
+</filters>
+<regions>
+	<negative id="non-playble">
+		<rectangle id="playble" min="41.5,-44.5" max="-114.5,43.5"/>
+		<union id="spawns">
+			<cuboid id="red-spawn" min="24.5,20,-35.5" max="17.5,31,-26.5"/>
+			<cuboid id="blue-spawn" min="-98.5,20,34.5" max="-90.5,31,25.5"/>
+		</union>
+	</negative>
+	<apply block="never" message="You may not edit this area." region="non-playble"/>
+	<apply block="never" message="You may not edit the spawns." region="spawns"/>
+	<apply enter="only-red" message="You may not enter the enemy spawn." region="red-spawn"/>
+	<apply enter="only-blue" message="You may not enter the enemy spawn." region="blue-spawn"/>
+</regions>
+<cores material="obsidian" mode-changes="true" leak="2">
+	<core team="red">
+		<region>
+			<cuboid min="23.5,37,-3.5" max="18.5,43,1.5"/>
+		</region>
+	</core>
+	<core team="blue">
+		<region>
+			<cuboid min="-92.5,37,1.5" max="-97.5,43,-3.5"/>
+		</region>
+	</core>
+</cores>
+<modes>
+    <mode after="15m" material="gold block" name="GOLD CORE MODE"/>
+    <mode after="25m" material="Glass" name="GLASS CORE MODE"/>
+</modes>
+<crafting>
+    <!-- Add custom shaped recipe and disable vanilla recipes for the same item. -->
+    <shaped override="true">
+        <result material="stone pickaxe">
+            <enchantment level="2">durability</enchantment>
+        </result>
+        <shape>
+            <row>FFF</row>
+            <row>.S.</row>
+            <row>.S.</row>
+        </shape>
+        <ingredient symbol="F">flint</ingredient>
+        <ingredient symbol="S">stick</ingredient>
+    </shaped>
+
+    <!-- 3x1 recipe, cheaper gold ingots -->
+    <shaped override="true">
+        <result material="gold helmet">
+            <enchantment level="1">PROTECTION_EXPLOSIONS</enchantment>
+        </result>
+        <shape>
+            <row>GGG</row>
+            <row>G.G</row>
+        </shape>
+        <ingredient symbol="G">gold ingot</ingredient>
+    </shaped>
+	<shaped override="true">
+        <result material="gold chestplate">
+            <enchantment level="1">PROTECTION_EXPLOSIONS</enchantment>
+        </result>
+        <shape>
+            <row>G.G</row>
+            <row>GGG</row>
+            <row>GGG</row>
+        </shape>
+        <ingredient symbol="G">gold ingot</ingredient>
+    </shaped>
+	<shaped override="true">
+        <result material="gold leggings">
+            <enchantment level="1">PROTECTION_EXPLOSIONS</enchantment>
+        </result>
+        <shape>
+            <row>GGG</row>
+            <row>G.G</row>
+            <row>G.G</row>
+        </shape>
+        <ingredient symbol="G">gold ingot</ingredient>
+    </shaped>
+	<shaped override="true">
+        <result material="gold boots">
+            <enchantment level="1">PROTECTION_EXPLOSIONS</enchantment>
+        </result>
+        <shape>
+            <row>G.G</row>
+            <row>G.G</row>
+        </shape>
+        <ingredient symbol="G">gold ingot</ingredient>
+    </shaped>
+</crafting>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron axe</tool>
+    <tool>diamond pickaxe</tool>
+</toolrepair>
+<itemremove>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>leather boots</item>
+	<item>smooth brick</item>
+	<item>glass</item>
+	<item>stone</item>
+	<item>golden apple</item>
+	<item>bucket</item>
+	<item>arrow</item>
+	<item>diamond pickaxe</item>
+	<item>iron axe</item>
+	<item>iron sword</item>
+	<item>bow</item>
+</itemremove>
+<killreward>
+    <item material="golden apple"/>
+    <item material="wood" amount="8"/>
+</killreward>
+<maxbuildheight>76</maxbuildheight>
+</map>

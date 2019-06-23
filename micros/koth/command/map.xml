@@ -1,0 +1,81 @@
+<map proto="1.4.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/PGMTools/PGMSchema/master/map.xsd">
+<name>Command</name>
+<version>1.0.0</version>
+<objective>Be the first team to reach 500 points!</objective>
+<authors>
+	<author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- Strangey -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue"     max="5" max-overfill="6">Blue</team>
+    <team id="red-team"  color="dark red" max="5" max-overfill="6">Red</team>
+</teams>
+<kits>
+    <kit id="main-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="8" amount="16" 				material="arrow"/>
+        <chestplate    unbreakable="true" material="chainmail chestplate"/>
+        <boots 				 unbreakable="true" material="iron boots"/>
+        <effect duration="4" amplifier="10">resistance</effect>
+        <effect duration="4" amplifier="10">regeneration</effect>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <helmet 	unbreakable="true" color="0066cc" material="leather helmet"  />
+        <leggings unbreakable="true" color="0066cc" material="leather leggings"/>
+    </kit>
+    <kit id="red-kit"  parents="main-kit">
+        <helmet 	unbreakable="true" color="cd0000" material="leather helmet"		/>
+        <leggings unbreakable="true" color="cd0000" material="leather leggings"	/>
+    </kit>
+</kits>
+<spawns>
+    <default 																yaw="180" region="spawn-default"/>
+    <spawn team="blue-team" kit="blue-kit"  yaw="90" 	region="spawn-blue"		/>
+    <spawn team="red-team" 	kit="red-kit" 	yaw="-90" region="spawn-red"		/>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red"	>red-team</team>
+</filters>
+<regions>
+		<apply block="never"/>
+		<point id="spawn-default">0.5,27,27.5</point>
+		<point id="spawn-red"	>-36.5,10,0.5</point>
+		<point id="spawn-blue">37.5,10,0.5</point>
+    <cuboid   id="capture-top" min="-3,10,28" max="4,13,21"/>
+    <cuboid   id="capture-mid" min="-3,7,4"   max="4,7,-3"/>
+    <cuboid   id="capture-bot" min="-3,5,-14" max="4,5,-21"/>
+    <cylinder id="indicator-top" base="0.5,8,24.5"  radius="4" height="2"/>
+    <cylinder id="indicator-mid" base="0.5,6,0.5"   radius="4" height="2"/>
+    <cylinder id="indicator-bot" base="0.5,4,-17.5" radius="4" height="2"/>
+</regions>
+<control-points incremental="true" show-progress="true" neutral-state="true" required="false" capture-time="5s" points="1">
+    <control-point name="Top"     progress="indicator-top" captured="indicator-top" capture="capture-top"/>
+    <control-point name="Middle"  progress="indicator-mid" captured="indicator-mid" capture="capture-mid"/>
+    <control-point name="Bottom"  progress="indicator-bot" captured="indicator-bot" capture="capture-bot"/>
+</control-points>
+<kill-reward>
+    <item amount="8" material="arrow"/>
+    <item 					 material="golden apple"/>
+</kill-reward>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<score>
+	<limit>750</limit>
+</score>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<respawn delay="3.5s"/>
+</map>

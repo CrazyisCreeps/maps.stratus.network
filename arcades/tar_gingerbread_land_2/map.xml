@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>TAR Gingerbread Land 2</name>
+<version>1.0</version>
+<objective>Get to the Finish Line!</objective>
+<authors>
+    <author uuid="657b93a7-3f50-4e94-ae3b-189506124836"/> <!-- Tjandra -->
+    <author uuid="2ca8072f-74be-4798-85b8-bbce03aa91af"/> <!-- Tywnis -->
+</authors>
+<players max="10" max-overfill="12" spread="true" colors="true"/>
+<spawns>
+    <spawn kit="spawn">
+        <regions yaw="-90"><cuboid min="64,2,16" max="64,2,26"/></regions>
+    </spawn>
+    <default>
+        <regions yaw="90"><cuboid min="72,26,102" max="67,26,96"/></regions>
+    </default>    
+</spawns>
+<blitz>
+    <lives>3</lives>    
+</blitz>
+<kits>
+    <kit id="spawn">
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="boat-kit">
+        <item slot="0" unbreakable="true">boat</item>
+        <item slot="1" unbreakable="true">boat</item>
+    </kit>
+    <kit id="observers">
+        <potion duration="oo" amplifier="1">speed</potion>
+    </kit>
+</kits>
+<portals>
+    <!-- Teleport the player from portal-entrance to a random point inside portal-exit -->
+    <portal region="portal-entrance">
+        <destination><region id="portal-exit"/></destination>
+    </portal>
+</portals>
+<regions>
+    <cuboid id="portal-entrance" min="180.5,7,20.5" max="182.5,9,22.5"/>
+    <cuboid id="portal-exit" min="229,19,31" max="228,22,11"/>
+    <apply kit="boat-kit">
+        <region>
+            <cuboid min="234,18,37" max="239,22,6"/>
+        </region>
+    </apply>
+</regions>
+<score>
+    <box points="1">
+        <region><cuboid id="FinishLine" min="98,0,116" max="93,8,81"/></region>
+    </box>
+    <limit>1</limit>
+</score>
+<time>5m</time>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>fly into wall</damage>
+    <damage>entity attack</damage>
+    <damage>suffocation</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

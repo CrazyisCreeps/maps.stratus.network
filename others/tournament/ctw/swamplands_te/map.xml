@@ -1,0 +1,147 @@
+<map proto="1.4.2">
+<name>Swamplands TE</name>
+<version>1.1.1</version>
+<objective>Capture the enemy's wool!</objective>
+<authors>
+    <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- Strangey -->
+</authors>
+<contributors>
+    <contributor uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9" contribution="New XML"/> <!-- Xerocoles -->
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" max="5">Red</team>
+    <team id="blue-team" color="blue" max="5">Blue</team>
+</teams>
+<spawns>
+    <default yaw="-90">
+        <region>
+            <cuboid min="-51.5,30,1.5" max="-54.5,30,-1.5"/>
+        </region>
+    </default>
+    <spawn team="red-team" kit="red-kit" yaw="-90">
+        <region>
+            <cuboid min="-29,6,85.5" max="-27,6,87.5"/>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit" yaw="90">
+        <region>
+            <cuboid min="29.5,6,-85.5" max="27.5,6,-87.5"/>
+        </region>
+    </spawn>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="28" material="arrow"/>
+        <item slot="31" material="iron spade"/>
+        <item slot="2" unbreakable="true" enchantment="efficiency:1" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" amount="64" damage="5" material="wood"/>
+        <item slot="5" amount="32" material="glass"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="64" material="golden carrot"/>
+        <effect duration="3" amplifier="4">resistance</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <helmet color="993333" material="leather helmet"/>
+        <chestplate color="993333" material="leather chestplate"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <helmet color="334CB2" material="leather helmet"/>
+        <chestplate color="334CB2" material="leather chestplate"/>
+    </kit>
+</kits>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="void-filter">
+        <void/>
+    </not>
+    <any id="only-iron">
+        <material>iron block</material>
+    </any>
+</filters>
+<regions>
+    <union id="spawns">
+        <union id="blue-spawn">
+            <rectangle min="3,-77" max="37,-96"/>
+        </union>
+        <union id="red-spawn">
+            <rectangle min="-3,77" max="-37,96"/>
+        </union>
+    </union>
+    <union id="woolrooms">
+        <union id="purple-wr">
+            <rectangle min="1,61" max="12,45"/>
+        </union>
+        <union id="orange-wr">
+           <rectangle min="-1,-61" max="-12,-45"/>
+        </union>
+    </union>
+    <union id="woolrooms-no-enter">
+        <union id="purple-wr-no-enter">
+           <cuboid min="1,40,56" max="12,0,45"/>
+           <cuboid min="1,40,56" max="12,10,61"/>
+        </union>
+        <union id="orange-wr-no-enter">
+           <cuboid min="-1,40,-56" max="-12,0,-45"/>
+           <cuboid min="-1,40,-56" max="-12,10,-61"/>
+        </union>
+    </union>
+    <apply block-place="never" region="spawns" message="You may not edit this area!"/>
+    <apply block="only-iron" region="spawns" message="You may not edit this area!"/>
+    <apply use="only-red" region="red-spawn"/>
+    <apply use="only-blue" region="blue-spawn"/>
+    <apply enter="only-blue" region="purple-wr-no-enter" message="You may not enter your own woolroom!"/>
+    <apply enter="only-red" region="orange-wr-no-enter" message="You may not enter your own woolroom!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply block="never" region="woolrooms" message="You may not edit the wool room!"/>
+    <apply block-place="void-filter" block-break="always" region="everywhere" message="You may not edit the void!"/>
+</regions>
+<kill-rewards>
+    <kill-reward>
+        <item amount="16" damage="5">wood</item>
+    </kill-reward>
+    <kill-reward>
+        <item>golden apple</item>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>wood</item>
+    <item>glass</item>
+    <item>golden carrot</item>
+    <item>arrow</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+<wools>
+    <wool team="blue-team" color="purple" craftable="false" location="8.5,14,49.5">
+        <monument><block>-20.5,15,-73.5</block></monument>
+    </wool>
+    <wool team="red-team" color="orange" craftable="false" location="-8.5,14,-49.5">
+        <monument><block>20.5,15,73.5</block></monument>
+    </wool>
+</wools>
+<crafting>
+    <disable>boat</disable>
+    <disable>boat spruce</disable>
+    <disable>boat birch</disable>
+    <disable>boat jungle</disable>
+    <disable>boat acacia</disable>
+    <disable>boat dark oak</disable>
+    <disable>minecart</disable>
+</crafting>
+<maxbuildheight>25</maxbuildheight>
+<timelock>on</timelock>
+</map>

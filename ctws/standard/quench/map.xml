@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Quench</name>
+<version>1.1.0</version>
+<objective>Capture and place the enemies wool before they get yours!/</objective>
+<!--Authors-->
+<authors>
+	<author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="Map building and XML"/><!--Obelistics-->
+</authors>
+<!--Extra things-->
+<timelock>on</timelock>
+<maxbuildheight>20</maxbuildheight>
+<!--Teams-->
+<teams>
+	<team id="red-team" color="dark red" max="10">Red</team>
+	<team id="blue-team" color="blue" max="10">Blue</team>
+</teams>
+<!--Kits-->
+<kits>
+	<kit id="spawn-kit" force="true">
+		<item slot="0" material="stone sword" unbreakable="true"/>
+		<item slot="1" material="bow" unbreakable="true"/>
+		<item slot="2" material="iron pickaxe" unbreakable="true"/>
+		<item slot="3" material="stone axe" unbreakable="true"/>
+		<item slot="4" material="wood" amount="24" damage="1"/>
+		<item slot="7" material="arrow" amount="64"/>
+		<item slot="8" material="golden carrot" amount="36"/>
+	</kit>
+	<kit id="red-kit" parents="spawn-kit">
+		<item slot="5" amount="36" material="stained clay" damage="14"/>
+	</kit>
+	<kit id="blue-kit" parents="spawn-kit">
+		<item slot="5" amount="36" material="stained clay" damage="11"/>
+	</kit>
+</kits>
+<!--Spawns-->
+<spawns>
+	<spawn team="red-team" kit="red-kit">
+		<region yaw="90">
+			<cylinder base="997.5,12.5,-581.5" radius="2" height="0"/>
+		</region>
+	</spawn>
+	<spawn team="blue-team" kit="blue-kit">
+		<region yaw="-90">
+			<cylinder base="817.5,12.5,-581.5" radius="2" height="0"/>
+		</region>
+	</spawn>
+	<default>
+		<region yaw="180">
+			<cylinder base="907.5,33,-581.5" radius="2" height="0"/>
+		</region>
+	</default>
+</spawns>
+<!--Filters-->
+<filters>
+	<team id="red-only">red-team</team>
+	<team id="blue-only">blue-team</team>
+	<not id="no-void">
+        <void/>
+    </not>
+</filters>
+<!--Regions-->
+<regions>
+	<union id="orange-room">
+		<rectangle min="956,-589" max="941,-574"/>
+	</union>
+    <cuboid id="orange-barrier" min="938,0,-589" max="937,oo,-574"/>
+	<union id="light-blue-room">
+		<rectangle min="859,-574" max="874,-589"/>
+	</union>
+    <cuboid id="light-blue-barrier" min="877,0,-574" max="878,oo,-589"/>
+	<union id="red-spawn">
+		<rectangle min="990,-589" max="1005,-574"/>
+	</union>
+	<union id="blue-spawn">
+		<rectangle min="825,-574" max="810,-589"/>
+	</union>
+	<!--Applying filters-->
+	<apply region="orange-room" enter="blue-only" message="You cannot enter your own wool room!"/>
+	<apply region="light-blue-room" enter="red-only" message="You cannot enter your own wool room!"/>
+    <apply region="orange-barrier" enter="red-only" message="You may not cross this region!"/>
+    <apply region="light-blue-barrier" enter="blue-only" message="You may not cross this region!"/>
+	<apply region="orange-room" block="blue-only" message="You cannot modify your own wool room!"/>
+	<apply region="light-blue-room" block="red-only" message="You cannot modify your own wool room!"/>
+	<apply region="red-spawn" block="never" message="You cannot modify the spawn!"/>
+	<apply region="blue-spawn" block="never" message="You cannot modify the spawn!"/>
+	<apply region="red-spawn" enter="red-only" message="You cannot enter the enemies spawn!"/>
+	<apply region="blue-spawn" enter="blue-only" message="You cannot enter the enemies spawn!"/>
+	<apply block="no-void" region="everywhere" message="You cannot modify the void!"/>
+</regions>
+<!--Wools-->
+<wools>
+	<wool team="red-team" color="light blue" location="866.5,9,-581.5">
+		<monument><block>992,13,-582</block></monument>
+	</wool>
+	<wool team="blue-team" color="orange" location="948.5,9,-581.5">
+		<monument><block>822,13,-582</block></monument>
+	</wool>
+</wools>
+<!--Itemremove-->
+<itemremove>
+	<item>stone sword</item>
+	<item>bow</item>
+	<item>arrow</item>
+	<item>golden carrot</item>
+	<item>double step</item>
+	<item>log</item>
+	<item>redstone</item>
+	<item>redstone torch on</item>
+	<item>stone pickaxe</item>
+	<item>stone axe</item>
+</itemremove>
+<!--Kill-rewards-->
+<kill-rewards>
+	<item material="golden apple"/>
+	<item material="arrow" amount="8"/>
+	<item material="wood" damage="1" amount="8"/>
+</kill-rewards>
+<!--End of XML-->
+</map>

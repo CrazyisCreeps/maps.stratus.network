@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Immitis FFA</name>
+<version>0.1.3</version>
+<rage/>
+<score>
+    <kills>1</kills>
+    <deaths>1</deaths>
+</score>
+<time>8m</time>
+<objective>Get the most kills in 8 minutes!</objective>
+<players min="2" max="28" max-overfill="28"/>
+<authors>
+    <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- JTerwiesch -->
+</authors>
+<contributors>
+    <contributor uuid="3fbec7dd-0a5f-40bf-9d11-885a54507112" contribution="XML"/> <!-- last_username -->
+</contributors>
+<filters>
+    <deny id="deny-unbreakable-blocks">
+        <not>
+            <any>
+                <material>crops</material>
+                <material>sugar cane block</material>
+                <material>long grass</material>
+                <material>yellow flower</material>
+                <material>red rose</material>
+                <material>sapling</material>
+                <material>carrot</material>
+                <material>potato</material>
+                <material>double plant</material>
+            </any>
+        </not>
+    </deny>
+</filters>
+<regions>
+    <apply block="deny-unbreakable-blocks">
+        <region>
+            <rectangle id="playable" min="-oo,-oo" max="oo,oo"/>
+        </region>
+    </apply>
+</regions>
+<kits>
+    <kit id="spawn-kit">
+        <potion duration="3" amplifier="10">damage resistance</potion>
+        <helmet locked="true">leather helmet</helmet>
+        <chestplate locked="true">leather chestplate</chestplate>
+        <leggings locked="true">leather leggings</leggings>
+        <boots locked="true">leather boots</boots>
+        <item slot="0" unbreakable="true" enchantment="damage all:10">diamond sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow damage:10" lore="`aOne-shot kill!">bow</item>
+        <item slot="2" amount="2">arrow</item>
+        <item slot="3" amount="32">bread</item>
+        <game-mode>adventure</game-mode>
+        <double-jump recharge-time="5s"/>
+    </kit>
+</kits>
+<keep-potion-bottles/>
+<killreward>
+    <item>arrow</item>
+</killreward>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<spawns>
+    <default yaw="-135">
+        <regions>
+            <cylinder base="-41.5,27,21.5" radius="4" height="0"/>
+        </regions>
+    </default>
+    <spawn kit="spawn-kit" spread="true">
+        <regions>
+            <point yaw="90">-7,24,11</point>
+            <point yaw="25">-2,30,2</point>
+            <point yaw="180">-18,24,16</point>
+            <point yaw="90">-22,23,-5</point>
+            <point yaw="-45">-45,22,-12</point>
+            <point yaw="-16">-34,6,-17</point>
+            <point yaw="-42">-28,16,-48</point>
+            <point yaw="145">-10,8,-30</point>
+            <point yaw="35">-2,9,-56</point>
+            <point yaw="0">8,16,-72</point>
+            <point yaw="-112">-1,24,-67</point>
+            <point yaw="-45">11,23,-76</point>
+            <point yaw="-160">21,21,-55</point>
+            <point yaw="-122">21,7,-94</point>
+            <point yaw="-105">71,12,-97</point>
+            <point yaw="64">75,22,-86</point>
+            <point yaw="90">64,22,-75</point>
+            <point yaw="-50">66,28,-80</point>
+            <point yaw="90">74,22,-67</point>
+            <point yaw="180">36,23,-42</point>
+            <point yaw="0">38,26,-26</point>
+            <point yaw="84">35,25,-5</point>
+            <point yaw="-110">7,24,0</point>
+            <point yaw="50">50,5,-51</point>
+            <point yaw="100">2,12,-35</point>
+            <point yaw="-90">16,9,-33</point>
+            <point yaw="-25">13,16,-44</point>
+            <point yaw="-45">21,8,-25</point>
+            <point yaw="90">37,10,-17</point>
+            <point yaw="50">40,6,1</point>
+            <point yaw="-115">9,8,21</point>
+            <point yaw="0">9,10,-1</point>
+            <point yaw="-45">0,7,-18</point>
+            <point yaw="130">-9,8,-29</point>
+            <point yaw="180">-4,42,11</point>
+        </regions>
+    </spawn>
+</spawns>
+<itemremove>
+    <item>diamond sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>bread</item>
+</itemremove>
+</map>

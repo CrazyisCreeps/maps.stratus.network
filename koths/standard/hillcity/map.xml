@@ -1,0 +1,164 @@
+<map proto="1.4.1">
+<gamemode>koth</gamemode>
+<name>Hillcity</name>
+<version>1.0.2</version>
+<objective>Be the first team to reach 750 points or own all hills!</objective>
+<authors>
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6"/>
+    <!-- rockymine -->
+</authors>
+<timelock>on</timelock>
+<broadcasts>
+    <tip after="5s">`rEach team owns its own `3Plaza-hill `rwhen the match starts. Go capture the other `3Plazas `rto gain points!</tip>
+	<tip after="5s">`3Plazas `r(hills) are marked by `3Beacon-beams`r!</tip>
+    <tip after="10s">`rThere are some `6`lGoodies `rhidden inside the map!</tip>
+	<tip after="15s">`rYou get `lone `r`6`lGolden Apple `rper kill!</tip>
+</broadcasts>
+<teams>
+    <team id="red" color="dark red" max="6">Red</team>
+    <team id="blue" color="blue" max="6">Blue</team>
+    <team id="lime" color="green" max="6">Lime</team>
+    <team id="yellow" color="yellow" max="6">Yellow</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <clear/>
+	    <item slot="0" unbreakable="true">stone sword</item>
+		<item slot="1" unbreakable="true">bow</item>
+		<item slot="2" amount="24">arrow</item>
+		<item slot="8" amount="1">golden apple</item>
+		<effect amplifier="1" duration="5">heal</effect>
+        <effect amplifier="1" duration="5">damage resistance</effect>
+		<chestplate unbreakable="true" locked="true">gold chestplate</chestplate>
+		<boots unbreakable="true" locked="true">gold boots</boots>
+	</kit>
+	<kit id="red-spawn-kit" parents="spawn">
+	    <leggings color="993333" unbreakable="true" enchantment="protection projectile:2" locked="true">leather leggings</leggings>
+	</kit>
+	<kit id="blue-spawn-kit" parents="spawn">
+	    <leggings color="334CB2" unbreakable="true" enchantment="protection projectile:2" locked="true">leather leggings</leggings>
+	</kit>
+	<kit id="lime-spawn-kit" parents="spawn">
+	    <leggings color="7FCC19" unbreakable="true" enchantment="protection projectile:2" locked="true">leather leggings</leggings>
+	</kit>
+	<kit id="yellow-spawn-kit" parents="spawn">
+	    <leggings color="E5E533" unbreakable="true" enchantment="protection projectile:2" locked="true">leather leggings</leggings>
+	</kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red-spawn-kit">
+        <regions yaw="-135">
+		    <block>117.5,15,174.5</block>
+		</regions>
+	</spawn>
+    <spawn team="blue" kit="blue-spawn-kit">
+        <regions yaw="135">
+		    <block>203.5,15,174.5</block>
+		</regions>
+	</spawn>
+    <spawn team="lime" kit="lime-spawn-kit">
+        <regions yaw="45">
+		    <block>203.5,15,88.5</block>
+		</regions>
+	</spawn>
+    <spawn team="yellow" kit="yellow-spawn-kit">
+        <regions yaw="-45">
+		    <block>117.5,15,88.5</block>
+		</regions>
+	</spawn>
+    <default>
+        <regions yaw="90">
+		    <block>156.5,14,131.5</block>
+		</regions>
+	</default>
+</spawns>
+<regions>
+    <apply block="never" region="everywhere"/>
+</regions>
+<score>
+    <limit>750</limit>
+</score>
+<king>
+    <hills>
+	    <hill name="Middle" capture-time="4s" points="1.75">
+		    <capture>
+			    <cuboid min="163,13,134" max="158,17,129"/>
+			</capture>
+		    <progress>
+			    <cuboid min="163,13,134" max="158,17,129"/>
+			</progress>
+		    <captured>
+			    <cuboid min="163,13,134" max="158,17,129"/>
+			</captured>
+		</hill>
+	    <hill name="Red Plaza" capture-time="2s" points="1" initial-owner="red">
+		    <capture>
+			    <cuboid min="138,11,154" max="133,16,159"/>
+			</capture>
+		    <progress>
+			    <cuboid min="138,11,154" max="133,16,159"/>
+			</progress>
+		    <captured>
+			    <cuboid min="138,11,154" max="133,16,159"/>
+			</captured>
+		</hill>
+	    <hill name="Blue Plaza" capture-time="2s" points="1" initial-owner="blue">
+		    <capture>
+			    <cuboid min="183,11,154" max="188,16,159"/>
+			</capture>
+		    <progress>
+			    <cuboid min="183,11,154" max="188,16,159"/>
+			</progress>
+		    <captured>
+			    <cuboid min="183,11,154" max="188,16,159"/>
+			</captured>
+		</hill>
+	    <hill name="Lime Plaza" capture-time="2s" points="1" initial-owner="lime">
+		    <capture>
+			    <cuboid min="183,11,109" max="188,16,104"/>
+			</capture>
+		    <progress>
+			    <cuboid min="183,11,109" max="188,16,104"/>
+			</progress>
+		    <captured>
+			    <cuboid min="183,11,109" max="188,16,104"/>
+			</captured>
+		</hill>
+	    <hill name="Yellow Plaza" capture-time="2s" points="1" initial-owner="yellow">
+		    <capture>
+			    <cuboid min="138,11,109" max="133,16,104"/>
+			</capture>
+		    <progress>
+			    <cuboid min="138,11,109" max="133,16,104"/>
+			</progress>
+		    <captured>
+			    <cuboid min="138,11,109" max="133,16,104"/>
+			</captured>
+		</hill>
+	</hills>
+</king>
+<toolrepair>
+    <tool>stone sword</tool>
+	<tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>gold chestplate</item>
+    <item>gold boots</item>
+	<item>leather leggings</item>
+    <item>bread</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<killreward>
+    <item>golden apple</item>
+	<item amount="8">arrow</item>
+    <kit>
+        <effect duration="1" amplifier="4">regeneration</effect>
+    </kit>
+</killreward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

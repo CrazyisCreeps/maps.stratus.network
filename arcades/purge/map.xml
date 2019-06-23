@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.4.2" game="Purge">
+<include src="tutorial.xml"/>
+   <name>Purge</name>
+   <version>1.0.0</version>
+   <objective>Eliminate the enemy players</objective>
+   <gamemode>blitz</gamemode>
+   <authors>
+      <author uuid="bf331953-4f92-43ee-8abc-7544b8234936" />
+      <!-- Vice -->
+      <author uuid="17feaec5-9616-49d8-a507-83026050dd8f" />
+      <!-- Shiny -->
+   </authors>
+   <rules>
+      <rule>Hiding is allowed.</rule>
+      <rule>Crossteaming is allowed.</rule>
+   </rules>
+   <teams>
+      <team id="team-1" color="yellow" max-overfill="1" max="1" min="0">Fear</team>
+      <team id="team-2" color="yellow" max-overfill="1" max="1" min="0">Murder</team>
+      <team id="team-3" color="yellow" max-overfill="1" max="1" min="0">Violence</team>
+      <team id="team-4" color="yellow" max-overfill="1" max="1" min="0">Destruction</team>
+      <team id="team-5" color="yellow" max-overfill="1" max="1" min="0">Crime</team>
+      <team id="team-6" color="yellow" max-overfill="1" max="1" min="0">Fatality</team>
+      <team id="team-7" color="yellow" max-overfill="1" max="1" min="0">Evil</team>
+      <team id="team-8" color="yellow" max-overfill="1" max="1" min="0">Necessity</team>
+      <team id="team-9" color="yellow" max-overfill="1" max="1" min="0">Toxicity</team>
+      <team id="team-10" color="yellow" max-overfill="1" max="1" min="0">Savagery</team>
+      <team id="team-11" color="yellow" max-overfill="1" max="1" min="0">Vice</team>
+      <team id="team-12" color="yellow" max-overfill="1" max="1" min="0">Mortality</team>
+   </teams>
+   <time>10m</time>
+   <kits>
+      <kit id="spawn">
+         <potion duration="180" amplifier="10">damage resistance</potion>
+         <potion duration="180" amplifier="10">regeneration</potion>
+         <item slot="0" enchantment="dig speed:1" name="`6Quick Pick" unbreakable="true" material="diamond pickaxe" />
+         <item slot="1" enchantment="dig speed:1" name="`6Quick Axe" unbreakable="true" material="diamond axe" />
+         <item slot="2" enchantment="dig speed:1" name="`6Quick Shovel" unbreakable="true" material="diamond spade" />
+      </kit>
+      <give filter="glowing-effect-give-oo">
+         <kit force="true">
+             <effect duration="oo" amplifier="1">glowing</effect>
+         </kit>
+      </give>
+   </kits>
+   <spawns>
+      <spawn team="team-1" kit="spawn">
+         <region yaw="180">
+            <cuboid min="-2,19,-9" max="-3,19,-10" />
+         </region>
+      </spawn>
+      <spawn team="team-2" kit="spawn">
+         <region yaw="180">
+            <cuboid min="-17,19,-9" max="-18,19,-10" />
+         </region>
+      </spawn>
+      <spawn team="team-3" kit="spawn">
+         <region yaw="180">
+            <cuboid min="-32,19,-9" max="-33,19,-10" />
+         </region>
+      </spawn>
+      <spawn team="team-4" kit="spawn">
+         <region yaw="180">
+            <cuboid min="-47,19,-9" max="-48,19,-10" />
+         </region>
+      </spawn>
+      <spawn team="team-5" kit="spawn">
+         <region yaw="180">
+            <cuboid min="-63,19,-9" max="-62,19,-10" />
+         </region>
+      </spawn>
+      <spawn team="team-6" kit="spawn">
+         <region yaw="180">
+            <cuboid min="-77,19,-9" max="-78,19,-10" />
+         </region>
+      </spawn>
+      <spawn team="team-7" kit="spawn">
+         <region yaw="0">
+            <cuboid min="-3,19,-53" max="-2,19,-52" />
+         </region>
+      </spawn>
+      <spawn team="team-8" kit="spawn">
+         <region yaw="0">
+            <cuboid min="-18,19,-53" max="-17,19,-52" />
+         </region>
+      </spawn>
+      <spawn team="team-9" kit="spawn">
+         <region yaw="0">
+            <cuboid min="-33,19,-53" max="-32,19,-52" />
+         </region>
+      </spawn>
+      <spawn team="team-10" kit="spawn">
+         <region yaw="0">
+            <cuboid min="-48,19,-53" max="-47,19,-52" />
+         </region>
+      </spawn>
+      <spawn team="team-11" kit="spawn">
+         <region yaw="0">
+            <cuboid min="-63,19,-53" max="-62,19,-52" />
+         </region>
+      </spawn>
+      <spawn team="team-12" kit="spawn">
+         <region yaw="0">
+            <cuboid min="-78,19,-53" max="-77,19,-52" />
+         </region>
+      </spawn>
+      <default>
+         <region yaw="-90">
+            <point>-81.5,17,-31.5</point>
+         </region>
+      </default>
+   </spawns>
+   <maxbuildheight>32</maxbuildheight>
+   <kill-rewards>
+      <kill-reward>
+         <kit>
+            <item material="diamond" />
+            <potion duration="5" amplifier="2">regeneration</potion>
+         </kit>
+      </kill-reward>
+   </kill-rewards>
+   <broadcasts>
+      <alert after="0s">Defend your house from intruders! The purge starts in 3 minutes, you may not leave your property until it is secured!</alert>
+      <alert after="15s" every="10m">Creating alliances with another team is allowed.</alert>
+      <alert after="60s">The purge is beginning in 2 minutes!</alert>
+      <alert after="120s">The purge is beginning in 1 minute!</alert>
+      <alert after="170s">The purge is beginning in 10 seconds!</alert>
+      <alert after="175s">The purge is beginning in 5 seconds!</alert>
+      <alert after="176s">The purge is beginning in 4 seconds!</alert>
+      <alert after="177s">The purge is beginning in 3 seconds!</alert>
+      <alert after="178s">The purge is beginning in 2 seconds!</alert>
+      <alert after="179s">The purge is beginning in 1 seconds!</alert>
+      <alert after="180s">The purge has begun!</alert>
+   </broadcasts>
+   <filters>
+      <all id="glowing-effect-give-oo">
+        <time>6m</time>
+        <match-running/>
+      </all>
+      <time id="night">3m</time>
+      <any id="only-team-1">
+         <filter id="night" />
+         <team>team-1</team>
+      </any>
+      <any id="only-team-2">
+         <filter id="night" />
+         <team>team-2</team>
+      </any>
+      <any id="only-team-3">
+         <filter id="night" />
+         <team>team-3</team>
+      </any>
+      <any id="only-team-4">
+         <filter id="night" />
+         <team>team-4</team>
+      </any>
+      <any id="only-team-5">
+         <filter id="night" />
+         <team>team-5</team>
+      </any>
+      <any id="only-team-6">
+         <filter id="night" />
+         <team>team-6</team>
+      </any>
+      <any id="only-team-7">
+         <filter id="night" />
+         <team>team-7</team>
+      </any>
+      <any id="only-team-8">
+         <filter id="night" />
+         <team>team-8</team>
+      </any>
+      <any id="only-team-9">
+         <filter id="night" />
+         <team>team-9</team>
+      </any>
+      <any id="only-team-10">
+         <filter id="night" />
+         <team>team-10</team>
+      </any>
+      <any id="only-team-11">
+         <filter id="night" />
+         <team>team-11</team>
+      </any>
+      <any id="only-team-12">
+         <filter id="night" />
+         <team>team-12</team>
+      </any>
+      <not id="no-void">
+         <void />
+      </not>
+      <not id="not-iron-block">
+         <material>iron block</material>
+      </not>
+   </filters>
+   <crafting>
+      <disable>boat</disable>
+      <disable>boat spruce</disable>
+      <disable>boat birch</disable>
+      <disable>boat jungle</disable>
+      <disable>boat acacia</disable>
+      <disable>boat dark oak</disable>
+   </crafting>
+   <blitz>
+      <lives>1</lives>
+      <broadcastLives>false</broadcastLives>
+   </blitz>
+   <friendlyfire>on</friendlyfire>
+   <regions>
+      <cuboid id="team-1-house" min="5,10,-19" max="-9,30,0" />
+      <cuboid id="team-2-house" min="-10,10,-19" max="-24,30,0" />
+      <cuboid id="team-3-house" min="-25,10,-19" max="-39,30,0" />
+      <cuboid id="team-4-house" min="-40,10,-19" max="-54,30,0" />
+      <cuboid id="team-5-house" min="-55,10,-19" max="-69,30,0" />
+      <cuboid id="team-6-house" min="-70,10,-19" max="-84,30,0" />
+      <cuboid id="team-7-house" min="5,10,-61" max="-9,30,-42" />
+      <cuboid id="team-8-house" min="-10,10,-61" max="-24,30,-42" />
+      <cuboid id="team-9-house" min="-25,10,-61" max="-39,30,-42" />
+      <cuboid id="team-10-house" min="-40,10,-61" max="-54,30,-42" />
+      <cuboid id="team-11-house" min="-55,10,-61" max="-69,30,-42" />
+      <cuboid id="team-12-house" min="-70,10,-61" max="-84,30,-42" />
+      <below id="ground" y="17" />
+      <apply block="never" region="ground" />
+      <apply block="only-team-1" leave="night" message="You must stay on your property for the first three minutes of the match!" region="team-1-house" />
+      <apply block="only-team-2" leave="night" message="You must stay on your property for the first three minutes of the match!" region="team-2-house" />
+      <apply block="only-team-3" leave="night" message="You must stay on your property for the first three minutes of the match!" region="team-3-house" />
+      <apply block="only-team-4" leave="night" message="You must stay on your property for the first three minutes of the match!" region="team-4-house" />
+      <apply block="only-team-5" leave="night" message="You must stay on your property for the first three minutes of the match!" region="team-5-house" />
+      <apply block="only-team-6" leave="night" message="You must stay on your property for the first three minutes of the match!" region="team-6-house" />
+      <apply block="only-team-7" leave="night" message="You must stay on your property for the first three minutes of the match!" region="team-7-house" />
+      <apply block="only-team-8" leave="night" message="You must stay on your property for the first three minutes of the match!" region="team-8-house" />
+      <apply block="only-team-9" leave="night" message="You must stay on your property for the first three minutes of the match!" region="team-9-house" />
+      <apply block="only-team-10" leave="night" message="You must stay on your property for the first three minutes of the match!" region="team-10-house" />
+      <apply block="only-team-11" leave="night" message="You must stay on your property for the first three minutes of the match!" region="team-11-house" />
+      <apply block="only-team-12" leave="night" message="You must stay on your property for the first three minutes of the match!" region="team-12-house" />
+   </regions>
+   <damage>
+      <deny>
+         <not>
+            <time>3m</time>
+         </not>
+      </deny>
+   </damage>
+   <gamerules>
+      <doDaylightCycle>true</doDaylightCycle>
+   </gamerules>
+   <itemremove>
+      <item>diamond sword</item>
+      <item>iron helmet</item>
+      <item>diamond</item>
+      <item>iron chestplate</item>
+      <item>iron leggings</item>
+      <item>iron boots</item>
+      <item>bow</item>
+      <item>arrow</item>
+      <item>cooked chicken</item>
+      <item>wood plate</item>
+      <item>workbench</item>
+      <item>fence</item>
+      <item>lever</item>
+      <item>bucket</item>
+      <item>water bucket</item>
+      <item>log</item>
+      <item>wood</item>
+      <item>web</item>
+      <item>torch</item>
+      <item>wood button</item>
+      <item>diamond pickaxe</item>
+      <item>diamond axe</item>
+      <item>diamond spade</item>
+      <item>slime block</item>
+      <item>carpet</item>
+      <item>book</item>
+   </itemremove>
+   <tutorial>
+      <stage title="Introduction">
+         <message>
+            <line>`fIn this map, you must `bprotect your property `ffor `bthree minutes `funtil the `bpurge `fstarts.</line>
+            <line>`fEach player gets their own `bproperty `fto protect.</line>
+        </message>
+        <teleport>
+            <point yaw="23" pitch="0">-24.5,20,-33.5</point>
+        </teleport>
+      </stage>
+      <stage title="Property">
+         <message>
+            <line>`fYou cannot `bleave your property `funtil the purge starts.</line>
+            <line>`fYou recieve a `bproperty `fwith a top floor, first floor, and `bvault`f.</line>
+        </message>
+        <teleport>
+            <point yaw="-30" pitch="0">-2.5,19,-9.5</point>
+        </teleport>
+      </stage>
+      <stage title="Vault">
+         <message>
+            <line>`fThe `bvault `fis located underneath your `bproperty`f.</line>
+            <line>`fThe `bvault `fcontains `bchests `fwith loot that you will need to `bsurvive`f.</line>
+            <line>`fThe `bchests `fcontain `bdefensive supplies `fand `barmor/tools`f.</line>
+        </message>
+        <teleport>
+            <point yaw="-117" pitch="0">-3.5,10,-5.5</point>
+        </teleport>
+      </stage>
+      <stage title="Victory">
+         <message>
+            <line>`fTo `awin the game`f, you must `beliminate all other players `fbefore the time runs out. Players will start to glow `b8 minutes `finto the match to help you find them.</line>
+        </message>
+        <teleport>
+            <point yaw="18" pitch="0">-60.5,19,-22.5</point>
+        </teleport>
+      </stage>
+</tutorial>
+</map>

@@ -1,0 +1,195 @@
+<map proto="1.4.2">
+	<name>Cold Aunder II</name>
+	<version>1.0.1</version>
+	<objective>Capture and return the other teams' wool</objective>
+	<authors>
+		<author uuid="96f9aa16-9c93-4b1d-9bce-18b8c212074b"/>
+			<!-- _ArmyFrog -->
+	</authors>
+	<contributors>
+		<contributor uuid="bf331953-4f92-43ee-8abc-7544b8234936" contribution="Feedback and Advice"/> 
+			<!--  ViceWatercolour  -->
+	</contributors>
+	<gamemode>ctw</gamemode>
+	<teams>
+		<team id="black-team" max="18" max-overfill="22" color="dark_gray">Noir</team>
+		<team id="white-team" max="18" max-overfill="22" color="gold">Blanc</team>
+	</teams>
+	<kits>
+		<kit id="spawn">
+			<item slot="0" unbreakable="true">stone sword</item>
+			<item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+			<item slot="2" enchantment="dig speed:1" unbreakable="true">iron pickaxe</item>
+			<item slot="3" enchantment="dig speed:1" unbreakable="true">stone axe</item>
+			<item slot="6" amount="16" damage="1">wood</item>
+			<item slot="7" amount="1">golden apple</item>
+			<item slot="8" amount="64">cooked beef</item>
+			<item slot="28" amount="64">arrow</item>
+			<potion duration="5">heal</potion>
+			<potion duration="5">damage resistance</potion>
+			<chestplate enchantment="protection_environmental:1" unbreakable="true">chainmail chestplate</chestplate>
+			<leggings unbreakable="true">chainmail leggings</leggings>
+		</kit>
+		<kit id="black" parents="spawn">
+			<item slot="4" amount="48">smooth brick</item>
+			<item slot="5" damage="15" amount="32">stained clay</item>
+			<helmet color="000000" unbreakable="true">leather helmet</helmet>
+			<boots color="000000" unbreakable="true">leather boots</boots>
+		</kit>
+		<kit id="white" parents="spawn">
+			<item slot="4" amount="48">nether brick</item>
+			<item slot="5" amount="32">stained clay</item>
+			<helmet color="FFFFFF" unbreakable="true">leather helmet</helmet>
+			<boots color="FFFFFF" unbreakable="true">leather boots</boots>
+		</kit>
+	</kits>
+	<spawns>
+		<spawn yaw="90" kit="black" team="black-team">
+			<region>
+				<cuboid max="111,13,-0" min="109,13,1"/>
+			</region>
+		</spawn>
+		<spawn yaw="-90" kit="white" team="white-team">
+			<region>
+				<cuboid max="-110,13,1" min="-108,13,-0"/>
+			</region>
+		</spawn>
+		<default>
+			<region>
+				<cylinder base="0,47,0" radius="4" height="1"/>
+			</region>
+		</default>
+	</spawns>
+	<filters>
+		<deny id="deny-world">
+			<cause>world</cause>
+		</deny>
+		<team id="only-black">black-team</team>
+		<team id="only-white">white-team</team>
+		<not id="deny-black">
+			<team>black-team</team>
+		</not>
+		<all id="only-iron">
+			<material>iron block</material>
+		</all>
+		<not id="deny-white">
+			<team>white-team</team>
+		</not>
+		<not id="antivoid">
+			<void/>
+		</not>
+		<all id="white-break">
+			<team>white-team</team>
+			<material>web</material>
+		</all>
+		<all id="black-break">
+			<team>black-team</team>
+			<material>web</material>
+		</all>
+	</filters>
+	<regions>
+		<apply block-break="only-white" block-place="never" message="`eYou may not modify the spawn tunnels or wool rooms!">
+			<region>
+				<cuboid min="86.5,7,-0.5" max="86.5,9,1.5"/>
+			</region>
+		</apply>
+		<apply block-break="only-black" block-place="never" message="`eYou may not modify the spawn tunnels or wool rooms!">
+			<region>
+				<cuboid min="-85.5,7,-0.5" max="-85.5,9,1.5"/>
+			</region>
+		</apply>
+		<apply block-place="always" block-break="always">
+			<region>
+				<rectangle min="60,18" max="-59,-17"/>
+				<rectangle min="-19,28" max="-59,-17"/>
+				<!-- Sides -->
+				<rectangle min="69.5,-33.5" max="-68.5,-15.5"/>
+				<rectangle min="-68.5,34.5" max="69.5,16.5"/>
+				
+			</region>
+		</apply>
+		<apply block-place="never" block-break="only-iron" message="`eYou may not modify the spawn tunnels or wool rooms!">
+			<region>
+				<union>
+					<rectangle min="70,-18" max="85,-7"/>
+					<rectangle min="70,19" max="85,8"/>
+					<rectangle min="83,-18" max="114,17"/>
+					<rectangle min="-69,19" max="-84,8"/>
+					<rectangle min="-69,-18" max="-84,-7"/>
+					<rectangle min="-82,19" max="-113,-18"/>
+				</union>
+			</region>
+		</apply>
+		<apply enter="deny-black" message="`eYou may not enter your own wool room!">
+			<region>
+				<rectangle min="86,-3" max="89,4"/>
+			</region>
+		</apply>
+		<apply enter="deny-white" message="`eYou may not enter your own wool room!">
+			<region>
+				<rectangle min="-85,4" max="-88,-3"/>
+			</region>
+		</apply>
+		<apply enter="only-black" message="`eYou may not enter black's spawn tunnels!">
+			<region>
+				<union id="black-spawn">
+					<rectangle min="70,-18" max="84,-7"/>
+					<rectangle min="70,19" max="84,8"/>
+				</union>
+			</region>
+		</apply>
+		<apply enter="only-white" message="`eYou may not enter white's spawn tunnels!">
+			<region>
+				<union id="white-spawn">
+					<rectangle min="-69,19" max="-83,8"/>
+					<rectangle min="-69,-18" max="-83,-7"/>
+				</union>
+			</region>
+		</apply>
+		<apply block="antivoid" message="`eYou may not modify this layer!">
+			<negative>
+				<region name="void"/>
+			</negative>
+		</apply>
+	</regions>
+	<wools>
+		<wool team="black-team" color="white" location="-88,7,0" craftable="false">
+			<monument><block>113,14,0</block></monument>
+		</wool>
+		<wool team="white-team" color="black" location="89,7,0" craftable="false">
+			<monument><block>-114,14,0</block></monument>
+		</wool>
+	</wools>
+	<maxbuildheight>15</maxbuildheight>
+	<itemremove>
+		<item>stone_sword</item>
+		<item>bow</item>
+		<item>iron_pickaxe</item>
+		<item>stone_axe</item>
+		<item>leather_helmet</item>
+		<item>chainmail_chestplate</item>
+		<item>chainmail_leggings</item>
+		<item>chainmail_boots</item>
+		<item>leather_boots</item>
+		<item>cooked_beef</item>
+		<item>wood</item>
+		<item>smooth_brick</item>
+		<item>nether_brick</item>
+		<item>stained_clay</item>
+		<item>arrow</item>
+	</itemremove>
+	<!--
+	<crafting>
+		<disable>boat</disable>
+		<disable>boat_spruce</disable>
+		<disable>boat_birch</disable>
+		<disable>boat_jungle</disable>
+		<disable>boat_acacia</disable>
+		<disable>boat_dark_oak</disable>
+	</crafting>
+	-->
+	<killreward>
+		<item amount="1">golden apple</item>
+		<item amount="6">arrow</item>
+	</killreward>
+</map>

@@ -1,0 +1,186 @@
+<?xml version="1.0"?> <!-- built in february 2019 -->
+<map proto="1.4.3">
+<name>Ruediger's Golftron</name>
+<version>1.0.0</version>
+<objective>Capture the wool!</objective>
+<authors>
+    <author uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30"/> <!--  Ruediger_LP  -->
+</authors>
+<contributors>
+	<contributor uuid="9e03cc2e-3d48-4dff-b38c-4dc55e011a1d" contribution="map tester"/> <!-- 12x2 -->
+	<contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65" contribution="testing server"/> <!--  BGMP  -->   
+</contributors>
+<maxbuildheight>12</maxbuildheight>
+<teams>
+    <team id="cyan-team" color="dark aqua" max="5" max-overfill="5">Cyan</team>
+    <team id="orange-team" color="gold" max="5" max-overfill="5">Orange</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+    	<clear/>
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="iron pickaxe" unbreakable="true"/>
+        <item slot="3" material="diamond axe" unbreakable="true"/>
+        <item slot="4" material="shears" unbreakable="true"/>
+        <item slot="5" material="wood" damage="2" amount="48"/>
+        <item slot="7" material="vine" amount="24"/>
+        <item slot="8" material="golden apple" amount="2"/>
+        <item slot="28" material="arrow" amount="20"/>
+        <item slot="30" material="wood spade" unbreakable="true"/>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <boots unbreakable="true">iron boots</boots>
+    </kit>
+	<kit id="cyan-kit" parents="spawn-kit">
+        <leggings color="4c7f99" unbreakable="true">leather leggings</leggings>
+        <item slot="6" material="stained glass" damage="9" amount="8"/> 
+    </kit>
+	<kit id="orange-kit" parents="spawn-kit">
+        <leggings color="d87f33" unbreakable="true">leather leggings</leggings>
+        <item slot="6" material="stained glass" damage="1" amount="8"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="cyan-team" kit="cyan-kit" yaw="-169">
+        <regions>
+            <cylinder base="-24,4.5,50" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="orange-team" kit="orange-kit" yaw="11">
+        <regions>
+            <cylinder base="24,4.5,-50" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <cylinder base="-18,13.5,44" radius="1" height="0" yaw="-145"/> <!-- cyan side -->
+            <cylinder base="18,13.5,-44" radius="1" height="0" yaw="35"/> <!-- orange side -->
+        </regions>
+    </default>
+</spawns>
+<wools craftable="false">
+    <wool team="cyan-team" color="cyan" location="-14.0,4.2,-79.0">
+        <monument><block>-27,5,52</block></monument>
+    </wool>
+    <wool team="orange-team" color="orange" location="14.0,4.2,79.0">
+        <monument><block>26,5,-53</block></monument>
+    </wool>
+</wools>
+<filters>
+    <not id="no-void"><void/></not>
+    <material id="only-iron">iron block</material>
+    <team id="only-cyan">cyan-team</team>
+    <team id="only-orange">orange-team</team>
+    <not id="deny-wool">
+        <material>wool</material>
+    </not>
+    <not id="deny-use">
+        <material>flower pot</material>
+    </not>
+</filters>
+<regions>
+    <complement id="cyan-spawn-enter">
+    	<region id="cyan-spawn"/>
+        <circle center="-14,40" radius="6"/>
+    </complement>
+    <complement id="orange-spawn-enter">
+    	<region id="orange-spawn"/>
+        <circle center="14,-40" radius="6"/>
+    </complement>
+    <union id="spawns">
+        <rectangle min="-14,40" max="-46,72" id="cyan-spawn"/>
+        <rectangle min="14,-40" max="46,-72" id="orange-spawn"/>
+    </union>
+    <union id="wools">
+        <rectangle min="-6,-71" max="-22,-91" id="cyan-wool"/>
+        <rectangle min="6,71" max="22,91" id="orange-wool"/>
+    </union>
+    <union id="build-area">
+        <rectangle min="22,9" max="6,55"/> <!-- cyan side -->
+        <rectangle min="-22,-9" max="-6,-55"/> <!-- orange side -->
+        <rectangle min="-22,-9" max="22,9"/> <!-- mid -->
+        <rectangle min="-6,-25" max="6,25"/>
+        <rectangle min="6,-40" max="-6,-56"/> <!-- orange spawn wool -->
+        <rectangle min="-6,40" max="6,56"/> <!-- cyan spawn wool -->
+    </union>
+    <apply enter="only-cyan" region="cyan-spawn-enter" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-orange" region="orange-spawn-enter" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-cyan" region="cyan-wool" message="You may not enter the `3CYAN WOOL`c room!"/>
+    <apply enter="only-orange" region="orange-wool" message="You may not enter the `6ORANGE WOOL`c room!"/>
+    <apply block="always" region="build-area"/>
+    <apply block-break="only-iron" region="spawns" message="You may not edit spawn!"/>
+    <apply block="never" region="spawns" message="You may not edit spawn!"/>
+    <apply block="never" region="wools" message="You may not edit the wool room!"/>
+    <apply block="no-void" region="everywhere" message="You may not build in the void!"/>
+    <apply use="deny-use" region="everywhere"/>
+</regions>
+<itemkeep>
+	<item>iron sword</item>
+	<item>bow</item>
+	<item>iron pickaxe</item>
+	<item>diamond axe</item>
+	<item>wood</item>
+	<item>stained glass</item>
+	<item>golden apple</item>
+	<item>grilled pork</item>
+	<item>arrow</item>
+    <item>wood spade</item>
+    <item>shears</item>
+    <item>iron boots</item>
+</itemkeep>
+<itemremove>
+	<item>stone</item>
+	<item>seeds</item>
+	<item>red rose</item>
+	<item>dirt</item>
+	<item>smooth stairs</item>
+	<item>leather leggings</item>
+	<item>chainmail chestplate</item>
+    <item>vine</item>
+    <item>stained clay</item>
+</itemremove>
+<toolrepair>
+	<tool>iron sword</tool>
+	<tool>bow</tool>
+	<tool>iron pickaxe</tool>
+	<tool>diamond axe</tool>
+    <tool>wood spade</tool>
+</toolrepair>
+<item-mods>
+    <rule>
+        <match>
+            <material>iron helmet</material>
+            <material>iron chestplate</material>
+            <material>iron leggings</material>
+            <material>iron boots</material>
+            <material>iron spade</material>
+        </match>
+        <modify unbreakable="true"/>
+    </rule>
+</item-mods>
+<crafting>
+    <disable>iron nugget</disable>
+    <disable>bucket</disable>
+    <shaped override="true">
+        <result material="water bucket"/>
+        <shape>
+            <row>I.I</row>
+            <row>.I.</row>
+        </shape>
+        <ingredient symbol="I">iron ingot</ingredient>
+    </shaped>
+</crafting>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<rules>
+    <rule>Spawnkilling is allowed.</rule>
+</rules>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple" amount="1"/>
+        <item material="wood" damage="2" amount="24"/>
+        <item amount="16" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+</map>

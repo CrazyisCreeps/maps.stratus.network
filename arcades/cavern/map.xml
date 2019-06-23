@@ -1,0 +1,82 @@
+<map proto="1.4.2">
+	<name>Cavern</name>
+	<version>1.0.0</version>
+	<objective>Reach the forest before being shot down!</objective>
+	<authors>
+		<author uuid="96f9aa16-9c93-4b1d-9bce-18b8c212074b"/>
+			<!-- _ArmyFrog -->
+	</authors>
+	<gamemode>koth</gamemode>
+	<gamemode>blitz</gamemode>
+	<gamemode>arcade</gamemode>
+	<teams>
+		<team id="red-team" min="1" max="20" max-overfill="25" color="dark_red">Miners</team>
+		<team id="blue-team" min="1" max="3" max-overfill="3" color="blue">Defenders</team>
+	</teams>
+	<kits>
+		<kit id="red">
+			<boots enchantment="frost walker" unbreakable="true" attributes="generic.maxHealth:add:20">leather boots</boots>
+			<potion duration="2">heal</potion>
+			<game-mode>adventure</game-mode>
+		</kit>
+		<kit id="blue">
+			<item slot="0" enchantment="arrow infinite:1" locked="true" unbreakable="true">bow</item>
+			<item slot="1" locked="true">arrow</item>
+			<game-mode>adventure</game-mode>
+			<fly flying="true" can-fly="true" fly-speed="2"/>
+		</kit>
+	</kits>
+	<spawns>
+		<spawn yaw="-135" kit="red" team="red-team">
+			<region>
+				<cuboid max="28,3.5,-0" min="22,3.5,-2"/>
+			</region>
+		</spawn>
+		<spawn yaw="135" kit="blue" team="blue-team">
+			<region>
+				<cuboid max="0,1.5,0" min="0,41.5,0"/>
+			</region>
+		</spawn>
+		<default>
+			<region>
+				<cuboid max="1,51,1" min="-0,51,-0"/>
+			</region>
+		</default>
+	</spawns>
+	<filters>
+		<team id="only-red">red-team</team>
+	</filters>
+	<regions>
+		<negative id="restriction">
+			<rectangle min="-0.5,-0.5" max="1.5,1.5"/>
+		</negative>
+		<apply enter="only-red" region="restriction"/>
+		<apply block-break="never">
+			<region>
+				<everywhere/>
+			</region>
+		</apply>
+	</regions>
+	<control-points capture-players="lead" incremental="true" show-progress="true">
+		<control-point name="Forest" capture-time="4s">
+			<capture><cuboid min="-22.5,35,-5.5" max="-25.5,30,-8.5"/></capture>
+			<progress><cuboid min="-22.5,35,-5.5" max="-25.5,30,-8.5"/></progress>
+		</control-point>
+	</control-points>
+	<time>8m</time>
+	<gamerules>
+		<naturalRegeneration>false</naturalRegeneration>
+	</gamerules>
+	<broadcasts>
+		<tip after="60s" count="6">The objective is at the top of the map! Keep running!</tip>
+	</broadcasts>
+	<blitz>
+		<lives>1</lives>
+	</blitz>
+	<itemremove>
+		<item>leather_boots</item>
+	</itemremove>
+	<hunger>
+		<depletion>off</depletion>
+	</hunger>
+</map>

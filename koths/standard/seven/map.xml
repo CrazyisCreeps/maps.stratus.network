@@ -1,0 +1,148 @@
+<map proto="1.4.2">
+<name>Seven</name>
+<version>1.1.0</version>
+<objective>Be the first team to reach 750 points!</objective>
+<authors>
+	  <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b"/> <!-- Jexel -->
+</authors>
+<contributors>
+    <contributor uuid="c8149d21-55cc-450f-ab50-2940c87d31b7" contribution="Fedebakc"/> <!--Deltuh-->
+    <contributor uuid="b1521072-6993-4fe4-ae60-dbeeb7dc0cfa" contribution="Name"/> <!--Antnecb -->
+    <contributor uuid="15c75bdd-005f-40f6-9e20-1ecf48bb51e5" contribution="Emotional Support, Feedback, Buildings"/>
+</contributors>
+<teams>
+    <team id="blue-team" color="blue" max="8">Blue</team>
+    <team id="red-team" color="dark red" max="8">Red</team>
+</teams>
+<kits>
+    <kit id="main-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <chestplate locked="true" unbreakable="true" material="chainmail chestplate"/>
+        <boots locked="true" enchantment="protection fall:2" unbreakable="true" material="iron boots"/>
+        <effect duration="4" amplifier="10">resistance</effect>
+        <effect duration="4" amplifier="10">regeneration</effect>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <helmet unbreakable="true" color="0066cc" material="leather helmet"/>
+        <leggings unbreakable="true" color="0066cc" material="leather leggings"/>
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <helmet locked="true" unbreakable="true" color="cd0000" material="leather helmet"/>
+        <leggings locked="true" unbreakable="true" color="cd0000" material="leather leggings"/>
+    </kit>
+    <kit id="slow-kit">
+        <force>0,0.1,0</force>
+    </kit>
+    <kit id="slow-kit-2">
+        <force>0,0.2,0</force>
+    </kit>
+    <lend filter="slow-regions">
+        <kit id="slow-kit"/>
+    </lend>
+		<!--
+    <lend filter="slow-regions-2">
+        <kit id="slow-kit-2"/>
+    </lend>
+		-->
+</kits>
+<spawns>
+    <default region="spawn-default" pitch="90"/>
+    <spawn team="blue-team" kit="blue-kit" region="spawn-blue" yaw="90"/>
+    <spawn team="red-team" kit="red-kit" region="spawn-red" yaw="-90"/>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+</filters>
+<regions>
+  <union id="slow-regions">
+      <cuboid id="slow-blue" min="-24,16,2" max="-27,12,-1"/>
+      <cuboid id="slow-red" min="25,16,2" max="28,12,-1"/>
+      <cuboid id="slow-red-tp-1" min="-17,118,-26" max="-19,110,-28"/>
+      <cuboid id="slow-blue-tp-1" min="18,118,-26" max="20,110,-28"/>
+  </union>
+	<!--
+  <union id="slow-regions-2">
+      <cuboid id="slow-blue-tp-2" min="18,100,-26" max="20,95,-28"/>
+      <cuboid id="slow-red-tp-2" min="-17,100,-26" max="-19,95,-28"/>
+      <cuboid id="slow-blue-tp-3" min="18,85,-26" max="20,80,-28"/>
+      <cuboid id="slow-red-tp-3" min="-17,85,-26" max="-19,80,-28"/>
+      <cuboid id="slow-blue-tp-4" min="18,70,-26" max="20,65,-28"/>
+      <cuboid id="slow-red-tp-4" min="-17,70,-26" max="-19,65,-28"/>
+      <cuboid id="slow-blue-tp-5" min="18,55,-26" max="20,50,-28"/>
+      <cuboid id="slow-red-tp-5" min="-17,55,-26" max="-19,50,-28"/>
+      <cuboid id="slow-blue-tp-6" min="18,40,-26" max="20,35,-28"/>
+      <cuboid id="slow-red-tp-6" min="-17,40,-26" max="-19,35,-28"/>
+      <cuboid id="slow-blue-tp-7" min="18,25,-26" max="20,20,-28"/>
+      <cuboid id="slow-red-tp-7" min="-17,25,-26" max="-19,20,-28"/>
+  </union>
+	-->
+  <cuboid id="portal-blue" min="7,5,31" max="8,8,28"/>
+  <cuboid id="portal-red" min="-6,5,31" max="-7,8,28"/>
+  <cuboid id="jump-top" min="0,6,-25" max="1,7.5,-26"/>
+  <cuboid id="jump-red" min="-17,6,0" max="-18,7.5,1"/>
+  <cuboid id="jump-blue" min="19,6,0" max="18,7.5,1"/>
+  <cuboid id="cp-top" min="-3,15,-22" max="4,17,-30"/>
+  <cuboid id="cp-mid" min="4,10,-3" max="-3,12,4"/>
+  <cuboid id="cp-bot" min="4,4,23" max="-3,6,30"/>
+  <point id="spawn-default">0.5,20,0.5</point>
+  <point id="spawn-blue">26.5,18,0.5</point>
+  <point id="spawn-red">-25.5,18,0.5</point>
+	<apply block="never"/>
+  <apply velocity="0,1.5,0" region="jump-top"/>
+  <apply velocity="0.2,1.3,0" region="jump-red"/>
+  <apply velocity="-0.2,1.3,0" region="jump-blue"/>
+</regions>
+<control-points incremental="true" show-progress="true" neutral-state="true" required="false">
+    <control-point name="Top" capture-time="5s" points="0.90">
+        <capture><region id="cp-top"/></capture>
+        <progress><region id="cp-top"/></progress>
+        <captured><region id="cp-top"/></captured>
+    </control-point>
+	<control-point name="Middle" capture-time="3.5s" points="1.35">
+        <capture><region id="cp-mid"/></capture>
+        <progress><region id="cp-mid"/></progress>
+        <captured><region id="cp-mid"/></captured>
+    </control-point>
+	<control-point name="Bottom" capture-time="5s" points="0.75">
+        <capture><region id="cp-bot"/></capture>
+        <progress><region id="cp-bot"/></progress>
+        <captured><region id="cp-bot"/></captured>
+    </control-point>
+</control-points>
+<portals sound="false">
+    <portal region="portal-blue" yaw="@90" x="@19" y="@25" z="@-27"/>
+    <portal region="portal-red" yaw="@-90" x="@-18" y="@25" z="@-27"/>
+</portals>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<score>
+	<limit>750</limit>
+</score>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<respawn delay="3s"/>
+</map>

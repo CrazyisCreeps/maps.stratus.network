@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Xi II</name>
+<version>1.0.0</version>
+<objective>Capture the wool located on the opposite side.</objective>
+<authors>
+    <author uuid="a23a1d91-7e97-40b4-8f5e-1ab82d8f5ade"/> <!-- chle_ -->
+</authors>
+<contributors>
+    <contributor uuid="38ab65dd-95f9-406f-917c-6accc995421f" contribution="Suggestions"/> <!-- GoldenOre -->
+</contributors>
+<teams>
+    <team id="cyan-team" color="dark aqua" max="10">Cyan</team>
+    <team id="purple-team" color="dark purple" max="10">Purple</team>
+</teams>
+<spawns>
+    <spawn team="cyan-team" kit="cyan-kit">
+        <regions yaw="-90">
+            <cuboid min="-94.5,21.5,12.5" max="-93.5,22,13.5"/>
+            <cuboid min="-94.5,21.5,-48.5" max="-93.5,22,-47.5"/>
+        </regions>
+    </spawn>
+    <spawn team="purple-team" kit="purple-kit">
+        <regions yaw="90">
+            <cuboid min="98.5,21.5,-47.5" max="97.5,22,-48.5"/>
+            <cuboid min="98.5,21.5,13.5" max="97.5,22,12.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <cuboid min="3.5,42.5,57.5" max="0.5,43,57.5"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="woolkit-cyanwool" force="true">
+        <item slot="7" damage="9" amount="4" material="wool"/>
+        <leggings locked="true" unbreakable="true" material="diamond leggings"/>
+        <effect amplifier="100" duration="2">heal</effect>
+        <effect amplifier="100" duration="2">damage resistance</effect>
+        <effect amplifier="100" duration="2">regeneration</effect>
+    </kit>
+    <kit id="woolkit-purplewool" force="true">
+        <item slot="7" damage="10" amount="4" material="wool"/>
+        <leggings locked="true" material="diamond leggings"/>
+        <effect amplifier="100" duration="2">heal</effect>
+        <effect amplifier="100" duration="2">damage resistance</effect>
+        <effect amplifier="100" duration="2">regeneration</effect>
+    </kit>
+    <kit id="spawn-kit">
+        <item unbreakable="true" slot="0" material="iron sword"/>
+        <item unbreakable="true" slot="1" enchantment="arrow infinite" material="bow"/>
+        <item unbreakable="true" slot="2" enchantment="dig speed" material="iron pickaxe"/>
+        <item unbreakable="true" slot="3" enchantment="dig speed" material="iron axe"/>
+        <item slot="4" amount="12" material="log 2"/>
+        <item slot="6" amount="32" damage="1" material="cooked fish"/>
+        <item slot="7" material="bucket"/>
+        <item slot="8" material="golden apple"/>
+        <item slot="28" material="arrow"/>
+        <effect amplifier="100" duration="5">heal</effect>
+        <effect amplifier="100" duration="5">damage resistance</effect>
+        <effect amplifier="100" duration="5">regeneration</effect>
+        <leggings locked="true" unbreakable="true">iron leggings</leggings>
+    </kit>
+    <kit id="cyan-kit" parents="spawn-kit">
+        <item slot="5" damage="9" amount="24" material="stained glass"/>
+        <helmet unbreakable="true" locked="true" damage="9">stained glass</helmet>
+        <chestplate unbreakable="true" locked="true" color="4C7F99" material="leather chestplate"/>
+        <boots unbreakable="true" locked="true" color="4C7F99" material="leather boots"/>
+    </kit>
+    <kit id="purple-kit" parents="spawn-kit">
+        <item slot="5" damage="10" amount="24" material="stained glass"/>
+        <helmet unbreakable="true" locked="true" damage="10">stained glass</helmet>
+        <chestplate unbreakable="true" locked="true" color="7F3FB2" material="leather chestplate"/>
+        <boots unbreakable="true" locked="true" color="7F3FB2" material="leather boots"/>
+    </kit>
+</kits>
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <all>
+                <kill-streak repeat="true" count="2"/>
+            </all>
+        </filter>
+        <item material="golden apple"/>
+    </kill-reward>
+    <kill-reward>
+        <item amount="12" material="wood" damage="4"/>
+    </kill-reward>
+</kill-rewards>
+<broadcasts>
+    <tip after="5s" repeat="3m30s">`7You get 1 `egolden apple `7every 2 kills!</tip>
+</broadcasts>
+<filters>
+    <team id="only-cyan">cyan-team</team>
+    <team id="only-purple">purple-team</team>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <not id="no-water">
+        <any>
+            <material>stationary water</material>
+            <material>water</material>
+            <material>water bucket</material>
+            <material>bucket</material>
+        </any>
+    </not>
+    <all id="only-pane-purple">
+        <material>stained glass pane</material>
+        <team>cyan-team</team>
+    </all>
+    <all id="only-pane-cyan">
+        <material>stained glass pane</material>
+        <team>purple-team</team>
+    </all>
+</filters>
+<regions>
+    <union id="spawns">
+        <union id="cyanspawns">
+            <rectangle id="left-cyan" min="-72.5,-5.5" max="-96.5,15.5"/>
+            <rectangle id="right-cyan" min="-72.5,-29.5" max="-96.5,-50.5"/>
+        </union>
+        <union id="purplespawns">
+            <rectangle id="left-purple" min="76.5,-29.5" max="100.5,-50.5"/>
+            <rectangle id="right-purple" min="76.5,-5.5" max="100.5,15.5"/>
+        </union>
+    </union>
+    <union id="woolrooms">
+        <rectangle id="purplewool" min="-106.5,-24.5" max="-117.5,-10.5"/>
+        <rectangle id="cyanwool" min="110.5,-10.5" max="121.5,-24.5"/>
+    </union>
+    <union id="woolrooms-k">
+        <rectangle id="cyanwool-k" min="-108.5,-11.5" max="-115.5,-23.5"/>
+        <rectangle id="purplewool-k" min="119.5,-23.5" max="112.5,-11.5"/>
+    </union>
+    <union id="victory-monuments">
+        <cuboid id="cyan-v" min="-77,7,-19" max="-75,10,-16"/>
+        <cuboid id="purple-v" min="81,7,-16" max="79,10,-19"/>
+    </union>
+    <negative id="yes-void">
+        <union id="void-areas">
+            <rectangle min="35.5,-6.5" max="-31.5,7.5"/>
+            <rectangle min="-31.5,-28.5" max="35.5,-42.5"/>
+        </union>
+    </negative>
+    <!--  applied  -->
+    <apply use="no-water" region="spawns"/>
+    <apply block="never" message="You may not edit the victory monuments." region="victory-monuments"/>
+    <apply kit="woolkit-cyanwool" region="cyanwool-k" filter="only-purple"/>
+    <apply kit="woolkit-purplewool" region="purplewool-k" filter="only-cyan"/>
+    <apply block="only-pane-cyan" region="purplewool"/>
+    <apply block="only-pane-purple" region="cyanwool"/>
+    <apply enter="only-cyan" message="You may not enter your own wool room!" region="cyanwool"/>
+    <apply enter="only-purple" message="You may not enter your own wool room!" region="purplewool"/>
+    <apply block="never" region="spawns" message="You may not modify the spawn!"/>
+    <apply enter="only-cyan" region="cyanspawns" message="You may not enter the enemy spawn"/>
+    <apply enter="only-purple" region="purplespawns" message="You may not enter the enemy spawn"/>
+    <apply block="deny-void" message="You may not build in the void!" region="yes-void"/>
+</regions>
+<wools>
+    <wool team="cyan-team" color="purple" location="116,16,-17">
+        <monument>
+            <block>-75.5,8,-17.5</block>
+        </monument>
+    </wool>
+    <wool team="purple-team" color="cyan" location="-112,16,-17">
+        <monument>
+            <block>79.5,8,-17.5</block>
+        </monument>
+    </wool>
+</wools>
+<itemremove>
+    <item>log 2</item>
+    <item>stained glass</item>
+    <item>cooked fish</item>
+    <item>bucket</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>diamond leggings</item>
+    <item>iron leggings</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+</itemremove>
+<toolrepair>
+	<tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<timelock>on</timelock>
+<maxbuildheight>23</maxbuildheight>
+</map>

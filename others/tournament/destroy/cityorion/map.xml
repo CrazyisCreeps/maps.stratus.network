@@ -1,0 +1,126 @@
+<map proto="1.4.2">
+<name>City Orion</name>
+<version>1.0.0</version>
+<objective>Leak the enemies core and destroy both of their monuments!</objective>
+<phase>development</phase>
+<authors>
+	<author uuid="a63de09d-6fa9-436f-9070-26f5e9a4d27b"/> <!-- dragonrider455 -->
+    <author uuid="cef67055-9c27-4b58-a16f-278d793ff6bc"/> <!-- mrcookie_13 -->
+</authors>
+<contributors>
+    <contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65" contribution="XML"/> <!-- BGM -->
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="8">Red</team>
+    <team id="blue" color="blue" max="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+		<item slot="0" material="iron sword"/>
+		<item slot="1" material="bow"/>
+		<item slot="2" enchantment="dig speed;durability" material="iron pickaxe"/>
+		<item slot="3" enchantment="dig speed;durability" material="iron axe"/>
+		<item slot="4" amount="64" material="wood"/>
+		<item slot="5" amount="64" material="glass"/>
+		<item slot="6" amount="64" material="golden carrot"/>
+		<item slot="7" material="golden apple"/>
+		<chestplate material="chainmail chestplate"/>
+		<item slot="28" amount="64" material="arrow"/>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+		<helmet color="ff0000" material="leather helmet"/>
+		<boots color="ff0000" material="leather boots"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+		<helmet color="000fff" material="leather helmet"/>
+		<boots color="000fff" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red-kit">
+		<region yaw="180">
+			<point>-103.5,18.5,-514.5</point>
+		</region>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+		<region>
+			<point>-103.5,18.5,-681.5</point>
+        </region>
+    </spawn>
+    <default>
+        <region yaw="-90">
+			<point>-179,27,-598</point>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <team id="red-only">red</team>
+    <team id="blue-only">blue</team>
+</filters>
+<regions>
+    <cuboid id="red-core-reg" min="-139,46,-567" max="-144,41,-572"/>
+    <cuboid id="blue-core-reg" min="-139,41,-629" max="-144,46,-624"/>
+    <negative id="void">
+		<union id="spawns">
+			<cuboid id="blue-spawn" min="-100,18,-652" max="-107,24,-685"/>
+			<cuboid id="red-spawn" min="-107,18,-543" max="-100,24,-512"/>
+        </union>
+        <rectangle id="map" min="-163,-543" max="-11,-653"/>
+    </negative>
+    <apply block-place="never" message="You may not edit the void area!" region="void"/>
+    <apply block="never" message="You may not edit the spawn tubes!" region="spawns"/>
+    <apply enter="red-only" message="You may not enter the enemy spawn tube!" region="red-spawn"/>
+    <apply enter="blue-only" message="You may not enter the enemy spawn tube!" region="blue-spawn"/>
+</regions>
+<cores leak="3" mode-changes="true">
+    <core id="red-core" region="red-core-reg" team="red"/>
+    <core id="blue-core" region="blue-core-reg" team="blue"/>
+</cores>
+<destroyables materials="ender stone" sparks="true">
+    <destroyables owner="red">
+        <destroyable id="red-A" name="Monument A">
+			<region>
+				<cuboid min="-70,44,-564.5" max="-67.5,50,-567.5"/>
+			</region>
+        </destroyable>
+    <destroyable id="red-B" name="Monument B">
+        <region>
+            <cuboid min="-50.5,44,-564.5" max="-53.5,50,-567.5"/>
+        </region>
+    </destroyable>
+	</destroyables>
+    <destroyables owner="blue">
+        <destroyable id="blue-A" name="Monument A">
+			<region>
+				<cuboid min="-50,44,-628.5" max="-53.5,50,-631.5"/>
+			</region>
+        </destroyable>
+		<destroyable id="blue-B" name="Monument B">
+			<region>
+				<cuboid min="-67.5,44,-631.5" max="-70.5,50,-628.5"/>
+			</region>
+        </destroyable>
+    </destroyables>
+</destroyables>
+<modes>
+    <mode after="10m" material="gold block"/>
+    <mode after="15m" material="glass"/>
+</modes>
+<itemremove>
+    <item>wood</item>
+    <item>glass</item>
+    <item>obsidian</item>
+    <item>gold block</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather boots</item>
+</itemremove>
+<tool-repair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</tool-repair>
+<maxbuildheight>59</maxbuildheight>
+</map>

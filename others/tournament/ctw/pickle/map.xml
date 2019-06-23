@@ -1,0 +1,330 @@
+<?xml version="1.0"?>
+<map proto="1.4.4">
+<include src="disable-boat-crafting.xml"/>
+<terrain remove-36="true"/>
+<name>Pickle</name>
+<version>1.1.1</version>
+<objective>Capture the enemy team's wools.</objective>
+<authors>
+    <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b"/> <!-- Jexel -->
+</authors>
+<contributors>
+    <contributor uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b"/> <!-- _3Each -->
+    <contributor uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- Strangey -->
+    <contributor contribution="XML" uuid="15c75bdd-005f-40f6-9e20-1ecf48bb51e5"/> <!-- Kiyara -->
+    <contributor uuid="6bec5c3a-4934-4b19-9aa8-c7c569820f7d"/> <!-- Claf -->
+</contributors>
+<teams>
+    <team id="red-team"  color="dark red" min="6" max="8" max-overfill="8">Red</team>
+    <team id="blue-team" color="blue"     min="6" max="8" max-overfill="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" material="diamond pickaxe" unbreakable="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="8" amount="64" material="golden carrot"/>
+		<item slot="7" material="golden apple"/>
+        <item slot="6" amount="64" material="wood"/>
+        <item slot="5" amount="64" material="wood"/>
+		<item slot="4" amount="64" material="glass"/>
+        <item slot="28" material="arrow"/>
+        <effect duration="5.8" amplifier="10">heal</effect>
+        <effect duration="10" amplifier="1">resistance</effect>
+    </kit>
+</kits>
+<wools>
+    <wool team="red-team" color="green" location="-51.5,13,42.5">
+        <monument>
+            <block>-2,9,-84</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="magenta" location="52.5,16,38.5">
+        <monument>
+            <block>2,9,-84</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="lime" location="-51.5,16,-37.5">
+        <monument>
+            <block>-2,9,84</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="pink" location="52.5,13,-41.5">
+        <monument>
+            <block>2,9,84</block>
+        </monument>
+    </wool>
+</wools>
+<spawns>
+    <spawn team="blue-team" kit="spawn-kit">
+        <regions yaw="-180">
+            <point>0.5,255,88.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="spawn-kit">
+        <regions yaw="0">
+            <point>0.5,255,-87.5</point>
+        </regions>
+    </spawn>
+    <default region="spawn-obs"/>
+</spawns>
+<filters>
+    <team id="only-red-team">red-team</team>
+    <team id="only-blue-team">blue-team</team>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <all id="only-red-wool">
+        <team>red-team</team>
+        <not>
+            <any>
+                <team>blue-team</team>
+                <material>chest</material>
+            </any>
+        </not>
+    </all>
+    <all id="only-blue-wool">
+        <team>blue-team</team>
+        <not>
+            <any>
+                <team>red-team</team>
+                <material>chest</material>
+            </any>
+        </not>
+    </all>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <material id="only-iron-break">iron block</material>
+    <not id="deny-player-place">
+        <any>
+            <team>red-team</team>
+            <team>blue-team</team>
+        </any>
+    </not>
+    <not id="match-start">
+        <match-running/>
+    </not>
+</filters>
+<regions>
+    <union id="spawn-obs">
+        <point yaw="0">0.5,20.1,-28.5</point>
+    </union>
+    <union id="no-fall">
+        <above z="86"/>
+        <below z="-85"/>
+    </union>
+    <apply block="only-blue-wool" enter="only-blue" message="This region is disable for your team.">
+        <region>
+            <rectangle min="-56,-34" max="-45,-43"/> <!-- lime -->
+            <rectangle min="57,-38" max="46,-47"/> <!-- cyan -->
+        </region>
+    </apply>
+    <apply block="only-red-wool" enter="only-red" message="This region is disable for your team.">
+        <region>
+            <rectangle min="57,35" max="46,44"/> <!-- magenta -->
+            <rectangle min="-56,39" max="-45,48"/> <!-- green -->
+        </region>
+    </apply>
+    <apply block="never" message="This region is disabled.">
+        <region>
+            <union>
+                <!-- blue -->
+                <union id="wools-blue-protect">
+                    <cuboid min="-43,0,50" max="-56,13,39"/>
+                    <cuboid min="44,0,46" max="57,16,35"/>
+                </union>
+                <!-- red -->
+                <union id="wools-red-protect">
+                    <cuboid min="44,0,-49" max="57,13,-38"/>
+                    <cuboid min="-43,0,-45" max="-56,16,-34"/>
+                </union>
+            </union>
+        </region>
+    </apply>
+    <!--
+    <apply block="only-red-team">
+        <region>
+            <cuboid min="-43,13,50" max="-56,oo,39"/>
+            <cuboid min="44,16,46" max="57,oo,35"/>
+        </region>
+    </apply>
+    <apply block="only-blue-team">
+        <region>
+            <cuboid min="42,13,-49" max="57,oo,-38"/>
+            <cuboid min="-43,16,-45" max="-56,oo,-34"/>
+        </region>
+    </apply>
+    -->
+    <apply block-break="only-iron-break" block-place="deny-player-place" message="You may only break iron blocks in spawn.">
+        <region>
+            <union id="spawns">
+                <cuboid id="spawn-red" min="9,0,-76" max="-8,oo,-95"/> <!-- red -->
+                <cuboid id="spawn-blue" min="9,0,77" max="-8,oo,96"/> <!-- blue -->
+            </union>
+        </region>
+    </apply>
+    <union id="removables">
+        <cuboid id="removable-0" min="-42,2,-8" max="-29,1,-23"/>
+        <cuboid id="removable-1" min="-6,2,-34" max="-16,1,-23"/>
+        <cuboid id="removable-2" min="29,2,-49" max="43,1,-8"/>
+        <cuboid id="removable-3" min="29,2,-28" max="17,1,-38"/>
+        <cuboid id="removable-4" min="17,2,-23" max="7,1,-8"/>
+        <cuboid id="removable-5" min="7,2,-62" max="-6,1,-71"/>
+        <cuboid id="removable-6" min="43,2,9" max="30,1,24"/>
+        <cuboid id="removable-7" min="7,2,35" max="17,1,24"/>
+        <cuboid id="removable-8" min="-28,2,29" max="-16,1,39"/>
+        <cuboid id="removable-9" min="-16,2,24" max="-6,1,9"/>
+        <cuboid id="removable-10" min="-6,2,63" max="7,1,72"/>
+        <cuboid id="removable-11" min="-28,2,50" max="-42,1,9"/>
+        <cuboid id="removable-12" min="44,2,35" max="17,1,49"/>
+        <cuboid id="removable-13" min="-43,2,-34" max="-16,1,-48"/>
+        <cuboid id="removable-14" min="43,2,-49" max="44,1,-38"/>
+        <cuboid id="removable-15" min="-42,2,50" max="-43,1,39"/>
+    </union>
+    <apply enter="only-red" region="spawn-red" message="This region is disabled for your team."/>
+    <apply enter="only-blue" region="spawn-blue" message="This region is disabled for your team."/>
+    <apply block-place="always" region="spawns"/>
+    <apply block="deny-void" message="This region is disabled.">
+        <region>
+            <negative>
+                <union>
+                    <rectangle min="-182,-51" max="-255,22"/> <!-- red -->
+                    <rectangle min="-315,82" max="-242,9"/> <!-- blue -->
+                    <rectangle min="-208,57" max="-243,21"/> <!-- mid islands -->
+                    <rectangle min="-290,-25" max="-254,10"/>
+                    <rectangle min="-235,-85" max="-216,-51"/> <!-- yellow -->
+                    <rectangle min="-148,-17" max="-182,2"/> <!-- orange -->
+                    <rectangle min="-262,116" max="-281,82"/> <!-- lime -->
+                    <rectangle min="-349,48" max="-315,29"/> <!-- cyan -->
+                </union>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<renewables>
+    <renewable interval="5s" grow="true" avoid-players="2" region="spawns">
+        <renew-filter>
+            <material>iron block</material>
+        </renew-filter>
+        <replace-filter>
+            <material>air</material>
+        </replace-filter>
+    </renewable>
+</renewables>
+<time results="objective">45m</time>
+<timelock>on</timelock>
+<maxbuildheight>26</maxbuildheight>
+<crafting>
+    <disable>shield</disable>
+</crafting>
+<damage>
+    <deny>
+        <all>
+            <cause>fall</cause>
+            <region id="no-fall"/>
+        </all>
+    </deny>
+</damage>
+<block-drops>
+    <rule>
+        <filter>
+            <material>gravel</material>
+        </filter>
+        <drops>
+            <item>flint</item>
+        </drops>
+    </rule>
+</block-drops>
+<item-mods>
+    <rule>
+        <match><material>bow</material></match>
+        <modify><enchantment>infinity</enchantment></modify>
+    </rule>
+</item-mods>
+<structures>
+    <structure region="removable-0" origin="0,1,0" id="removables0"/>
+    <dynamic structure="removables0" trigger="match-start"/>
+    <structure region="removable-1" origin="0,1,0" id="removables1"/>
+    <dynamic structure="removables1" trigger="match-start"/>
+    <structure region="removable-2" origin="0,1,0" id="removables2"/>
+    <dynamic structure="removables2" trigger="match-start"/>
+    <structure region="removable-3" origin="0,1,0" id="removables3"/>
+    <dynamic structure="removables3" trigger="match-start"/>
+    <structure region="removable-4" origin="0,1,0" id="removables4"/>
+    <dynamic structure="removables4" trigger="match-start"/>
+    <structure region="removable-5" origin="0,1,0" id="removables5"/>
+    <dynamic structure="removables5" trigger="match-start"/>
+    <structure region="removable-6" origin="0,1,0" id="removables6"/>
+    <dynamic structure="removables6" trigger="match-start"/>
+    <structure region="removable-7" origin="0,1,0" id="removables7"/>
+    <dynamic structure="removables7" trigger="match-start"/>
+    <structure region="removable-8" origin="0,1,0" id="removables8"/>
+    <dynamic structure="removables8" trigger="match-start"/>
+    <structure region="removable-9" origin="0,1,0" id="removables9"/>
+    <dynamic structure="removables9" trigger="match-start"/>
+    <structure region="removable-10" origin="0,1,0" id="removables10"/>
+    <dynamic structure="removables10" trigger="match-start"/>
+    <structure region="removable-11" origin="0,1,0" id="removables11"/>
+    <dynamic structure="removables11" trigger="match-start"/>
+    <structure region="removable-12" origin="0,1,0" id="removables12"/>
+    <dynamic structure="removables12" trigger="match-start"/>
+    <structure region="removable-13" origin="0,1,0" id="removables13"/>
+    <dynamic structure="removables13" trigger="match-start"/>
+    <structure region="removable-14" origin="0,1,0" id="removables14"/>
+    <dynamic structure="removables14" trigger="match-start"/>
+    <structure region="removable-15" origin="0,1,0" id="removables15"/>
+    <dynamic structure="removables15" trigger="match-start"/>
+</structures>
+<kill-reward>
+    <item>golden apple</item>
+    <item amount="32" damage="2" material="wood"/>
+    <item amount="16" material="glass"/>
+</kill-reward>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>smooth brick</item>
+    <item>wood</item>
+    <item>log</item>
+    <item>162</item>
+    <item>golden carrot</item>
+    <item>stone</item>
+    <item>cobblestone</item>
+    <item>glowstone dust</item>
+    <item>sapling</item>
+    <item>double step</item>
+    <item>apple</item>
+    <item>leaves</item>
+    <item>stained clay</item>
+    <item>seeds</item>
+    <item>red rose</item>
+    <item>yellow flower</item>
+    <item>flower pot item</item>
+    <item>melon</item>
+    <item>mossy cobblestone</item>
+    <item>glass</item>
+    <item>carpet</item>
+    <item>string</item>
+    <item>sand</item>
+    <item>sugar cane</item>
+    <item>redstone</item>
+    <item>wool:8</item> <!-- gray -->
+    <item>wool:1</item> <!-- orange -->
+    <item>wool:14</item> <!-- red -->
+    <item>wool:0</item> <!-- white -->
+    <item>wool:11</item> <!-- blue -->
+    <item>wood step:1</item>
+    <item>water lily</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+<respawn auto="true" blackout="true" delay="4.6s"/>
+</map>

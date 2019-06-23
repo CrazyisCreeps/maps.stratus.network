@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Juggernaut">
+<name>Juggernaut: St. Carrotfields</name>
+<version>1.0</version>
+<objective>Be the last ghost alive!</objective>
+<authors>
+    <author uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b"/> <!-- ItsMiiOlly -->
+    <author uuid="75fd93dd-8e48-4698-81a2-97dae2ec5b5f"/> <!-- iPGz -->
+    <author uuid="af9c1942-af66-42d1-89f9-9b677c281e03"/> <!-- _IQ -->
+</authors>
+<phase>development</phase>
+<time result="juggernaut">5m</time>
+<blitz>
+    <rule filter="only-juggernaut" lives="1"/>
+    <rule filter="only-humans" lives="3"/>
+</blitz>
+<teams>
+    <team id="juggernaut" color="dark green" max="2" max-overfill="2">Grinch</team>
+    <team id="humans" color="dark red" max="24" plural="true">Elves</team>
+</teams>
+<spawns safe="true"> 
+    <spawn team="humans" kit="humans-kit" angle="0.5,12,0.5">
+        <region>
+            <cylinder base="0.5,11,0.5" radius="40" height="4"/>
+        </region>
+    </spawn> 
+    <spawn team="juggernaut" kit="juggernaut-kit" angle="0.5,12,0.5">
+        <region>
+            <cylinder base="0.5,11,0.5" radius="6" height="4"/>
+        </region>
+    </spawn>
+    <default yaw="-90">
+        <region>
+            <block>2,46,0</block>
+        </region>
+    </default>
+</spawns>
+<kits>
+    <kit id="all">
+        <clear/>
+        <potion duration="oo" amplifier="1" ambient="true">night vision</potion>
+    </kit>
+    <kit id="juggernaut-kit" parents="all">
+        <head name="`r`bThe Grinch" slot="slot.armor.head" locked="true" uuid="a096c06d-9660-42c0-9bb3-908b4edc2149" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTgzOGQ2MzBkNDk2ZjIxMjg1ZDQ5MDk5YzNmZDhkOTIxNDQyMTcyYTUxNjBjMWI1ZDQyYTUwODBmOWNmODE4YSJ9fX0=">
+            <attribute slot="slot.armor.head" operation="add" amount="3">generic.armor</attribute>
+            <attribute slot="slot.armor.head" operation="add" amount="400">generic.armorToughness</attribute>
+        </head>
+        <chestplate color="993333" unbreakable="true" material="leather chestplate">
+            <attribute slot="slot.armor.chest" operation="add" amount="1">generic.knockbackResistance</attribute>
+            <attribute slot="slot.armor.head" operation="add" amount="8">generic.armor</attribute>
+            <attribute slot="slot.armor.head" operation="add" amount="400">generic.armorToughness</attribute>
+        </chestplate>
+        <leggings color="993333" unbreakable="true" material="leather leggings">
+            <attribute slot="slot.armor.head" operation="add" amount="6">generic.armor</attribute>
+            <attribute slot="slot.armor.head" operation="add" amount="400">generic.armorToughness</attribute>
+        </leggings>
+        <boots color="993333" unbreakable="true" material="leather boots">
+            <attribute slot="slot.armor.head" operation="add" amount="3">generic.armor</attribute>
+            <attribute slot="slot.armor.head" operation="add" amount="400">generic.armorToughness</attribute>
+        </boots>
+        <item slot="0">diamond sword</item>
+        <item slot="1" name="`rKnockback Stick" enchantment="knockback:3">stick</item>
+        <potion duration="oo" amplifier="20">health boost</potion>
+        <potion duration="oo" amplifier="2">jump</potion>
+        <potion duration="oo" amplifier="3">damage resistance</potion>
+        <potion duration="3" amplifier="100">heal</potion>
+        <potion duration="oo">regeneration</potion>
+        <item projectile="coal-cannon" name="`rCoal Launcher" amount="12">coal</item>
+        <item projectile="pulse-cannon" name="`rPulser" amount="8">nether star</item>
+        <item name="`rLingering Potion of Blindness" amount="3" material="lingering potion">
+            <effect duration="12">blindness</effect>
+            <effect duration="12">slowness</effect>
+        </item>
+    </kit>
+    <kit id="humans-kit" parents="all">
+        <any count="1">
+            <head name="`r`bElf" slot="slot.armor.head" locked="true" uuid="a096c06d-9660-42c1-9bb3-908b4edc2149" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmZiYjRhNGFjYmZiOWZlMDYxYTYxYTg3NjYzZGE1YmU3MTllNTQzNDg1NjZlZjIxYWRmMzRhOThjMDljNGY1MiJ9fX0="/>
+            <head name="`r`bElf" slot="slot.armor.head" locked="true" uuid="a096c06d-9660-42c2-9bb3-908b4edc2149" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTU3YmU0N2JlNmY0YjI2YjA3OWM3NzU4YjY2Y2E4ODhiOWMzNGVhZWQ3MmU2ZTU4YjEzZDg3ZmZkYTBiMyJ9fX0="/>
+            <head name="`r`bElf" slot="slot.armor.head" locked="true" uuid="a096c06d-9660-42c3-9bb3-908b4edc2149" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTVhZmQ3Y2FjMzY1Mzk4YjE1YjAzNDlkNDkyZmNmZWQwYjdjZDE5NTZlNGUzNGQzYmQ1MTNkZjgxMTJiIn19fQ=="/>
+            <head name="`r`bElf" slot="slot.armor.head" locked="true" uuid="a096c06d-9660-42c4-9bb3-908b4edc2149" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmM2ZTc5ZDE3MTc5MDJmNzFkYzU1M2M1MzczZmYyZTE3YmFlNjE5YjM5ZjhkZGJkZDIzMzgzZGQ1NWIzOTYifX19"/>
+            <head name="`r`bElf" slot="slot.armor.head" locked="true" uuid="a096c06d-9660-42c5-9bb3-908b4edc2149" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTg5YTRjMWE3YzgxZjM3NjVmNWE1ZTJjOTJlNGQ0OGVkOTczMGRhYzE4NzhkZmY0MWExOTFkNzhhMTY5ZDg5In19fQ=="/>
+            <head name="`r`bElf" slot="slot.armor.head" locked="true" uuid="a096c06d-9660-42c6-9bb3-908b4edc2149" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmI2MDgxYWFjZmQzNDdjMTI2YWI0ZTkwOTA5ZmRkMzdhNGRlYjVjYTE5MTg0ZWI0Yzk1OTE3MzRmODU4NjgifX19"/>
+        </any>
+        <chestplate color="4C4C4C" unbreakable="true" material="leather chestplate"/>
+        <leggings color="4C4C4C" unbreakable="true" material="leather leggings"/>
+        <boots color="993333" unbreakable="true" material="leather boots"/>
+        <item slot="0">iron axe</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <any count="2" unique="false">
+            <option weight="10"><item name="`rSnowman Launcher" projectile="snowman-cannon-1" amount="5">snow ball</item></option>
+            <option weight="10"><item amount="2">ender pearl</item></option>
+            <option weight="2"><item name="`rBreath of the Winter Solstice" projectile="dragon-cannon">eye of ender</item></option>
+            <option weight="10"><item name="`rTNT Launcher" projectile="tnt-cannon" amount="3">tnt</item></option>
+            <option weight="10"><item name="`rPulser" projectile="pulse-cannon" amount="3">nether star</item></option>
+            <option weight="5"><double-jump recharge-time="4s"/></option>
+        </any>
+        <item slot="8">golden apple</item>
+        <item slot="28">arrow</item>
+        <potion duration="oo" amplifier="1" ambient="true">speed</potion>
+        <potion duration="2" amplifier="100">heal</potion>
+    </kit>
+    <kit id="pulse" force="true">
+        <impulse yaw="true" pitch="false">0,0.8,-10</impulse>
+        <chestplate unbreakable="true" material="diamond chestplate"/>
+    </kit>
+    <kit id="coal-kit">
+        <effect duration="6">blindness</effect>
+        <effect duration="6">wither</effect>
+    </kit>
+</kits>
+<projectiles>
+    <projectile id="snowman-cannon-1" name="Snowman cannon" projectile="Snowman" velocity="2.4" damage="5" effect="slowness:2:8"/>
+    <projectile id="dragon-cannon" name="Winter's Breath cannon" projectile="DragonFireball" velocity="4" damage="0"/>
+    <projectile id="tnt-cannon" name="Wither cannon" projectile="TNTPrimed" velocity="1.8" damage="2"/>
+    <projectile id="pulse-cannon" name="Pulse cannon" projectile="Snowball" velocity="4" damage="1" victim-kit="pulse" attacker-kit="pulse"/>
+    <projectile id="coal-cannon" name="Coal launcher" projectile="WitherSkull" velocity="2.8" damage="3" victim-kit="coal-kit"/>
+</projectiles>
+<filters>
+    <team id="only-juggernaut">juggernaut</team>
+    <team id="only-humans">humans</team>
+    <not id="deny-use">
+        <material>beacon</material>
+    </not>
+</filters>
+<regions>
+    <apply block="never" use="deny-use"/>
+</regions>
+<itemremove>
+    <item>diamond sword</item>
+    <item>iron axe</item>
+    <item>leather helmet</item>
+    <item>diamond helmet</item>
+    <item>diamond chestplate</item>
+    <item>leather chestplate</item>
+    <item>diamond leggings</item>
+    <item>diamond boots</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>bread</item>
+</itemremove>
+<disabledamage>
+    <damage>starvation</damage>
+</disabledamage>
+<gamerules>
+    <keepInventory>true</keepInventory>
+</gamerules>
+</map>

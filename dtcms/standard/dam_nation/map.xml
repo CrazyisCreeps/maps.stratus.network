@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Dam Nation</name>
+<version>1.2.2</version>
+<gamemode>dtm</gamemode>
+<objective>Destroy the enemy's two monuments AND leak their core 5 blocks!</objective>
+<authors>
+    <author uuid="89d44df9-b7cf-4e41-9910-51fae6d30ea5" contribution="Map Design"/> <!-- gamez7 -->
+    <author uuid="1a8709cc-0861-4289-8c35-d5802a5f4c0c" contribution="Builder"/> <!-- creeplode -->
+</authors>
+<contributors>
+    <contributor uuid="5bb60a0b-5059-4db9-9169-e07db4664e3d" contribution="Feedback Monkey"/> <!-- djfigs1 -->
+    <!-- <contributor uuid="e8649ff5-8f05-4939-8bb2-21e2d094bbc8" contribution="Farmhand"/> mbarne2852 this won't show until he logs into the server and otherwise just spams-->
+</contributors>
+<timelock>on</timelock>
+<teams>
+    <team color="dark red" max="32" id="red">Red</team>
+    <team color="blue" max="32" id="blue" >Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" material="iron sword"/>
+        <item slot="1" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="2" material="diamond pickaxe"/>
+        <item slot="3" enchantment="efficiency:2" material="iron axe"/>
+        <item slot="30" material="iron spade"/>
+        <item slot="5" amount="64" damage="1" material="wood"/>
+        <item slot="7" amount="32" material="ladder"/>
+        <item slot="8" material="potion">
+            <effect duration="10s" amplifier="2">speed</effect>
+        </item>
+        <item slot="4" amount="32" material="bread"/>
+        <item slot="28" material="arrow"/>
+        <potion amplifier="5" duration="4s">damage resistance</potion>
+    </kit>
+    <kit id="kit-red" parents="spawn">
+        <item slot="32" amount="24" damage="14" material="wool"/>
+        <helmet color="993333">leather helmet</helmet>
+    </kit>
+    <kit id="kit-blue" parents="spawn">
+        <item slot="32" amount="24" damage="11" material="wool"/>
+        <helmet color="334CB2">leather helmet</helmet>
+    </kit>
+</kits>
+    <!--
+<crafting>
+    <disable>boat</disable>
+    <disable>444</disable>
+</crafting>
+-->
+<cores name="Core" material="obsidian" leak="5" mode-changes="true">
+    <core team="red">
+        <region>
+            <cuboid id="red-core" min="121,21,-12" max="128,26,-8" />
+        </region>
+    </core>
+    <core team="blue">
+          <region>
+            <cuboid id="blue-core" min="-125,21,-13" max="-120,26,-8" />
+          </region>
+    </core>
+</cores>
+<modes>
+    <mode after="30m" material="coal block" name="`eCOAL CORE MODE"/>
+    <mode after="45m" material="sponge" name="`eSPONGE CORE MODE"/>
+</modes>
+<destroyables materials="obsidian" completion="100%">
+    <destroyable owner="red" name="Fort Monument">
+       <region><cuboid min="55,17,-35" max="56,19,-34"/></region>
+    </destroyable>
+    <destroyable owner="red" name="Dam Monument">
+       <region><cuboid min="64,15,48" max="65,17,49"/></region>
+    </destroyable>
+    <destroyable owner="blue" name="Fort Monument">
+       <region><cuboid min="-55,17,-35" max="-54,19,-34"/></region>
+    </destroyable>
+    <destroyable owner="blue" name="Dam Monument">
+       <region><cuboid min="-64,15,48" max="-63,17,49"/></region>
+    </destroyable>
+</destroyables>
+<spawns>
+    <spawn team="red" kit="kit-red" yaw="0">
+        <region>
+            <cuboid id="red-spawn" min="157.5,11.5,26.5" max="160.5,11.5,29.5"/>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="kit-blue" yaw="0">
+        <region>
+            <cuboid id="blue-spawn" min="-159.5,11.5,26.5" max="-156.5,11.5,29.5"/>
+        </region>
+    </spawn>
+    <default>
+        <region yaw="0">
+            <cuboid min="-1,51,-1" max="1,51,1"/>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+    <deny id="deny-chest">
+        <material>chest</material>
+    </deny>
+    <deny id="deny-boat-dispenser">
+		<any>
+			<material>dispenser</material>
+			<material>wood_plate</material>
+		</any>
+    </deny>
+</filters>
+<regions>
+     <!--  Spawn Anti-Grief  -->
+    <apply block="never" message="You may not modify the team spawns!">
+        <region>
+            <cuboid min="152,10,21" max="165,16,51"/>
+            <cuboid min="-165,10,21" max="-152,16,51"/>
+        </region>
+    </apply>
+    <!--  Block Spawn Entrance  -->
+    <apply enter="only-red" message="You are not allowed in Red's spawn room.">
+        <region>
+            <cuboid min="154,10,40" max="155,16,23"/>
+            <cuboid min="165,14,23" max="154,16,31"/>
+        </region>
+    </apply>
+    <apply enter="only-blue" message="You are not allowed in Blue's spawn room.">
+        <region>
+            <cuboid min="-153,10,40" max="-154,16,23"/>
+            <cuboid min="-163,14,23" max="-153,16,31"/>
+        </region>
+    </apply>
+    <!--  Void Protection  -->
+    <apply block="no-void" message="You may not modify outside the playing field!">
+        <region><everywhere/></region>
+    </apply>
+    <!--  Chest Protection  -->
+    <apply block="deny-chest" message="You may not place nor destroy chests here!">
+        <region>
+            <cuboid min="148,7,6" max="148,7,13"/>
+            <cuboid min="-148,7,6" max="-148,7,13"/>
+            <cuboid min="49,9,-41" max="49,11,-38"/>
+            <cuboid min="-49,9,-41" max="-49,11,-38"/>
+        </region>
+    </apply>
+    <!--  Boat Dispenser Protection  -->
+    <apply block="deny-boat-dispenser" use="deny-boat-dispenser" message="The boat dispensers are locked.">
+        <region>
+            <cuboid min="-2,6,4" max="2,7,10"/>
+        </region>
+    </apply>
+</regions>
+<renewables>
+    <renewable interval="1">
+        <region>
+            <cuboid min="-150,16,-36" max="-117,19,-19"/>
+            <cuboid min="151,16,-36" max="118,19,-19"/>
+        </region>
+        <renew-filter>
+            <any>
+                <material>iron block</material>
+            </any>
+        </renew-filter>
+    </renewable>
+</renewables>
+<itemremove>
+    <item>obsidian</item>
+    <item>seeds</item>
+    <item>glowstone dust</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>glass bottle</item>
+    <item>golden apple</item>
+    <item>leather helmet</item>
+    <item>rails</item>
+    <item>flint</item>
+    <item>netherrack</item>
+    <item>coal block</item>
+    <item>sponge</item>
+    <item>anvil</item>
+    <item>445</item> <!-- Birch Boat -->
+    <item damage="1">wood</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+    <tool>leather helmet</tool>
+</toolrepair>
+<killreward>
+    <item amount="1">golden apple</item>
+</killreward>
+<tnt>
+    <blockdamage>false</blockdamage>
+    <fuse>2s</fuse>
+    <licensing>false</licensing>
+</tnt>
+<gamerules>
+    <doDaylightCycle>false</doDaylightCycle>
+    <keepInventory>false</keepInventory>
+</gamerules>
+<maxbuildheight>33</maxbuildheight>
+</map>

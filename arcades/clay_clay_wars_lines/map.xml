@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<include src="blitz-global.xml"/>
+<name>Clay Clay Wars: Lines</name>
+<version>1.0.4</version>
+<objective>Leak lava from the enemy's core, or kill all players on the enemy team.</objective>
+<gamemode>dtc</gamemode>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="cc2292de-fcb3-412d-9319-f3177f73b605"/> <!-- cs_ -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue" max="100">Blue Team</team>
+    <team id="red-team" color="red" max="100">Red Team</team>
+</teams>
+<time>10m</time>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<timelock>on</timelock>
+<spawns>
+    <spawn team="blue-team" yaw="-90">
+        <region><point>4.5,4.0,-21.5</point></region>
+    </spawn>
+    <spawn team="red-team" yaw="90">
+        <region><point>14.5,4.0,-21.5</point></region>
+    </spawn>
+    <default yaw="180">
+        <region><point>8.5,1.0,1.5</point></region>
+    </default>
+</spawns>
+<cores material="obsidian" leak="2">
+    <core team="blue-team">
+        <region><cuboid min="1,7,-23" max="4,10,-20"/></region>
+    </core>
+    <core team="red-team">
+        <region><cuboid min="15,7,-23" max="18,10,-20"/></region>
+    </core>
+</cores>
+</map>

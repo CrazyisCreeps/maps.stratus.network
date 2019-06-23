@@ -1,0 +1,183 @@
+<map proto="1.4.2">
+<name>Cerulean</name>
+<version>1.4.0</version>
+<objective>Capture the wool and return it to your victory monument</objective>
+<authors>
+    <author uuid="bf331953-4f92-43ee-8abc-7544b8234936" /> <!-- ViceTechnicolour -->
+    <author uuid="c88f74cc-51e7-43da-b893-54f8ec630701" /> <!-- Epicness -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue"     max="8" max-overfill="10">Blue</team>
+    <team id="red-team"  color="dark red" max="8" max-overfill="10">Red</team>
+</teams>
+<kits>
+    <kit id="main-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword" />
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>arrow infinite</enchantment>
+        </item>
+        <item slot="2" unbreakable="true" material="stone pickaxe" />
+        <item slot="3" unbreakable="true" material="stone axe" />
+        <item slot="4" amount="24"        material="wood" damage="1" />
+        <item slot="8" amount="64"        material="golden carrot" />
+        <item slot="28" amount="1"         material="arrow" />
+        <chestplate    unbreakable="true" material="chainmail chestplate" />
+        <boots         unbreakable="true" material="gold boots" />
+        <effect duration="3" amplifier="10">resistance</effect>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <item     slot="5" amount="16" damage="11"  material="stained clay" />
+        <helmet   unbreakable="true" color="0066cc" material="leather helmet" />
+        <leggings unbreakable="true" color="0066cc" material="leather leggings" />
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <item     slot="5" amount="16" damage="14"  material="stained clay" />
+        <helmet   unbreakable="true" color="cd0000" material="leather helmet" />
+        <leggings unbreakable="true" color="cd0000" material="leather leggings" />
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <regions>
+            <point yaw="0">-96.5,13,-82.5</point>
+        </regions>
+    </default>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+            <point yaw="180">-66.5,10,13.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red-kit">
+        <regions>
+            <point yaw="180">-126.5,10,13.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <not id="deny-void">
+        <void />
+    </not>
+    <not id="deny-player-cause">
+        <cause>player</cause>
+    </not>
+    <all id="view-wool-beam-blue">
+        <filter id="only-blue" />
+        <not>
+            <all id="view-monument-beam-blue">
+                <filter id="only-blue" />
+                <carrying>
+                    <item damage="1" material="wool" />
+                </carrying>
+            </all>
+        </not>
+    </all>
+    <all id="view-wool-beam-red">
+        <filter id="only-red" />
+        <not>
+            <all id="view-monument-beam-red">
+                <filter id="only-red" />
+                <carrying>
+                    <item damage="9" material="wool" />
+                </carrying>
+            </all>
+        </not>
+    </all>
+    <all id="blue-webs">
+    		<team>blue-team</team>
+    		<any>
+    			<material>web</material>
+    		</any>
+    	</all>
+    	<all id="red-webs">
+    		<team>red-team</team>
+    		<any>
+    			<material>web</material>
+    		</any>
+    	</all>
+</filters>
+<regions>
+    <rectangle id="blue-spawn"    min="-62,0"    max="-71,18" />
+    <rectangle id="red-spawn"     min="-131,0"   max="-122,18" />
+    <union id="wool-rooms">
+        <rectangle id="lime-wool"     min="-139,-18" max="-148,-9" />
+        <rectangle id="magenta-wool"  min="-45,-18"  max="-54,-9" />
+    </union>
+    <above id="world-limit" y="20" />
+    <below id="bottom-layer" y="1" />
+    <apply region="blue-spawn"   enter="only-blue"               message="You may not enter the other team's spawn" />
+    <apply region="blue-spawn"   block="never"                   message="You may not modify the spawn area" />
+    <apply region="red-spawn"    enter="only-red"                message="You may not enter the other team's spawn" />
+    <apply region="red-spawn"    block="never"                   message="You may not modify the spawn area" />
+    <apply region="lime-wool"    block="blue-webs"               message="You may not modify the wool room" />
+	<apply region="magenta-wool" block="red-webs"                message="You may not modify the wool room" />
+    <apply region="lime-wool"    enter="only-blue"               message="You may not enter this wool room" />
+    <apply region="magenta-wool" enter="only-red"                message="You may not enter this wool room" />
+    <apply region="world-limit"  block-place="deny-player-cause" message="You may not place blocks that high" />
+    <apply region="bottom-layer" block="never"                   message="You may not interact with that material here" />
+    <apply                       block-place="deny-void"         message="You may not interact with that material here" />
+</regions>
+<wools>
+    <wool team="blue-team" color="lime" location="-143.5,2,-13.5">
+        <monument>
+            <block>-67,10,16</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="magenta" location="-49.5,2,-13.5">
+        <monument>
+            <block>-127,10,16</block>
+        </monument>
+    </wool>
+</wools>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8"  material="wood" damage="1" />
+        <item             material="golden apple" />
+    </kill-reward>
+    <kill-reward filter="only-blue">
+        <item amount="12" damage="11" material="stained clay" />
+    </kill-reward>
+    <kill-reward filter="only-red">
+        <item amount="12" damage="14" material="stained clay" />
+    </kill-reward>
+</kill-rewards>
+<item-mods>
+    <rule>
+        <match>
+            <material>bow</material>
+            <material>diamond helmet</material>
+            <material>iron sword</material>
+            <material>iron pickaxe</material>
+            <material>iron axe</material>
+            <material>iron spade</material>
+            <material>iron helmet</material>
+            <material>iron chestplate</material>
+            <material>iron leggings</material>
+            <material>iron boots</material>
+        </match>
+        <modify unbreakable="true" />
+    </rule>
+</item-mods>
+<toolrepair>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>stone sword</item>
+    <item>stone pickaxe</item>
+    <item>stone axe</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>gold boots</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>arrow</item>
+    <item>double plant</item>
+    <item>red rose</item>
+    <item>string</item>
+</itemremove>
+</map>

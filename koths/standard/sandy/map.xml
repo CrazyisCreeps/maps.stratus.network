@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Sandy</name>
+<version>1.0.0</version>
+<objective>Be the first to 750 points</objective>
+<authors>
+    <author uuid="9116d3fa-1400-4ada-aecd-2eae1d73e383" />  <!--XUPH-->
+    <author uuid="0b8f95fa-0f40-4f28-9fd0-b8e243bb6800" />  <!--Fouled-->
+</authors>
+<teams>
+    <team id="blue-team" color="blue" max="8">Blue</team>
+    <team id="red-team" color="dark red" max="8">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="4" amplifier="10">resistance</effect>
+        <effect duration="4" amplifier="10">regeneration</effect>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="0066cc" material="leather helmet"/>
+        <leggings unbreakable="true" color="0066cc" material="leather leggings"/>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="cd0000" material="leather helmet"/>
+        <leggings unbreakable="true" color="cd0000" material="leather leggings"/>
+    </kit>
+</kits>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow" />
+        <item amount="1" material="golden apple" />
+    </kill-reward>
+</kill-rewards>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="90">
+            <block>-861.5,155.5,-664.5</block>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="-90">
+            <block>-921.5,155.5,-664.5</block>
+        </regions>
+    </spawn>
+    <default>
+        <region yaw="0">
+            <cylinder base="-891.5,178,-696.5" radius="1" height="1" />
+        </region>
+    </default>
+</spawns>
+<respawn delay="3s" />
+<control-points capture-players="lead" neutral-state="true" incremental="true" show-progress="true" required="false">
+    <control-point name="Point A" capture-time="5s" points="1">
+        <capture>
+            <cuboid min="-888,152,-685" max="-895,155,-690" />
+            <cuboid min="-889,152,-684" max="-894,155,-691" />
+        </capture>
+        <progress>
+            <cuboid min="-888,152,-685" max="-895,155,-690" />
+            <cuboid min="-889,152,-684" max="-894,155,-691" />
+        </progress>
+        <captured>
+            <cuboid min="-888,152,-685" max="-895,155,-690" />
+            <cuboid min="-889,152,-684" max="-894,155,-691" />
+            <cuboid min="-887,152,-696" max="-896,173,-693" />
+        </captured>
+    </control-point>
+    <control-point name="Point B" capture-time="5s" points="1">
+        <capture>
+            <cuboid min="-889,152,-638" max="-894,155,-645" />
+            <cuboid min="-888,152,-639" max="-895,155,-644" />
+        </capture>
+        <progress>
+            <cuboid min="-889,152,-638" max="-894,155,-645" />
+            <cuboid min="-888,152,-639" max="-895,155,-644" />
+        </progress>
+        <captured>
+            <cuboid min="-889,152,-638" max="-894,155,-645" />
+            <cuboid min="-888,152,-639" max="-895,155,-644" />
+            <cuboid min="-887,152,-636" max="-896,173,-633" />
+        </captured>
+    </control-point>
+    <control-point name="Middle" capture-time="5s" points="1">
+        <capture>
+            <cuboid min="-889,144,-661" max="-894,147,-668" />
+            <cuboid min="-895,144,-667" max="-888,147,-662" />
+        </capture>
+        <progress>
+            <cuboid min="-889,144,-661" max="-894,147,-668" />
+            <cuboid min="-895,144,-667" max="-888,147,-662" />
+        </progress>
+        <captured>
+            <cuboid min="-889,144,-661" max="-894,147,-668" />
+            <cuboid min="-895,144,-667" max="-888,147,-662" />
+        </captured>
+    </control-point>
+</control-points>
+<regions>
+    <apply block="never" />
+</regions>
+<score>
+    <limit>750</limit>
+</score>
+<itemremove>
+  	<item>leather boots</item>
+  	<item>chainmail leggings</item>
+  	<item>iron chestplate</item>
+  	<item>leather helmet</item>
+</itemremove>
+<toolrepair>
+  	<tool>iron sword</tool>
+  	<tool>bow</tool>
+</toolrepair>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

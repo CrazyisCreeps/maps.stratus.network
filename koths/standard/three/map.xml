@@ -1,0 +1,113 @@
+<map proto="1.4.2">
+<name>Three</name>
+<version>1.0</version>
+<objective>Be the first team to reach 750 points!</objective>
+<authors>
+	  <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b"/> <!-- Jexel -->
+	  <author uuid="15c75bdd-005f-40f6-9e20-1ecf48bb51e5"/> <!-- Kiyara -->
+	  <author uuid="b61981c0-6f14-492b-8185-99e2b5df2222"/> <!-- Winne -->
+	  <author uuid="d71152ca-187d-43c4-9901-ba001606c655"/> <!-- wylt -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue" max="10">Blue</team>
+    <team id="red-team" color="dark red" max="10">Red</team>
+</teams>
+<kits>
+    <kit id="main-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="20" material="arrow"/>
+        <chestplate locked="true" enchantment="protection projectile:2" unbreakable="true" material="chainmail chestplate"/>
+        <boots locked="true" enchantment="protection fall:2" unbreakable="true" material="iron boots"/>
+        <effect duration="4.2" amplifier="10">resistance</effect>
+        <effect duration="4.2" amplifier="10">regeneration</effect>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <helmet unbreakable="true" color="0066cc" material="leather helmet"/>
+        <leggings unbreakable="true" color="0066cc" material="leather leggings"/>
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <helmet locked="true" unbreakable="true" color="cd0000" material="leather helmet"/>
+        <leggings locked="true" unbreakable="true" color="cd0000" material="leather leggings"/>
+    </kit>
+	<kit id="portal-kit">
+		<effect duration="2.2" amplifier="10">resistance</effect>
+		<effect duration="2.2" amplifier="10">regeneration</effect>
+	</kit>
+</kits>
+<spawns>
+    <default region="spawn-default" yaw="90"/>
+    <spawn team="blue-team" kit="blue-kit" region="spawn-blue" yaw="135"/>
+    <spawn team="red-team" kit="red-kit" region="spawn-red" yaw="-45"/>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+</filters>
+<regions>
+    <cuboid id="portal-blue" min="22,8,26" max="23,11,29"/>
+    <cuboid id="portal-red" min="-25,8,-21" max="-28,11,-22"/>
+    <cuboid id="cp-top" min="-14,13,15" max="-21,15,22"/>
+    <cuboid id="cp-top-indicator" min="-14,20,15" max="-21,25,22"/>
+	<cuboid id="cp-mid" min="4,5,-3" max="-3,7,4"/>
+	<cuboid id="cp-mid-indicator" min="4,20,-3" max="-3,25,4"/>
+	<cuboid id="cp-bot" min="17,7,-16" max="24,9,-23"/>
+	<cuboid id="cp-bot-indicator" min="17,20,-16" max="24,25,-23"/>
+	<point id="spawn-default">0.5,36.1,0.5</point>
+	<point id="spawn-blue">27.5,30.1,27.5</point>
+	<point id="spawn-red">-26.5,30.1,-26.5</point>
+	<apply block="never"/>
+	<apply kit="portal-kit" filter="only-blue" region="portal-blue"/>
+	<apply kit="portal-kit" filter="only-red" region="portal-red"/>
+</regions>
+<control-points incremental="true" show-progress="true" neutral-state="true" required="false">
+    <control-point name="Alpha" capture-time="8.5s" points="0.90">
+        <capture><region id="cp-top"/></capture>
+        <progress><region id="cp-top"/></progress>
+        <captured><region id="cp-top-indicator"/></captured>
+    </control-point>
+	<control-point name="Middle" capture-time="8s" points="1.35">
+        <capture><region id="cp-mid"/></capture>
+        <progress><region id="cp-mid"/></progress>
+        <captured><region id="cp-mid-indicator"/></captured>
+    </control-point>
+	<control-point name="Bravo" capture-time="8.5s" points="0.75">
+        <capture><region id="cp-bot"/></capture>
+        <progress><region id="cp-bot"/></progress>
+        <captured><region id="cp-bot-indicator"/></captured>
+    </control-point>
+</control-points>
+<portals sound="false">
+    <portal filter="only-blue" region="portal-blue" yaw="@135" x="@27.5" y="@17.1" z="@27.5"/>
+    <portal filter="only-red" region="portal-red" yaw="@-45" x="@-26.5" y="@17.1" z="@-26.5"/>
+</portals>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<score>
+	<limit>750</limit>
+</score>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<respawn delay="3s"/>
+</map>

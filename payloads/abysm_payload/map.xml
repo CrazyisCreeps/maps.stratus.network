@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<map proto="1.4.3" game="Payload">
+<name>Abysm: Payload</name>
+<version>1.0.0</version>
+<objective>Payload: Attack/Defence</objective>
+<gamemode>ad</gamemode>
+<authors>
+    <author uuid="1c2664be-01ce-4be4-ac1c-a4dcc64b80c7"/> <!-- xxjkr7xx -->
+    <author uuid="b843e63b-4d8c-4606-b6da-08b3ed8534d1"/> <!-- santilam -->
+</authors>
+<contributors>
+    <contributor uuid="715769c5-8c4c-4489-bdf8-f9cee2b2ae8a" contribution="Payloadification"/> <!-- amactus -->
+</contributors>
+<teams>
+    <team id="attack" color="dark red" max="12">Attackers</team>
+    <team id="defend" color="blue" max="12">Defenders</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" amount="2">golden apple</item>
+        <item slot="3" amount="16">cooked beef</item>
+        <item slot="8" amount="32">arrow</item>
+        <potion duration="3" amplifier="25">heal</potion>
+        <potion duration="3" amplifier="25">damage resistance</potion>
+    </kit>
+    <kit id="attack-kit" parents="spawn">
+        <chestplate enchantment="protection projectile:1" unbreakable="true">iron chestplate</chestplate>
+        <leggings color="993333" unbreakable="true">leather leggings</leggings>
+        <boots enchantment="protection fall:2" unbreakable="true">iron boots</boots>
+    </kit>
+    <kit id="defend-kit" parents="spawn">
+        <chestplate enchantment="protection projectile:1" unbreakable="true">iron chestplate</chestplate>
+        <leggings color="334CB2" unbreakable="true">leather leggings</leggings>
+        <boots enchantment="protection fall:2" unbreakable="true">iron boots</boots>
+    </kit>
+</kits>
+<!-- PAYLOADS -->
+<payloads capture-time="5s" recovery="3" decay="3" empty-decay="3">
+    <payload name="Payload" id="payload" neutral-state="true" location="23.5,1.0,-23.5" radius="3" yaw="180.0" owner="defend" enemy-speed="1.5" friendly-speed="2" required="false" points="1" checkpoint-material="detector rail"/>
+</payloads>
+<!-- /PAYLOADS -->
+<score>
+    <limit>1</limit>
+</score>
+<time result="defend">15m</time>
+<destroyables materials="barrier" completion="0%" required="false" show="false" mode-changes="true">
+    <destroyable name="monu" owner="attack">
+       <region><cuboid min="20,1,-9" max="8,7,-14"/></region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="30s" material="air" name="The Attackers will be released"/>
+</modes>
+<itemremove>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>iron chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<killreward>
+    <item amount="4">arrow</item>
+    <item amount="1">golden apple</item>
+</killreward>
+<regions>
+<!--
+    <apply block="deny-all">
+        <rectangle name="main-area" min="-oo,oo" max="oo,-oo" />
+    </apply>
+-->
+<!--
+    <apply block="allow-water allow-world">
+        <rectangle min="-oo,-oo" max="oo,oo" />
+    </apply>
+-->
+</regions>
+<!--
+<filters>
+    <filter name="allow-water">
+        <block>stationary water</block>
+    </filter>
+</filters>
+-->
+<spawns>
+    <spawn team="attack" kit="attack-kit">
+        <regions yaw="135">
+            <cuboid min="14.5,4,-3.5" max="12.5,3,-4.5" />
+        </regions>
+    </spawn>
+    <spawn team="defend" kit="defend-kit" yaw="-135">
+        <regions yaw="135">
+            <cuboid min="-18.5,2,-82.5" max="-19.5,1,-83.5" />
+        </regions>
+    </spawn>
+    <default yaw="0">
+        <cuboid min="-4.5,52,-55.5" max="-6.5,53,-57.5" />
+    </default>
+</spawns>
+</map>

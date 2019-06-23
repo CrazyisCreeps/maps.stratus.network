@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Knights Of Osenden</name>
+<version>1.0.0</version>
+<objective>Destroy your opponents three monuments before they destroy yours!</objective>
+<authors>
+    <author uuid="be132e39-d32f-49f9-acc2-1e1a343aeaeb" />
+    <!-- KnightZack -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="32" max-overfill="38">Red</team>
+    <team id="purple" color="dark purple" max="32" max-overfill="38">Purple</team>
+</teams>
+<spawns>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="180">
+            <cuboid min="0,5,-72" max="0,5,-72" />
+        </regions>
+    </spawn>
+    <spawn team="purple" kit="purple-kit">
+        <regions yaw="0">
+            <cuboid min="0,5,130" max="0,5,130" />
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <cuboid min="-83,80,29" max="-83,80,29" />
+        </regions>
+    </default>
+</spawns>
+<destroyables materials="obsidian" completion="100%">
+    <destroyable name="West Monument" owner="purple">
+        <region>
+            <cuboid min="-52,39,138" max="-53,36,137" />
+        </region>
+    </destroyable>
+    <destroyable name="Middle Monument" owner="purple">
+        <region>
+            <cuboid min="0,18,134" max="1,21,133" />
+        </region>
+    </destroyable>
+    <destroyable name="East Monument" owner="purple">
+        <region>
+            <cuboid min="54,37,137" max="53,38,138" />
+        </region>
+    </destroyable>
+    <destroyable name="East Monument" owner="red">
+        <region>
+            <cuboid min="54,39,-80" max="53,36,-79" />
+        </region>
+    </destroyable>
+    <destroyable name="Middle Monument" owner="red">
+        <region>
+            <cuboid min="1,18,-77" max="0,21,-75" />
+        </region>
+    </destroyable>
+    <destroyable name="West Monument" owner="red">
+        <region>
+            <cuboid min="-53,39,-80" max="-52,36,-79" />
+        </region>
+    </destroyable>
+</destroyables>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" material="iron sword" unbreakable="true" />
+        <item slot="1" material="bow" unbreakable="true" />
+        <item slot="2" material="diamond pickaxe" unbreakable="true" />
+        <item slot="3" material="stone axe" unbreakable="true" />
+        <item slot="4" material="stone spade" unbreakable="true" />
+        <item slot="5" amount="64" material="wood" />
+        <item slot="7" amount="1" material="golden apple" />
+        <item slot="8" amount="32" material="cooked fish" />
+        <item slot="28" amount="32" material="arrow" />
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <boots color="cd0000" material="leather boots" unbreakable="true" />
+        <item slot="6" amount="32" damage="14" material="stained clay" />
+    </kit>
+    <kit id="purple-kit" parents="spawn">
+        <boots color="7F3FB2" material="leather boots" unbreakable="true" />
+        <item slot="6" amount="32" damage="11" material="stained clay" />
+    </kit>
+</kits>
+<itemremove>
+    <item>obsidian</item>
+    <item>leather boots</item>
+    <item>sand</item>
+    <item>dirt</item>
+    <item>grass path</item>
+    <item>dirt</item>
+    <item>gravel</item>
+    <item>iron sword</item>
+    <item>stone axe</item>
+    <item>diamond pickaxe</item>
+    <item>leather boots</item>
+    <item>stone spade</item>
+    <item>stained clay</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" material="Golden Apple" />
+    </kill-reward>
+</kill-rewards>
+<filters>
+    <not id="no-void">
+        <void />
+    </not>
+    <any id="iron-break">
+        <material>iron block</material>
+    </any>
+</filters>
+<regions>
+    <apply block-place="never" block-break="iron-break" message="`eYou may only modify iron blocks at spawn!">
+        <region>
+            <union>
+                <cuboid id="red-base" min="-25,4,-65" max="28,9,-93" />
+                <cuboid id="purple-base" min="28,9,157" max="-25,4,123" />
+            </union>
+        </region>
+    </apply>
+    <apply block="no-void" message="You may not modify the void area!">
+        <region>
+            <rectangle id="main-area" min="66,153" max="-93,-98" />
+        </region>
+    </apply>
+</regions>
+<maxbuildheight>48</maxbuildheight>
+</map>

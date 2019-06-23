@@ -1,0 +1,159 @@
+<map proto="1.4.2">
+<name>Gelid</name>
+<version>1.2.0</version>
+<objective>Have the most flag captures in 8 minutes</objective>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" /> <!-- mitchiii_ -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue"     max="8" max-overfill="10">Blue</team>
+    <team id="red-team"  color="dark red" max="8" max-overfill="10">Red</team>
+</teams>
+<kits>
+    <kit id="main-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword" />
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment level="1">infinity</enchantment>
+        </item>
+        <item slot="8" amount="64"        material="golden carrot" />
+        <item slot="9"                    material="arrow" />
+        <chestplate    unbreakable="true" material="chainmail chestplate" />
+        <boots         unbreakable="true" material="iron boots" />
+        <effect duration="3" amplifier="10">resistance</effect>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <helmet   unbreakable="true" color="0066cc" material="leather helmet" />
+        <leggings unbreakable="true" color="0066cc" material="leather leggings" />
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <helmet   unbreakable="true" color="cd0000" material="leather helmet" />
+        <leggings unbreakable="true" color="cd0000" material="leather leggings" />
+    </kit>
+    <kit id="flag-kit">
+        <walk-speed>0.6</walk-speed>
+        <max-health>12</max-health>
+        <shield health="4" delay="16s" />
+    </kit>
+    <kit id="pickup-kit" force="true">
+        <effect duration="24">speed</effect>
+        <effect duration="12">strength</effect>
+        <effect duration="6" level="2">regeneration</effect>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <regions>
+            <point yaw="90">-40,23.5,236</point>
+        </regions>
+    </default>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+            <point yaw="-45">-99.5,4.5,252.5</point>
+            <point yaw="30">-99.5,4.5,252.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red-kit">
+        <regions>
+            <point yaw="135">-59.5,4.5,219.5</point>
+            <point yaw="-150">-59.5,4.5,219.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<respawn delay="1s" />
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <any id="allowed-blocks">
+        <material>tnt</material>
+        <material>web</material>
+        <material>long grass</material>
+        <material>snow</material>
+    </any>
+    <time id="allow-powerup-spawn">5s</time>
+</filters>
+<regions>
+    <sphere id="blue-base" origin="-99.5,4.5,252.5" radius="4" />
+    <sphere id="red-base"  origin="-59.5,4.5,219.5" radius="4" />
+    <sphere id="blue-capture" origin="-89.5,9,265.5" radius="4" />
+    <sphere id="red-capture"  origin="-69.5,9,206.5" radius="4" />
+    <point id="pickup-spawn">-79.5,12,236</point>
+    <apply region="blue-base" enter="only-blue"      message="You may not enter Blue's base" />
+    <apply region="red-base"  enter="only-red"       message="You may not enter Red's base" />
+    <apply                    block="allowed-blocks" message="You may not interact with that material here" />
+</regions>
+<score />
+<time>8m</time>
+<flags carry-kit="flag-kit">
+    <!-- Blue flag, red's objective -->
+    <flag id="blue-flag" name="Blue Flag" color="blue" owner="blue-team">
+        <post pickup-filter="only-red" recover-time="3s" respawn-speed="8">-90,9,265</post>
+        <net points="1" region="red-capture">
+            <capture-filter>
+                <not>
+                    <flag-carried>red-flag</flag-carried>
+                </not>
+            </capture-filter>
+        </net>
+    </flag>
+    <!-- Red flag, blue's objective -->
+    <flag id="red-flag" name="Red Flag" color="red" owner="red-team">
+        <post pickup-filter="only-blue" recover-time="3s" respawn-speed="8">-70,9,206</post>
+        <net points="1" region="blue-capture">
+            <capture-filter>
+                <not>
+                    <flag-carried>blue-flag</flag-carried>
+                </not>
+            </capture-filter>
+        </net>
+    </flag>
+</flags>
+<pickups>
+    <pickup id="center-pickup" name="`b`lPower Boost" region="pickup-spawn" kit="pickup-kit" respawn-time="8s" spawn-filter="allow-powerup-spawn" />
+</pickups>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="3" repeat="true" />
+        </filter>
+        <item            material="golden apple" />
+        <item amount="2" material="web" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="6" repeat="true" />
+        </filter>
+        <item            material="golden apple" />
+        <item amount="1" material="tnt" />
+    </kill-reward>
+</kill-rewards>
+<block-drops>
+    <rule>
+        <filter>
+            <material>snow</material>
+        </filter>
+        <drops>
+            <item material="snow ball" />
+        </drops>
+    </rule>
+</block-drops>
+<tnt>
+    <instantignite>on</instantignite>
+    <fuse>2s</fuse>
+</tnt>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>seeds</item>
+    <item>string</item>
+</itemremove>
+</map>

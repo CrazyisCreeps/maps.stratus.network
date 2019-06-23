@@ -1,0 +1,300 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Harvest</name>
+<version>1.1.1</version>
+<gamemode>koth</gamemode>
+<objective>Be the first team to reach 400 points!</objective>
+<authors>
+    <author contributation="Map Author and XML" uuid="53af1e46-7424-485b-97de-7bf8d854a2aa"/> <!--  BTKing  -->
+</authors>
+<contributors>
+    <contributor contribution="Official Tower Builder" uuid="a63de09d-6fa9-436f-9070-26f5e9a4d27b"/> <!--  dragonrider455  -->
+    <contributor contribution="Feedback" uuid="48924ea3-3aad-4e16-838c-368d8d9e0a25"/> <!--  Matic0B  -->
+</contributors>
+<rules>
+    <rule>Creating alliances with other team(s) is not allowed!</rule>
+</rules>
+<teams>
+    <team max="14" color="red"    id="pink-team">Pink</team>
+    <team max="14" color="blue"   id="blue-team">Blue</team>
+    <team max="14" color="yellow" id="yellow-team">Yellow</team>
+    <team max="14" color="gold"   id="orange-team">Orange</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item material="stone sword" show-unbreakable="false" unbreakable="true" slot="0"/>
+        <item material="bow" show-unbreakable="false" unbreakable="true" slot="1"/>
+        <item material="arrow" slot="28" amount="16"/>
+        <item material="cooked beef" slot="7" amount="48"/>
+        <item material="emerald" slot="6" amount="1"/>
+        <item material="golden apple" slot="8" amount="1"/>
+        <leggings unbreakable="true" enchantment="protection projectile:2">chainmail leggings</leggings>
+    </kit>
+    <kit id="pink-kit" parents="spawn">
+        <helmet     unbreakable="true" color="F27FA5">leather helmet</helmet>
+        <chestplate unbreakable="true" color="F27FA5">leather chestplate</chestplate>
+        <boots      unbreakable="true" color="F27FA5">leather boots"</boots>
+    </kit>
+        <kit id="blue-kit" parents="spawn">
+        <helmet     unbreakable="true" color="6699D8">leather helmet</helmet>
+        <chestplate unbreakable="true" color="6699D8">leather chestplate</chestplate>
+        <boots      unbreakable="true" color="6699D8">leather boots"</boots>
+    </kit>
+        <kit id="yellow-kit" parents="spawn">
+        <helmet     unbreakable="true" color="E5E533">leather helmet</helmet>
+        <chestplate unbreakable="true" color="E5E533">leather chestplate</chestplate>
+        <boots      unbreakable="true" color="E5E533">leather boots"</boots>
+    </kit>
+        <kit id="orange-kit" parents="spawn">
+        <helmet     unbreakable="true" color="D87F33">leather helmet</helmet>
+        <chestplate unbreakable="true" color="D87F33">leather chestplate</chestplate>
+        <boots      unbreakable="true" color="D87F33">leather boots"</boots>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <regions>
+            <point yaw="180">206.5,6,-32.5</point>
+        </regions>
+    </default>
+        <spawn safe="true" kit="blue-kit" team="blue-team">
+            <regions>
+        <point yaw="90">303.5,20,-32.5</point>
+    </regions>
+    </spawn>
+    <spawn safe="true" kit="orange-kit" team="orange-team">
+        <regions>
+            <point yaw="180">206.5,20,64.5</point>
+        </regions>
+    </spawn>
+    <spawn safe="true" kit="pink-kit" team="pink-team">
+        <regions>
+            <point yaw="0">206.5,20,-129.5</point>
+        </regions>
+    </spawn>
+    <spawn safe="true" kit="yellow-kit" team="yellow-team">
+        <regions>
+            <point yaw="-90">109.5,20,-32.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-pink">pink-team</team>
+    <team id="only-blue">blue-team</team>
+    <team id="only-yellow">yellow-team</team>
+    <team id="only-orange">orange-team</team>
+    <!-- Who's in control of pink hill -->
+    <all id="only-blue-phill-capped">
+        <team>blue-team</team>
+        <objective>pink-hill</objective>
+    </all>
+    <all id="only-pink-phill-capped">
+        <team>pink-team</team>
+        <objective>pink-hill</objective>
+    </all>
+    <all id="only-yellow-phill-capped">
+        <team>yellow-team</team>
+        <objective>pink-hill</objective>
+    </all>
+    <all id="only-orange-phill-capped">
+        <team>orange-team</team>
+        <objective>pink-hill</objective>
+    </all>
+    <!-- Who's in control of blue hill -->
+    <all id="only-blue-bhill-capped">
+        <team>blue-team</team>
+        <objective>blue-hill</objective>
+    </all>
+    <all id="only-pink-bhill-capped">
+        <team>pink-team</team>
+        <objective>blue-hill</objective>
+    </all>
+    <all id="only-yellow-bhill-capped">
+        <team>yellow-team</team>
+        <captured>blue-hill</captured>
+    </all>
+    <all id="only-orange-bhill-capped">
+        <team>orange-team</team>
+        <objective>blue-hill</objective>
+    </all>
+    <!-- Who's in control of yellow hill -->
+    <all id="only-blue-yhill-capped">
+        <team>blue-team</team>
+        <objective>yellow-hill</objective>
+    </all>
+    <all id="only-pink-yhill-capped">
+        <team>pink-team</team>
+        <objective>yellow-hill</objective>
+    </all>
+    <all id="only-yellow-yhill-capped">
+        <team>yellow-team</team>
+        <captured>yellow-hill</captured>
+    </all>
+    <all id="only-orange-yhill-capped">
+        <team>orange-team</team>
+        <objective>yellow-hill</objective>
+    </all>
+    <!-- Who's in control of orange hill -->
+    <all id="only-blue-ohill-capped">
+        <team>blue-team</team>
+        <objective>orange-hill</objective>
+    </all>
+    <all id="only-pink-ohill-capped">
+        <team>pink-team</team>
+        <objective>orange-hill</objective>
+    </all>
+    <all id="only-yellow-ohill-capped">
+        <team>yellow-team</team>
+        <objective>orange-hill</objective>
+    </all>
+    <all id="only-orange-ohill-capped">
+        <team>orange-team</team>
+        <objective>orange-hill</objective>
+    </all>
+</filters>
+<regions>
+    <!-- Playing Field -->
+    <cuboid id="pink-spawn" min="221.5,11,-96.5" max="191,55,-134"/>
+    <cuboid id="blue-spawn" min="270.5,11,-17.5" max="308,55,-47"/>
+    <cuboid id="yellow-spawn" min="142.5,11,-47.5" max="104,55,-17"/>
+    <cuboid id="orange-spawn" min="191.5,11,31.5" max="221,55,69"/>
+    <!-- Portals -->
+    <cuboid id="yhill-portal" min="164.5,15,19.5" max="162.5,18,18.5"/>
+    <cuboid id="phill-portal" min="154.5,15,-74.5" max="155.5,18,-76.5"/>
+    <cuboid id="bhill-portal" min="248.5,15,-84.5" max="250.5,18,-83.5"/>
+    <cuboid id="ohill-portal" min="258.5,15,9.5" max="257.5,18,11.5"/>
+    <!--  Portal Exits -->
+    <block id="blue-exit-portal">303.5,20,-32.5</block>
+    <block id="orange-exit-portal">206.5,20,64.5</block>
+    <block id="pink-exit-portal">206.5,20,-129.5</block>
+    <block id="yellow-exit-portal">109.5,20,-32.5</block>
+    <!-- Applicators -->
+    <apply region="pink-spawn"   enter="only-pink"   message="You may not enter Pink's base!"/>
+    <apply region="blue-spawn"   enter="only-blue"   message="You may not enter Blue's base!"/>
+    <apply region="yellow-spawn" enter="only-yellow" message="You may not enter Yellow's base!"/>
+    <apply region="orange-spawn" enter="only-orange" message="You may not enter Orange's base!"/>
+    <apply block="never"/>
+</regions>
+<portals>
+    <!-- Yellow Hill Portal -->
+    <portal region="yhill-portal" yaw="@90" filter="only-blue-yhill-capped" destination="blue-exit-portal"/>
+    <portal region="yhill-portal" yaw="@0" filter="only-pink-yhill-capped" destination="pink-exit-portal"/>
+    <portal region="yhill-portal" yaw="@-90" filter="only-yellow-yhill-capped" destination="yellow-exit-portal"/>
+    <portal region="yhill-portal" yaw="@180" filter="only-orange-yhill-capped" destination="orange-exit-portal"/>
+    <!-- Pink Hill Portal -->
+    <portal region="phill-portal" yaw="@90" filter="only-blue-phill-capped" destination="blue-exit-portal"/>
+    <portal region="phill-portal" yaw="@0" filter="only-pink-phill-capped" destination="pink-exit-portal"/>
+    <portal region="phill-portal" yaw="@-90" filter="only-yellow-phill-capped" destination="yellow-exit-portal"/>
+    <portal region="phill-portal" yaw="@180" filter="only-orange-phill-capped" destination="orange-exit-portal"/>
+    <!-- Blue Hill Portal -->
+    <portal region="bhill-portal" yaw="@90" filter="only-blue-bhill-capped" destination="blue-exit-portal"/>
+    <portal region="bhill-portal" yaw="@0" filter="only-pink-bhill-capped" destination="pink-exit-portal"/>
+    <portal region="bhill-portal" yaw="@-90" filter="only-yellow-bhill-capped" destination="yellow-exit-portal"/>
+    <portal region="bhill-portal" yaw="@180" filter="only-orange-bhill-capped" destination="orange-exit-portal"/>
+    <!-- Orange Hill Portal -->
+    <portal region="ohill-portal" yaw="@90" filter="only-blue-ohill-capped" destination="blue-exit-portal"/>
+    <portal region="ohill-portal" yaw="@0" filter="only-pink-ohill-capped" destination="pink-exit-portal"/>
+    <portal region="ohill-portal" yaw="@-90" filter="only-yellow-ohill-capped" destination="yellow-exit-portal"/>
+    <portal region="ohill-portal" yaw="@180" filter="only-orange-ohill-capped" destination="orange-exit-portal"/>
+</portals>
+<king>
+    <hills>
+        <hill permanent="false" required="false" show-progess="true" decay="0" recovery="1" points="1" neutral-state="true" time-multiplier="0.1" capture-time="10s" id="centre-hill" name="Centre Hill">
+            <capture>
+                <cylinder height="35" radius="7" base="206,5,-33"/>
+            </capture>
+            <progress>
+                <cylinder height="35" radius="7" base="206,5,-33"/>
+            </progress>
+            <captured>
+                <cylinder height="35" radius="7" base="206,5,-33"/>
+            </captured>
+        </hill>
+        <hill permanent="false" required="false" show-progess="true" decay="0" recovery="1" points="0.5" neutral-state="true" time-multiplier="0.1" capture-time="5s" id="pink-hill" name="Pink Hill">
+            <capture>
+                <cylinder height="26" radius="7" base="171,14,-68"/>
+            </capture>
+            <progress>
+                <cylinder height="26" radius="7" base="171,14,-68"/>
+            </progress>
+            <captured>
+                <cylinder height="26" radius="7" base="171,14,-68"/>
+            </captured>
+        </hill>
+        <hill permanent="false" required="false" show-progess="true" decay="0" recovery="1" points="0.5" neutral-state="true" time-multiplier="0.1" capture-time="5s" id="yellow-hill" name="Yellow Hill">
+            <capture>
+                <cylinder height="26" radius="7" base="171,14,2"/>
+            </capture>
+            <progress>
+                <cylinder height="26" radius="7" base="171,14,2"/>
+            </progress>
+            <captured>
+                <cylinder height="26" radius="7" base="171,14,2"/>
+            </captured>
+        </hill>
+        <hill permanent="false" required="false" show-progess="true" decay="0" recovery="1" points="0.5" neutral-state="true" time-multiplier="0.1" capture-time="5s" id="orange-hill" name="Orange Hill">
+            <capture>
+                <cylinder height="26" radius="7" base="241,14,2"/>
+            </capture>
+            <progress>
+                <cylinder height="26" radius="7" base="241,14,2"/>
+            </progress>
+            <captured>
+                <cylinder height="26" radius="7" base="241,14,2"/>
+            </captured>
+        </hill>
+        <hill permanent="false" required="false" show-progess="true" decay="0" recovery="1" points="0.5" neutral-state="true" time-multiplier="0.1" capture-time="5s" id="blue-hill" name="Blue Hill">
+            <capture>
+                <cylinder height="26" radius="7" base="241,14,-68"/>
+            </capture>
+            <progress>
+                <cylinder height="26" radius="7" base="241,14,-68"/>
+            </progress>
+            <captured>
+                <cylinder height="26" radius="7" base="241,14,-68"/>
+            </captured>
+        </hill>
+    </hills>
+</king>
+<score>
+    <limit>500</limit>
+</score>
+<broadcasts>
+    <tip after="20s" every="3m">Trade emeralds with villagers at spawn for better gear!</tip>
+    <tip after="40s" every="2m">If you control a hill, you can use the portal nearby to easily return to your spawn!</tip>
+    <tip after="60s" every="2m">Centre Hill is worth the most points!</tip>
+</broadcasts>
+<timelock>off</timelock>
+<kill-rewards>
+    <kill-reward>
+        <item material="emerald"/>
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemkeep>
+    <item>blaze rod</item>
+    <item>iron sword</item>
+    <item>chainmail helmet</item>
+    <item>chainmail boots</item>
+    <item>chainmail chestplate</item>
+    <item>gold boots</item>
+    <item>potion</item>
+    <item>splash potion</item>
+    <item>ender pearl</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<itemremove>
+    <item>cooked beef</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+</itemremove>
+</map>

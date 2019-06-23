@@ -1,0 +1,237 @@
+<map proto="1.4.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/PGMTools/PGMSchema/master/map.xsd" game="Duels">
+<name>Arena</name>
+<version>1.0.0</version>
+<objective>Duel it your way (TM)</objective>
+<authors>
+    <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b"/>
+    <author uuid="15c75bdd-005f-40f6-9e20-1ecf48bb51e5"/>
+    <author uuid="556fd070-7c92-4742-a061-c352b30728f8"/>
+</authors>
+<contributors>
+    <contributor uuid="459fd919-0d58-401a-9601-6cab1eb721ab" contribution="Tourney Dude"/> <!-- Reshif -->
+    <contributor uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150"/>
+</contributors>
+<!--
+<teams>
+    <team id="orange-team" color="gold" max="14">Orange</team>
+    <team id="cyan-team" color="dark aqua" max="14">Cyan</team>
+</teams>
+https://i.badlion.net/VGvy8LNDaHneZ5w8DA6ASe.png
+-->
+<players colors="true" max="10" max-overfill="10"/>
+<classes family="PVP">
+    <class id="sumo" name="Sumo" description="Kit for Sumo PVP" longdescription="Spawn with immunity to damage." default="true" icon="leash">
+        <kit>
+            <item slot="0" name="Blockhitter" unbreakable="true">stone sword</item>
+            <effect duration="oo" amplifier="9999">heal</effect>
+            <effect duration="oo" amplifier="9999">damage resistance</effect>
+            <effect duration="oo">night vision</effect>
+            <effect duration="oo" amplifier="1">saturation</effect>
+            <leggings unbreakable="true" damage="-3000">iron leggings</leggings>
+            <helmet enchantment="protection:3" unbreakable="true">diamond helmet</helmet>
+            <chestplate unbreakable="true">iron chestplate</chestplate>
+            <boots unbreakable="true">iron boots</boots>
+        </kit>
+    </class>
+    <class name="Naked" description="debugging kit" icon="bone">
+        <kit>
+            <effect duration="oo">night vision</effect>
+            <effect duration="oo" amplifier="1">saturation</effect>
+        </kit>
+    </class>
+    <class id="classic" name="Classic" description="Full diamond" longdescription="Full diamond armor and sword unenchanted, 16 arrows, 8 Golden Apples, and a bow." icon="diamond sword">
+        <kit>
+            <item slot="0" unbreakable="true">diamond sword</item>
+            <item slot="1" unbreakable="true">bow</item>
+            <item slot="3" amount="16">arrow</item>
+            <item slot="4" amount="8">golden apple</item>
+            <item slot="8" amount="32">cooked beef</item>
+            <leggings unbreakable="true">diamond leggings</leggings>
+            <helmet unbreakable="true">diamond helmet</helmet>
+            <chestplate unbreakable="true">diamond chestplate</chestplate>
+            <boots unbreakable="true">diamond boots</boots>
+        </kit>
+    </class>
+    <class id="classic-melee" name="Classic-Melee" description="Full diamond, no bow." longdescription="Full diamond armor and sword unenchanted,and 8 Golden Apples." icon="diamond sword">
+        <kit>
+            <item slot="0" unbreakable="true">diamond sword</item>
+            <item slot="4" amount="8">golden apple</item>
+            <item slot="8" amount="32">cooked beef</item>
+            <leggings unbreakable="true">diamond leggings</leggings>
+            <helmet unbreakable="true">diamond helmet</helmet>
+            <chestplate unbreakable="true">diamond chestplate</chestplate>
+            <boots unbreakable="true">diamond boots</boots>
+        </kit>
+    </class>
+</classes>
+<kits>
+    <kit id="spawn">
+        <item slot="0" name="Blockhitter" unbreakable="true">stone sword</item>
+        <effect duration="oo" amplifier="9999">heal</effect>
+        <effect duration="oo" amplifier="9999">damage resistance</effect>
+        <effect duration="oo">night vision</effect>
+        <effect duration="oo" amplifier="1">saturation</effect>
+        <leggings unbreakable="true" damage="-3000">iron leggings</leggings>
+    </kit>
+    <kit id="kit-default" parents="spawn">
+        <helmet enchantment="protection:3" unbreakable="true">diamond helmet</helmet>
+        <chestplate unbreakable="true">iron chestplate</chestplate>
+        <boots unbreakable="true">iron boots</boots>
+    </kit>
+    <kit id="obs">
+        <effect duration="oo">night vision</effect>
+    </kit>
+</kits>
+<portals>
+    <portal x="@-53.5" y="@25" z="@0.5" region="portal-region"/>
+    <portal x="@53.5" y="@19.1" z="@-83.5" region="yellow-portals"/>
+    <portal x="@53.5" y="@19.1" z="@-41.5" region="magenta-portals"/>
+    <portal x="@53.5" y="@19.1" z="@0.5" region="green-portals"/>
+    <portal x="@53.5" y="@19.1" z="@42.5" region="red-portals"/>
+    <portal x="@53.5" y="@19.1" z="@84.5" region="blue-portals"/>
+</portals>
+<spawns>
+    <spawn spread="true" region="spawns-all" kit="obs"/>
+    <!--
+    <spawn team="cyan" kit="cyan" yaw="90">
+        <cylinder base="53.5,19,0.5" radius="2" height="1"/>
+    </spawn>
+    <spawn team="orange" kit="orange" yaw="-90">
+        <cylinder base="-52.5,19,0.5" radius="2" height="1"/>
+    </spawn>
+      -->
+    <default kit="obs" yaw="180" region="spawns-default"/>
+</spawns>
+<regions>
+    <union id="spawns-all">
+        <cylinder id="spawn-cyan" base="53.5,19,0.5" radius="2" height="1"/>
+        <cylinder id="spawn-orange" base="-52.5,19,0.5" radius="2" height="1"/>
+    </union>
+    <union id="end-game-region">
+        <block>61.5,18,0.5</block>
+        <block>-60.5,18,0.5</block>
+        <block>61.5,18,42.5</block>
+        <block>-60.5,18,42.5</block>
+        <block>61.5,18,84.5</block>
+        <block>-60.5,18,84.5</block>
+        <block>61.5,18,-41.5</block>
+        <block>-60.5,18,-41.5</block>
+        <block>61.5,18,-83.5</block>
+        <block>-60.5,18,-83.5</block>
+    </union>
+    <union id="end-game-progress">
+        <block>61.5,18,0.5</block>
+        <block>-60.5,18,0.5</block>
+        <block>61.5,17,42.5</block>
+        <block>-60.5,17,42.5</block>
+        <block>61.5,17,84.5</block>
+        <block>-60.5,17,84.5</block>
+        <block>61.5,17,-41.5</block>
+        <block>-60.5,17,-41.5</block>
+        <block>61.5,17,-83.5</block>
+        <block>-60.5,17,-83.5</block>
+    </union>
+    <union id="yellow-portals">
+        <cuboid id="lane-blue-orange-yellow" min="-46,18,82" max="-45,21,80"/>
+        <cuboid id="lane-blue-cyan-yellow" min="46,18,82" max="47,21,80"/>
+        <cuboid id="lane-green-orange-yellow" min="-46,18,-4" max="-45,21,-2"/>
+        <cuboid id="lane-green-cyan-yellow" min="47,18,-4" max="46,21,-2"/>
+        <cuboid id="lane-red-orange-yellow" min="-46,18,38" max="-45,21,40"/>
+        <cuboid id="lane-red-cyan-yellow" min="47,18,38" max="46,21,40"/>
+        <cuboid id="lane-magenta-orange-yellow" min="-46,18,-46" max="-45,21,-44"/>
+        <cuboid id="lane-magenta-cyan-yellow" min="47,18,-46" max="46,21,-44"/>
+    </union>
+    <union id="magenta-portals">
+        <cuboid id="lane-blue-orange-magenta" min="-46,18,82" max="-45,21,84"/>
+        <cuboid id="lane-blue-cyan-magenta" min="46,18,82" max="47,21,84"/>
+        <cuboid id="lane-green-orange-magenta" min="-46,18,-2" max="-45,21,0"/>
+        <cuboid id="lane-green-cyan-magenta" min="47,18,-2" max="46,21,0"/>
+        <cuboid id="lane-yellow-orange-magenta" min="-46,18,-85" max="-45,21,-87"/>
+        <cuboid id="lane-yellow-cyan-magenta" min="47,18,-85" max="46,20,-87"/>
+        <cuboid id="lane-red-orange-magenta" min="-46,18,40" max="-45,21,42"/>
+        <cuboid id="lane-red-cyan-magenta" min="47,18,40" max="46,21,42"/>
+    </union>
+    <union id="green-portals">
+        <cuboid id="lane-blue-orange-green" min="-45,18,84" max="-46,21,86"/>
+        <cuboid id="lane-blue-cyan-green" min="46,18,84" max="47,21,86"/>
+        <cuboid id="lane-yellow-orange-green" min="-46,18,-83" max="-45,21,-85"/>
+        <cuboid id="lane-yellow-cyan-green" min="47,18,-83" max="46,20,-85"/>
+        <cuboid id="lane-red-orange-green" min="-46,18,42" max="-45,21,44"/>
+        <cuboid id="lane-red-cyan-green" min="47,18,42" max="46,21,44"/>
+        <cuboid id="lane-magenta-orange-green" min="-46,18,-43" max="-45,21,-41"/>
+        <cuboid id="lane-magenta-cyan-green" min="47,18,-43" max="46,21,-41"/>
+    </union>
+    <union id="red-portals">
+        <cuboid id="lane-blue-orange-red" min="-46,18,86" max="-45,21,88"/>
+        <cuboid id="lane-blue-cyan-red" min="46,18,86" max="47,21,88"/>
+        <cuboid id="lane-green-orange-red" min="47,18,3" max="46,21,1"/>
+        <cuboid id="lane-green-cyan-red" min="-46,18,3" max="-45,21,1"/>
+        <cuboid id="lane-yellow-orange-red" min="-46,18,-81" max="-45,21,-83"/>
+        <cuboid id="lane-yellow-cyan-red" min="47,18,-81" max="46,20,-83"/>
+        <cuboid id="lane-magenta-orange-red" min="-46,18,-41" max="-45,21,-39"/>
+        <cuboid id="lane-magenta-cyan-red" min="47,18,-41" max="46,21,-39"/>
+    </union>
+    <union id="blue-portals">
+        <cuboid id="lane-green-orange-blue" min="-46,18,3" max="-45,21,5"/>
+        <cuboid id="lane-green-cyan-blue" min="47,18,3" max="46,21,5"/>
+        <cuboid id="lane-yellow-orange-blue" min="-46,18,-79" max="-45,21,-81"/>
+        <cuboid id="lane-yellow-cyan-blue" min="47,18,-79" max="46,20,-81"/>
+        <cuboid id="lane-red-orange-blue" min="-46,18,45" max="-45,21,47"/>
+        <cuboid id="lane-red-cyan-blue" min="47,18,45" max="46,21,47"/>
+        <cuboid id="lane-magenta-orange-blue" min="-46,18,-39" max="-45,21,-37"/>
+        <cuboid id="lane-magenta-cyan-blue" min="47,18,-39" max="46,21,-37"/>
+    </union>
+    <cylinder id="spawns-default" base="0.5,42,0.5" radius="2" height="1"/>
+    <cuboid id="portal-region" min="-oo,0,-oo" max="oo,7,oo"/>
+    <apply block="no-water"/>
+</regions>
+<filters>
+    <!--
+    <team id="only-cyan">cyan-team</team>
+    <team id="only-orange">orange-team</team>
+    <all id="cyan-only">
+        <filter id="only-cyan"/>
+        <not>
+            <filter id="only-orange"/>
+        </not>
+    </all>
+    <all id="orange-only">
+        <filter id="only-orange"/>
+        <not>
+            <filter id="only-cyan"/>
+        </not>
+    </all>
+    -->
+    <not id="no-water"><material>water</material></not>
+</filters>
+<itemremove>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>diamond helmet</item>
+    <item>iron chestplate</item>
+    <item>iron leggings</item>
+    <item>iron boots</item>
+    <item>diamond helmet</item>
+    <item>diamond leggings</item>
+    <item>diamond chestplate</item>
+    <item>diamond boots</item>
+    <item>diamond sword</item>
+    <item>bow</item>
+</itemremove>
+<gamerules>
+    <doTileDrops>false</doTileDrops>
+</gamerules>
+<killreward>
+    <item amount="1">golden apple</item>
+</killreward>
+<control-points>
+    <control-point name="End Game" capture-time="3" id="end-game-hill" decay="40" points="100" capture="end-game-progress" required="true" neutral-state="true"/>
+</control-points>
+<timelock>on</timelock>
+<score>
+    <limit>1</limit>
+</score>
+</map>

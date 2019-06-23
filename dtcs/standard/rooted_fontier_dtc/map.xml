@@ -1,0 +1,148 @@
+<map proto="1.4.3">
+<name>Rooted Frontier DTC</name>
+<gamemode>DTC</gamemode>
+<version>1.0.2</version>
+<objective>Leak the enemy's core 6 blocks to win!</objective>
+<authors>
+	<author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" /> <!--  mitchiii_  -->
+</authors>
+<contributors>
+	<contributor uuid="04415962-13e2-4010-b5f1-6d5ed7e537d4" contribution="Name suggestions" /> <!-- Poseidons -->
+</contributors>
+<teams>
+	<team id="red" color="dark red" max="16">Red</team>
+	<team id="blue" color="blue" max="16">Blue</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="45">
+            <cuboid min="26.5,20.5,-90.5" max="24.5,20.5,-88.5"/>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="-135">
+            <cuboid min="-22.5,20.5,91.5" max="-20.5,20.5,89.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <cuboid min="60.5,40,1.5" max="61.5,40,-0.5"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" enchantment="dig speed:1">diamond pickaxe</item>
+        <item slot="3" enchantment="durability:3;dig speed:1" material="iron axe"/>
+        <item slot="4" amount="48" damage="1">wood</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="32">cooked beef</item>
+		<item slot="28" amount="1">arrow</item>
+        <potion duration="5" amplifier="3">heal</potion>
+        <potion duration="5">damage resistance</potion>
+		<leggings color="0066cc" unbreakable="true">chainmail leggings</leggings>
+    </kit>
+	<kit id="red-kit" parents="spawn">
+		<item slot="5" amount="16" damage="14">stained clay</item>
+	    <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+	    <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+	<kit id="blue-kit" parents="spawn">
+		<item slot="5" amount="16" damage="11">stained clay</item>
+	    <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+	    <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
+        <boots color="0066cc" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+	<not id="no-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+	<negative id="void">
+		<union id="playable">
+			<union id="frontlines">
+				<rectangle min="-35.5,18.5" max="39.5,-17.5"/>
+				<rectangle min="-24.5,-26.5" max="28.5,27.5"/>
+			</union>
+			<union id="spawns">
+				<union id="red-spawn">
+					<rectangle min="-10.5,98.5" max="-29.5,84.5"/>
+					<rectangle min="-13.5,77.5" max="-28.5,89.5"/>
+					<rectangle min="-14.5,76.5" max="-98.5,86.5"/>
+					<rectangle min="-12.5,83.5" max="-15.5,87.5"/>
+					<rectangle min="-18.5,75.5" max="-27.5,73.5"/>
+					<rectangle min="-21.5,71.5" max="-23.5,74.5"/>
+				</union>
+				<union id="blue-spawn">
+					<rectangle min="14.5,-97.5" max="33.5,-83.5"/>
+					<rectangle min="17.5,-76.5" max="24.5,-88.5"/>
+					<rectangle min="18.5,-75.5" max="33.5,-85.5"/>
+					<rectangle min="16.5,-82.5" max="19.5,-86.5"/>
+					<rectangle min="22.5,-74.5" max="31.5,-72.5"/>
+					<rectangle min="25.5,-70.5" max="27.5,-73.5"/>
+				</union>
+			</union>
+		</union>
+	</negative>
+		<apply block-place="no-void" message="You may not place blocks in this area" region="void"/>
+		<apply block="never" message="You may not edit spawn" region="spawns"/>
+		<apply enter="only-red" message="You may not enter the enemy spawn" region="red-spawn"/>
+		<apply enter="only-blue" message="You may not enter the enemy spawn" region="blue-spawn"/>
+</regions>
+<cores material="obsidian" leak="4" mode-changes="true">
+    <core team="blue">
+         <region><cuboid min="-13.5,22,-79.5" max="-8.5,27,-74.5"/></region>
+    </core>
+    <core team="red">
+		<region><cuboid min="11.5,22,79.5" max="16.5,27,74.5"/></region>
+    </core>
+</cores>
+<modes>
+    <mode after="15m" material="gold block"/>
+    <mode after="20m" material="glass"/>
+</modes>
+<maxbuildheight>36</maxbuildheight>
+<itemremove>
+    <item>obsidian</item>
+    <item>stained clay</item>
+    <item>string</item>
+    <item>wood</item>
+    <item>glowstone dust</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>sugar cane</item>
+    <item>clay ball</item>
+    <item>stone plate</item>
+    <item>sand</item>
+    <item>glass</item>
+    <item>glass bottle</item>
+    <item>seeds</item>
+    <item>ladder</item>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>chainmail leggings</item>
+    <item>leather boots</item>
+	<item>red rose</item>
+    <item>arrow</item>
+    <item>38</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<killreward>
+    <item material="golden apple"/>
+    <item material="wood" amount="8" damage="1"/>
+</killreward>
+</map>

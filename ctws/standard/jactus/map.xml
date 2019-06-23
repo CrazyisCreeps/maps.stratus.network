@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Jactus</name>
+<version>1.0.1</version>
+<objective>Capture and return the other teams' wools</objective>
+<authors>
+    <author uuid="8a3f4bb0-308f-4f06-a07c-087f3f77575c"/> <!-- Stoudyo -->
+    <author uuid="4a643ce8-9ae7-4440-95c7-b7371fcad43c"/> <!-- Spalgra -->
+    <author uuid="42534d9b-b687-42f1-aaf4-baa697548311"/> <!-- iBreezly -->
+</authors>
+<contributors>
+    <contributor uuid="96f9aa16-9c93-4b1d-9bce-18b8c212074b" contribution="XML and Minor Edits"/> <!-- _ArmyFrog -->
+</contributors>
+<gamemode>ctw</gamemode>
+<teams>
+    <team id="cyan" max="18" color="dark aqua">Cyan</team>
+    <team id="red" max="18" color="red">Red</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">iron pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="5" amount="64">glass</item>
+        <item slot="4" amount="16" damage="1">log</item>
+        <item slot="6" amount="1">bucket</item>
+        <item slot="7" amount="64">bread</item>
+        <item slot="8" unbreakable="true">iron spade</item>
+        <item slot="28" amount="1">arrow</item>
+        <potion duration="5">heal</potion>
+        <potion duration="5">damage resistance</potion>
+    </kit>
+    <kit id="red-spawn-kit" parents="spawn">
+        <helmet unbreakable="true" color="ff0000">leather helmet</helmet>
+	<chestplate unbreakable="true" color="ff0000">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="ff0000">leather leggings</leggings>
+        <boots unbreakable="true">iron boots</boots>            
+    </kit>
+    <kit id="cyan-spawn-kit" parents="spawn">
+        <helmet unbreakable="true" color="4C7F99">leather helmet</helmet>
+	<chestplate unbreakable="true" color="4C7F99">leather chestplate</chestplate>		
+        <leggings unbreakable="true" color="4C7F99">leather leggings</leggings>
+        <boots unbreakable="true">iron boots</boots>                   
+    </kit>
+ </kits>
+<spawns>
+    <spawn yaw="-90" kit="red-spawn-kit" team="red">
+        <region>
+            <cuboid max="65.5,7,-5.5" min="67.5,7,-7.5"/>
+        </region>
+    </spawn>
+    <spawn yaw="90" kit="cyan-spawn-kit" team="cyan">
+        <region>
+            <cuboid max="-62.5,7,-7.5" min="-64.5,7,-5.5"/>
+        </region>
+    </spawn>
+    <default>
+        <region>
+            <cuboid max="1,48,-7" min="-0,48,-5"/>
+        </region>
+    </default>
+</spawns>
+<filters>
+	<team id="only-cyan">cyan</team>
+    <team id="only-red">red</team>
+	<one id="only-red-break">
+        <all>
+            <any>
+                <material>web</material>
+            </any>
+            <team>red</team>
+        </all>
+    </one>
+	<one id="only-cyan-break">
+        <all>
+            <any>
+                <material>web</material>
+            </any>
+            <team>cyan</team>
+        </all>
+    </one>
+	<not id="no-void">
+        <void/>
+    </not>
+	<any id="only-iron">
+		<material>iron block</material>
+	</any>
+</filters>
+<regions>
+	<union id="spawns">
+		<rectangle id="cyan-spawn" min="74.5,-13.5" max="59.5,0.5"/>
+		<rectangle id="red-spawn" min="-71.5,0.5" max="-56.5,-13.5"/>
+	</union>
+	<union id="red-wool-rooms">
+		<rectangle min="-92.5,32.5" max="-102.5,43.5"/>
+		<rectangle min="-102.5,-45.5" max="-92.5,-56.5"/>
+	</union>
+	<union id="cyan-wool-rooms">
+		<rectangle min="95.5,-45.5" max="105.5,-56.5"/>
+		<rectangle min="105.5,32.5" max="94.5,43.5"/>
+	</union>
+	<union id="wool-placements">
+        <block location="-71.5,10,-4.5" id="blue-wool"/>
+        <block location="-71.5,10,-8.5" id="light_blue-wool"/>
+        <block location="74.5,10,-8.5" id="magenta-wool"/>
+        <block location="74.5,10,-4.5" id="pink-wool"/>
+    </union>
+	<union id="iron-supply">
+        <rectangle id="cyan-iron" min="-81.5,-15.5" max="-92.5,1.5"/>
+		<rectangle id="red-iron" min="84.5,2.5" max="96.5,-15.5"/>
+    </union>
+	<rectangle id="everything" min="oo,oo" max="-oo,-oo"/>
+	<cuboid id="no-underbridge" min="oo,0,oo" max="-oo,5,-oo"/>
+	<apply block="never" message="You may not interact with spawn!" region="spawns"/> <!-- never -->
+	<apply enter="only-red" message="You may not enter the enemy spawn" region="cyan-spawn"/>
+	<apply enter="only-cyan" message="You may not enter the enemy spawn" region="red-spawn"/>
+	<apply block="only-red-break" message="You may not interact with the wool room!" region="red-wool-rooms"/>
+	<apply block="only-cyan-break" message="You may not interact with the wool room!" region="cyan-wool-rooms"/>
+	<apply enter="only-red" message="You may not enter your own wool room" region="red-wool-rooms"/>
+	<apply enter="only-cyan" message="You may not enter your own wool room" region="cyan-wool-rooms"/>
+	<apply use="only-cyan" region="cyan-wool-rooms"/>
+	<apply use="only-red" region="red-wool-rooms"/>
+	<apply block="never" message="You may not underbridge!" region="no-underbridge"/> <!-- never -->
+	<apply block-break="only-iron" block-place="never" message="You may only break iron blocks here." region="iron-supply"/> <!-- never -->
+	<apply block-place="no-void" block-break="always" message="You may not edit the void area!" region="everything"/> <!-- no-void -->
+</regions>
+<wools craftable="false">
+    <wool team="cyan" color="blue" location="-71.5,10,-4.5" monument="blue-wool"/>
+    <wool team="cyan" color="light blue" location="-71.5,10,-8.5" monument="light_blue-wool"/>
+    <wool team="red" color="magenta" location="74.5,10,-8.5" monument="magenta-wool"/>
+    <wool team="red" color="pink" location="74.5,10,-4.5" monument="pink-wool"/>
+</wools>	
+<killreward>
+    <item>golden apple</item>
+</killreward>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>arrow</item>
+    <item>seeds</item>
+    <item>string</item>
+    <item>sapling</item>
+    <item>sapling:1</item>
+    <item>bread</item>
+</itemremove>   
+<maxbuildheight>32</maxbuildheight>
+<timelock>off</timelock>
+</map>

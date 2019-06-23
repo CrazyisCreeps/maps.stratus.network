@@ -1,0 +1,206 @@
+<map proto="1.4.2">
+<name>Route 12</name>
+<version>1.3.1</version>
+<objective>Capture the enemy's wools!</objective>
+<authors>
+    <author uuid="e931b4b3-479f-4761-8808-4c4b2ed69b0f"/> <!-- Mattato -->
+</authors>
+<contributors>
+    <contributor uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
+    <contributor uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- Strangey -->
+    <contributor uuid="2ca8072f-74be-4798-85b8-bbce03aa91af"/> <!-- Tywnis -->
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" max="8">Red</team>
+    <team id="blue-team" color="blue" max="8">Blue</team>
+</teams>
+<spawns>
+    <default yaw="45">
+        <region>
+            <cuboid min="-150.5,52,-100.5" max="-147.5,52,-103.5"/>
+        </region>
+    </default>
+    <spawn team="red-team" kit="red-kit" yaw="-135" safe="true">
+        <region>
+            <cuboid min="-248.5,20,-1.5" max="-250.5,20,0.5"/>
+        </region>
+        <region>
+            <cuboid min="-251.5,20,-0.5" max="-249.5,20,-2.5"/>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit" yaw="45" safe="true">
+        <region>
+            <cuboid min="-47.5,20,-202.5" max="-45.5,20,-204.5"/>
+        </region>
+        <region>
+            <cuboid min="-46.5,20,-205.5" max="-48.5,20,-203.5"/>
+        </region>
+    </spawn>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" enchantment="efficiency:1" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+		<item slot="4" amount="64" material="golden carrot"/>
+		<item slot="5" material="golden apple"/>
+        <item slot="6" amount="64" material="wood"/>
+		<item slot="7" amount="64" material="wood"/>
+        <item slot="8" amount="32" material="glass"/>
+        <effect duration="6" amplifier="255">resistance</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <chestplate color="993333" material="leather chestplate"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <chestplate color="334CB2" material="leather chestplate"/>
+    </kit>
+</kits>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="void-filter">
+        <void/>
+    </not>
+    <!-- this was being weird lol -->
+    <any id="no-edit">
+        <material>emerald block</material>
+    </any>
+    <all id="only-red-edit">
+        <team>blue-team</team>
+        <any>
+            <material>web</material>
+            <material>stained glass</material>
+        </any>
+    </all>
+    <all id="only-blue-edit">
+        <team>red-team</team>
+        <any>
+            <material>web</material>
+            <material>stained glass</material>
+        </any>
+    </all>
+</filters>
+<regions>
+    <union id="spawns">
+        <union id="blue-spawn">
+            <rectangle min="-66,-194" max="-62,-207"/>
+            <rectangle min="-44,-207" max="-62,-189"/>
+            <rectangle min="-57,-189" max="-44,-185"/>
+        </union>
+        <union id="red-spawn">
+            <rectangle min="-235,-16" max="-253,2"/>
+            <rectangle min="-235,-11" max="-231,2"/>
+            <rectangle min="-253,-20" max="-240,-16"/>
+        </union>
+    </union>
+    <union id="wool-mons">
+        <cuboid min="-206,29,-42" max="-209,26,-45"/>
+        <cuboid min="-91,29,-163" max="-88,26,-160"/>
+    </union>
+    <union id="woolrooms">
+        <union id="blue-wr">
+            <union id="lime-wr">
+                <rectangle min="-135,-220" max="-122,-207"/>
+            </union>
+            <union id="pink-wr">
+                <rectangle min="-31,-116" max="-44,-129"/>
+            </union>
+        </union>
+        <union id="red-wr">
+          <union id="orange-wr">
+              <rectangle min="-162,15" max="-175,2"/>
+          </union>
+          <union id="cyan-wr">
+              <rectangle min="-266,-76" max="-253,-89"/>
+         </union>
+      </union>
+    </union>
+	<apply block="never">
+        <region>
+            <block>-149,4,-103</block>
+        </region>
+    </apply>
+    <apply block="no-edit" region="wool-mons" message="You may not edit the victory monument area!"/>
+    <apply block="no-edit" region="spawns" message="You may not edit this area!"/>
+    <apply use="only-red" region="red-spawn" message="You may not enter the opponent's spawn!"/>
+    <apply use="only-blue" region="blue-spawn" message="You may not enter the opponent's spawn!"/>
+    <apply block="only-blue-edit" region="blue-wr" message="You may not edit the wool rooms!"/>
+    <apply block="only-red-edit" region="red-wr" message="You may not edit the wool rooms!"/>
+    <apply enter="only-red" region="blue-wr" message="You may not enter your own woolroom!"/>
+    <apply enter="only-blue" region="red-wr" message="You may not enter your own woolroom!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply block-place="void-filter" block-break="always" region="everywhere" message="You may not edit the void!"/>
+</regions>
+<renewables>
+    <renewable rate="0.1" grow="true" particles="true" sound="true" avoid-players="3">
+        <region>
+            <cuboid min="-218,18,-18" max="-233,0,-33"/>
+        </region>
+        <region>
+            <cuboid min="-79,18,-187" max="-64,0,-172"/>
+        </region>
+        <renew-filter>
+            <any>
+                <material>iron block</material>
+            </any>
+        </renew-filter>
+    </renewable>
+</renewables>
+<kill-rewards>
+    <kill-reward>
+        <item amount="32">wood</item>
+    </kill-reward>
+	<kill-reward>
+        <item amount="16">glass</item>
+    </kill-reward>
+    <kill-reward>
+        <item>golden apple</item>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>leather chestplate</item>
+	<item>arrow</item>
+    <item>glass</item>
+    <item>wood</item>
+    <item>golden carrot</item>>
+    <item>string</item>
+    <item>sapling</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<wools>
+    <wool team="blue-team" color="orange" craftable="false" location="-168.5,18,-4.5">
+        <monument><block>-46.5,21,-205.5</block></monument>
+    </wool>
+    <wool team="blue-team" color="cyan" craftable="false" location="-246.5,18,-82.5">
+        <monument><block>-45.5,21,-204.5</block></monument>
+    </wool>
+    <wool team="red-team" color="lime" craftable="false" location="-128.5,18,-200.5">
+        <monument><block>-250.5,21,0.5</block></monument>
+    </wool>
+    <wool team="red-team" color="pink" craftable="false" location="-50.5,18,-122.5">
+        <monument><block>-251.5,21,-0.5</block></monument>
+    </wool>
+</wools>
+<crafting>
+    <disable>boat</disable>
+    <disable>boat spruce</disable>
+    <disable>boat birch</disable>
+    <disable>boat jungle</disable>
+    <disable>boat acacia</disable>
+    <disable>boat dark oak</disable>
+    <disable>minecart</disable>
+</crafting>
+<maxbuildheight>28</maxbuildheight>
+<timelock>on</timelock>
+<time result="objectives">45m</time>
+</map>

@@ -1,0 +1,195 @@
+<map proto="1.4.1" game="Capture the Wool">
+<name>Boulders</name>
+<version>1.1.1</version>
+<objective>Capture the enemy teams wools!</objective>
+<authors>
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6"/>
+    <!-- rockymine -->
+</authors>
+<maxbuildheight>30</maxbuildheight>
+<timelock>on</timelock>
+<gamemode>ctw</gamemode>
+<teams>
+    <team id="red" color="dark red" max="12" max-overfill="14">Red</team>
+    <team id="blue" color="blue" max="12" max-overfill="14">Blue</team>        
+</teams>
+<spawns>
+    <spawn team="red" kit="red-spawn-kit">
+        <regions yaw="-45">
+            <block>-11.5,14,-18.5</block>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-spawn-kit">
+        <regions yaw="135">
+            <block>37.5,14,66.5</block>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <point>13,10,24</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn" force="true">
+        <potion duration="5" amplifier="1">heal</potion>
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" enchantment="arrow infinite" unbreakable="true">bow</item>
+        <item slot="2" enchantment="dig speed:3" unbreakable="true">iron pickaxe</item>
+        <item slot="3" enchantment="dig speed:4" unbreakable="true">iron axe</item>
+        <item slot="6" enchantment="dig speed:2" unbreakable="true">iron spade</item>
+        <item slot="8" amount="48">grilled pork</item>
+        <item slot="4" amount="64" damage="2">wood</item>
+		<item slot="7" amount="16">iron ingot</item>		
+	    <item slot="28">arrow</item>
+    </kit>
+    <kit id="red-spawn-kit" parents="spawn">
+        <helmet unbreakable="true" color="ff0000">leather helmet</helmet>
+		<chestplate unbreakable="true">iron chestplate</chestplate>
+        <leggings unbreakable="true" color="ff0000">leather leggings</leggings>
+        <boots unbreakable="true">iron boots</boots>            
+    </kit>
+    <kit id="blue-spawn-kit" parents="spawn">
+        <helmet unbreakable="true" color="0000ff">leather helmet</helmet>
+		<chestplate unbreakable="true">iron chestplate</chestplate>		
+        <leggings unbreakable="true" color="0000ff">leather leggings</leggings>
+        <boots unbreakable="true">iron boots</boots>                   
+    </kit>
+</kits>
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+    <not id="deny-red">
+        <team>red</team>
+    </not>
+    <not id="deny-blue">
+        <team>blue</team>
+    </not>
+    <any id="only-some">
+        <material>web</material>
+        <material>leaves</material>
+    </any>
+	<allow id="leaves">
+	    <material>leaves</material>
+	</allow>
+    <allow id="logs">
+        <material>log</material>
+    </allow>
+</filters>
+<regions>
+    <negative id="non-bridge">
+	    <union>
+		    <rectangle min="25,7" max="1,41"/>
+            <rectangle min="1,47" max="-5,59"/>
+            <rectangle min="25,1" max="31,-11"/>
+			<rectangle min="37.5, -11.5" max="37.5,-28.5"/>
+			<rectangle min="-11.5,59.5" max="-11.5,76.5"/>
+		</union>
+	</negative>		
+    <union id="spawns">
+        <rectangle id="red-spawn" min="1,1" max="-23,-23"/>
+        <rectangle id="blue-spawn" min="25,47" max="49,71"/>
+    </union>
+    <!-- Blue Owns / Red needs to Capture -->    
+    <rectangle id="purple-pink" min="6,77" max="-10,89"/>
+    <!-- Red Owns / Blue needs to Capture -->
+    <rectangle id="green-lime" min="20,-29" max="36,-41"/>
+	<union id="wool-rooms">
+	    <region id="purple-pink"/>
+		<region id="green-lime"/>
+	</union>
+    <union id="only-red-zones">
+        <region id="red-spawn"/>
+        <region id="purple-pink"/>
+	</union>
+    <union id="only-blue-zones">
+        <region id="blue-spawn"/>
+        <region id="green-lime"/>
+	</union>
+	<!--Chests-->
+	<union id="chests">
+		<block>11,7,-18</block>
+		<block>11,7,-20</block>
+		<block>-16,18,71</block>
+		<block>-19,18,71</block>
+		<block>14,7,65</block>
+		<block>14,7,67</block>
+		<block>41,18,-24</block>
+		<block>44,18,-24</block>
+	</union>
+	<!-- Temp Fix -->
+	<union id="no-enter">
+        <cuboid id="blue-no-enter" min="2.5,33,89.5" max="-5.5,oo,73.5"/>
+        <cuboid id="red-no-enter" min="23.5,33,-41.5" max="31.5,oo,-28.5"/>
+    </union>
+    <apply block="never" region="chests" message="You cannot change edit the defence chests!"/>
+	<apply enter="never" region="no-enter" message="You may not enter this region"/>
+	<apply block-break="only-some" block-place="never" region="wool-rooms"/>
+	<apply block="never" region="spawns" message="You may not modify this area!"/>
+	<apply block-place="leaves" region="non-bridge"/> 
+	<apply block-break="always" region="non-bridge"/> 
+	<apply block-place="no-void" region="non-bridge" message="You may not modify the void area!"/>
+	<apply enter="deny-red" message="Only blue team may enter this region!" region="only-blue-zones"/>
+    <apply enter="deny-blue" message="Only red team may enter this region!" region="only-red-zones"/>
+</regions>	
+<toolrepair>
+    <tool>bow</tool>
+    <tool>iron sword</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+    <tool>arrow</tool>
+    <tool>iron pickaxe</tool>
+</toolrepair>
+<itemremove>
+	<item>red rose</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>grilled pork</item>
+    <item>apple</item>
+    <item>chest</item>
+	<item>step</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+	<item>wood button</item>
+	<item>shears</item>
+	<item>carpet</item>
+	<item>long grass</item>
+	<item>iron chestplate</item>
+	<item>iron leggings</item>
+	<item>iron helmet</item>
+	<item>iron boots</item>
+	<item>leaves</item>
+	<item>golden apple</item>
+</itemremove>
+<wools team="red">
+    <wool color="purple" location="-3.5,10,83.5">
+	    <monument> 
+		    <block>-9,12,-4</block>
+		</monument>
+	</wool>	
+    <wool color="pink" location="-0.5,22,82.5">
+	    <monument> 
+		    <block>-9,12,-7</block>
+		</monument>
+	</wool>	
+</wools>
+<wools team="blue">
+    <wool color="green" location="29.5,10,-35.5">
+	    <monument> 
+		    <block>34,12,51</block>
+		</monument>
+	</wool>	
+    <wool color="lime" location="26.5,22,-34.5">
+	    <monument> 
+		    <block>34,12,54</block>
+		</monument>
+	</wool>	
+</wools>
+<killreward>
+    <item damage="2" amount="8">wood</item>
+    <item>golden apple</item>
+</killreward>		
+</map>

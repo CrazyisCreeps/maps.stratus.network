@@ -1,0 +1,148 @@
+<map proto="1.4.2">
+<name>Pallow</name>
+<version>1.1.1</version>
+<objective>Capture the enemy's wool!</objective>
+<authors>
+    <author uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042"/> <!-- triplezko -->
+</authors>
+<contributors>
+    <contributor uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9" contribution="New XML"/> <!-- Xerocoles -->
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" max="5">Red</team>
+    <team id="blue-team" color="blue" max="5">Blue</team>
+</teams>
+<spawns>
+    <default yaw="90">
+        <region>
+            <cuboid min="62.5,35.2,1.5" max="61.5,35.2,-0.5"/>
+        </region>
+    </default>
+    <spawn team="red-team" kit="spawn" yaw="0">
+        <region>
+            <cuboid min="1.5,5,-89.5" max="-0.5,5,-88.5"/>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="spawn" yaw="180">
+        <region>
+            <cuboid min="-0.5,5,90.5" max="1.5,5,89.5"/>
+        </region>
+    </spawn>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="28" material="arrow"/>
+        <item slot="31" material="iron spade"/>
+        <item slot="2" unbreakable="true" enchantment="efficiency:1" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" amount="64" damage="1" material="wood"/>
+        <item slot="5" amount="32" material="glass"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="64" material="golden carrot"/>
+        <effect duration="4" amplifier="1">resistance</effect>
+    </kit>
+</kits>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="void-filter">
+        <void/>
+    </not>
+    <any id="only-gold">
+        <material>gold block</material>
+    </any>
+</filters>
+<regions>
+    <union id="spawns">
+        <union id="blue-spawn">
+            <rectangle min="11,95" max="-10,73"/>
+        </union>
+        <union id="red-spawn">
+            <rectangle min="11,-72" max="-10,-94"/>
+        </union>
+    </union>
+    <union id="woolrooms">
+        <union id="purple-wr">
+            <rectangle min="5,47" max="-3,35"/>
+            <rectangle min="-5,45" max="6,36"/>
+            <rectangle min="7,37" max="-6,39"/>
+            <rectangle min="-6,42" max="7,44"/>
+            <cuboid min="7,17,42" max="-6,50,39"/>
+        </union>
+        <union id="lime-wr">
+           <rectangle min="5,-46" max="-3,-34"/>
+           <rectangle min="-5,-44" max="6,-35"/>
+           <rectangle min="7,-36" max="-6,-38"/>
+           <rectangle min="-6,-41" max="7,-43"/>
+           <cuboid min="7,17,-41" max="-6,50,-38"/>
+        </union>
+    </union>
+    <apply block="only-gold" region="spawns" message="You may not edit this area!"/>
+    <apply use="only-red" region="red-spawn"/>
+    <apply use="only-blue" region="blue-spawn"/>
+    <apply enter="only-red" region="purple-wr" message="You may not enter your own woolroom!"/>
+    <apply enter="only-blue" region="lime-wr" message="You may not enter your own woolroom!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply block="never" region="woolrooms" message="You may not edit the wool room!"/>
+    <apply block-place="void-filter" block-break="always" region="everywhere" message="You may not edit the void!"/>
+</regions>
+<renewables>
+    <renewable rate="6" particles="true" sound="true" avoid-players="3">
+        <union>
+            <cuboid min="10,5,87" max="-9,9,75"/>
+            <cuboid min="-9,5,-86" max="10,9,-74"/>
+        </union>
+        <renew-filter>
+            <any>
+                <material>gold block</material>
+            </any>
+        </renew-filter>
+    </renewable>
+</renewables>
+<kill-rewards>
+    <kill-reward>
+        <item amount="16" damage="1">wood</item>
+    </kill-reward>
+    <kill-reward>
+        <item>golden apple</item>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>wood</item>
+    <item>glass</item>
+    <item>golden carrot</item>
+    <item>arrow</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+<wools>
+    <wool team="red-team" color="purple" craftable="false" location="0.5,13,41.5">
+        <monument><block>0.5,6,-92.5</block></monument>
+    </wool>
+    <wool team="blue-team" color="lime" craftable="false" location="0.5,13,-40.5">
+        <monument><block>0.5,6,93.5</block></monument>
+    </wool>
+</wools>
+<crafting>
+    <disable>boat</disable>
+    <disable>boat spruce</disable>
+    <disable>boat birch</disable>
+    <disable>boat jungle</disable>
+    <disable>boat acacia</disable>
+    <disable>boat dark oak</disable>
+</crafting>
+<maxbuildheight>29</maxbuildheight>
+<timelock>on</timelock>
+</map>

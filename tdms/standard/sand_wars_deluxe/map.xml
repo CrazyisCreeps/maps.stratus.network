@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Sand Wars: Deluxe</name>
+<version>2.3.2</version>
+<objective>Be the team with the most kills after 10 minutes.</objective>
+<authors>
+    <author uuid="25961a08-c90c-4abd-b136-dad90e89c2eb"/> <!-- Anxuiz -->
+</authors>
+<contributors>
+    <contributor uuid="99ac8e8f-dcb2-4286-bd93-60582615a501" contribution="aesthetics"/> <!-- mcjcjhttt -->
+</contributors>
+<teams>
+    <team color="dark red" max="24">Red</team>
+    <team color="blue" max="24">Blue</team>
+    <team color="yellow" max="24">Yellow</team>
+    <team color="green" max="24">Green</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="28" amount="1">arrow</item>
+        <item slot="2" amount="2">golden apple</item>
+        <item slot="3" amount="3">tnt</item>
+        <item slot="4">flint and steel</item>
+        <item slot="5" amount="64">sand</item>
+        <item slot="6" amount="64">sand</item>
+        <item slot="7" amount="16">glass</item>
+        <potion duration="5">heal</potion>
+        <potion duration="10">damage resistance</potion>
+        <potion duration="oo">saturation</potion>
+        <potion duration="oo" amplifier="1">jump</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet locked="true" unbreakable="true" color="191919">leather helmet</helmet>
+        <chestplate locked="true" unbreakable="true" color="cd0000">leather chestplate</chestplate>
+        <leggings locked="true" unbreakable="true" color="191919">leather leggings</leggings>
+        <boots locked="true" unbreakable="true" color="191919" enchantment="protection fall:6">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet locked="true" unbreakable="true" color="191919">leather helmet</helmet>
+        <chestplate locked="true" unbreakable="true" color="0066cc">leather chestplate</chestplate>
+        <leggings locked="true" unbreakable="true" color="191919">leather leggings</leggings>
+        <boots locked="true" unbreakable="true" color="191919" enchantment="protection fall:6">leather boots</boots>
+    </kit>
+    <kit name="green" parents="spawn">
+        <helmet locked="true" unbreakable="true" color="191919">leather helmet</helmet>
+        <chestplate locked="true" unbreakable="true" color="7FCC19">leather chestplate</chestplate>
+        <leggings locked="true" unbreakable="true" color="191919">leather leggings</leggings>
+        <boots locked="true" unbreakable="true" color="191919" enchantment="protection fall:6">leather boots</boots>
+    </kit>
+    <kit name="yellow" parents="spawn">
+        <helmet locked="true" unbreakable="true" color="191919">leather helmet</helmet>
+        <chestplate locked="true" unbreakable="true" color="E5E533">leather chestplate</chestplate>
+        <leggings locked="true" unbreakable="true" color="191919">leather leggings</leggings>
+        <boots locked="true" unbreakable="true" color="191919" enchantment="protection fall:6">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawns safe="true" sequential="true">
+        <spawn team="blue" kit="blue" yaw="180">
+            <cuboid min="-25,71,22" max="-38,126,9"/> <!-- regular tower spawn -->
+            <cuboid min="-42,6,5" max="-21,6,26"/> <!-- atop the obsidian -->
+            <point>1,8,0</point> <!-- last resort spawn in the center pad -->
+        </spawn>
+        <spawn team="red" kit="red" yaw="0">
+            <cuboid min="-38,71,-10" max="-25,126,-23"/> <!-- regular tower spawn -->
+            <cuboid min="-21,6,-27" max="-42,6,-6"/> <!-- atop the obsidian -->
+            <point>1,8,0</point> <!-- last resort spawn in the center pad -->
+        </spawn>
+        <spawn team="green" kit="green" yaw="0">
+            <cuboid min="7,71,9" max="-6,126,22"/> <!-- regular tower spawn -->
+            <cuboid min="-10,6,26" max="11,6,5"/> <!-- atop the obsidian -->
+            <point>1,8,0</point> <!-- last resort spawn in the center pad -->
+        </spawn>
+        <spawn team="yellow" kit="yellow" yaw="0">
+            <cuboid min="-6,71,-23" max="7,126,-10"/> <!-- regular tower spawn -->
+            <cuboid min="11,6,-6" max="-10,6,-27"/> <!-- atop the obsidian -->
+            <point>1,8,0</point> <!-- last resort spawn in the center pad -->
+        </spawn>
+    </spawns>
+    <default yaw="270">
+        <cuboid min="45,12,-2" max="49,12,2"/>
+    </default>
+</spawns>
+<playable>
+    <rectangle min="22,-38" max="-53,37"/>
+</playable>
+<score>
+    <time>10m</time>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>flint and steel</tool>
+</toolrepair>
+<itemremove>
+    <item>torch</item>
+    <item>arrow</item>
+    <item>sand</item>
+    <item>golden apple</item>
+    <item>tnt</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>gold boots</item>
+</itemremove>
+<killreward>
+    <item amount="2">tnt</item>
+    <item amount="2">golden apple</item>
+</killreward>
+<disabledamage>
+    <damage ally="true">block explosion</damage>
+</disabledamage>
+<tnt>
+    <yield>0</yield>
+    <licensing>off</licensing>
+</tnt>
+</map>

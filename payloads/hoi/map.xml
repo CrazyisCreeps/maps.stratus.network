@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<map proto="1.4.3" game="Payload">
+<name>Hoi</name>
+<version>1.0.0</version>
+<objective>Get the payload to the end in 12 mins</objective>
+<authors>
+    <author uuid="7ce4a2ee-f3cc-4593-8e59-5f66616d4d5b" contribution="Map building"/><!--rayfreeze-->
+    <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="Map design and building"/><!--Obelistics-->
+</authors>
+<contributors>
+    <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Feedback"/><!--rockymine-->
+    <contributor uuid="dff980ed-9f69-491e-b79c-30c21350baf2" contribution="Feedback"/><!--DoomyBoy-->
+</contributors>
+<score>
+    <limit>1</limit>
+</score>
+<teams>
+    <team id="attack-team" color="dark red" max="8" max-overfill="8">Attackers</team>
+    <team id="defend-team" color="blue" max="8" max-overfill="8">Defenders</team>
+</teams>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" unbreakable="true" prevent-sharing="true">iron sword</item>
+        <item slot="1" unbreakable="true" prevent-sharing="true">bow</item>
+        <item slot="2">golden apple</item>
+        <item slot="8" amount="20">arrow</item>
+        <chestplate unbreakable="true" locked="true">iron chestplate</chestplate>
+        <boots unbreakable="true" locked="true">iron boots</boots>
+        <leggings unbreakable="true" locked="true">chainmail leggings</leggings>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="defend-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="334CB2" locked="true">leather helmet</helmet>
+    </kit>
+    <kit id="attack-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="993333" locked="true">leather helmet</helmet>
+    </kit>
+</kits>
+<filters>
+    <team id="only-attack">attack-team</team>
+    <team id="only-defend">defend-team</team>
+    <all id="attack-spawn-1">
+        <team>attack-team</team>
+        <not>
+            <any>
+                <filter id="attack-spawn-2"/>
+                <filter id="attack-spawn-3"/>
+            </any>
+        </not>
+    </all>
+    <all id="attack-spawn-2">    
+        <payload-checkpoint payload-id="payload">0</payload-checkpoint>
+        <not>
+            <any>
+                <filter id="attack-spawn-3"/>
+            </any>
+        </not>
+    </all>
+    <all id="attack-spawn-3">
+        <payload-checkpoint payload-id="payload">1</payload-checkpoint>
+    </all>
+    <not id="visual-materials">
+        <material>stained_clay</material>
+    </not>
+</filters>
+<regions>
+    <union id="attack-spawn">
+        <rectangle min="-164,57" max="-150,93"/>
+        <cuboid min="-197,17,36" max="-194,11,45"/>
+        <cuboid min="-202,13,61" max="-191,6,64"/>
+    </union>
+    <union id="defend-spawn">
+        <rectangle min="-223,14" max="-239,-7"/>
+    </union>
+    <apply block="never" region="everywhere" message="You cannot edit the map"/>
+    <apply enter="only-attack" region="attack-spawn" message="You cannot enter the attacker's spawn"/>
+    <apply enter="only-defend" region="defend-spawn" message="You cannot enter the defender's spawn"/>
+</regions>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+           <item material="arrow" amount="4"/>
+    </kill-reward>
+</kill-rewards>
+<time result="defend-team">12m</time>
+<spawns>
+    <spawn team="attack-team" kit="attack-kit" filter="attack-spawn-1">
+        <regions yaw="180">
+            <point>-159.5,6.5,84.5</point>
+        </regions>
+    </spawn>
+    <spawn team="attack-team" kit="attack-kit" filter="attack-spawn-2">
+        <regions yaw="180">
+            <point>-195.5,11.5,43.5</point>
+        </regions>
+    </spawn>
+    <spawn team="attack-team" kit="attack-kit" filter="attack-spawn-3">
+        <regions yaw="90">
+            <point>-192.5,6.5,62.5</point>
+        </regions>
+    </spawn>
+    <spawn team="defend-team" kit="defend-kit">
+        <regions yaw="-30">
+            <point>-230.5,6.5,1.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-135">
+            <point>-186.5,12,77.5</point>
+        </regions>
+    </default>
+</spawns>
+<portals>
+    <portal x="@-221" y="@11" z="@36.5" yaw="@90">
+        <region><cylinder base="-238,11,21.5" radius="1" height="3"/></region>
+    </portal>
+    <portal x="@-236" y="@11" z="@21.5" yaw="@-90">
+        <region><cylinder base="-219,11,36.5" radius="1" height="3"/></region>
+    </portal>
+    <portal x="@-173" y="@6" z="@27.5" yaw="@-90">
+        <region><cylinder base="-192,12,42.5" radius="1" height="3"/></region>
+    </portal>
+    <portal x="@-190" y="@12" z="@42.5" yaw="@-90">
+        <region><cylinder base="-175,6,27.5" radius="1" height="3"/></region>
+    </portal>
+</portals>
+<payloads incremental="true" neutral-state="true" show-progress="true" scaled-time="true" time-multiplier="0.25" capture-time="5s">
+    <payload name="Payload" id="payload" location="-158.5,6,51.5" radius="3" yaw="180.0" owner="defend-team" enemy-speed="1" friendly-speed="1.5" required="false" points="1" checkpoint-material="iron plate" empty-decay="1"/>
+</payloads>
+<destroyables materials="barrier" completion="0%" required="false" show="false" mode-changes="true">
+    <destroyable name="monu" owner="attack-team">
+       <region><cuboid min="-164,15,74" max="-155,6,73"/></region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="30s" material="air" name="Attacker's released"/>
+</modes>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>cooked mutton</item>
+    <item>leather helmet</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>iron chestplate</item>
+    <item>seeds</item>
+    <item>leaves</item>
+    <item>red rose</item>
+    <item>yellow flower</item>
+    <item>sapling</item>
+    <item>apple</item>
+</itemremove>
+<time result="defend-team">12m</time>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

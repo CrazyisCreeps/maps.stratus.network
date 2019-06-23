@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Tiki Valley</name>
+<version>1.0</version>
+<objective>Control the center point to capture the enemy flag!</objective>
+<score>
+	<limit>3</limit>
+	<kills>0</kills>
+</score>
+<authors>
+    <author uuid="bac7aaf9-888c-4522-8913-13a833527da6"/> <!-- drop_the_hammer -->
+</authors>
+<contributors>
+    <contributor uuid="bbfac3db-dd46-4996-b936-0e2432f33285" contribution="XML"/> <!-- Valky -->
+</contributors>
+<respawn delay="3s"/>
+<teams>
+    <team id="red-team" color="dark red" max="12" max-overfill="14">Red</team>
+    <team id="blue-team" color="blue" max="12" max-overfill="14">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" amount="1">golden apple</item>
+        <item slot="3" amount="64">cooked beef</item>
+        <item slot="27">arrow</item>
+		<chestplate unbreakable="true" enchantment="protection environmental:1">iron chestplate</chestplate>
+		<potion duration="3" amplifier="15">damage resistance</potion> 
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <helmet color="993333" unbreakable="true">leather helmet</helmet>
+		<leggings color="993333" unbreakable="true">leather leggings</leggings>		
+        <boots color="993333" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <helmet color="334CB2" unbreakable="true">leather helmet</helmet>
+		<leggings color="334CB2" unbreakable="true">leather leggings</leggings>		
+        <boots color="334CB2" unbreakable="true">leather boots</boots>	
+    </kit>
+    <kit id="flag-kit">
+        <effect duration="oo" amplifier="1">slowness</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="170">
+			<cylinder base="52,12,20" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="-10">
+			<cylinder base="-83,12,1" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <point>-15.5,65.1,53.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+	<not id="mid-not-capped">
+		<any>
+			<captured team="red-team">mid</captured>
+			<captured team="blue-team">mid</captured>			
+		</any>
+	</not>
+	<captured id="red-capped-mid" team="red-team">mid</captured>
+	<captured id="blue-capped-mid" team="blue-team">mid</captured>
+</filters>
+<regions>
+    <apply block="never">
+        <region>
+			<everywhere/>
+		</region>
+    </apply>
+</regions>
+<control-points incremental="true">
+	<control-point id="mid" name="Mid" capture-time="6s" points="0" required="false">
+		<capture-region>
+			<cuboid min="-18,20,13" max="-13,23,8"/>
+		</capture-region>
+		<progress-display-region>
+			<cuboid min="-18,20,13" max="-13,23,8"/>
+		</progress-display-region>
+		<owner-display-region>
+			<cuboid min="-18,20,13" max="-13,23,8"/>
+			<cuboid min="-20,18,28" max="-21,19,29"/>
+			<cuboid min="-18,18,38" max="-21,19,39"/>
+			<cuboid min="-11,18,-7" max="-10,19,-8"/>
+			<cuboid min="-13,18,-17" max="-12,19,-18"/>
+		</owner-display-region>
+	</control-point>
+</control-points>
+<flags>
+    <post id="red-post" pickup-filter="only-blue" recover-time="12s" respawn-time="5s" yaw="-90">14,26,10</post>
+    <post id="blue-post" pickup-filter="only-red" recover-time="12s" respawn-time="5s" yaw="90">-46,26,10</post>
+    <flag id="red-flag" owner="red-team" required="false" name="Red Flag" color="red" post="red-post" carry-kit="flag-kit" locked="true">
+		<capture-filter>
+			<all>
+				<team>blue-team</team>
+				<captured team="blue-team">mid</captured>
+			</all>
+		</capture-filter>
+	</flag>
+    <flag id="blue-flag" owner="blue-team" required="false" name="Blue Flag" color="blue" post="blue-post" carry-kit="flag-kit" locked="true">
+		<capture-filter>
+			<all>
+				<team>red-team</team>
+				<captured team="red-team">mid</captured>
+			</all>
+		</capture-filter>
+	</flag>
+    <net flag="red-flag" points="1">
+        <region>
+            <cuboid min="-47,25,12" max="-44,27,9"/>
+        </region>
+    </net>
+    <net flag="blue-flag" points="1">
+        <region>
+            <cuboid min="15,25,9" max="13,27,12"/>
+        </region>
+    </net>
+</flags>
+<beacons>
+	<beacon location="-15.5,0,10.5" particle-count="100" visibility-filter="mid-not-capped" color="purple"/>
+	<beacon location="-15.5,0,10.5" particle-count="100" visibility-filter="red-capped-mid" color="red"/>
+	<beacon location="-15.5,0,10.5" particle-count="100" visibility-filter="blue-capped-mid" color="blue"/>	
+</beacons>	
+<item-mods>
+    <rule>
+        <match>
+            <material>banner</material>
+        </match>
+        <modify locked="true"/>
+    </rule>
+</item-mods>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+<itemremove>
+    <item>leather helmet</item>
+    <item>iron chestplate</item>
+    <item>leather leggings</item>
+	<item>leather boots</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+	<item>golden apple</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+</map>

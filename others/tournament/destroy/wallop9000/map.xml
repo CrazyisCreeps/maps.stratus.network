@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Wallop 9000</name>
+<version>1.0.2</version>
+<objective>Leak the enemy team's core and destory their monument.</objective>
+<authors>
+    <author uuid="6bec5c3a-4934-4b19-9aa8-c7c569820f7d"/> <!-- Claf -->
+    <author uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042" contribution="The Real Author"/> <!-- triplezko -->
+</authors>
+<gamemode>dtc</gamemode>
+<gamemode>dtm</gamemode>
+<teams>
+    <team id="red-team" color="dark red" max="8">Red</team>
+    <team id="blue-team" color="blue" max="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" material="iron sword"/>
+        <item slot="1" material="bow">
+            <enchantment level="1">infinity</enchantment>
+        </item>
+        <item slot="2" material="diamond pickaxe"/>
+        <item slot="3" material="iron axe">
+            <enchantment level="1">efficiency</enchantment>
+        </item>
+        <item slot="4" amount="64" damage="1" material="wood"/>
+        <item slot="5" amount="32" material="glass"/>
+        <item slot="6" material="golden apple"/>
+        <item slot="7" amount="64" damage="1" material="cooked fish"/>
+        <item slot="27" material="arrow"/>
+    </kit>
+</kits>
+<cores material="obsidian" leak="3" mode-changes="true">
+    <core team="blue-team">
+        <region>
+            <cuboid min="-81,47,85" max="-87,52,79"/>
+        </region>
+    </core>
+    <core team="red-team">
+        <region>
+            <cuboid min="-17,47,79" max="-11,52,85"/>
+        </region>
+    </core>
+</cores>
+<destroyables name="E G G ?" materials="ender stone">
+    <destroyable owner="blue-team">
+       <region>
+           <cuboid min="-85,34,63" max="-81,27,67"/>
+       </region>
+    </destroyable>
+    <destroyable owner="red-team">
+       <region>
+           <cuboid min="-13,34,67" max="-17,27,63"/>
+       </region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="10m" material="gold block"/>
+    <mode after="20m" material="packed ice"/>
+</modes>
+<spawns>
+    <spawn team="red-team" kit="spawn-kit">
+        <regions yaw="0">
+            <point>-17.5,23,-16.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="spawn-kit">
+        <regions yaw="0">
+            <point>-79.5,23,-16.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <point>-48.5,67,-16.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+</filters>
+<regions>
+    <apply block="never" message="You may not build outside of the playable region!">
+        <region>
+            <negative>
+                <rectangle min="-107,19" max="10,152"/>
+            </negative>
+        </region>
+    </apply>
+    <apply enter="only-blue" message="You may not enter Blue Team's spawn!">
+        <region>
+            <cuboid min="-82,27,-19" max="-77,27,27"/>
+        </region>
+    </apply>
+    <apply enter="only-red" message="You may not enter Red Team's spawn!">
+        <region>
+            <cuboid min="-20,27,-19" max="-15,27,27"/>
+        </region>
+    </apply>
+</regions>
+<crafting>
+    <disable>shield</disable>
+    <disable>iron fence</disable>
+    <disable>anvil</disable>
+    <disable>iron trapdoor</disable>
+</crafting>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>obsidian</item>
+    <item>anvil</item>
+    <item>iron fence</item>
+    <item>iron trapdoor</item>
+    <item>ender stone</item>
+    <item>gold block</item>
+    <item>packed ice</item>
+    <item>glowstone dust</item>
+    <item>cooked_fish:1</item>
+</itemremove>
+<timelock>on</timelock>
+<maxbuildheight>58</maxbuildheight>
+<time result="objectives">45m</time>
+</map>

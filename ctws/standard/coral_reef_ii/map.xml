@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Coral Reef II</name>
+<version>1.8.1</version>
+<gamemode>ctw</gamemode>
+<objective>Capture the wools and return them to your victory monument.</objective>
+<authors>
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/>
+    <!-- GoldenOre -->
+</authors>
+<contributors>
+    <contributor uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06" contribution="Feedback"/>
+    <!-- Strangey -->
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="18">Red</team>
+    <team id="blue" color="blue" max="18">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite">bow</item>
+        <item slot="2" enchantment="durability:4;dig speed:1">iron pickaxe</item>
+        <item slot="3" enchantment="durability:4">iron axe</item>
+        <item slot="4" amount="64" damage="2">wood</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="32" damage="1">cooked fish</item>
+        <item slot="28" amount="1">arrow</item>
+        <item slot="27" amount="2">stick</item>
+        <effect duration="5" amplifier="5">resistance</effect>
+    </kit>
+		<kit id="red-kit" parents="spawn">
+		<helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+	    <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+	<kit id="blue-kit" parents="spawn">
+	    <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+		<chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="-90">
+            <cuboid min="-450.5,11,172.5" max="-448.5,11,169.5"/>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="90">
+            <cuboid min="-286.5,11,172.5" max="-284,11,169.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <point>-366.5,44,111.5</point>
+        </regions>
+    </default>
+</spawns>
+<block-drops>
+    <rule>
+        <region>
+            <everywhere/>
+        </region>
+        <filter>
+            <any>
+                <material>double step</material>
+            </any>
+        </filter>
+        <drops>
+            <item amount="1" material="sandstone"/>
+        </drops>
+    </rule>
+</block-drops>
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <material id="only-gold">gold block</material>
+</filters>
+<regions>
+    <union id="bridgezones">
+        <rectangle id="bridgezone" min="-326.5,130.5" max="-408.5,211.5"/>
+    </union>
+    <union id="bases">
+        <rectangle id="blue-base" min="-438.5,182.5" max="-460,159.5"/>
+        <rectangle id="red-base" min="-296.5,182.5" max="-274.5,159.5"/>
+    </union>
+    <!-- Red must enter -->
+    <union id="red-wools">
+        <rectangle id="green-wool" min="-452,212" max="-438,198"/>
+        <rectangle id="lime-wool" min="-452,144" max="-438,130"/>
+    </union>
+    <!-- Blue must enter -->
+    <union id="blue-wools">
+        <rectangle id="purple-wool" min="-283,130" max="-297,144"/>
+        <rectangle id="magenta-wool" min="-283,198" max="-297,212"/>
+    </union>
+    <!-- Applied -->
+    <apply block="only-gold" message="You may only break gold blocks in spawn!">
+        <region>
+            <region id="blue-base"/>
+            <region id="red-base"/>
+        </region>
+    </apply>
+    <apply enter="only-red" message="You may not enter the enemy base!">
+        <region>
+            <region id="red-base"/>
+        </region>
+    </apply>
+    <apply enter="only-blue" message="You may not enter the enemy base!">
+        <region>
+            <region id="blue-base"/>
+        </region>
+    </apply>
+    <apply enter="only-red" block="only-red" message="You may not enter or modify your own wool room!">
+        <region>
+            <region id="red-wools"/>
+        </region>
+    </apply>
+    <apply enter="only-blue" block="only-blue" message="You may not enter or modify your own wool room!">
+        <region>
+            <region id="blue-wools"/>
+        </region>
+    </apply>
+    <apply block="deny-void" message="You may not build outside the map area!">
+        <region>
+            <negative>
+                <region id="bridgezones"/>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<wools team="blue">
+    <wool color="purple" location="-442,12,166" craftable="false">
+        <monument>
+            <block>-442,12,166</block>
+        </monument>
+    </wool>
+    <wool color="pink" location="-442,12,175" craftable="false">
+        <monument>
+            <block>-442,12,175</block>
+        </monument>
+    </wool>
+</wools>
+<wools team="red">
+    <wool color="lime" location="-294,12,166" craftable="false">
+        <monument>
+            <block>-294,12,166</block>
+        </monument>
+    </wool>
+    <wool color="green" location="-294,12,175" craftable="false">
+        <monument>
+            <block>-294,12,175</block>
+        </monument>
+    </wool>
+</wools>
+<maxbuildheight>30</maxbuildheight>
+<itemremove>
+    <item>cooked fish</item>
+    <item>stained clay</item>
+    <item>wood</item>
+    <item>stone button</item>
+    <item>brown mushroom</item>
+    <item>redstone</item>
+    <item>sandstone</item>
+    <item>sand</item>
+    <item>string</item>
+    <item>stick</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+</itemremove>
+<toolrepair>
+    <tool>iron axe</tool>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+</toolrepair>
+<timelock>on</timelock>
+<killreward>
+    <item amount="1">golden apple</item>
+    <item amount="16">sandstone</item>
+</killreward>
+</map>

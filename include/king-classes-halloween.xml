@@ -1,0 +1,419 @@
+<map>
+<objective>Protect your Pumpkin King; when they die your team loses!</objective>
+<blitz>
+    <lives>2</lives>
+</blitz>
+<time>8m</time>
+<broadcasts>
+    <alert after="1s">Kill the other team's Pumpkin King to conquer and win!</alert>
+    <tip after="5s" filter="not-king">Protect your Pumpkin King from the other team!</tip>
+    <tip after="5.2s" filter="not-king">If they are killed, your team will lose the match!</tip>
+    <tip after="5s" filter="is-king">You are the Pumpkin King - stay guarded and don't die...</tip>
+    <tip after="5.1s" filter="is-king">You only have 1 life so if you die your team will lose the match!</tip>
+    <alert after="6m30s">The Pumpkin Kings are now glowing!</alert>
+</broadcasts>
+<teams>
+    <team id="red" color="gold" max="32">Orange</team>
+    <team id="blue" color="dark purple" max="32">Purple</team>
+</teams>
+<classes family="King" sticky="true">
+    <class name="Skeleton Knight" description="Attack from both close and afar" icon="chainmail chestplate" default="true" restrict="false">
+        <kit>
+            <clear />
+            <item slot="0" unbreakable="true" material="iron sword" />
+            <item slot="1" unbreakable="true" material="bow" />
+            <item slot="2" unbreakable="true" material="wood pickaxe" />
+            <item slot="3" amount="12" material="mossy cobblestone" />
+            <item slot="4" amount="12" material="ladder" />
+            <item slot="6" amount="16" material="arrow" />
+            <item slot="7" amount="2" material="golden apple" />
+            <item slot="8" amount="32" material="golden carrot" />
+            <head slot="slot.armor.head" locked="true" uuid="0336dbbc-f6f4-446d-82f6-b8eb6bd09cb7" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmZhNTk3MmY0ZmZlNTk0MWMxNGMzOTZlOWRmOTk4NjgxMzc0ODdjNTVjOTAyZTY2Y2Y3OWViNGY5OWQwYmQ2MiJ9fX0=" />
+            <chestplate unbreakable="true" locked="true" material="chainmail chestplate" />
+            <leggings unbreakable="true" locked="true" material="chainmail leggings" />
+            <boots unbreakable="true" locked="true" material="iron boots" />
+            <walk-speed>0.8</walk-speed>
+        </kit>
+    </class>
+    <class name="Zombie Brute" description="Heavy armour and close combat" icon="iron axe" default="false" restrict="false">
+        <kit>
+            <clear />
+            <item slot="0" unbreakable="true" material="iron axe" />
+            <item slot="1" unbreakable="true" material="wood pickaxe" />
+            <item slot="2" amount="12" material="mossy cobblestone" />
+            <item slot="3" amount="12" material="ladder" />
+            <item slot="7" amount="2" material="golden apple" />
+            <item slot="8" amount="32" material="golden carrot" />
+            <head slot="slot.armor.head" locked="true" uuid="0336dbbc-f6f4-446d-82f6-b8eb6bd09cb8" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWUyZmU1ZGZlY2MxZjBiN2ViZTE0MGQ5NWExNTQxMzE0MzQ4NzZmMTVmNDk0Yzk5YzczZTkzZmFkYzFlNzQ2In19fQ==" />
+            <chestplate unbreakable="true" locked="true" material="iron chestplate">
+                <enchantment level="2">protection environmental</enchantment>
+                <enchantment>thorns</enchantment>
+                <attribute slot="slot.armor.chest" operation="base" amount="-0.4">generic.movementSpeed</attribute>
+            </chestplate>
+            <leggings unbreakable="true" locked="true" material="iron leggings" />
+            <boots unbreakable="true" locked="true" material="iron boots">
+                <enchantment level="2">protection environmental</enchantment>
+            </boots>
+            <effect>slow digging</effect>
+            <knockback-reduction>0.5</knockback-reduction>
+        </kit>
+    </class>
+    <class name="Golem Archer" description="Long ranged attacker" icon="bow" default="false" restrict="false">
+        <kit>
+            <clear />
+            <item slot="0" unbreakable="true" material="wood sword">
+                <attribute slot="slot.weapon.mainhand" operation="add" amount="3">generic.attackDamage</attribute>
+            </item>
+            <item slot="1" unbreakable="true" material="bow">
+                <enchantment>arrow infinite</enchantment>
+                <enchantment level="2">arrow damage</enchantment>
+            </item>
+            <item slot="2" unbreakable="true" material="stone pickaxe" />
+            <item slot="3" amount="12" material="mossy cobblestone" />
+            <item slot="4" amount="24" material="ladder" />
+            <item slot="7" amount="2" material="golden apple" />
+            <item slot="8" amount="32" material="golden carrot" />
+            <item slot="28" material="arrow" />
+            <head slot="slot.armor.head" locked="true" uuid="0336dbbc-f6f4-446d-82f6-b8eb6bd09c66" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTUwNTVjN2FmYWQ0ZGVhN2YxNjNlYTg3YTE0NzdlYjkyNWYyNjVkZjhhYzI4MzdlOTNlYTlkZTU4MzgzNWVmIn19fQ==" />
+            <chestplate unbreakable="true" locked="true" material="leather chestplate">
+                <enhantment>protection projectile</enhantment>
+            </chestplate>
+            <leggings unbreakable="true" locked="true" material="chainmail leggings" />
+            <boots unbreakable="true" locked="true" material="gold boots" />
+        </kit>
+    </class>
+    <class name="Grave Digger" description="Create aiding structures" icon="iron spade" default="false" restrict="false">
+        <kit>
+            <clear />
+            <item slot="0" unbreakable="true" material="stone sword" />
+            <item slot="1" unbreakable="true" material="iron pickaxe">
+                <enchantment level="2">dig speed</enchantment>
+            </item>
+            <item slot="2" unbreakable="true" material="iron axe">
+                <enchantment level="2">dig speed</enchantment>
+            </item>
+            <item slot="3" unbreakable="true" material="iron spade">
+                <enchantment level="2">dig speed</enchantment>
+            </item>
+            <item slot="4" amount="64" material="mossy cobblestone" />
+            <item slot="5" amount="64" material="mossy cobblestone" />
+            <item slot="6" amount="64" material="ladder" />
+            <item slot="7" amount="2" material="golden apple" />
+            <item slot="8" amount="32" material="golden carrot" />
+            <item slot="9" unbreakable="true" material="shears" />
+            <item slot="31" amount="64" material="mossy cobblestone" />
+            <item slot="32" amount="64" material="mossy cobblestone" />
+            <item slot="33" amount="64" material="torch" />
+            <head slot="slot.armor.head" locked="true" uuid="0336dbbc-f6f4-446d-82f6-b8eb6bd09c87" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWYzNmU1M2YzOTU1OTNlZGRjODFlNTExODc4NDU2ZDc3MjRlNTMzMzdhM2Y1YjFkMzI0ZmZiOWUxNjBmNjRjIn19fQ==" />
+            <chestplate unbreakable="true" locked="true" material="chainmail chestplate">
+                <enchantment>protection projectile</enchantment>
+            </chestplate>
+            <leggings unbreakable="true" locked="true" material="chainmail leggings" />
+            <boots unbreakable="true" locked="true" material="iron boots">
+                <enchantment>protection fall</enchantment>
+            </boots>
+        </kit>
+    </class>
+    <class name="Reaper" description="Sneak around quickly" icon="gold hoe" default="false" restrict="false">
+        <kit>
+            <clear />
+            <item slot="0" unbreakable="true" material="gold hoe">
+                <enchantment>knockback</enchantment>
+                <enchantment level="1">sharpness</enchantment>
+                <attribute slot="slot.weapon.mainhand" operation="add" amount="5">generic.attackDamage</attribute>
+            </item>
+            <item slot="1" unbreakable="true" material="stone pickaxe" />
+            <item slot="2" amount="8" material="skull item" damage="1" projectile="reaper-skull" name="`r`bFlaming Skull" lore="`r`7Right-click to throw"/>
+            <item slot="3" amount="12" material="mossy cobblestone" />
+            <item slot="4" amount="24" material="ladder" />
+            <item slot="7" amount="2" material="golden apple" />
+            <item slot="8" amount="32" material="golden carrot" />
+            <head slot="slot.armor.head" locked="true" uuid="0336dbbc-f6f4-446d-82f6-b8eb6bd09c48" skin="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODg4M2FkZTM1YTE3YmFmMzIyZjUzNzljMWRkYzdkM2VkZWNiZDM5ZDMzZGM3OTk2ZTM4M2RmOWMxNGJiYTMifX19" />
+            <chestplate unbreakable="true" locked="true" material="leather chestplate">
+                <enchantment level="3">protection projectile</enchantment>
+            </chestplate>
+            <boots unbreakable="true" locked="true" material="iron boots">
+                <enchantment level="2">protection fall</enchantment>
+                <enchantment>depth strider</enchantment>
+            </boots>
+            <effect amplifier="1">speed</effect>
+            <effect amplifier="1">jump</effect>
+            <double-jump power="2" recharge-time="8s" />
+            <max-health>16</max-health>
+        </kit>
+    </class>
+</classes>
+<respawn delay="4s" blackout="true" />
+<kits>
+    <kit id="spawn">
+        <potion duration="3" amplifier="1">heal</potion>
+        <potion duration="5" amplifier="2">damage resistance</potion>
+    </kit>
+    <kit id="obs">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="king" force="true">
+        <clear />
+        <item slot="0" unbreakable="true" material="gold sword" />
+        <item slot="1" unbreakable="true" material="bow" />
+        <item slot="2" unbreakable="true" material="gold pickaxe" />
+        <item slot="4" amount="3" material="splash potion" name="`rPumpkin King's Berserking Potion">
+            <effect duration="6" amplifier="2">strength</effect>
+            <effect duration="6" amplifier="1">speed</effect>
+            <effect duration="3" amplifier="4">regeneration</effect>
+            <effect duration="3" amplifier="4">haste</effect>
+        </item>
+        <item slot="6" amount="12" material="spectral arrow" />
+        <item slot="7" amount="2" material="golden apple" />
+        <item slot="8" amount="32" material="golden carrot" />
+        <helmet unbreakable="true" locked="true" material="jack o lantern" />
+        <chestplate unbreakable="true" locked="true" material="gold chestplate">
+            <enchantment level="2">protection projectile</enchantment>
+        </chestplate>
+        <leggings unbreakable="true" locked="true" material="chainmail leggings" />
+        <boots unbreakable="true" locked="true" material="gold boots">
+            <enchantment level="2">protection fall</enchantment>
+            <enchantment level="2">protection environmental</enchantment>
+        </boots>
+        <effect amplifier="2">night vision</effect>
+        <effect amplifier="2">slow digging</effect>
+        <effect duration="0" amplifier="10">speed</effect>
+        <effect duration="0" amplifier="10">jump</effect>
+        <effect duration="0" amplifier="10">resistance</effect>
+        <knockback-reduction>0.18</knockback-reduction>
+        <walk-speed>1</walk-speed>
+        <max-health>20</max-health>
+        <double-jump enabled="false" />
+    </kit>
+    <give kit="king" filter="is-king" />
+    <kit id="glow">
+        <effect>glowing</effect>
+    </kit>
+    <give kit="glow" filter="glow-kings" />
+    <lend kit="underground-lvl-1" filter="apply-lvl-1" />
+    <kit id="underground-lvl-1">
+        <effect>slowness</effect>
+        <effect>weakness</effect>
+    </kit>
+    <lend kit="underground-lvl-2" filter="apply-lvl-2" />
+    <kit id="underground-lvl-2">
+        <effect amplifier="2">slowness</effect>
+        <effect>weakness</effect>
+    </kit>
+    <lend kit="underground-lvl-2-king" filter="apply-lvl-2-king" />
+    <kit id="underground-lvl-2-king">
+        <effect>poison</effect>
+    </kit>
+    <lend kit="underground-lvl-3" filter="apply-lvl-3" />
+    <kit id="underground-lvl-3">
+        <effect amplifier="2">slowness</effect>
+        <effect amplifier="2">weakness</effect>
+    </kit>
+    <lend kit="underground-lvl-3-king" filter="apply-lvl-3-king" />
+    <kit id="underground-lvl-3-king">
+        <effect amplifier="2">poison</effect>
+        <effect amplifier="3">slow digging</effect>
+    </kit>
+</kits>
+<projectiles>
+    <projectile id="reaper-skull" name="flaming skull" projectile="WitherSkull" velocity="1" damage="4" throwable="true" cooldown="1.75s" click="right">
+        <effect duration="2" amplifier="3">wither</effect>
+    </projectile>
+</projectiles>
+<kill-rewards>
+    <kill-reward>
+        <kit>
+            <item material="golden apple" />
+            <effect duration="3s">night vision</effect>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <kit>
+            <effect duration="3s">speed</effect>
+        </kit>
+        <filter>
+            <all>
+                <class>Zombie Brute</class>
+                <not>
+                    <filter id="is-king" />
+                </not>
+            </all>
+        </filter>
+    </kill-reward>
+    <kill-reward>
+        <kit>
+            <item amount="6" material="arrow" />
+            <effect duration="3s">speed</effect>
+        </kit>
+        <filter>
+            <all>
+                <class>Skeleton Knight</class>
+                <not>
+                    <filter id="is-king" />
+                </not>
+            </all>
+        </filter>
+    </kill-reward>
+    <kill-reward>
+        <item amount="16" material="mossy cobblestone" />
+        <item amount="8" material="ladder" />
+        <filter>
+            <all>
+                <class>Grave Digger</class>
+                <not>
+                    <filter id="is-king" />
+                </not>
+            </all>
+        </filter>
+    </kill-reward>
+    <kill-reward>
+        <item amount="3" material="skull item" damage="1" projectile="reaper-skull" name="`r`bFlaming Skull" lore="`r`7Right-click to throw" />
+        <filter>
+            <all>
+                <class>Reaper</class>
+                <not>
+                    <filter id="is-king" />
+                </not>
+            </all>
+        </filter>
+    </kill-reward>
+    <kill-reward filter="is-king">
+        <item amount="3" material="spectral arrow" />
+    </kill-reward>
+</kill-rewards>
+<filters>
+    <not id="deny-void">
+        <void />
+    </not>
+    <not id="deny-storage">
+        <any>
+            <material>chest</material>
+            <material>furnace</material>
+            <material>trapped chest</material>
+            <material>ender chest</material>
+            <material>dropper</material>
+            <material>dispenser</material>
+            <material>hopper</material>
+        </any>
+    </not>
+    <not id="not-king">
+        <any id="is-king">
+            <carrying-flag>red-class-picker</carrying-flag>
+            <carrying-flag>blue-class-picker</carrying-flag>
+        </any>
+    </not>
+    <not id="not-brute">
+        <class>Zombie Brute</class>
+    </not>
+    <all id="allow-conquest-capture">
+        <time>5s</time>
+        <filter id="is-king" />
+    </all>
+    <countdown duration="30s" message="Kings will begin glowing in {0}">
+        <all>
+            <time>6m</time>
+            <match-running />
+        </all>
+    </countdown>
+    <all id="glow-kings">
+        <time>6m30s</time>
+        <filter id="is-king" />
+        <match-running />
+    </all>
+    <all id="apply-lvl-1">
+        <region id="underground" />
+    </all>
+    <all id="apply-lvl-2">
+        <region id="underground" />
+        <time>30s</time>
+    </all>
+    <all id="apply-lvl-2-king">
+        <filter id="apply-lvl-2" />
+        <filter id="is-king" />
+    </all>
+    <all id="apply-lvl-3">
+        <region id="underground" />
+        <time>1m</time>
+    </all>
+    <all id="apply-lvl-3-king">
+        <filter id="apply-lvl-3" />
+        <filter id="is-king" />
+    </all>
+</filters>
+<regions>
+    <apply block="never" region="spawns" message="`7You may not place blocks in the spawning region!" />
+    <apply use="deny-storage" message="`7Storage blocks may not be used!" />
+    <apply block-place="deny-void" message="`7This block may not be modified!" />
+</regions>
+<flags show="false">
+    <flag id="red-class-picker" name="Orange King's Reign" color="orange" post="red-post" drop-filter="never" carry-message="You are the King - Survive as long as possible!" />
+    <flag id="blue-class-picker" name="Purple King's Reign" color="purple" post="blue-post" drop-filter="never" carry-message="You are the King - Survive as long as possible!" />
+</flags>
+<control-points>
+    <control-point id="conquest" name="King's Conquest" capture-time="0s" permanent="true" capture="everywhere" player-filter="allow-conquest-capture" />
+</control-points>
+<mobs>
+    <filter>
+        <deny>
+            <spawn>natural</spawn>
+        </deny>
+    </filter>
+</mobs>
+<itemremove>
+    <item>wood sword</item>
+    <item>wood pickaxe</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>stone sword</item>
+    <item>stone pickaxe</item>
+    <item>stone axe</item>
+    <item>stone spade</item>
+    <item>chainmail helmet</item>
+    <item>chainmail chestplate</item>
+    <item>chainmail leggings</item>
+    <item>chainmail boots</item>
+    <item>gold sword</item>
+    <item>gold helmet</item>
+    <item>gold chestplate</item>
+    <item>gold leggings</item>
+    <item>gold boots</item>
+    <item>gold hoe</item>
+    <item>gold pickaxe</item>
+    <item>iron sword</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>iron spade</item>
+    <item>iron helmet</item>
+    <item>iron chestplate</item>
+    <item>iron leggings</item>
+    <item>iron boots</item>
+    <item>diamond sword</item>
+    <item>diamond pickaxe</item>
+    <item>diamond axe</item>
+    <item>diamond spade</item>
+    <item>diamond helmet</item>
+    <item>diamond chestplate</item>
+    <item>diamond leggings</item>
+    <item>diamond boots</item>
+    <item>shears</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>spectral arrow</item>
+    <item>golden carrot</item>
+    <item>apple</item>
+    <item>potion</item>
+    <item>splash potion</item>
+    <item>glass bottle</item>
+    <item>sapling</item>
+    <item>skull item</item>
+    <item>jack o lantern</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>torch</item>
+    <item>ladder</item>
+    <item>mossy cobblestone</item>
+</itemkeep>
+</map>

@@ -1,0 +1,147 @@
+<map proto="1.4.3">
+	<name>Bistre</name>
+	<phase>development</phase>
+	<version>1.0.1</version>
+	<objective>Capture both of the enemy wools and place them back on your monument</objective>
+	<authors>
+		<author uuid="48924ea3-3aad-4e16-838c-368d8d9e0a25"/> <!--Matic0B-->
+	</authors>
+	<teams>
+		<team id="red" color="dark red" max="14" max-overfill="15">Red</team>
+		<team id="blue" color="blue" max="14" max-overfill="15">Blue</team>
+	</teams>
+	<kits>
+		<kit id="spawn">
+			<item slot="0" unbreaking="true" material="iron sword"/>
+			<item slot="1" unbreaking="true" material="bow"/>
+			<item slot="2" unbreaking="true" material="iron pickaxe"/>
+			<item slot="3" unbreaking="true" material="iron spade"/>
+			<item slot="4" unbreaking="true" material="iron axe"/>
+			<item slot="5" damage="1" amount="32" material="wood"/>
+			<item slot="6" amount="16" material="cooked beef"/>
+			<item slot="7" material="golden apple"/>
+			<item slot="28" amount="32" material="arrow"/>
+			<potion duration="3" amplifier="5">damage resistance</potion>
+		</kit>
+		<kit id="resistance-removal" force="true">
+			<potion duration="0.1">damage resistance</potion>
+		</kit>
+	</kits>
+	<spawns>
+		<spawn team="red" kit="spawn">
+			<region yaw="130">
+				<point>-1,5.5,99</point>
+			</region>
+		</spawn>
+		<spawn team="blue" kit="spawn">
+			<region yaw="-50">
+				<point>-34,5.5,-20</point>
+			</region>
+		</spawn>
+		<default>
+			<region yaw="90" pitch="30">
+				<point>23.5,30,39.5</point>
+			</region>
+		</default>
+	</spawns>
+	<filters>
+		<team id="only-red">red</team>
+		<team id="only-blue">blue</team>
+		<not id="no-void">
+        	<void/>
+    	</not>
+    	<not id="no-beacons">
+    		<any>
+    			<material>beacon</material>
+    		</any>
+    	</not>
+    </filters>
+	<regions>
+		<negative id="void">
+			<union id="bridging-area">
+				<rectangle min="6,-20" max="-13,-4"/>
+				<rectangle min="5,-4" max="-40,83"/>
+				<rectangle min="-41,83" max="-22,99"/>
+				<rectangle min="-40.5,82.5" max="-40.5,80.5"/>
+				<rectangle min="5.5,-1.5" max="5.5,-3.5"/>
+			</union>
+			<union id="spawns">
+				<union id="red-spawn">
+					<rectangle min="-7,90" max="4,93"/>
+					<rectangle min="6,93" max="-8,97"/>
+					<rectangle min="-9,96" max="6,100"/>
+					<rectangle min="6,99" max="-10,107"/>
+				</union>
+				<union id="blue-spawn">
+					<rectangle min="-28,-11" max="-39,-15"/>
+					<rectangle min="-41,-14" max="-27,-17"/>
+					<rectangle min="-26,-17" max="-41,-21"/>
+					<rectangle min="-41,-20" max="-25,-27"/>
+				</union>
+			</union>
+			<union id="wool-rooms">
+				<union id="red-rooms">
+					<rectangle id="magenta" min="25,94" max="14,104"/>
+					<rectangle id="purple" min="-31,116" max="-42,126"/>
+				</union>
+				<union id="blue-rooms">
+					<rectangle id="lime" min="-60,-15" max="-49,-25"/>
+					<rectangle id="green" min="-4,-37" max="7,-47"/>
+				</union>
+			</union>
+		</negative>
+		<apply block-place="no-void" kit="resistance-removal" block-break="always" message="You may not edit the void area!" region="void"/>
+		<apply block="never" message="You may not edit the spawn areas!" region="spawns"/>
+		<apply enter="only-red" message="You may not enter the enemy spawn!" region="red-spawn"/>
+		<apply enter="only-blue" message="You may not enter the enemy spawn!" region="blue-spawn"/>
+		<apply block="never" use="no-beacons" message="You may not edit the wool rooms!" region="wool-rooms"/>
+		<apply enter="only-red" message="You may not enter your own wool room!" region="blue-rooms"/>
+		<apply enter="only-blue" message="You may not enter your own wool room!" region="red-rooms"/>
+	</regions>
+	<wools>
+		<wool team="red" color="lime" location="-54.5,5,-20">
+			<monument>
+				<block>-16.5,6,99.5</block>
+			</monument>
+		</wool>
+		<wool team="red" color="green" location="1.5,7,-42.5">
+			<monument>
+				<block>-18.5,6,99.5</block>
+			</monument>
+		</wool>
+		<wool team="blue" color="magenta" location="19.5,4,99.5">
+			<monument>
+				<block>-18.5,6,-20.5</block>
+			</monument>
+		</wool>
+		<wool team="blue" color="purple" location="-36.5,7,121.5">
+			<monument>
+				<block>-16.5,6,-20.5</block>
+			</monument>
+		</wool>
+	</wools>
+	<destroyables>
+	    <destroyable id="bridging-glass" owner="red" materials="stained glass:0" name="A" show="false" completion="0%" mode-changes="true" required="false">
+	        <region>
+	            <cuboid min="-45,0,129" max="10,100,-53"/>
+	        </region>
+	    </destroyable>
+	</destroyables>
+	<modes>
+	    <mode after="3s" material="air" name="Removing glass" show-before="4s"/>
+	</modes>
+	<kill-rewards>
+		<kill-reward>
+			<item>golden apple</item>
+			<item amount="16">arrow</item>
+		</kill-reward>
+	</kill-rewards>
+	<tool-repair>
+		<tool>iron sword</tool>
+		<tool>bow</tool>
+		<tool>iron pickaxe</tool>
+		<tool>iron spade</tool>
+		<tool>iron axe</tool>
+	</tool-repair>
+	<maxbuildheight>12</maxbuildheight>
+</map>

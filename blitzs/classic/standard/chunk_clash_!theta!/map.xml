@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Chunk Clash !THETA!</name>
+<version>1.0.1</version>
+<objective>Kill the other teams to win</objective>
+<!-- Map authors & contributors. -->
+<authors>
+	<author uuid="715769c5-8c4c-4489-bdf8-f9cee2b2ae8a"/> <!-- Cactus -->
+</authors>
+<contributors>
+    <contributor uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b" contribution="Chunk Clash !BETA!"/> <!-- _3Each -->
+</contributors>
+<!-- Map modules, i.e. objectives, regions, spawns. -->
+<gamemode>ffa</gamemode>
+<gamemode>blitz</gamemode>
+<!-- Teams.Each team has 1 player but can be increased by staff. -->
+<teams>
+   <team id="red-team" color="dark red" max="1" max-overfill="1">Red</team>
+   <team id="blue-team" color="blue" max="1" max-overfill="1">Blue</team>
+   <team id="purple-team" color="light purple" max="1" max-overfill="1">Purple</team>
+   <team id="gold-team" color="gold" max="1" max-overfill="1">Gold</team>
+</teams>
+<!-- Each player has 1 life -->
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>false</broadcastLives>
+</blitz>
+<!-- Time till the match ends in minutes.aka 40 minutes -->
+<time>30m</time>
+<include src="blitz-global.xml"/>
+<!-- Where players/teams spawn. -->
+<spawns>
+    <spawn team="red-team">
+        <regions yaw="0">
+            <point>0,144,-93</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team">
+        <regions yaw="90">
+            <point>93,144,0</point>
+        </regions>
+    </spawn>
+    <spawn team="purple-team">
+        <regions yaw="-180">
+            <point>0,144,93</point>
+        </regions>
+    </spawn>
+    <spawn team="gold-team">
+        <regions yaw="-90">
+            <point>-93,144,0</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <cuboid min="-17,56,-16" max="13,65,15"/>
+        </regions>
+    </default>
+</spawns>
+<!-- Some map settings, i.e daylight cycle -->
+<gamerules>
+    <doDaylightCycle>true</doDaylightCycle>
+    <doFireTick>true</doFireTick>
+    <doTileDrops>true</doTileDrops>
+    <mobGriefing>true</mobGriefing>
+    <doMobLoot>true</doMobLoot>
+</gamerules>
+<maxbuildheight>75</maxbuildheight>
+<!-- mobs are enabled. -->
+<mobs>
+    <filter>
+        <spawn>natural</spawn>
+    </filter>
+</mobs>
+<!-- no kits are needed as it is a survival map. -->
+</map>

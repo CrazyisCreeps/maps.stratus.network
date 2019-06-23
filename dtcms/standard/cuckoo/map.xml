@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<map proto="1.4.1">
+<name>Cuckoo</name>
+<version>1.0.0</version>
+<objective>Destroy enemy's monuments and the core.</objective>
+<gamemode>dtc</gamemode>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="f926e3b1-ce9c-4269-a5e8-e339d5056480" />
+    <!-- Matilaina -->
+    <author uuid="5eed208d-de58-4022-9ba7-6ccb5ea7e92a" />
+    <!-- Selfie -->
+</authors>
+<contributors>
+    <contributor uuid="3fbec7dd-0a5f-40bf-9d11-885a54507112" contribution="Server Host and Much Help" />
+    <!-- DoomyBoy -->
+</contributors>
+<teams>
+    <team id="redTeam" color="dark red" max="10" max-overfill="14">Red</team>
+    <team id="blueTeam" color="blue" max="10" max-overfill="14">Blue</team>
+</teams>
+<cores material="obsidian" leak="8">
+    <core team="blueTeam">
+        <region>
+            <cuboid min="29,33,3" max="26,28,6" />
+        </region>
+    </core>
+    <core team="redTeam">
+        <region>
+            <cuboid min="-41,33,3" max="-44,28,6" />
+        </region>
+    </core>
+</cores>
+<spawns>
+    <spawn team="redTeam" kit="redKit">
+        <regions yaw="-90">
+            <block>-107.5,76,4.5</block>
+        </regions>
+    </spawn>
+    <spawn team="blueTeam" kit="blueKit">
+        <regions yaw="90">
+            <block>92.5,76,4.5</block>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <block>-7.5,73,-76.5</block>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <not id="no-void">
+        <void />
+    </not>
+    <not id="denyDispensers">
+        <any>
+            <material>dispenser</material>
+        </any>
+    </not>
+</filters>
+<destroyables materials="coal block" completion="100%">
+    <destroyable owner="blueTeam" id="blueLowMonument" name="Low Monument">
+        <region>
+            <cuboid min="26,33,-34" max="29,28,-37" />
+        </region>
+    </destroyable>
+    <destroyable owner="blueTeam" id="blueHighMonument" name="High Monument">
+        <region>
+            <cuboid min="26,47,43" max="29,43,46" />
+        </region>
+    </destroyable>
+    <destroyable owner="redTeam" id="redLowMonument" name="Low Monument">
+        <region>
+            <cuboid min="-44,33,46" max="-41,28,43" />
+        </region>
+    </destroyable>
+    <destroyable owner="redTeam" id="redHighMonument" name="High Monument">
+        <region>
+            <cuboid min="-44,47,-37" max="-41,42,-34" />
+        </region>
+    </destroyable>
+</destroyables>
+<regions>
+    <apply block="never" message="You may not modify the void area!">
+        <region>
+            <negative>
+                <rectangle id="playingField" min="50,83" max="-65,-74" />
+            </negative>
+        </region>
+    </apply>
+    <apply kit="resistanceKit">
+        <region>
+            <cuboid id="redFall" min="-58,78,3" max="-70,75,6" />
+            <cuboid id="blueFall" min="46,78,3" max="43,75,6" />
+        </region>
+    </apply>
+    <apply block="never">
+        <region>
+            <cuboid id="redUnderSpawn" min="-56,41,7" max="-61,38,2" />
+            <cuboid id="blueUnderSpawn" min="46,41,2" max="41,38,7" />
+        </region>
+    </apply>
+    <apply block="denyDispensers">
+        <region>
+            <everywhere />
+        </region>
+    </apply>
+</regions>
+<kits>
+    <kit id="redKit" parents="spawnKit">
+        <chestplate color="cd0000" unbreakable="true" material="leather chestplate" />
+    </kit>
+    <kit id="blueKit" parents="spawnKit">
+        <chestplate color="0066cc" unbreakable="true" material="leather chestplate" />
+    </kit>
+    <kit id="spawnKit" force="true">
+        <item slot="0" unbreakable="true" material="iron sword" />
+        <item slot="1" unbreakable="true" material="bow" />
+        <item slot="2" unbreakable="true" material="diamond pickaxe" />
+        <item slot="3" unbreakable="true" material="diamond axe" />
+        <item slot="4" amount="32" material="log" />
+        <item slot="5" amount="32" material="glass" />
+        <item slot="6" amount="64" material="cobblestone" />
+        <item slot="8" amount="32" material="bread" />
+        <item slot="28" amount="64" material="arrow" />
+        <item slot="19" amount="64" material="arrow" />
+    </kit>
+    <kit id="resistanceKit">
+        <effect duration="5" amplifier="2">resistance</effect>
+    </kit>
+</kits>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple" />
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>62</maxbuildheight>
+<timelock>on</timelock>
+<itemremove>
+    <item>leather chestplate</item>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>diamond axe</item>
+    <item>smooth_brick:3</item>
+    <item>iron spade</item>
+    <item>log</item>
+    <item>wood:3</item>
+    <item>dirt</item>
+    <item>glowstone_dust</item>
+    <item>clay</item>
+    <item>clay_ball</item>
+    <item>stone</item>
+    <item>brick</item>
+    <item>dispenser</item>
+    <item>stained_clay:11</item>
+    <item>stained_clay:14</item>
+</itemremove>
+</map>

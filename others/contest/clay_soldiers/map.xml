@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Clay Soldiers</name>
+<version>1.1.0</version>
+<gamemode>ctw</gamemode>
+<objective>Capture the enemy's wools!</objective>
+<authors>
+    <author uuid="53af1e46-7424-485b-97de-7bf8d854a2aa"/> <!-- __BT -->
+</authors>
+<contributors>
+    <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Map feedback and aesthetics"/> <!-- rockymine -->
+    <contributor uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="Moral support"/> <!-- Crazy_ -->
+</contributors>
+<teams>
+    <team id="dawn" max="10" max-overfill="12" color="gold">Dawn</team>
+    <team id="dusk" max="10" max-overfill="12" color="light_purple">Dusk</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">iron pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="28" amount="24">arrow</item>
+        <item slot="5" amount="24">log</item>
+        <item slot="7">golden apple</item>
+        <item slot="8" amount="24">bread</item>
+        <potion duration="5" amplifier="100">damage resistance</potion>
+    </kit>
+    <kit id="dawn-gear" parents="spawn">
+        <chestplate unbreakable="true" color="D87F33">leather chestplate</chestplate>
+        <boots unbreakable="true" color="D87F33">leather boots</boots>
+        <item slot="4" damage="14" amount="64">stained glass</item>
+    </kit>
+    <kit id="dusk-gear" parents="spawn">
+        <chestplate unbreakable="true" color="B24CD8">leather chestplate</chestplate>
+        <boots unbreakable="true" color="B24CD8">leather boots</boots>
+        <item slot="4" damage="11" amount="64">stained glass</item>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="dawn" kit="dawn-gear">
+        <regions>
+            <point yaw="180">0.5,22,34.5</point>
+        </regions>
+    </spawn>
+    <spawn team="dusk" kit="dusk-gear">
+        <regions>
+            <point yaw="0">0.5,22,-129.5</point>
+        </regions>
+    </spawn>
+    <default yaw="90">
+        <regions>
+            <point>67.5,51,-47.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-dawn">dawn</team>
+    <team id="only-dusk">dusk</team>
+    <not id="no-void">
+        <void/>
+    </not>
+    <all id="dawn-webs">
+        <team>dawn</team>
+        <any>
+            <material>web</material>
+        </any>
+    </all>
+    <all id="dusk-webs">
+        <team>dusk</team>
+        <any>
+            <material>web</material>
+        </any>
+    </all>
+</filters>
+<regions>
+    <union id="wool-rooms">
+        <union id="dawn-wools"> <!-- This is a lovely mess -->
+            <cuboid min="-8,0,45.5" max="9,oo,46.5"/>
+            <cuboid min="-9,0,47.5" max="10,oo,47.5"/>
+            <cuboid min="-10,0,48.5" max="11,oo,48.5"/>
+            <cuboid min="-11,0,49.5" max="12,oo,49.5"/>
+            <cuboid min="-12,0,50.5" max="13,oo,50.5"/>
+            <cuboid min="-13,0,51.5" max="14,oo,51.5"/>
+            <cuboid min="-14,0,52.5" max="15,oo,52.5"/>
+            <cuboid min="-15,0,53.5" max="16,oo,58.5"/>
+        </union>
+        <mirror id="dusk-wools" normal="0,0,1" origin="0.5,0,-47.5"><region id="dawn-wools"/></mirror>
+    </union>
+    <union id="spawns">
+        <union id="dawn-spawn">
+            <cuboid min="-9.5,0,10.5" max="10.5,8,31.5"/>
+            <rectangle min="2.5,32.5" max="-1.5,36.5"/>
+        </union>
+        <mirror id="dusk-spawn" normal="0,0,1" origin="0.5,0,-47.5"><region id="dawn-spawn"/></mirror>
+    </union>
+    <union id="dusk-spawn-ejec"> <!-- on dawn side -->
+        <!-- Left ladder -->
+        <cuboid min="-5.5,0,13.5" max="-6.5,8,14.5"/>
+        <!-- Right ladder -->
+        <cuboid min="6.5,0,13.5" max="7.5,8,14.5"/>
+    </union>
+    <mirror id="dawn-spawn-ejec" normal="0,0,1" origin="0.5,0,-47.5"><region id="dusk-spawn-ejec"/></mirror>
+    <block id="spawner">0,5,-48</block>
+    <!-- Applicators -->
+    <!-- Spawns -->
+    <apply block="never" region="spawns" message="You may not interact with spawn!"/>
+    <!-- Shoots team out of other team's spawn ladder drop area -->
+    <apply velocity="0,0.5,0" region="dusk-spawn-ejec" filter="only-dusk"/>
+    <apply velocity="0,0.5,0" region="dawn-spawn-ejec" filter="only-dawn"/>
+    <!-- Wool rooms -->
+    <apply block-break="dawn-webs" block-place="never" region="dusk-wools" message="You may not break blocks in the wool rooms!"/>
+    <apply block-break="dusk-webs" block-place="never" region="dawn-wools" message="You may not break blocks in the wool roooms!"/>
+    <apply enter="only-dawn" region="dusk-wools" message="You may not enter the other team's wool rooms!"/>
+    <apply enter="only-dusk" region="dawn-wools" message="You may not enter the other team's wool rooms!"/>
+    <!-- Spawner -->
+    <apply block="never" region="spawner" message="You may not break the golden apple spawner!"/>
+    <!-- Void - block 36 -->
+    <apply block="no-void" region="everywhere" message="You may not build in the void!"/>
+</regions>
+<wools team="dawn">
+    <wool color="yellow" location="2.5,10,-147.5">
+        <monument><block>2,4,12</block></monument>
+    </wool>
+    <wool color="orange" location="-2.5,10,-147.5">
+        <monument><block>-2,4,12</block></monument>
+    </wool>
+</wools>
+<wools team="dusk">
+    <wool color="magenta" location="2.5,10,52.5">
+        <monument><block>2,4,-108</block></monument>
+    </wool>
+    <wool color="cyan" location="-2.5,10,52.5">
+        <monument><block>-2,4,-108</block></monument>
+    </wool>
+</wools>
+<timelock>on</timelock>
+<maxbuildheight>14</maxbuildheight>
+<broadcasts>
+    <tip after="10s" every="3m">There's a golden apple spawner at the middle island!</tip>
+</broadcasts>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8">arrow</item>
+    </kill-reward>
+</kill-rewards>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>string</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+</map>
+<!-- Hey map dev guy, love you. Sorry for any errors -->

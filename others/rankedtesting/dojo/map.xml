@@ -1,0 +1,137 @@
+<map proto="1.4.2">
+<name>Dojo</name>
+<version>1.0.6</version>
+<objective>Escort the flag to the enemy side.</objective>
+<authors>
+    <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/> <!-- Valky -->
+</authors>
+<contributors>
+    <contributor>rockymine</contributor>
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="5" max-overfill="5">Red</team>
+    <team id="blue" color="blue"    max="5" max-overfill="5">Blue</team>
+</teams>
+<filters>
+    <team id="red-only">red</team>
+    <team id="blue-only">blue</team>
+    <not id="spawn-1">
+        <time>2m</time>
+    </not>
+    <all id="spawn-2">
+        <time>2m</time>
+        <not><time>4m</time></not>
+    </all>
+    <all id="spawn-3">
+        <time>4m</time>
+        <not><time>6m</time></not>
+    </all>
+    <all id="spawn-4">
+        <time>6m</time>
+        <not><time>8m</time></not>
+    </all>
+    <all id="spawn-5">
+        <time>8m</time>
+    </all>
+</filters>
+<spawns>
+    <default kit="obsKit" region="spawn-obs" yaw="90"/>
+    <spawn team="red"  kit="red-kit"  region="spawn-red"  yaw="-45"/>
+    <spawn team="blue" kit="blue-kit" region="spawn-blue" yaw="135"/>
+    <filter>
+        <not>
+            <same-team>
+                <carrying-flag>flag</carrying-flag>
+            </same-team>
+        </not>
+    </filter>	
+</spawns>
+<respawns>
+    <respawn delay="3s" auto="true" blackout="true" filter="spawn-1"/>
+    <respawn delay="3.5s" auto="true" blackout="true" filter="spawn-2"/>
+    <respawn delay="4s" auto="true" blackout="true" filter="spawn-3"/>
+    <respawn delay="4.5s" auto="true" blackout="true" filter="spawn-4"/>
+    <respawn delay="5s" auto="true" blackout="true" filter="spawn-5"/>
+</respawns>
+<kits>
+    <kit id="spawn-Kit">
+        <clear/>
+        <game-mode>adventure</game-mode>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" amount="20">arrow</item>
+        <item slot="8" amount="1">golden apple</item>
+		    <leggings      unbreakable="true">iron leggings</leggings>
+        <effect duration="oo">night vision</effect>
+    </kit>
+    <kit id="blue-kit" parents="spawn-Kit">
+        <clear-items/>
+        <helmet     color="0066cc" unbreakable="true">leather helmet</helmet>
+        <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
+        <boots      color="0066cc" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="red-kit" parents="spawn-Kit">
+        <clear-items/>
+        <helmet     color="cd0000" unbreakable="true">leather helmet</helmet>
+        <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+        <boots      color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="flag-kit">	
+        <max-health>16</max-health>		
+        <potion duration="3" amplifier="2">absorption</potion>			
+    </kit>
+    <kit id="obsKit">
+        <effect duration="oo">night vision</effect>
+    </kit>
+    <kit id="reset-kit" force="true">
+        <max-health>20</max-health>		
+    </kit>
+</kits>
+<regions>
+    <apply block="never"/>
+    <cylinder id="spawn-obs"  base="0,25,266" radius="1.5" height="1"/>
+    <cylinder id="spawn-red"  base="-64.5,6,248.5"   radius="1"   height="1"/>
+    <cylinder id="spawn-blue" base="11.5,6,302.5" radius="1"   height="1"/>
+	<cuboid id="blue-net" min="-57,11,256" max="-54,14,253"/>
+	<cuboid id="red-net" min="4,11,298" max="1,14,295"/>
+</regions>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<flags flag-proximity-metric="closest player">
+    <flag id="flag" name="Flag"  shared="true"  pickup-kit="flag-kit"  drop-kit="reset-kit" carry-message="Escort the flag to the enemy side!">
+        <post recover-time="0s" respawn-time="10s">-27,10,275</post>
+    </flag>
+    <flags points="1">
+        <net region="red-net" flag="flag" capture-filter="red-only"/>
+        <net region="blue-net" flag="flag" capture-filter="blue-only"/>
+    </flags>
+</flags>
+<time result="objectives">10m</time>
+<score>
+    <kills>0</kills>
+    <deaths>0</deaths>
+</score>
+<killreward>
+    <item amount="4">arrow</item>
+    <item>golden apple</item>
+</killreward>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>iron helmet</item>
+    <item>iron chestplate</item>
+    <item>iron leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<timelock>on</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

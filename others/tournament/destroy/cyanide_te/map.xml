@@ -1,0 +1,136 @@
+<map proto="1.4.0">
+	<time result="objectives">45m</time>
+	<name>Cyanide TE</name>
+	<version>1.2.0</version>
+	<objective>Leak lava from the enemy's core and break their emerald monument</objective>
+	
+	<authors>
+		<author uuid="61f8e9dd-62ab-453a-b7ef-83ce8a383fe8"/><!--Campeh-->
+		<author uuid="b20e68ac-3700-45c6-a53f-5fec0eb2aaa1"/><!--Pedrah-->
+		<author uuid="dd43251f-f339-4b28-ac3e-fd12f79d8151"/><!--Laeh-->
+	</authors>
+	
+	<contributors>
+		<contributor uuid="e82603df-417d-4a95-bd1f-1720648be0b4" contribution="XML"/> <!-- Pablete1234 -->
+		<contributor uuid="f2c6cdb3-7336-4599-853e-e6fba640eb88" contribution="Building help"/> <!-- lSloh -->
+		<contributor uuid="eaf0ae5a-e001-47a6-85d0-003eb9e82b4c" contribution="Building help"/> <!-- Ronaa -->
+		<contributor uuid="65ffe1e4-d09e-4835-85d3-bfa6972b8a25" contribution="Building help"/> <!-- Pibo -->
+		<contributor uuid="377e44ba-8c33-47bd-8c07-1ca03635e90c" contribution="Building help"/> <!-- lPoloBlash -->
+	</contributors>
+	
+	<teams>
+		<team id="blue" color="blue" max="8">Blue</team>
+		<team id="red" color="dark red" max="8">Red</team>
+	</teams>
+	
+	<spawns yaw="90">
+		<spawn team="red">
+			<region yaw="90">
+				<point>-5.5,53.5,-117.5</point>
+			</region>
+		</spawn>
+		<spawn team="blue">
+			<region yaw="90">
+				<point>-5.1,53.5,6.5</point>
+			</region>
+		</spawn>
+		<default>
+			<regions>
+				<cylinder base="10.5,53,-55.5" radius="1" height="0" />
+			</regions>
+		</default>
+	</spawns>
+	
+	<kits>
+		<kit id="resist">
+			<potion duration="5" amplifier="1">damage_resistance</potion>
+		</kit>
+	</kits>
+	
+	<filters>
+		<not id="red-obi-stands">
+			<completed>obsidian-red</completed>
+		</not>
+		<not id="blue-obi-stands">
+			<completed>obsidian-blue</completed>
+		</not>
+	</filters>
+
+	<regions>
+		<union id="water-drops">
+			<rectangle id="red-water-drop" min="-55.0,-88.0" max="-48.0,-81.0"/>
+			<rectangle id="blue-water-drop" min="-55.0,-30.0" max="-48.0,-23.0"/>
+		</union>
+		<apply region="water-drops" block="never" message="You may not place or break blocks in the water drops."/>
+		
+		<negative id="exit-spawn">
+			<union id="spawn-areas">
+				<cuboid id="red-tunnel" min="-47.0,52.0,-87.0" max="11.0,oo,-82.0"/>
+				<cuboid id="blue-tunnel" min="-47.0,52.0,-29.0" max="11.0,oo,-24.0"/>
+				<cuboid id="obs-spawn" min="6.0,49.0,-60.0" max="14.0,oo,-51.0"/>
+			</union>
+		</negative>
+		<apply region="exit-spawn" kit="resist"/>
+		
+		<negative id="outside">
+			<cuboid id="play" min="-126.0,-oo,-128.0" max="-10.0,45,17.0"/>
+		</negative>
+		<apply region="outside" block="never" message="You may not interact with blocks outside the playing field."/>
+		
+		<!-- Objectives -->
+
+		<cuboid id="red-obsidian-core" min="-107.0,20.0,-87.0" max="-102.0,25,-82.0"/>
+		<cuboid id="blue-obsidian-core" min="-107.0,20.0,-29.0" max="-102.0,25,-24.0"/>
+
+		<cuboid id="red-emerald" min="-68.0,26.0,-95.0" max="-62.0,34.0,-89.0"/>
+		<cuboid id="blue-emerald" min="-68.0,26.0,-17.0" max="-62.0,34.0,-23.0"/>
+		
+		<cuboid id="red-obsidian" min="-29.0,19.0,-86.0" max="-27.0,22.0,-84.0"/>
+		<cuboid id="blue-obsidian" min="-29.0,19.0,-28.0" max="-27.0,22.0,-26.0"/>
+		
+		<cuboid id="red-portal-region" min="-5.2,53,-115" max="-7,57,-119"/>
+		<cuboid id="blue-portal-region" min="-5.2,53,8" max="-7,57,4"/>
+	</regions>
+	
+	<portals>
+		<portal x="@-51.5" y="@53.5" z="@6.5" yaw="@-180" region="blue-portal-region" filter="blue-obi-stands"/>
+		<portal x="@-51.5" y="@53.5" z="@-117.5" yaw="@0" region="red-portal-region" filter="red-obi-stands"/>
+	</portals>
+
+	<cores material="obsidian" leak="3" mode-changes="true">
+		<core id="core-red" team="red" region="red-obsidian-core"/>
+		<core id="core-blue" team="blue" region="blue-obsidian-core"/>
+	</cores>
+	
+	<modes>
+    	<mode after="10m" material="gold block"/>
+		<mode after="25m" material="packed ice"/>
+	</modes>
+	
+	<destroyables>
+		<destroyable region="red-emerald" id="emerald-red" name="Emerald Monument" materials="emerald_block;beacon" owner="red"/>
+		<destroyable region="blue-emerald" id="emerald-blue" name="Emerald Monument" materials="emerald_block;beacon" owner="blue"/>
+		
+		<destroyable region="red-obsidian" id="obsidian-red" name="Obsidian Monument" materials="obsidian;beacon" owner="red" required="false"/>
+		<destroyable region="blue-obsidian" id="obsidian-blue" name="Obsidian Monument" materials="obsidian;beacon" owner="blue" required="false"/>
+	</destroyables>
+	
+	<itemremove>
+		<item>prismarine_crystals</item>
+		<item>emerald_block</item>
+		<item>gold_block</item>
+		<item>cobblestone</item>
+		<item>obsidian</item>
+	</itemremove>
+	
+	<kill-rewards>
+    <!-- Give two emeralds for all kills -->
+    <kill-reward>
+        <item amount="1" material="GOLDEN_APPLE"/>
+    </kill-reward>
+</kill-rewards>
+	
+	<maxbuildheight>45</maxbuildheight>
+	<timelock>on</timelock>
+	
+</map>

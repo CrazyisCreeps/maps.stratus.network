@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Derelinquo</name>
+<version>1.0.1</version>
+<include src="void-death.xml"/>
+<objective>Destroy the other team’s obsidian monument</objective>
+<authors>
+    <author uuid="33b99f02-2a1a-42db-9505-6161a3b2cb7e"/> <!-- halfmaster1 -->
+</authors>
+<contributors>
+    <contributor contribution="Many helpful things" uuid="a9f11454-beac-4cc3-a138-1780802c8794"/> <!-- Crazy_ -->
+    <contributor contribution="Mapdev server" uuid="51122eec-f6b4-42f6-9a4d-807aeee960a2"/> <!-- ravi60 -->
+    <contributor contribution="Advice" uuid="02f79ea8-12a2-4e56-b0e0-1f578f0bda44"/> <!-- Freekkiller -->
+    <contributor contribution="Some XML" uuid="1e3b1b79-307a-4093-aaeb-21b2fd419336"/> <!-- BlockDrop74 -->
+    <contributor contribution="Advice" uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b"/> <!-- Jexel -->
+</contributors>
+<gamemode>dtm</gamemode>
+<timelock>on</timelock>
+<teams>
+    <team id="yellow" color="yellow" max="10" max-overfill="12">Yellow Team</team>
+    <team id="orange" color="gold" max="10" max-overfill="12">Orange Team</team>
+</teams>
+<broadcasts>
+    <tip after="10s" every="8m">Diamond spawners can be found in the middle, and iron spawners in the corners.</tip>
+</broadcasts>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item material="iron sword" slot="0" unbreakable="true"/>
+        <item material="bow" slot="1" unbreakable="true"/>
+        <item material="stone pickaxe" slot="2" unbreakable="true"/>
+        <item material="wood" damage="1" slot="3" amount="16"/>
+        <item material="glass" slot="4" amount="16"/>
+        <item material="golden apple" slot="7" amount="1"/>
+        <item material="golden carrot" slot="8" amount="16"/>
+        <item material="arrow" slot="28" amount="16"/>
+        <effect duration="4" amplifier="4">resistance</effect>
+        <effect duration="oo">night vision</effect>
+    </kit>
+    <kit id="yellow-kit" parent="spawn">
+        <helmet color="ffff00" material="leather helmet"/>
+        <chestplate color="ffff00" material="leather chestplate">
+            <enchantment level="1">protection_projectile</enchantment>
+        </chestplate>
+        <boots color="ffff00" enchantment="protection_fall" material="leather boots"/>
+    </kit>
+    <kit id="orange-kit" parent="spawn">
+        <helmet color="ff8800" material="leather helmet"/>
+        <chestplate color="ff8800" material="leather chestplate">
+            <enchantment level="1">protection_projectile</enchantment>
+        </chestplate>
+        <boots color="ff8800" enchantment="protection_fall" material="leather boots"/>
+    </kit>
+    <kit id="obs">
+        <effect duration="oo">night vision</effect>
+    </kit>
+</kits>
+<itemremove>
+    <item>step</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>emerald block</item>
+    <item>diamond sword</item>
+</itemremove>
+<toolrepair>
+    <tool>stone pickaxe</tool>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemkeep>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>stone pickaxe</item>
+    <item>golden carrot</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<killreward>
+    <item material="arrow" amount="8"/>
+    <item material="golden apple" amount="1"/>
+    <item material="golden carrot" amount="2"/>
+</killreward>
+<destroyables name="Monument" materials="emerald block" mode-changes="true">
+    <destroyable owner="yellow" region="yellow-monument"/>
+    <destroyable owner="orange" region="orange-monument"/>
+</destroyables>
+<spawns>
+    <spawn team="yellow" kit="yellow-kit">
+        <regions angle="-290.5,107,-1348.5">
+            <region id="yellow-spawn"/>
+        </regions>
+    </spawn>
+    <spawn team="orange" kit="orange-kit">
+        <regions angle="-290.5,107,-1482.5">
+            <region id="orange-spawn"/>
+        </regions>
+    </spawn>
+    <default kit="obs">
+        <regions angle="-290.5,121,-1415.5">
+            <region id="obs-spawn"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <any id="yellow-cant-touch-spawner">
+        <not><team>yellow</team></not>
+        <not><material>mob spawner</material></not>
+    </any>
+    <any id="orange-cant-touch-spawner">
+        <not><team>orange</team></not>
+        <not><material>mob spawner</material></not>
+    </any>
+</filters>
+<regions>
+    <!-- Monuments -->
+    <cylinder id="yellow-monument" base="-290.5,105,-1384.5" radius="1.5" height="4"/>
+    <cylinder id="orange-monument" base="-290.5,105,-1446.5" radius="1.5" height="4"/>
+    <!-- Spawns -->
+    <cuboid id="yellow-spawn" min="-293,107,-1346" max="-288,107,-1345"/>
+    <cuboid id="orange-spawn" min="-293,107,-1486" max="-288,107,-1485"/>
+    <cylinder id="obs-spawn" base="-227,121,-1415.5" radius="3" height="0"/>
+    <cylinder id="yellow-spawn-protection" base="-290.5,0,-1348.5" radius="7.5" height="oo"/>
+    <cylinder id="orange-spawn-protection" base="-290.5,0,-1482.5" radius="7.5" height="oo"/>
+    <!-- Outside the map -->
+    <negative id="outside-the-map">
+        <cuboid min="-339,96,-1490" max="-242,oo,-1341"/>
+    </negative>
+    <above id="above-the-height-limit" y="115"/>
+    <!-- Iron spawners -->
+    <union id="yellow-iron-spawners">
+        <block>-258,107,-1351</block>
+        <block>-324,107,-1351</block>
+    </union>
+    <union id="orange-iron-spawners">
+        <block>-258,107,-1481</block>
+        <block>-324,107,-1481</block>
+    </union>
+    <!-- Applies -->
+    <apply region="yellow-spawn-protection" block-place="never" message="You can't place blocks here!"/>
+    <apply region="yellow-spawn-protection" block-break="never" message="You can't break blocks here!"/>
+    <apply region="orange-spawn-protection" block-place="never" message="You can't place blocks here!"/>
+    <apply region="orange-spawn-protection" block-break="never" message="You can't break blocks here!"/>
+    <apply region="outside-the-map" block-place="never" message="You can't place blocks outside the map!"/>
+    <apply region="outside-the-map" block-break="never" message="You can't break blocks outside the map!"/>
+    <apply region="above-the-height-limit" block-place="never" message="You can't break place this high!"/>
+    <apply region="above-the-height-limit" block-break="never" message="You can't break blocks this high!"/>
+    <apply region="yellow-iron-spawners" block-break="yellow-cant-touch-spawner" early-warning="true" message="You can't break your own iron spawner!"/>
+    <apply region="orange-iron-spawners" block-break="orange-cant-touch-spawner" early-warning="true" message="You can't break your own iron spawner!"/>
+</regions>
+<crafting>
+    <disable>iron pickaxe</disable>
+    <disable>diamond pickaxe</disable>
+</crafting>
+</map>

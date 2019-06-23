@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Gralien</name>
+<version>1.4.1</version>
+<objective>Take both of the enemy's wool and place them on your wool monument.</objective>
+<authors>
+    <author uuid="57f5535d-6b9e-4013-ad71-e2cc63ec8d7c"/> <!-- ItzaMeLuigi -->
+</authors>
+<teams>
+    <team id="blue" color="blue" max="10">Blue</team>
+    <team id="red" color="dark red" max="10">Red</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" material="stone sword" unbreakable="true"/>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="3" enchantment="dig speed:3" unbreakable="true" material="iron axe"/>
+        <item slot="6" amount="1" material="iron spade"/>
+        <item slot="7" amount="1" material="golden_apple"/>
+        <item slot="8" amount="32" material="cooked_beef"/>
+        <item slot="28" material="arrow"/>
+		<potion amplifier="5" duration="5">damage resistance</potion>
+		<leggings>chainmail leggings</leggings>
+		<item slot="4" amount="16" damage="1" material="wood"/>
+		<item slot="5" amount="8" material="glass"/>
+		<maybe filter="time-5">
+		    <item slot="4" amount="20" damage="1" material="wood"/>
+		    <item slot="5" amount="10" material="glass"/>
+		</maybe>
+		<maybe filter="time-10">
+		    <item slot="4" amount="24" damage="1" material="wood"/>
+			  <item slot="5" amount="12" material="glass"/>
+		</maybe>
+		<maybe filter="time-15">
+		    <item slot="4" amount="28" damage="1" material="wood"/>
+			  <item slot="5" amount="14" material="glass"/>
+		</maybe>
+		<maybe filter="time-20">
+        <item slot="4" amount="32" damage="1" material="wood"/>
+        <item slot="5" amount="16" material="glass"/>
+		</maybe>
+    </kit>
+    <kit id="kit-blue" parents="spawn">
+        <helmet color="334CB2" unbreakable="true">leather helmet</helmet>
+        <chestplate color="334CB2" unbreakable="true">leather chestplate</chestplate>
+        <boots color="334CB2" unbreakable="true">leather boots</boots>
+    </kit>
+  	<kit id="kit-red" parents="spawn">
+        <helmet color="993333" unbreakable="true">leather helmet</helmet>
+        <chestplate color="993333" unbreakable="true">leather chestplate</chestplate>
+        <boots color="993333" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="kit-red">
+        <region yaw="0">
+            <cuboid min="-0.5,9,-68.5" max="1.5,9,-67.5"/>
+  		  </region>
+    </spawn>
+    <spawn team="blue" kit="kit-blue">
+        <region yaw="180">
+			       <cuboid min="1.5,9,31.5" max="-0.5,9,30.5"/>
+		    </region>
+    </spawn>
+    <default>
+        <region yaw="90">
+			       <cuboid min="-0.5,30,-17.5" max="1.5,30,-19.5"/>
+		    </region>
+    </default>
+</spawns>
+<filters>
+  	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <not id="no-chest-red">
+        <all>
+            <not>
+                <filter id="only-red"/>
+            </not>
+            <any>
+                <material>chest</material>
+                <material>trapped chest</material>
+                <material>stone button</material>
+            </any>
+        </all>
+    </not>
+    <not id="no-chest-blue">
+        <all>
+            <not>
+                <filter id="only-blue"/>
+            </not>
+            <any>
+                <material>chest</material>
+                <material>trapped chest</material>
+                <material>stone button</material>
+            </any>
+        </all>
+    </not>
+  	<all id="only-leaves">
+  		  <material>leaves</material>
+  	</all>
+  	<not id="no-beacons">
+  		  <material>beacon</material>
+  	</not>
+    <any id="no-void">
+    		<not>
+      			<void/>
+    		</not>
+    		<material>leaves</material>
+    </any>
+  	<all id="time-5">
+  		  <time>5m</time>
+  	</all>
+  	<all id="time-10">
+  		  <time>10m</time>
+  	</all>
+  	<all id="time-15">
+  		  <time>15m</time>
+  	</all>
+  	<all id="time-20">
+  		  <time>20m</time>
+  	</all>
+</filters>
+<regions>
+	  <cuboid id="obs-lobby" min="-3.5,28,-14.5" max="4.5,24,-22.5"/>
+    <union id="allow-block-place">
+    		<!-- Mid Red -->
+    		<rectangle min="-18.5,-59.5" max="19.5,-40.5"/>
+    		<rectangle min="21.5,-35.5" max="-20.5,-20.5"/>
+    		<!-- Mid -->
+    		<rectangle min="18.5,-17.5" max="-17.5,-19.5"/>
+    		<rectangle min="12.5,6.5" max="-11.5,-43.5"/>
+    		<!-- Mid Blue -->
+    		<rectangle min="-18.5,22.5" max="19.5,3.5"/>
+    		<rectangle min="21.5,-0.5" max="-21.5,-15.5"/>
+    		<!-- Red -->
+    		<rectangle min="-17.5,-75.5" max="-10.5,-56.5"/>
+    		<rectangle min="-7.5,-43.5" max="-10.5,-56.5"/>
+    		<rectangle min="18.5,-75.5" max="11.5,-56.5"/>
+    		<rectangle min="8.5,-43.5" max="11.5,-56.5"/>
+    		<!-- Blue -->
+    		<rectangle min="18.5,38.5" max="11.5,19.5"/>
+    		<rectangle min="8.5,6.5" max="11.5,19.5"/>
+    		<rectangle min="-17.5,38.5" max="-11.5,20.5"/>
+    		<rectangle min="-7.5,6.5" max="-11.5,20.5"/>
+    </union>
+  	<union id="spawns">
+    		<circle id="red-spawn" center="0.5,-67.5" radius="7"/>
+    		<circle id="blue-spawn" center="0.5,30.5" radius="7"/>
+  	</union>
+  	<union id="red-wool-rooms">
+    		<cuboid min="-31.5,10,-93.5" max="-39.5,oo,-83.5"/>
+    		<cuboid min="32.5,10,-83.5" max="40.5,oo,-93.5"/>
+  	</union>
+  	<union id="blue-wool-rooms">
+    		<cuboid min="32.5,10,46.5" max="40.5,oo,56.5"/>
+    		<cuboid min="-31.5,10,46.5" max="-39.5,oo,56.5"/>
+  	</union>
+  	<complement>
+    		<region id="spawns"/>
+    		<region id="wool-placements"/>
+  	</complement>
+    <union id="wool-placements">
+        <block location="-4.5,10,-67.5" id="pink-wool"/>
+        <block location="5.5,10,-67.5" id="magenta-wool"/>
+        <block location="-4.5,10,30.5" id="cyan-wool"/>
+        <block location="5.5,10,30.5" id="light-blue-wool"/>
+    </union>
+  	<apply block="never" region="obs-lobby"/>
+  	<apply block="never" message="You may not break blocks in spawn" region="spawns"/>
+  	<apply enter="only-red"  message="You may not enter the enemy spawn" region="red-spawn"/>
+  	<apply enter="only-blue"  message="You may not enter the enemy spawn" region="blue-spawn"/>
+  	<apply use="no-chest-blue" message="You may not interact with your own wool rooms" region="red-wool-rooms"/>
+  	<apply use="no-chest-red" message="You may not interact with your own wool rooms" region="blue-wool-rooms"/>
+  	<apply block="never" message="You may not interact with the wool rooms" region="red-wool-rooms"/>
+  	<apply block="never" message="You may not interact with the wool rooms" region="blue-wool-rooms"/>
+  	<apply enter="only-blue" message="You may not enter your own wool room" region="red-wool-rooms"/>
+  	<apply enter="only-red" message="You may not enter your own wool room" region="blue-wool-rooms"/>
+  	<apply use="only-blue" region="blue-wool-rooms"/>
+  	<apply use="only-red" region="red-wool-rooms"/>
+  	<apply block="always" region="allow-block-place"/>
+  	<apply block="no-void" message="You may not edit the void area!"/>
+</regions>
+<wools craftable="false">
+    <wool team="red" color="magenta" location="54,12,-9" monument="magenta-wool"/>
+    <wool team="red" color="pink" location="53,12,-10" monument="pink-wool"/>
+    <wool team="blue" color="cyan" location="-54,12,9" monument="cyan-wool"/>
+    <wool team="blue" color="light_blue" location="53,12,-10" monument="light-blue-wool"/>
+</wools>
+<maxbuildheight>20</maxbuildheight>
+<itemremove>
+    <item>string</item>
+    <item>glowstone dust</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>sugar cane</item>
+    <item>seeds</item>
+    <item>clay ball</item>
+    <item>stone plate</item>
+    <item>sand</item>
+    <item damage="2">log</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>cooked beef</item>
+    <item>golden apple</item>
+  	<item>leather helmet</item>
+  	<item>leather chestplate</item>
+  	<item>chainmail leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron spade</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<killreward>
+    <item material="golden apple"/>
+    <item amount="8" material="wood" damage="1"/>
+    <item amount="4" material="glass"/>
+</killreward>
+<timelock>on</timelock>
+<broadcasts>
+    <alert after="1s">The longer the match goes on, the more blocks you get when you spawn!</alert>
+</broadcasts>
+</map>

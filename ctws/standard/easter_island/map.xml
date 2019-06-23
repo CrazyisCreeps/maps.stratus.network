@@ -1,0 +1,179 @@
+<map proto="1.4.2">
+<name>Easter Island</name>
+<version>1.0.2</version>
+<objective>Capture both wools and return them to your victory monument</objective>
+<authors>
+    <author uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b" /> <!-- _3Each -->
+    <author uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad" /> <!-- AlmightyBread -->
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" /> <!-- GoldenOre -->
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6" /> <!-- Rockymine -->
+</authors>
+<contributors>
+    <contributor uuid="f690a591-348b-482e-a18d-7779d0c0a28c" contribution="XML" /> <!-- mitchiii_ -->
+</contributors>
+<teams>
+    <team id="blue-team" color="blue"     max="10" max-overfill="12">Blue</team>
+    <team id="red-team"  color="dark red" max="10" max-overfill="12">Red</team>
+</teams>
+<kits>
+    <kit id="main-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword" />
+        <item slot="1" unbreakable="true" material="bow" />
+        <item slot="2" unbreakable="true" material="stone pickaxe" />
+        <item slot="3" unbreakable="true" material="stone axe" />
+        <item slot="4" amount="48"        material="wood" damage="1" />
+        <item slot="8" amount="64"        material="golden carrot" />
+        <item slot="28" amount="32"       material="arrow" />
+        <chestplate    unbreakable="true" enchantment="protection projectile:3" material="chainmail chestplate" />
+        <leggings         unbreakable="true" enchantment="protection fall:2" material="iron leggings" />
+        <effect duration="3" amplifier="10">resistance</effect>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <item     slot="5" amount="36" damage="11"  material="stained clay" />
+        <helmet   unbreakable="true" color="0066cc" material="leather helmet" />
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <item     slot="5" amount="36" damage="14"  material="stained clay" />
+        <helmet   unbreakable="true" color="cd0000" material="leather helmet" />
+    </kit>
+</kits>
+<spawns>
+    <default angle="-77.5,30,109.5">
+        <regions>
+            <cylinder base="-77.5,29,112.5" radius="2" height="0" />
+        </regions>
+    </default>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+            <point yaw="180">-123.5,15.5,186.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red-kit">
+        <regions>
+            <point yaw="0">-123.5,15.5,34.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <any id="wool-room-whitelist">
+        <material>cobble wall</material>
+    </any>
+    <all id="only-blue-wool-wl">
+        <filter id="only-blue" />
+        <filter id="wool-room-whitelist" />
+    </all>
+    <all id="only-red-wool-wl">
+        <filter id="only-red" />
+        <filter id="wool-room-whitelist" />
+    </all>
+</filters>
+<regions>
+    <negative id="non-playable">
+        <complement>
+            <rectangle id="playable" min="-93,211" max="-154,9" />
+            <!-- subtract any gaps -->
+            <!-- water is at y 0 so we can't use a void filter unless we want to be dumb and not allow block placing in water -->
+            <rectangle min="-143,212" max="-104,181" /> <!-- behind blue -->
+            <rectangle min="-143,172" max="-128,123" /> <!-- blue west gap -->
+            <rectangle min="-104,172" max="-119,123" /> <!-- blue east gap -->
+            <rectangle min="-143,9"   max="-104,40" /> <!-- behind red -->
+            <rectangle min="-143,49"  max="-128,98" /> <!-- red west gap -->
+            <rectangle min="-104,49"  max="-119,98" /> <!-- red east gap -->
+        </complement>
+    </negative>
+    <rectangle id="blue-spawn" min="-128,194" max="-119,182" />
+    <rectangle id="red-spawn"  min="-128,39"  max="-119,27" />
+    <union id="blue-wools">
+        <rectangle id="lime-wool"  min="-143,201" max="-154,212" />
+        <rectangle id="green-wool" min="-93,201"  max="-104,212" />
+    </union>
+    <union id="red-wools">
+        <rectangle id="orange-wool" min="-143,9" max="-154,20" />
+        <rectangle id="yellow-wool" min="-93,9"  max="-104,20" />
+    </union>
+    <apply region="blue-spawn" enter="only-blue"               message="You may not enter the other team's spawn" />
+    <apply region="blue-spawn" block="never"                   message="You may not modify the spawn area" />
+    <apply region="red-spawn"  enter="only-red"                message="You may not enter the other team's spawn" />
+    <apply region="red-spawn"  block="never"                   message="You may not modify the spawn area" />
+    <apply region="blue-wools" enter="only-red"  block="only-red-wool-wl"  use="only-red"  message="You may not do that in this woolroom" />
+    <apply region="red-wools"  enter="only-blue" block="only-blue-wool-wl" use="only-blue" message="You may not do that in this woolroom" />
+    <apply region="non-playable" block-place="never"           message="You may not place blocks in the void" />
+</regions>
+<wools>
+    <wool team="blue-team" color="orange" location="-148.5,17,11.5">
+        <monument>
+            <block>-126,16,187</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="yellow" location="-98.5,17,11.5">
+        <monument>
+            <block>-122,16,187</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="green" location="-98.5,17,209.5">
+        <monument>
+            <block>-122,16,33</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="lime" location="-148.5,17,209">
+        <monument>
+            <block>-126,16,33</block>
+        </monument>
+    </wool>
+</wools>
+<kill-rewards>
+    <kill-reward>
+        <item amount="12" material="wood" damage="1" />
+        <item amount="12" material="arrow" />
+        <item             material="golden apple" />
+    </kill-reward>
+    <kill-reward filter="only-blue">
+        <item amount="12" damage="11" material="stained clay" />
+    </kill-reward>
+    <kill-reward filter="only-red">
+        <item amount="12" damage="14" material="stained clay" />
+    </kill-reward>
+</kill-rewards>
+<item-mods>
+    <rule>
+        <match>
+            <material>gold helmet</material>
+            <material>iron boots</material>
+        </match>
+        <modify unbreakable="true" />
+    </rule>
+</item-mods>
+<toolrepair>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>stone sword</item>
+    <item>stone pickaxe</item>
+    <item>stone axe</item>
+    <item>stained clay</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>arrow</item>
+    <item>string</item>
+    <item>iron leggings</item>
+</itemremove>
+<itemkeep>
+    <item>wood</item>
+</itemkeep>
+<crafting>
+    <disable>boat</disable>
+    <disable>boat spruce</disable>
+    <disable>boat birch</disable>
+    <disable>boat jungle</disable>
+    <disable>boat acacia</disable>
+    <disable>boat dark oak</disable>
+</crafting>
+<maxbuildheight>22</maxbuildheight>
+</map>

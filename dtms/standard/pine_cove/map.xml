@@ -1,0 +1,188 @@
+<map proto="1.4.2">
+<include src="tutorial.xml"/>
+<name>Pine Cove</name>
+<version>1.0.1</version>
+<objective>Obtain a diamond pickaxe at the villager, then break the enemy monuments.</objective>
+<authors>
+    <author uuid="2ca8072f-74be-4798-85b8-bbce03aa91af"/> <!-- Tywnis -->
+</authors>
+<contributors>
+    <contributor uuid="62c41f0e-133d-4192-ad33-f0896f47d23a" contribution="XML/Packaging"/> <!-- nixter1029 -->
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="20">Red</team>
+    <team id="blue" color="blue" max="20">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red" kit="red-kit" yaw="-90">
+        <regions>
+            <cylinder base="950.5,12,-1154.5" radius="3" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit" yaw="90">
+        <regions>
+            <cylinder base="1025.5,12,-1119.5" radius="3" height="0"/>
+        </regions>
+    </spawn>
+    <default yaw="180">
+        <regions>
+            <cylinder base="988,89,-1187" radius="1" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<respawn delay="3.5s"/>
+<kits>
+    <kit id="teams">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">iron pickaxe</item>
+        <item slot="6" amount="48">arrow</item>
+        <item slot="7">coal</item>
+        <item slot="8" amount="32">cooked fish</item>
+        <potion duration="8" amplifier="2">damage resistance</potion>
+        <potion duration="4" amplifier="1">heal</potion>
+        <helmet unbreakable="true">chainmail helmet</helmet>
+    </kit>
+    <kit id="red-kit" parents="teams">
+        <item slot="3" amount="16" damage="14">stained glass</item>
+        <chestplate color="ff0000" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="ff0000" unbreakable="true">leather leggings</leggings>
+        <boots color="ff0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue-kit" parents="teams">
+        <item slot="3" amount="16" damage="11">stained glass</item>
+        <chestplate color="0000ff" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="0000ff" unbreakable="true">leather leggings</leggings>
+        <boots color="0000ff" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+    <all id="allow-some">
+        <not>
+            <void/>
+        </not>
+        <any>
+            <material>obsidian</material>
+            <material>coal block</material>
+            <material>stained glass</material>
+            <material>leaves</material>
+            <material>long grass</material>
+        </any>
+    </all>
+</filters>
+<regions>
+    <union id="monuments">
+        <cuboid id="blue-left" min="1042,21,-1109" max="1043,19,-1110"/>
+        <cuboid id="blue-right" min="1034,24,-1177" max="1033,22,-1178"/>
+        <cuboid id="blue-left-ft" min="1001,10,-1098" max="1002,8,-1097"/>
+        <cuboid id="red-left" min="933,21,-1165" max="934,19,-1164"/>
+        <cuboid id="red-right" min="943,24,-1096" max="942,22,-1097"/>
+        <cuboid id="red-left-ft" min="974,10,-1177" max="975,8,-1176"/>
+    </union>
+    <union id="spawn-protection">
+        <cylinder id="red-spawn" base="950.5,12,-1154.5" radius="8" height="oo"/>
+        <cylinder id="blue-spawn" base="1025.5,12,-1119.5" radius="8" height="oo"/>
+    </union>
+    <apply block="never" region="spawn-protection" message="You may not modify the spawn area"/>
+    <apply use="only-red" region="red-spawn" message="You may not access Red's supply chest"/>
+    <apply use="only-blue" region="blue-spawn" message="You may not access Blue's supply chest"/>
+    <apply block="allow-some" message="You may not interact with that material here"/>
+</regions>
+<destroyables owner="blue" materials="obsidian">
+    <destroyable id="blue-left-mon" name="Left Monument" region="blue-left"/>
+    <destroyable id="blue-right-mon" name="Right Monument" region="blue-right" mode-changes="true"/>
+    <destroyable id="blue-left-ft-mon" name="Front Left Monument" region="blue-left-ft" mode-changes="true"/>
+</destroyables>
+<destroyables owner="red" materials="obsidian">
+    <destroyable id="red-left-mon" name="Left Monument" region="red-left"/>
+    <destroyable id="red-right-mon" name="Right Monument" region="red-right" mode-changes="true"/>
+    <destroyable id="red-left-ft-mon" name="Front Left Monument" region="red-left-ft" mode-changes="true"/>
+</destroyables>
+<modes>
+    <mode after="15m" material="coal block"/>
+</modes>
+<killreward>
+    <item>golden apple</item>
+    <item amount="8">arrow</item>
+    <item amount="2">coal</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="3" repeat="true"/>
+    </filter>
+    <item amount="2">coal</item>
+</killreward>
+<killreward filter="only-red">
+    <item amount="8" damage="14">stained glass</item>
+</killreward>
+<killreward filter="only-blue">
+    <item amount="8" damage="11">stained glass</item>
+</killreward>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>cooked fish</item>
+    <item>iron sword</item>
+    <item>iron helmet</item>
+    <item>iron chestplate</item>
+    <item>iron leggings</item>
+    <item>iron boots</item>
+    <item>chainmail helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>ice</item>
+    <item>obsidian</item>
+    <item>coal block</item>
+    <item>bedrock</item>
+    <item>sapling</item>
+    <item>seeds</item>
+    <item>leaves</item>
+    <item>stained glass</item>
+</itemremove>
+<itemkeep>
+    <item>coal</item>
+    <item>diamond pickaxe</item>
+    <item>iron sword</item>
+    <item>iron boots</item>
+    <item>iron leggings</item>
+    <item>iron chestplate</item>
+    <item>iron helmet</item>
+    <item>splash potion</item>
+</itemkeep>
+<tutorial>
+    <stage title="Destroy the Monument">
+        <message>
+            <line>`rThe objective is to obtain a `adiamond pickaxe `rfrom the villager.</line>
+            <line>`rThen to break the `c3 `renemy obsidian monuments.</line>
+            <line>`rEverytime you get a kill, you revieve 2 coal (currency).</line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="90">985,95,-1138</point>
+        </teleport>
+    </stage>
+    <stage title="Villager">
+        <message>
+            <line>`rThe villager is located in the open building across from spawn.</line>
+            <line>`rYou must use the coal (currency) to trade with it.</line>
+            <line>`rIt offers better swords, `7iron armor`r, potions, and a `adiamond pickaxe`r.</line>
+        </message>
+        <teleport>
+            <point yaw="155" pitch="10">965,12,-1123</point>
+        </teleport>
+    </stage>
+    <stage title="Monuments">
+        <message>
+            <line>`rEach team must defend 3 obsidian monuments.</line>
+            <line>`rThey consist of `a1 `robsidian block.</line>
+            <line>`rRemember that block placing/breaking is `cdisabled `ron this map!</line>
+        </message>
+        <teleport>
+            <point yaw="-45" pitch="45">931,30,-1170</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

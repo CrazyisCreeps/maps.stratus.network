@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<map proto="1.4.2" game="Water Drop">
+<name>Water Drop: Sky Traffic</name>
+<version>1.2.2</version>
+<objective>Get to the bottom!</objective>
+<gamemode>Arcade</gamemode>
+<authors>
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
+</authors>
+<players min="1" max="60" colors="true"/>
+<spawns>
+    <spawn kit="players" yaw="0" region="spawn"/>
+    <default kit="obs" yaw="0" region="spawn"/> 
+</spawns>
+<kits>
+    <kit id="obs">
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+    <kit id="players">
+        <health>6</health>
+        <max-health>6</max-health>
+        <clear/>
+        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <boots color="7fcc19" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <effect duration="3s" amplifier="5">resistance</effect>
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit id="removal" force="true">
+        <clear/>
+        <item slot="0" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="1" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="2" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <boots color="993333" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="force-kill">
+        <potion duration="1" amplifier="100">harm</potion>
+    </kit>
+</kits>
+<filters>
+    <all id="water">
+        <any>
+            <material>water</material>
+            <material>stationary water</material>
+            <material>wood button</material>
+        </any>
+        <not>
+            <cause>world</cause>
+        </not>
+    </all>
+</filters>
+<regions>
+    <cylinder id="spawn" base="-151.5,212.5,-97.5" radius="1" height="1"/>
+    <cylinder id="end" base="-151.5,62,18.5" radius="1" height="1"/>
+    <union id="no-cheat">
+        <cylinder base="-152,88,-31" radius="18" height="1"/>
+    </union>
+    <apply block-place="water" block-break="water" block-physics="never" use="never"/>
+</regions>
+<score>
+    <limit>2</limit>
+    <box points="1" region="end"/>
+</score>
+<portals>
+    <portal region="no-cheat" y="-1000"/>
+    <portal region="end" destination="spawn"/>
+</portals>
+<block-drops>
+    <rule trample="true" kit="force-kill">
+        <filter>
+            <all>
+                <material>stained glass</material>
+            </all>
+        </filter>
+    </rule>
+</block-drops>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>leather boots</item>
+    <item>barrier</item>
+</itemremove>
+</map>

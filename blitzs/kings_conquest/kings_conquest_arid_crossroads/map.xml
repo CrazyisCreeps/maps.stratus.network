@@ -1,0 +1,52 @@
+<map proto="1.4.0" game="Kill the King">
+<name>King's Conquest: Arid Crossroads</name>
+<version>1.0</version>
+<authors>
+    <author uuid="e82504ac-8c95-4895-9dca-222f924d697c"/> <!-- TiggyLi -->
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- Stealth5061 -->
+</authors>
+<spawns>
+    <spawn team="red" region="red-spawn" sequential="true" yaw="180" kit="spawn" />
+    <spawn team="blue" region="blue-spawn" sequential="true" yaw="0" kit="spawn" />
+    <default region="default-spawn" yaw="-90" kit="obs" />
+</spawns>
+<filters>
+    <not id="deny-break">
+        <any>
+            <material>bedrock</material>
+        </any>
+    </not>
+</filters>
+<regions>
+    <block id="red-spawn">-0.5,15.5,12.5</block>
+    <block id="blue-spawn">-0.5,15.5,-93.5</block>
+    <union id="spawns">
+        <cylinder base="-0.5,14,12.5" radius="2" height="3" />
+        <cylinder base="-0.5,14,-93.5" radius="2" height="3" />
+    </union>
+    <block id="default-spawn">50.5,20,-40.5</block>
+    <above id="build-limit" y="26" />
+    <complement id="underground">
+        <below y="11" />
+        <cuboid min="29,2,-5" max="-33,18,-75" />
+    </complement>
+    <apply>
+        <region>
+            <union>
+                <cylinder base="-8,6,12" radius="5" height="4"/>
+                <cylinder base="7,6,-93" radius="5" height="4"/>
+            </union>
+        </region>
+        <kit>
+            <effect duration="3" amplifier="5">wither</effect>
+        </kit>
+    </apply>
+    <apply region="build-limit" block="never" message="`7You have reached the maximum build height! (`c35 Blocks`7)" />
+</regions>
+<flags>
+    <post id="red-post">-0.5,15,12.5</post>
+    <post id="blue-post">-0.5,15,-93.5</post>
+</flags>
+<timelock>on</timelock>
+<include src="king-classes.xml"/>
+</map>

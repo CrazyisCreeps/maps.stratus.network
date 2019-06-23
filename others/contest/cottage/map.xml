@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Cottage</name>
+<version>1.0</version>
+<objective>Leak Lava From the Opponent's Obsidian Core!</objective>
+<authors>
+  <author uuid="74e59389-2b3e-490d-954a-a7af1fb1eded"/> <!-- Dowly_ -->
+</authors>
+<teams>
+  <team id="blue-team" color="blue" max="10">Blue</team>
+  <team id="red-team" color="dark red" max="10">Red</team>
+</teams>
+<maxbuildheight>31</maxbuildheight>
+<timelock>on</timelock>
+<spawns>
+  <default yaw="0">
+    <region>
+      <cuboid min="2,44.2,2" max="-1,44.2,-1"/>
+    </region>
+  </default>
+  <spawn team="blue-team" kit="blue-kit" yaw="-45">
+    <region>
+      <cuboid min="-65.5,24,-20.5" max="-67.5,24,-18.5"/>
+    </region>
+  </spawn>
+  <spawn team="red-team" kit="red-kit" yaw="135">
+    <region>
+      <cuboid min="66.5,24,21.5" max="68.5,24,19.5"/>
+    </region>
+  </spawn>
+</spawns>
+<kits>
+  <kit id="spawn" force="true">
+    <item slot="0">iron sword</item>
+    <item slot="1" enchantment="arrow infinite:1">bow</item>
+    <item slot="2">diamond pickaxe</item>
+    <item slot="3" enchantment="dig speed:1">iron axe</item>
+    <item slot="4" amount="48" damage="4">wood</item>
+    <item slot="5" amount="16">glass</item>
+    <item slot="7">golden apple</item>
+    <item slot="8" amount="32">cooked beef</item>
+    <item slot="35">arrow</item>
+    <leggings unbreakable="true">chainmail leggings</leggings>
+  </kit>
+  <kit id="blue-kit" parents="spawn">
+    <helmet unbreakable="true" color="0066cc">leather helmet</helmet>
+    <chestplate unbreakable="true" color="0066cc">leather chestplate</chestplate>
+    <boots unbreakable="true" color="0066cc">leather boots</boots>
+  </kit>
+  <kit id="red-kit" parents="spawn">
+    <helmet unbreakable="true" color="cd0000">leather helmet</helmet>
+    <chestplate unbreakable="true" color="cd0000">leather chestplate</chestplate>
+    <boots unbreakable="true" color="cd0000">leather boots</boots>
+  </kit>
+</kits>
+<filters>
+  <team id="only-blue">blue-team</team>
+  <team id="only-red">red-team</team>
+  <material id="only-iron">iron block</material>
+</filters>
+<regions>
+  <union id="spawns">
+    <cylinder id="blue-spawn" base="-70,17,-23" radius="13" height="oo"/>
+    <cylinder id="red-spawn" base="71,17,24" radius="13" height="oo"/>
+  </union>
+  <union id="iron-mines">
+    <union id="blue-iron-mine">
+      <cylinder base="-62.5,8,-10.5" radius="5" height="8"/>
+      <cylinder base="-62.5,15,-10.5" radius="3" height="5"/>
+    </union>
+    <union id="red-iron-mine">
+      <cylinder base="63.5,8,11.5" radius="5" height="8"/>
+      <cylinder base="63.5,15,11.5" radius="3" height="3"/>
+    </union>
+  </union>
+  <union id="iron-entrances">
+    <cuboid id="blue-iron-entrance" min="-57,10,2" max="-65,17,-4"/>
+    <cuboid id="red-iron-entrance" min="58,10,-1" max="66,17,3"/>
+  </union>
+  <negative id="outside-map">
+    <cuboid min="-70,0,-23" max="71,oo,24"/>
+  </negative>
+  <apply region="spawns" block="never" message="You may not edit the spawn area!"/>
+  <apply region="iron-mines" block="only-iron" message="You may only break iron in the iron mines!"/>
+  <apply region="iron-entrances" block="never" message="You may not block or edit the iron mine entrance!"/>
+  <apply region="blue-iron-mine" enter="only-blue" message="You may not enter the opponent's iron mine!"/>
+  <apply region="red-iron-mine" enter="only-red" message="You may not enter the opponent's iron mine!"/>
+  <apply region="blue-spawn" enter="only-blue" message="You may not enter the other team's spawn!"/>
+  <apply region="red-spawn" enter="only-red" message="You may not enter the other team's spawn!"/>
+  <apply region="outside-map" block="never" message="You may not edit the void!"/>
+</regions>
+<renewables>
+  <renewable rate="2">
+  	<region>
+    	<region id="iron-mines"/>
+    </region>
+    <renew-filter>
+      <any>
+        <material>iron block</material>
+      </any>
+    </renew-filter>
+    <replace-filter>
+      <any>
+        <material>air</material>
+      </any>
+    </replace-filter>
+  </renewable>
+</renewables>
+<cores material="obsidian" leak="3" mode-changes="true">
+  <core team="blue-team">
+    <region>
+      <cuboid min="-47,17,9" max="-52,22,14"/>
+    </region>
+  </core>
+  <core team="red-team">
+    <region>
+      <cuboid min="48,17,-8" max="53,22,-13"/>
+    </region>
+  </core>
+</cores>
+<modes>
+  <mode after="15m" material="gold block" name="GOLD CORE MODE"/>
+</modes>
+<kill-rewards>
+  <kill-reward>
+    <item>golden apple</item>
+  </kill-reward>
+</kill-rewards>
+<toolrepair>
+  <tool>iron sword</tool>
+  <tool>bow</tool>
+  <tool>diamond pickaxe</tool>
+  <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+  <item>log 2</item>
+  <item>wood</item>
+  <item>glass</item>
+  <item>leather helmet</item>
+  <item>leather chestplate</item>
+  <item>chainmail leggings</item>
+  <item>leather boots</item>
+  <item>cooked beef</item>
+  <item damage="0">step</item>
+  <item>obsidian</item>
+  <item>gold block</item>
+  <item>glowstone dust</item>
+  <item>stained clay</item>
+  <item>arrow</item>
+  <item>sapling</item>
+  <item>apple</item>
+</itemremove>
+</map>

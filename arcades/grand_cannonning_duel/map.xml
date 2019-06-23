@@ -1,0 +1,1430 @@
+<map proto="1.4.2">
+<name>Grand Cannonning Duel</name>
+<version>1.0.0</version>
+<objective>Win the tournament!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="a9f11454-beac-4cc3-a138-1780802c8794"/> <!-- Crazy_ -->
+</authors>
+<contributors>
+    <contributor uuid="f690a591-348b-482e-a18d-7779d0c0a28c" contribution="XML Senpai"/> <!-- mitchiii_ -->
+    <contributor uuid="3fbec7dd-0a5f-40bf-9d11-885a54507112" contribution="Cannon Duel Inspiration"/> <!-- Cubist -->
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="Cannon Duel Inspiration"/> <!-- ElectroidFilms -->
+    <contributor uuid="07fa10c6-f564-4630-861e-fe134ae27527" contribution="Grand Dueling Concept"/> <!-- Yoyo_ -->
+</contributors>
+<teams>
+    <team id="black-player" color="black" max="1" max-overfill="1">Black</team>
+    <team id="darkblue-player" color="dark blue" max="1" max-overfill="1">Dark Blue</team>
+    <team id="darkgreen-player" color="dark green" max="1" max-overfill="1">Green</team> <!-- Dark Green -->
+    <team id="cyan-player" color="dark aqua" max="1" max-overfill="1">Cyan</team>
+    <team id="purple-player" color="dark purple" max="1" max-overfill="1">Purple</team>
+    <team id="orange-player" color="gold" max="1" max-overfill="1">Orange</team>
+    <team id="grey-player" color="gray" max="1" max-overfill="1">Silver</team> <!-- Grey -->
+    <team id="darkgrey-player" color="dark gray" max="1" max-overfill="1">Grey</team> <!-- Dark Grey -->
+    <team id="blue-player" color="blue" max="1" max-overfill="1">Blue</team>
+    <team id="red-player" color="dark red" max="1" max-overfill="1">Red</team>
+    <team id="green-player" color="green" max="1" max-overfill="1">Lime</team> <!-- Green -->
+    <team id="skyblue-player" color="aqua" max="1" max-overfill="1">Aqua</team> <!-- Sky Blue -->
+    <team id="magenta-player" color="light purple" max="1" max-overfill="1">Magenta</team>
+    <team id="yellow-player" color="yellow" max="1" max-overfill="1">Yellow</team>
+    <team id="white-player" color="white" max="1" max-overfill="1">White</team>
+    <team id="pink-player" color="red" max="1" max-overfill="1">Pink</team>
+</teams>
+<kits>
+    <kit id="team" force="true">
+        <clear/>
+        <item slot="0" unbreakable="true" attributes="generic.attackDamage:add:7">diamond pickaxe</item>
+        <item slot="27" unbreakable="true" name="`6TNT Defuser" lore="`7Right click to defuse team griefer's TNT|`7Does not work in `9water`7.|`7Use `a/report `7to alert the staff!">shears</item>
+        <item slot="9" amount="64">tnt</item>
+        <item slot="10" amount="64">tnt</item>
+        <item slot="1" amount="64">vine</item>
+        <item slot="29" unbreakable="true" attributes="generic.attackDamage:add:1" name="`aiCarus Blade" lore="`7Right click to reduce TNT damage">wood sword</item>
+        <item slot="11" amount="64">tnt</item>
+        <item slot="3" amount="64">nether fence</item>
+        <item slot="31" amount="64">step</item>
+        <item slot="22" amount="16">ladder</item>
+        <item slot="4" amount="16">stone button</item>
+        <item slot="32" amount="8">stone plate</item>
+        <item slot="23" amount="16">lever</item>
+        <item slot="34" amount="16">trap door</item>
+        <item slot="5">water bucket</item>
+        <item slot="33">water bucket</item>
+        <item slot="24">water bucket</item>
+        <item slot="15" amount="16">piston base</item>
+        <item slot="8" amount="16">redstone block</item>
+        <item slot="6" amount="64">redstone</item>
+        <item slot="25" amount="16">redstone torch on</item>
+        <item slot="16" amount="16">diode</item>
+        <item slot="7" amount="64">tnt</item>
+        <item slot="35" amount="8">sand</item>
+        <item slot="26" amount="3">dispenser</item>
+        <item slot="17" amount="8">redstone comparator</item>
+        <effect duration="oo" amplifier="10">damage resistance</effect>
+    </kit>
+    <kit id="white-gear" parents="team" force="true">
+        <item slot="12" damage="0" amount="64">stained glass</item>
+        <item slot="21" damage="0" amount="64">stained clay</item>
+        <item slot="30" damage="0" amount="64">stained clay</item>
+        <item slot="2" damage="0" amount="64">stained clay</item>
+        <helmet locked="true" color="FFFFFF" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="FFFFFF" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="FFFFFF" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="FFFFFF" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="orange-gear" parents="team" force="true">
+        <item slot="12" damage="1" amount="64">stained glass</item>
+        <item slot="21" damage="1" amount="64">stained clay</item>
+        <item slot="30" damage="1" amount="64">stained clay</item>
+        <item slot="2" damage="1" amount="64">stained clay</item>
+        <helmet locked="true" color="D87F33" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="D87F33" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="D87F33" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="D87F33" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="magenta-gear" parents="team" force="true">
+        <item slot="12" damage="2" amount="64">stained glass</item>
+        <item slot="21" damage="2" amount="64">stained clay</item>
+        <item slot="30" damage="2" amount="64">stained clay</item>
+        <item slot="2" damage="2" amount="64">stained clay</item>
+        <helmet locked="true" color="B24CD8" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="B24CD8" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="B24CD8" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="B24CD8" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue-gear" parents="team" force="true">
+        <item slot="12" damage="3" amount="64">stained glass</item>
+        <item slot="21" damage="3" amount="64">stained clay</item>
+        <item slot="30" damage="3" amount="64">stained clay</item>
+        <item slot="2" damage="3" amount="64">stained clay</item>
+        <helmet locked="true" color="6699D8" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="6699D8" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="6699D8" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="6699D8" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="yellow-gear" parents="team" force="true">
+        <item slot="12" damage="4" amount="64">stained glass</item>
+        <item slot="21" damage="4" amount="64">stained clay</item>
+        <item slot="30" damage="4" amount="64">stained clay</item>
+        <item slot="2" damage="4" amount="64">stained clay</item>
+        <helmet locked="true" color="E5E533" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="E5E533" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="E5E533" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="E5E533" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="green-gear" parents="team" force="true">
+        <item slot="12" damage="5" amount="64">stained glass</item>
+        <item slot="21" damage="5" amount="64">stained clay</item>
+        <item slot="30" damage="5" amount="64">stained clay</item>
+        <item slot="2" damage="5" amount="64">stained clay</item>
+        <helmet locked="true" color="7FCC19" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="7FCC19" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="7FCC19" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="7FCC19" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="pink-gear" parents="team" force="true">
+        <item slot="12" damage="6" amount="64">stained glass</item>
+        <item slot="21" damage="6" amount="64">stained clay</item>
+        <item slot="30" damage="6" amount="64">stained clay</item>
+        <item slot="2" damage="6" amount="64">stained clay</item>
+        <helmet locked="true" color="F27FA5" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="F27FA5" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="F27FA5" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="F27FA5" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="darkgrey-gear" parents="team" force="true">
+        <item slot="12" damage="7" amount="64">stained glass</item>
+        <item slot="21" damage="7" amount="64">stained clay</item>
+        <item slot="30" damage="7" amount="64">stained clay</item>
+        <item slot="2" damage="7" amount="64">stained clay</item>
+        <helmet locked="true" color="4C4C4C" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="4C4C4C" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="4C4C4C" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="4C4C4C" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="grey-gear" parents="team" force="true">
+        <item slot="12" damage="8" amount="64">stained glass</item>
+        <item slot="21" damage="8" amount="64">stained clay</item>
+        <item slot="30" damage="8" amount="64">stained clay</item>
+        <item slot="2" damage="8" amount="64">stained clay</item>
+        <helmet locked="true" color="999999" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="999999" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="999999" unbreakable="true">leather leggings</leggings>
+    <boots locked="true" color="999999" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="cyan-gear" parents="team" force="true">
+        <item slot="12" damage="9" amount="64">stained glass</item>
+        <item slot="21" damage="9" amount="64">stained clay</item>
+        <item slot="30" damage="9" amount="64">stained clay</item>
+        <item slot="2" damage="9" amount="64">stained clay</item>
+        <helmet locked="true" color="4C7F99" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="4C7F99" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="4C7F99" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="4C7F99" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="purple-gear" parents="team" force="true">
+        <item slot="12" damage="10" amount="64">stained glass</item>
+        <item slot="21" damage="10" amount="64">stained clay</item>
+        <item slot="30" damage="10" amount="64">stained clay</item>
+        <item slot="2" damage="10" amount="64">stained clay</item>
+        <helmet locked="true" color="7F3FB2" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="7F3FB2" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="7F3FB2" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="7F3FB2" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="darkblue-gear" parents="team" force="true">
+        <item slot="12" damage="11" amount="64">stained glass</item>
+        <item slot="21" damage="11" amount="64">stained clay</item>
+        <item slot="30" damage="11" amount="64">stained clay</item>
+        <item slot="2" damage="11" amount="64">stained clay</item>
+        <helmet locked="true" color="334CB2" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="334CB2" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="334CB2" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="334CB2" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="skyblue-gear" parents="team" force="true">
+        <item slot="12" damage="3" amount="64">stained glass</item>
+        <item slot="21" damage="3" amount="64">stained clay</item>
+        <item slot="30" damage="3" amount="64">stained clay</item>
+        <item slot="2" damage="3" amount="64">stained clay</item>
+        <helmet locked="true" color="B2CCEB" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="B2CCEB" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="B2CCEB" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="B2CCEB" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="darkgreen-gear" parents="team" force="true">
+        <item slot="12" damage="13" amount="64">stained glass</item>
+        <item slot="21" damage="13" amount="64">stained clay</item>
+        <item slot="30" damage="13" amount="64">stained clay</item>
+        <item slot="2" damage="13" amount="64">stained clay</item>
+        <helmet locked="true" color="667F33" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="667F33" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="667F33" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="667F33" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="red-gear" parents="team" force="true">
+        <item slot="12" damage="14" amount="64">stained glass</item>
+        <item slot="21" damage="14" amount="64">stained clay</item>
+        <item slot="30" damage="14" amount="64">stained clay</item>
+        <item slot="2" damage="14" amount="64">stained clay</item>
+        <helmet locked="true" color="993333" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="993333" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="993333" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="993333" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="black-gear" parents="team" force="true">
+        <item slot="12" damage="15" amount="64">stained glass</item>
+        <item slot="21" damage="15" amount="64">stained clay</item>
+        <item slot="30" damage="15" amount="64">stained clay</item>
+        <item slot="2" damage="15" amount="64">stained clay</item>
+        <helmet locked="true" color="191919" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
+        <chestplate locked="true" color="191919" unbreakable="true">leather chestplate</chestplate>
+        <leggings locked="true" color="191919" unbreakable="true">leather leggings</leggings>
+        <boots locked="true" color="191919" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="resistance-clear" force="true">
+        <effect amplifier="10" duration="3s">damage resistance</effect>
+    </kit>
+</kits>
+<spawns>
+    <default yaw="90">
+        <regions>
+            <point>30.5,34,0.5</point>
+        </regions>
+    </default>
+    <!-- Arena 1 Matchups -->
+    <spawn team="black-player" yaw="180" kit="black-gear" region="arena-1-point-1"/>
+    <spawn team="cyan-player" yaw="0" kit="cyan-gear" region="arena-1-point-2"/>
+    <!-- Arena 2 Matchups -->
+    <spawn team="darkblue-player" yaw="180" kit="darkblue-gear" region="arena-2-point-1"/>
+    <spawn team="darkgrey-player" yaw="0" kit="darkgrey-gear" region="arena-2-point-2"/>
+    <!-- Arena 3 Matchups -->
+    <spawn team="darkgreen-player" yaw="180" kit="darkgreen-gear" region="arena-3-point-1"/>
+    <spawn team="magenta-player" yaw="0" kit="magenta-gear" region="arena-3-point-2"/>
+    <!-- Arena 4 Matchups -->
+    <spawn team="red-player" yaw="180" kit="red-gear" region="arena-4-point-1"/>
+    <spawn team="orange-player" yaw="0" kit="orange-gear" region="arena-4-point-2"/>
+    <!-- Arena 5 Matchups -->
+    <spawn team="purple-player" yaw="180" kit="purple-gear" region="arena-5-point-1"/>
+    <spawn team="white-player" yaw="0" kit="white-gear" region="arena-5-point-2"/>
+    <!-- Arena 6 Matchups -->
+    <spawn team="pink-player" yaw="180" kit="pink-gear" region="arena-6-point-1"/>
+    <spawn team="skyblue-player" yaw="0" kit="skyblue-gear" region="arena-6-point-2"/>
+    <!-- Arena 7 Matchups -->
+    <spawn team="grey-player" yaw="180" kit="grey-gear" region="arena-7-point-1"/>
+    <spawn team="blue-player" yaw="0" kit="blue-gear" region="arena-7-point-2"/>
+    <!-- Arena 8 Matchups -->
+    <spawn team="green-player" yaw="180" kit="green-gear" region="arena-8-point-1"/>
+    <spawn team="yellow-player" yaw="0" kit="yellow-gear" region="arena-8-point-2"/>
+</spawns>
+<regions>
+    <union id="arena-spawns">
+        <!-- arena-#-point-1 is the point below the number -->
+        <!-- yaw for point-1 is 180 -->
+        <!-- yaw for point-2 is 0 -->
+        <point id="arena-1-point-1">0.5,50,25.5</point>
+        <point id="arena-1-point-2">0.5,50,-24.5</point>
+        <point id="arena-2-point-1">-39.5,50,25.5</point>
+        <point id="arena-2-point-2">-39.5,50,-24.5</point>
+        <point id="arena-3-point-1">-79.5,50,25.5</point>
+        <point id="arena-3-point-2">-79.5,50,-24.5</point>
+        <point id="arena-4-point-1">-119.5,50,25.5</point>
+        <point id="arena-4-point-2">-119.5,50,-24.5</point>
+        <point id="arena-5-point-1">-153.5,50,25.5</point>
+        <point id="arena-5-point-2">-153.5,50,-24.5</point>
+        <point id="arena-6-point-1">-187.5,50,25.5</point>
+        <point id="arena-6-point-2">-187.5,50,-24.5</point>
+        <point id="arena-7-point-1">-187.5,50,-69.5</point>
+        <point id="arena-7-point-2">-187.5,50,-119.5</point>
+        <point id="arena-8-point-1">-153.5,50,-69.5</point>
+        <point id="arena-8-point-2">-153.5,50,-119.5</point>
+        <!-- End of inital arenas, now onto quarter finals -->
+        <point id="arena-9-point-1">-119.5,50,-69.5</point>
+        <point id="arena-9-point-2">-119.5,50,-119.5</point>
+        <point id="arena-10-point-1">-79.5,50,-69.5</point>
+        <point id="arena-10-point-2">-79.5,50,-119.5</point>
+        <point id="arena-11-point-1">-39.5,50,-69.5</point>
+        <point id="arena-11-point-2">-39.5,50,-119.5</point>
+        <point id="arena-12-point-1">0.5,50,-69.5</point>
+        <point id="arena-12-point-2">0.5,50,-119.5</point>
+        <!-- Semi finals -->
+        <point id="arena-13-point-1">0.5,50,-164.5</point>
+        <point id="arena-13-point-2">0.5,50,-214.5</point>
+        <point id="arena-14-point-1">-39.5,50,-164.5</point>
+        <point id="arena-14-point-2">-39.5,50,-214.5</point>
+        <!-- Final arena -->
+        <point id="arena-15-point-1">-79.5,50,-164.5</point>
+        <point id="arena-15-point-2">-79.5,50,-214.5</point>
+    </union>
+    <union id="arena-regions"> <!-- Used as regions for the hills | Also used for portals -->
+        <cuboid id="arena-1" min="7,-oo,32" max="-6,55,-31"/>
+        <cuboid id="arena-2" min="-33,-oo,32" max="-46,55,-31"/>
+        <cuboid id="arena-3" min="-73,-oo,32" max="-86,55,-31"/>
+        <cuboid id="arena-4" min="-113,-oo,32" max="-126,55,-31"/>
+        <cuboid id="arena-5" min="-147,-oo,32" max="-160,55,-31"/>
+        <cuboid id="arena-6" min="-181,-oo,32" max="-194,55,-31"/>
+        <cuboid id="arena-7" min="-181,-oo,-63" max="-194,55,-126"/>
+        <cuboid id="arena-8" min="-147,oo,-63" max="-160,55,-126"/>
+        <cuboid id="arena-9" min="-113,-oo,-63" max="-126,55,-126"/>
+        <cuboid id="arena-10" min="-73,-oo,-63" max="-86,55,-126"/>
+        <cuboid id="arena-11" min="-33,-oo,-63" max="-46,55,-126"/>
+        <cuboid id="arena-12" min="7,-oo,-63" max="-6,55,-126"/>
+        <cuboid id="arena-13" min="7,-oo,-158" max="-6,55,-221"/>
+        <cuboid id="arena-14" min="-33,-oo,-158" max="-46,55,-221"/>
+        <cuboid id="arena-15" min="-73,-oo,-158" max="-86,55,-221"/>
+    </union>
+    <union id="arena-platforms"> <!-- To be used to allow building / placing blocks in these regions -->
+        <union id="arena-1-platforms"> <!-- min 20 max 35 --> 
+            <cuboid id="arena-1-platform-1" min="4,20,29" max="-3,35,22"/>
+            <cuboid id="arena-1-platform-2" min="-3,20,-28" max="4,35,-21"/>
+        </union>
+        <union id="arena-2-platforms">
+            <cuboid id="arena-2-platform-1" min="-36,20,29" max="-43,35,22"/>
+            <cuboid id="arena-2-platform-2" min="-36,20,-21" max="-43,35,-28"/>
+        </union>
+        <union id="arena-3-platforms">
+            <cuboid id="arena-3-platform-1" min="-76,20,29" max="-83,35,22"/>
+            <cuboid id="arena-3-platform-2" min="-76,20,-21" max="-83,25,-28"/>
+        </union>
+        <union id="arena-4-platforms">
+            <cuboid id="arena-4-platform-1" min="-123,20,22" max="-116,35,29"/>
+            <cuboid id="arena-4-platform-2" min="-116,20,-21" max="-123,35,-28"/>
+        </union>
+        <union id="arena-5-platforms">
+            <cuboid id="arena-5-platform-1" min="-157,20,22" max="-150,35,29"/>
+            <cuboid id="arena-5-platform-2" min="-150,20,-21" max="-157,35,-28"/>
+        </union>
+        <union id="arena-6-platforms">
+            <cuboid id="arena-6-platform-1" min="-191,20,22" max="-184,35,29"/>
+            <cuboid id="arena-6-platform-2" min="-184,20,-21" max="-191,35,-28"/>
+        </union>
+        <union id="arena-7-platforms">
+            <cuboid id="arena-7-platform-1" min="-191,20,-73" max="-184,35,-66"/>
+            <cuboid id="arena-7-platform-2" min="-184,20,-116" max="-191,35,-123"/>
+        </union>
+        <union id="arena-8-platforms">
+            <cuboid id="arena-8-platform-1" min="-157,20,-73" max="-150,35,-66"/>
+            <cuboid id="arena-8-platform-2" min="-150,20,-116" max="-157,35,-123"/>
+        </union>
+        <union id="arena-9-platforms">
+            <cuboid id="arena-9-platform-1" min="-123,20,-73" max="-116,35,-66"/>
+            <cuboid id="arena-9-platform-2" min="-116,20,-116" max="-123,35,-123"/>
+        </union>
+        <union id="arena-10-platforms">
+            <cuboid id="arena-10-platform-1" min="-83,20,-73" max="-76,35,-66"/>
+            <cuboid id="arena-10-platform-2" min="-76,20,-116" max="-83,35,-123"/>
+        </union>
+        <union id="arena-11-platforms">
+            <cuboid id="arena-11-platform-1" min="-43,20,-73" max="-36,35,-66"/>
+            <cuboid id="arena-11-platform-2" min="-36,20,-116" max="-43,35,-123"/>
+        </union>
+        <union id="arena-12-platforms">
+            <cuboid id="arena-12-platform-1" min="-3,20,-73" max="4,35,-66"/>
+            <cuboid id="arena-12-platform-2" min="4,20,-116" max="-3,35,-123"/>
+        </union>
+        <union id="arena-13-platforms">
+            <cuboid id="arena-13-platform-1" min="-3,20,-168" max="4,35,-161"/>
+            <cuboid id="arena-13-platform-2" min="4,20,-211" max="-3,35,-218"/>
+        </union>
+        <union id="arena-14-platforms">
+            <cuboid id="arena-14-platform-1" min="-43,20,-168" max="-36,35,-161"/>
+            <cuboid id="arena-14-platform-2" min="-36,20,-211" max="-43,35,-218"/>
+        </union>
+        <union id="arena-15-platforms">
+            <cuboid id="arena-15-platform-1" min="-83,20,-168" max="-76,35,-161"/>
+            <cuboid id="arena-15-platform-2" min="-76,20,-211" max="-83,35,-218"/>
+        </union>
+    </union>
+    <negative id="clear-res">
+        <union id="arena-drop-platforms"> <!-- Used to drop players into arenas when it detects that both players have been queued up | Also used to give players their starter kits again -->
+            <union id="arena-1-drop-platforms"> <!-- min 20 max 35 --> 
+                <cuboid id="arena-1-drop-1" min="4,50,29" max="-3,52,22"/>
+                <cuboid id="arena-1-drop-2" min="-3,50,-28" max="4,52,-21"/>
+            </union>
+            <union id="arena-2-drop-platforms">
+                <cuboid id="arena-2-drop-1" min="-36,50,29" max="-43,52,22"/>
+                <cuboid id="arena-2-drop-2" min="-36,50,-21" max="-43,52,-28"/>
+            </union>
+            <union id="arena-3-drop-platforms">
+                <cuboid id="arena-3-drop-1" min="-76,50,29" max="-83,52,22"/>
+                <cuboid id="arena-3-drop-2" min="-76,50,-21" max="-83,52,-28"/>
+            </union>
+            <union id="arena-4-drop-platforms">
+                <cuboid id="arena-4-drop-1" min="-123,50,22" max="-116,52,29"/>
+                <cuboid id="arena-4-drop-2" min="-116,50,-21" max="-123,52,-28"/>
+            </union>
+            <union id="arena-5-drop-platforms">
+                <cuboid id="arena-5-drop-1" min="-157,50,22" max="-150,52,29"/>
+                <cuboid id="arena-5-drop-2" min="-150,50,-21" max="-157,52,-28"/>
+            </union>
+            <union id="arena-6-drop-platforms">
+                <cuboid id="arena-6-drop-1" min="-191,50,22" max="-184,52,29"/>
+                <cuboid id="arena-6-drop-2" min="-184,50,-21" max="-191,52,-28"/>
+            </union>
+            <union id="arena-7-drop-platforms">
+                <cuboid id="arena-7-drop-1" min="-191,50,-73" max="-184,52,-66"/>
+                <cuboid id="arena-7-drop-2" min="-184,50,-116" max="-191,52,-123"/>
+            </union>
+            <union id="arena-8-drop-platforms">
+                <cuboid id="arena-8-drop-1" min="-157,50,-73" max="-150,52,-66"/>
+                <cuboid id="arena-8-drop-2" min="-150,50,-116" max="-157,52,-123"/>
+            </union>
+            <union id="arena-9-drop-platforms">
+                <cuboid id="arena-9-drop-1" min="-123,50,-73" max="-116,52,-66"/>
+                <cuboid id="arena-9-drop-2" min="-116,50,-116" max="-123,52,-123"/>
+            </union>
+            <union id="arena-10-drop-platforms">
+                <cuboid id="arena-10-drop-1" min="-83,50,-73" max="-76,52,-66"/>
+                <cuboid id="arena-10-drop-2" min="-76,50,-116" max="-83,52,-123"/>
+            </union>
+            <union id="arena-11-drop-platforms">
+                <cuboid id="arena-11-drop-1" min="-43,50,-73" max="-36,52,-66"/>
+                <cuboid id="arena-11-drop-2" min="-36,50,-116" max="-43,52,-123"/>
+            </union>
+            <union id="arena-12-drop-platforms">
+                <cuboid id="arena-12-drop-1" min="-3,50,-73" max="4,52,-66"/>
+                <cuboid id="arena-12-drop-2" min="4,50,-116" max="-3,52,-123"/>
+            </union>
+            <union id="arena-13-drop-platforms">
+                <cuboid id="arena-13-drop-1" min="-3,50,-168" max="4,52,-161"/>
+                <cuboid id="arena-13-drop-2" min="4,50,-211" max="-3,52,-218"/>
+            </union>
+            <union id="arena-14-drop-platforms">
+                <cuboid id="arena-14-drop-1" min="-43,50,-168" max="-36,52,-161"/>
+                <cuboid id="arena-14-drop-2" min="-36,50,-211" max="-43,52,-218"/>
+            </union>
+            <union id="arena-15-drop-platforms">
+                <cuboid id="arena-15-drop-1" min="-83,50,-168" max="-76,52,-161"/>
+                <cuboid id="arena-15-drop-2" min="-76,50,-211" max="-83,52,-218"/>
+            </union>
+        </union>
+    </negative>
+    <union id="arena-win-condition-portals"> <!-- Portals that are filtered to only allow teams holding the hill win condition to pass through -->
+        <cuboid id="arena-1-portal" min="7,-oo,32" max="-6,10,-31"/>
+        <cuboid id="arena-2-portal" min="-33,-oo,32" max="-46,10,-31"/>
+        <cuboid id="arena-3-portal" min="-73,-oo,32" max="-86,10,-31"/>
+        <cuboid id="arena-4-portal" min="-113,-oo,32" max="-126,10,-31"/>
+        <cuboid id="arena-5-portal" min="-147,-oo,32" max="-160,10,-31"/>
+        <cuboid id="arena-6-portal" min="-181,-oo,32" max="-194,10,-31"/>
+        <cuboid id="arena-7-portal" min="-181,-oo,-63" max="-194,10,-126"/>
+        <cuboid id="arena-8-portal" min="-147,oo,-63" max="-160,10,-126"/>
+        <cuboid id="arena-9-portal" min="-113,-oo,-63" max="-126,10,-126"/>
+        <cuboid id="arena-10-portal" min="-73,-oo,-63" max="-86,10,-126"/>
+        <cuboid id="arena-11-portal" min="-33,-oo,-63" max="-46,10,-126"/>
+        <cuboid id="arena-12-portal" min="7,-oo,-63" max="-6,10,-126"/>
+        <cuboid id="arena-13-portal" min="7,-oo,-158" max="-6,10,-221"/>
+        <cuboid id="arena-14-portal" min="-33,-oo,-158" max="-46,10,-221"/>
+        <cuboid id="arena-15-portal" min="-73,-oo,-158" max="-86,10,-221"/>
+    </union>
+    <!-- Applicators -->
+    <apply block="always" region="arena-platforms"/>
+    <apply block="never" message="You can't build or break blocks here!"/>
+    <apply kit="resistance-clear" region="clear-res"/>
+    <!-- Give kits to teams in next arenas -->
+
+    <!-- Arena 9 -->
+    <apply kit="black-gear" region="arena-9-drop-1" filter="only-black"/>
+    <apply kit="cyan-gear" region="arena-9-drop-1" filter="only-cyan"/>
+    <apply kit="green-gear" region="arena-9-drop-2" filter="only-green"/>
+    <apply kit="yellow-gear" region="arena-9-drop-2" filter="only-yellow"/>
+
+    <!-- Arena 10 -->
+    <apply kit="darkblue-gear" region="arena-10-drop-1" filter="only-darkblue"/>
+    <apply kit="darkgrey-gear" region="arena-10-drop-1" filter="only-darkgrey"/>
+    <apply kit="grey-gear" region="arena-10-drop-2" filter="only-grey"/>
+    <apply kit="blue-gear" region="arena-10-drop-2" filter="only-blue"/>
+
+    <!-- Arena 11 -->
+    <apply kit="darkgreen-gear" region="arena-11-drop-1" filter="only-darkgreen"/>
+    <apply kit="magenta-gear" region="arena-11-drop-1" filter="only-magenta"/>
+    <apply kit="pink-gear" region="arena-11-drop-2" filter="only-pink"/>
+    <apply kit="skyblue-gear" region="arena-11-drop-2" filter="only-skyblue"/>
+
+    <!-- Arena 12 -->
+    <apply kit="red-gear" region="arena-12-drop-1" filter="only-red"/>
+    <apply kit="orange-gear" region="arena-12-drop-1" filter="only-orange"/>
+    <apply kit="purple-gear" region="arena-12-drop-2" filter="only-purple"/>
+    <apply kit="white-gear" region="arena-12-drop-2" filter="only-white"/>
+
+    <!-- Arena 13 -->
+    <apply kit="black-gear" region="arena-13-drop-1" filter="only-black"/>
+    <apply kit="cyan-gear" region="arena-13-drop-1" filter="only-cyan"/>
+    <apply kit="green-gear" region="arena-13-drop-1" filter="only-green"/>
+    <apply kit="yellow-gear" region="arena-13-drop-1" filter="only-yellow"/>
+    <apply kit="red-gear" region="arena-13-drop-2" filter="only-red"/>
+    <apply kit="orange-gear" region="arena-13-drop-2" filter="only-orange"/>
+    <apply kit="purple-gear" region="arena-13-drop-2" filter="only-purple"/>
+    <apply kit="white-gear" region="arena-13-drop-2" filter="only-white"/>
+
+    <!-- Arena 14 -->
+    <apply kit="darkblue-gear" region="arena-14-drop-1" filter="only-darkblue"/>
+    <apply kit="darkgrey-gear" region="arena-14-drop-1" filter="only-darkgrey"/>
+    <apply kit="grey-gear" region="arena-14-drop-1" filter="only-grey"/>
+    <apply kit="blue-gear" region="arena-14-drop-1" filter="only-blue"/>
+    <apply kit="darkgreen-gear" region="arena-14-drop-2" filter="only-darkgreen"/>
+    <apply kit="magenta-gear" region="arena-14-drop-2" filter="only-magenta"/>
+    <apply kit="pink-gear" region="arena-14-drop-2" filter="only-pink"/>
+    <apply kit="skyblue-gear" region="arena-14-drop-2" filter="only-skyblue"/>
+    <!-- Arena 15 -->
+    <apply kit="black-gear" region="arena-15-drop-1" filter="only-black"/>
+    <apply kit="cyan-gear" region="arena-15-drop-1" filter="only-cyan"/>
+    <apply kit="green-gear" region="arena-15-drop-1" filter="only-green"/>
+    <apply kit="yellow-gear" region="arena-15-drop-1" filter="only-yellow"/>
+    <apply kit="red-gear" region="arena-15-drop-1" filter="only-red"/>
+    <apply kit="orange-gear" region="arena-15-drop-1" filter="only-orange"/>
+    <apply kit="purple-gear" region="arena-15-drop-1" filter="only-purple"/>
+    <apply kit="white-gear" region="arena-15-drop-1" filter="only-white"/>
+    <apply kit="darkblue-gear" region="arena-15-drop-2" filter="only-darkblue"/>
+    <apply kit="darkgrey-gear" region="arena-15-drop-2" filter="only-darkgrey"/>
+    <apply kit="grey-gear" region="arena-15-drop-2" filter="only-grey"/>
+    <apply kit="blue-gear" region="arena-15-drop-2" filter="only-blue"/>
+    <apply kit="darkgreen-gear" region="arena-15-drop-2" filter="only-darkgreen"/>
+    <apply kit="magenta-gear" region="arena-15-drop-2" filter="only-magenta"/>
+    <apply kit="pink-gear" region="arena-15-drop-2" filter="only-pink"/>
+    <apply kit="skyblue-gear" region="arena-15-drop-2" filter="only-skyblue"/>
+</regions>
+<control-points required="false" show="false" capture-time="0s"> <!-- show="false" later -->
+    <!-- Used to detect who won what, in order to win the match both players need to have successfully queued up -->
+    <control-point id="arena-1-won" capture="arena-1">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-1-queued-1</objective>
+                <objective any="true">arena-1-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-2-won" capture="arena-2">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-2-queued-1</objective>
+                <objective any="true">arena-2-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-3-won" capture="arena-3">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-3-queued-1</objective>
+                <objective any="true">arena-3-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-4-won" capture="arena-4">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-4-queued-1</objective>
+                <objective any="true">arena-4-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-5-won" capture="arena-5">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-5-queued-1</objective>
+                <objective any="true">arena-5-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-6-won" capture="arena-6">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-6-queued-1</objective>
+                <objective any="true">arena-6-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-7-won" capture="arena-7">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-7-queued-1</objective>
+                <objective any="true">arena-7-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-8-won" capture="arena-8">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-8-queued-1</objective>
+                <objective any="true">arena-8-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-9-won" capture="arena-9">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-9-queued-1</objective>
+                <objective any="true">arena-9-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-10-won" capture="arena-10">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-10-queued-1</objective>
+                <objective any="true">arena-10-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-11-won" capture="arena-11">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-11-queued-1</objective>
+                <objective any="true">arena-11-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-12-won" capture="arena-12">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-12-queued-1</objective>
+                <objective any="true">arena-12-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-13-won" capture="arena-13">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-13-queued-1</objective>
+                <objective any="true">arena-13-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-14-won" capture="arena-14">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-14-queued-1</objective>
+                <objective any="true">arena-14-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+    <control-point id="arena-15-won" capture="arena-15">
+        <capture-filter>
+            <all>
+                <objective any="true">arena-15-queued-1</objective>
+                <objective any="true">arena-15-queued-2</objective>
+            </all>
+        </capture-filter>
+    </control-point>
+</control-points>
+<control-points required="false" show="false" capture-time="0s">
+    <!-- Used to detect when players have queued up for their next match -->
+    <control-point id="arena-1-queued-1" capture="arena-1-drop-1"/>
+    <control-point id="arena-1-queued-2" capture="arena-1-drop-2"/>
+    <control-point id="arena-2-queued-1" capture="arena-2-drop-1"/>
+    <control-point id="arena-2-queued-2" capture="arena-2-drop-2"/>
+    <control-point id="arena-3-queued-1" capture="arena-3-drop-1"/>
+    <control-point id="arena-3-queued-2" capture="arena-3-drop-2"/>
+    <control-point id="arena-4-queued-1" capture="arena-4-drop-1"/>
+    <control-point id="arena-4-queued-2" capture="arena-4-drop-2"/>
+    <control-point id="arena-5-queued-1" capture="arena-5-drop-1"/>
+    <control-point id="arena-5-queued-2" capture="arena-5-drop-2"/>
+    <control-point id="arena-6-queued-1" capture="arena-6-drop-1"/>
+    <control-point id="arena-6-queued-2" capture="arena-6-drop-2"/>
+    <control-point id="arena-7-queued-1" capture="arena-7-drop-1"/>
+    <control-point id="arena-7-queued-2" capture="arena-7-drop-2"/>
+    <control-point id="arena-8-queued-1" capture="arena-8-drop-1"/>
+    <control-point id="arena-8-queued-2" capture="arena-8-drop-2"/>
+    <control-point id="arena-9-queued-1" capture="arena-9-drop-1"/>
+    <control-point id="arena-9-queued-2" capture="arena-9-drop-2"/>
+    <control-point id="arena-10-queued-1" capture="arena-10-drop-1"/>
+    <control-point id="arena-10-queued-2" capture="arena-10-drop-2"/>
+    <control-point id="arena-11-queued-1" capture="arena-11-drop-1"/>
+    <control-point id="arena-11-queued-2" capture="arena-11-drop-2"/>
+    <control-point id="arena-12-queued-1" capture="arena-12-drop-1"/>
+    <control-point id="arena-12-queued-2" capture="arena-12-drop-2"/>
+    <control-point id="arena-13-queued-1" capture="arena-13-drop-1"/>
+    <control-point id="arena-13-queued-2" capture="arena-13-drop-2"/>
+    <control-point id="arena-14-queued-1" capture="arena-14-drop-1"/>
+    <control-point id="arena-14-queued-2" capture="arena-14-drop-2"/>
+    <control-point id="arena-15-queued-1" capture="arena-15-drop-1"/>
+    <control-point id="arena-15-queued-2" capture="arena-15-drop-2"/>
+</control-points>
+<filters>
+    <team id="only-black">black-player</team>
+    <team id="only-darkblue">darkblue-player</team>
+    <team id="only-darkgreen">darkgreen-player</team>
+    <team id="only-cyan">cyan-player</team>
+    <team id="only-purple">purple-player</team>
+    <team id="only-orange">orange-player</team>
+    <team id="only-grey">grey-player</team>
+    <team id="only-darkgrey">darkgrey-player</team>
+    <team id="only-blue">blue-player</team>
+    <team id="only-red">red-player</team>
+    <team id="only-green">green-player</team>
+    <team id="only-skyblue">skyblue-player</team>
+    <team id="only-magenta">magenta-player</team>
+    <team id="only-yellow">yellow-player</team>
+    <team id="only-white">white-player</team>
+    <team id="only-pink">pink-player</team>
+    <!-- Triggers the portal when filter is met -->
+    <all id="arena-1-winner-portal-trigger">
+        <region id="arena-1"/>
+        <objective id="arena-1-winner" any="true">arena-1-won</objective>
+    </all>
+    <all id="arena-2-winner-portal-trigger">
+        <region id="arena-2"/>
+        <objective id="arena-2-winner" any="true">arena-2-won</objective>
+    </all>
+    <all id="arena-3-winner-portal-trigger">
+        <region id="arena-3"/>
+        <objective id="arena-3-winner" any="true">arena-3-won</objective>
+    </all>
+    <all id="arena-4-winner-portal-trigger">
+        <region id="arena-4"/>
+        <objective id="arena-4-winner" any="true">arena-4-won</objective>
+    </all>
+    <all id="arena-5-winner-portal-trigger">
+        <region id="arena-5"/>
+        <objective id="arena-5-winner" any="true">arena-5-won</objective>
+    </all>
+    <all id="arena-6-winner-portal-trigger">
+        <region id="arena-6"/>
+        <objective id="arena-6-winner" any="true">arena-6-won</objective>
+    </all>
+    <all id="arena-7-winner-portal-trigger">
+        <region id="arena-7"/>
+        <objective id="arena-7-winner" any="true">arena-7-won</objective>
+    </all>
+    <all id="arena-8-winner-portal-trigger">
+        <region id="arena-8"/>
+        <objective id="arena-8-winner" any="true">arena-8-won</objective>
+    </all>
+    <all id="arena-9-winner-portal-trigger">
+        <region id="arena-9"/>
+        <objective id="arena-9-winner" any="true">arena-9-won</objective>
+    </all>
+    <all id="arena-10-winner-portal-trigger">
+        <region id="arena-10"/>
+        <objective id="arena-10-winner" any="true">arena-10-won</objective>
+    </all>
+    <all id="arena-11-winner-portal-trigger">
+        <region id="arena-11"/>
+        <objective id="arena-11-winner" any="true">arena-11-won</objective>
+    </all>
+    <all id="arena-12-winner-portal-trigger">
+        <region id="arena-12"/>
+        <objective id="arena-12-winner" any="true">arena-12-won</objective>
+    </all>
+    <all id="arena-13-winner-portal-trigger">
+        <region id="arena-13"/>
+        <objective id="arena-13-winner" any="true">arena-13-won</objective>
+    </all>
+    <all id="arena-14-winner-portal-trigger">
+        <region id="arena-14"/>
+        <objective id="arena-14-winner" any="true">arena-14-won</objective>
+    </all>
+    <all id="arena-15-winner-portal-trigger">
+        <region id="arena-15"/>
+        <objective id="arena-15-winner" any="true">arena-15-won</objective>
+    </all>
+    <!-- Alert system for rounds (when they start) -->
+    <all id="arena-1-starting">
+        <all id="arena-1-queues-done">
+            <objective any="true">arena-1-queued-1</objective>
+            <objective any="true">arena-1-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-1-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-1-queues-done"/>
+            <region id="arena-1"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-2-starting">
+        <all id="arena-2-queues-done">
+            <objective any="true">arena-2-queued-1</objective>
+            <objective any="true">arena-2-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-2-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-2-queues-done"/>
+            <region id="arena-2"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-3-starting">
+        <all id="arena-3-queues-done">
+            <objective any="true">arena-3-queued-1</objective>
+            <objective any="true">arena-3-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-3-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-3-queues-done"/>
+            <region id="arena-3"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-4-starting">
+        <all id="arena-4-queues-done">
+            <objective any="true">arena-4-queued-1</objective>
+            <objective any="true">arena-4-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-4-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-4-queues-done"/>
+            <region id="arena-4"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-5-starting">
+        <all id="arena-5-queues-done">
+            <objective any="true">arena-5-queued-1</objective>
+            <objective any="true">arena-5-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-5-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-5-queues-done"/>
+            <region id="arena-5"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-6-starting">
+        <all id="arena-6-queues-done">
+            <objective any="true">arena-6-queued-1</objective>
+            <objective any="true">arena-6-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-6-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-6-queues-done"/>
+            <region id="arena-6"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-7-starting">
+        <all id="arena-7-queues-done">
+            <objective any="true">arena-7-queued-1</objective>
+            <objective any="true">arena-7-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-7-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-7-queues-done"/>
+            <region id="arena-7"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-8-starting">
+        <all id="arena-8-queues-done">
+            <objective any="true">arena-8-queued-1</objective>
+            <objective any="true">arena-8-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-8-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-8-queues-done"/>
+            <region id="arena-8"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-9-starting">
+        <all id="arena-9-queues-done">
+            <objective any="true">arena-9-queued-1</objective>
+            <objective any="true">arena-9-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-9-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-9-queues-done"/>
+            <region id="arena-9"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-10-starting">
+        <all id="arena-10-queues-done">
+            <objective any="true">arena-10-queued-1</objective>
+            <objective any="true">arena-10-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-10-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-10-queues-done"/>
+            <region id="arena-10"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-11-starting">
+        <all id="arena-11-queues-done">
+            <objective any="true">arena-11-queued-1</objective>
+            <objective any="true">arena-11-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-11-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-11-queues-done"/>
+            <region id="arena-11"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-12-starting">
+        <all id="arena-12-queues-done">
+            <objective any="true">arena-12-queued-1</objective>
+            <objective any="true">arena-12-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-12-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-12-queues-done"/>
+            <region id="arena-12"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-13-starting">
+        <all id="arena-13-queues-done">
+            <objective any="true">arena-13-queued-1</objective>
+            <objective any="true">arena-13-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-13-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-13-queues-done"/>
+            <region id="arena-13"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-14-starting">
+        <all id="arena-14-queues-done">
+            <objective any="true">arena-14-queued-1</objective>
+            <objective any="true">arena-14-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-14-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-14-queues-done"/>
+            <region id="arena-14"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="arena-15-starting">
+        <all id="arena-15-queues-done">
+            <objective any="true">arena-15-queued-1</objective>
+            <objective any="true">arena-15-queued-2</objective>
+        </all>
+        <not>
+            <countdown duration="15s">
+                <all>
+                    <filter id="arena-15-queues-done"/>
+                </all>
+            </countdown>
+        </not>
+    </all>
+    <countdown duration="15s" message="Your round starts in {0}">
+        <all>
+            <filter id="arena-15-queues-done"/>
+            <region id="arena-15"/>
+            <participating/>
+        </all>
+    </countdown>
+    <!-- Triggers glass connecting bridges, 2m30s into each round -->
+    <!--<all id="after2m30s-1">
+            <countdown duration="2m30s">
+                <filter id="arena-1-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-1-starting"/>
+            <region id="arena-1"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-2">
+        <filter id="arena-2-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-2-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-2-starting"/>
+            <region id="arena-2"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-3">
+        <filter id="arena-3-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-3-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-3-starting"/>
+            <region id="arena-3"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-4">
+        <filter id="arena-4-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-4-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-4-starting"/>
+            <region id="arena-4"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-5">
+        <filter id="arena-5-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-5-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-5-starting"/>
+            <region id="arena-5"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-6">
+        <filter id="arena-6-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-6-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-6-starting"/>
+            <region id="arena-6"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-7">
+        <filter id="arena-7-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-7-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-7-starting"/>
+            <region id="arena-7"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-8">
+        <filter id="arena-8-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-8-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-8-starting"/>
+            <region id="arena-8"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-9">
+        <filter id="arena-9-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-9-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-9-starting"/>
+            <region id="arena-9"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-10">
+        <filter id="arena-10-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-10-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-10-starting"/>
+            <region id="arena-10"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-11">
+        <filter id="arena-11-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-11-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-11-starting"/>
+            <region id="arena-11"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-12">
+        <filter id="arena-12-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-12-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-12-starting"/>
+            <region id="arena-12"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-13">
+        <filter id="arena-13-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-13-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-13-starting"/>
+            <region id="arena-13"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-14">
+        <filter id="arena-14-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-14-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-14-starting"/>
+            <region id="arena-14"/>
+            <participating/>
+        </all>
+    </countdown>
+    <all id="after2m30s-15">
+        <filter id="arena-15-starting"/>
+            <countdown duration="2m30s">
+                <filter id="arena-15-starting"/>
+            </countdown>
+    </all>
+    <countdown duration="2m30s" message="Connecting platforms in {0}">
+        <all>
+            <filter id="arena-15-starting"/>
+            <region id="arena-15"/>
+            <participating/>
+        </all>
+    </countdown>-->
+</filters>
+<structures>
+    <!-- Regions full of air, drop platforms -->
+    <structure id="drop-arena-1-players-1" air="true" region="arena-1-drop-1"/>
+    <structure id="drop-arena-2-players-1" air="true" region="arena-2-drop-1"/>
+    <structure id="drop-arena-3-players-1" air="true" region="arena-3-drop-1"/>
+    <structure id="drop-arena-4-players-1" air="true" region="arena-4-drop-1"/>
+    <structure id="drop-arena-5-players-1" air="true" region="arena-5-drop-1"/>
+    <structure id="drop-arena-6-players-1" air="true" region="arena-6-drop-1"/>
+    <structure id="drop-arena-7-players-1" air="true" region="arena-7-drop-1"/>
+    <structure id="drop-arena-8-players-1" air="true" region="arena-8-drop-1"/>
+    <structure id="drop-arena-9-players-1" air="true" region="arena-9-drop-1"/>
+    <structure id="drop-arena-10-players-1" air="true" region="arena-10-drop-1"/>
+    <structure id="drop-arena-11-players-1" air="true" region="arena-11-drop-1"/>
+    <structure id="drop-arena-12-players-1" air="true" region="arena-12-drop-1"/>
+    <structure id="drop-arena-13-players-1" air="true" region="arena-13-drop-1"/>
+    <structure id="drop-arena-14-players-1" air="true" region="arena-14-drop-1"/>
+    <structure id="drop-arena-15-players-1" air="true" region="arena-15-drop-1"/>
+    <structure id="drop-arena-1-players-2" air="true" region="arena-1-drop-2"/>
+    <structure id="drop-arena-2-players-2" air="true" region="arena-2-drop-2"/>
+    <structure id="drop-arena-3-players-2" air="true" region="arena-3-drop-2"/>
+    <structure id="drop-arena-4-players-2" air="true" region="arena-4-drop-2"/>
+    <structure id="drop-arena-5-players-2" air="true" region="arena-5-drop-2"/>
+    <structure id="drop-arena-6-players-2" air="true" region="arena-6-drop-2"/>
+    <structure id="drop-arena-7-players-2" air="true" region="arena-7-drop-2"/>
+    <structure id="drop-arena-8-players-2" air="true" region="arena-8-drop-2"/>
+    <structure id="drop-arena-9-players-2" air="true" region="arena-9-drop-2"/>
+    <structure id="drop-arena-10-players-2" air="true" region="arena-10-drop-2"/>
+    <structure id="drop-arena-11-players-2" air="true" region="arena-11-drop-2"/>
+    <structure id="drop-arena-12-players-2" air="true" region="arena-12-drop-2"/>
+    <structure id="drop-arena-13-players-2" air="true" region="arena-13-drop-2"/>
+    <structure id="drop-arena-14-players-2" air="true" region="arena-14-drop-2"/>
+    <structure id="drop-arena-15-players-2" air="true" region="arena-15-drop-2"/>
+    <!-- Only move the structue if it detects both players have queued -->
+    <dynamic structure="drop-arena-1-players-1" offset="0,-1,0" trigger="arena-1-starting"/>
+    <dynamic structure="drop-arena-1-players-2" offset="0,-1,0" trigger="arena-1-starting"/>
+    <dynamic structure="drop-arena-2-players-1" offset="0,-1,0" trigger="arena-2-starting"/>
+    <dynamic structure="drop-arena-2-players-2" offset="0,-1,0" trigger="arena-2-starting"/>
+    <dynamic structure="drop-arena-3-players-1" offset="0,-1,0" trigger="arena-3-starting"/>
+    <dynamic structure="drop-arena-3-players-2" offset="0,-1,0" trigger="arena-3-starting"/>
+    <dynamic structure="drop-arena-4-players-1" offset="0,-1,0" trigger="arena-4-starting"/>
+    <dynamic structure="drop-arena-4-players-2" offset="0,-1,0" trigger="arena-4-starting"/>
+    <dynamic structure="drop-arena-5-players-1" offset="0,-1,0" trigger="arena-5-starting"/>
+    <dynamic structure="drop-arena-5-players-2" offset="0,-1,0" trigger="arena-5-starting"/>
+    <dynamic structure="drop-arena-6-players-1" offset="0,-1,0" trigger="arena-6-starting"/>
+    <dynamic structure="drop-arena-6-players-2" offset="0,-1,0" trigger="arena-6-starting"/>
+    <dynamic structure="drop-arena-7-players-1" offset="0,-1,0" trigger="arena-7-starting"/>
+    <dynamic structure="drop-arena-7-players-2" offset="0,-1,0" trigger="arena-7-starting"/>
+    <dynamic structure="drop-arena-8-players-1" offset="0,-1,0" trigger="arena-8-starting"/>
+    <dynamic structure="drop-arena-8-players-2" offset="0,-1,0" trigger="arena-8-starting"/>
+    <dynamic structure="drop-arena-9-players-1" offset="0,-1,0" trigger="arena-9-starting"/>
+    <dynamic structure="drop-arena-9-players-2" offset="0,-1,0" trigger="arena-9-starting"/>
+    <dynamic structure="drop-arena-10-players-1" offset="0,-1,0" trigger="arena-10-starting"/>
+    <dynamic structure="drop-arena-10-players-2" offset="0,-1,0" trigger="arena-10-starting"/>
+    <dynamic structure="drop-arena-11-players-1" offset="0,-1,0" trigger="arena-11-starting"/>
+    <dynamic structure="drop-arena-11-players-2" offset="0,-1,0" trigger="arena-11-starting"/>
+    <dynamic structure="drop-arena-12-players-1" offset="0,-1,0" trigger="arena-12-starting"/>
+    <dynamic structure="drop-arena-12-players-2" offset="0,-1,0" trigger="arena-12-starting"/>
+    <dynamic structure="drop-arena-13-players-1" offset="0,-1,0" trigger="arena-13-starting"/>
+    <dynamic structure="drop-arena-13-players-2" offset="0,-1,0" trigger="arena-13-starting"/>
+    <dynamic structure="drop-arena-14-players-1" offset="0,-1,0" trigger="arena-14-starting"/>
+    <dynamic structure="drop-arena-14-players-2" offset="0,-1,0" trigger="arena-14-starting"/>
+    <dynamic structure="drop-arena-15-players-1" offset="0,-1,0" trigger="arena-15-starting"/>
+    <dynamic structure="drop-arena-15-players-2" offset="0,-1,0" trigger="arena-15-starting"/> 
+    <!-- Glass bridges to prevent stalemates -->
+    <structure id="arena-1-bridge" air="true">
+        <region><cuboid min="0,26,-20" max="1,26,21"/></region>
+    </structure>
+    <structure id="arena-2-bridge" air="true">
+        <region><cuboid min="-40,26,-20" max="-39,26,21"/></region>
+    </structure>
+    <structure id="arena-3-bridge" air="true">
+        <region><cuboid min="-80,26,-20" max="-79,26,21"/></region>
+    </structure>
+    <structure id="arena-4-bridge" air="true">
+        <region><cuboid min="-120,26,-20" max="-119,26,21"/></region>
+    </structure>
+    <structure id="arena-5-bridge" air="true">
+        <region><cuboid min="-154,26,-20" max="-153,26,21"/></region>
+    </structure>
+    <structure id="arena-6-bridge" air="true">
+        <region><cuboid min="-188,26,-20" max="-187,26,21"/></region>
+    </structure>
+    <structure id="arena-7-bridge" air="true">
+        <region><cuboid min="-188,26,-115" max="-187,26,-74"/></region>
+    </structure>
+    <structure id="arena-8-bridge" air="true">
+        <region><cuboid min="-154,26,-115" max="-153,26,-74"/></region>
+    </structure>
+    <structure id="arena-9-bridge" air="true">
+        <region><cuboid min="-120,26,-115" max="-119,26,-74"/></region>
+    </structure>
+    <structure id="arena-10-bridge" air="true">
+        <region><cuboid min="-80,26,-115" max="-79,26,-74"/></region>
+    </structure>
+    <structure id="arena-11-bridge" air="true">
+        <region><cuboid min="-40,26,-115" max="-39,26,-74"/></region>
+    </structure>
+    <structure id="arena-12-bridge" air="true">
+        <region><cuboid min="0,26,-115" max="1,26,-74"/></region>
+    </structure>
+    <structure id="arena-13-bridge" air="true">
+        <region><cuboid min="0,26,-210" max="-39,26,-169"/></region>
+    </structure>
+    <structure id="arena-14-bridge" air="true">
+        <region><cuboid min="-40,26,-210" max="-79,26,-169"/></region>
+    </structure>
+    <structure id="arena-15-bridge" air="true">
+        <region><cuboid min="-80,26,-210" max="-119,26,-169"/></region>
+    </structure>
+    <!-- For the bridges in mid -->
+    <!--<dynamic structure="arena-1-bridge" offset="0,-1,0">
+        <trigger>
+            <all>
+                <filter id="arena-1-starting"/>
+                <not>
+                    <countdown duration="2m30s">
+                        <filter id="arena-1-starting"/>
+                    </countdown>
+                </not>
+            </all>
+        </trigger>
+    </dynamic>
+    <dynamic structure="arena-2-bridge" offset="0,-1,0" trigger="after2m30s-2"/>
+    <dynamic structure="arena-3-bridge" offset="0,-1,0" trigger="after2m30s-3"/>
+    <dynamic structure="arena-4-bridge" offset="0,-1,0" trigger="after2m30s-4"/>
+    <dynamic structure="arena-5-bridge" offset="0,-1,0" trigger="after2m30s-5"/>
+    <dynamic structure="arena-6-bridge" offset="0,-1,0" trigger="after2m30s-6"/>
+    <dynamic structure="arena-7-bridge" offset="0,-1,0" trigger="after2m30s-7"/>
+    <dynamic structure="arena-8-bridge" offset="0,-1,0" trigger="after2m30s-8"/>
+    <dynamic structure="arena-9-bridge" offset="0,-1,0" trigger="after2m30s-9"/>
+    <dynamic structure="arena-10-bridge" offset="0,-1,0" trigger="after2m30s-10"/>
+    <dynamic structure="arena-11-bridge" offset="0,-1,0" trigger="after2m30s-11"/>
+    <dynamic structure="arena-12-bridge" offset="0,-1,0" trigger="after2m30s-12"/>
+    <dynamic structure="arena-13-bridge" offset="0,-1,0" trigger="after2m30s-13"/>
+    <dynamic structure="arena-14-bridge" offset="0,-1,0" trigger="after2m30s-14"/>
+    <dynamic structure="arena-15-bridge" offset="0,-1,0" trigger="after2m30s-15"/>-->
+</structures>
+<portals observers="never"> 
+    <!-- Quarter Finals -->
+
+    <!-- Arena 9 Matchups -->
+    <portal destination="arena-9-point-1" forward="arena-1-winner-portal-trigger" yaw="@180"/>
+    <portal destination="arena-9-point-2" forward="arena-8-winner-portal-trigger" yaw="@0"/>
+    <!-- Arena 10 Matchups -->
+    <portal destination="arena-10-point-1" forward="arena-2-winner-portal-trigger" yaw="@180"/>
+    <portal destination="arena-10-point-2" forward="arena-7-winner-portal-trigger"  yaw="@0"/>
+    <!-- Arena 11 Matchups -->
+    <portal destination="arena-11-point-1" forward="arena-3-winner-portal-trigger" yaw="@180"/>
+    <portal destination="arena-11-point-2" forward="arena-6-winner-portal-trigger" yaw="@0"/>
+    <!-- Arena 12 Matchups -->
+    <portal destination="arena-12-point-1" forward="arena-4-winner-portal-trigger" yaw="@180"/>
+    <portal destination="arena-12-point-2" forward="arena-5-winner-portal-trigger" yaw="@0"/>
+    
+    <!-- Semi Finals -->
+
+    <!-- Arena 13 Matchups -->
+    <portal destination="arena-13-point-1" forward="arena-9-winner-portal-trigger" yaw="@180"/>
+    <portal destination="arena-13-point-2" forward="arena-12-winner-portal-trigger" yaw="@0"/>
+    <!-- Arena 14 Matchups -->
+    <portal destination="arena-14-point-1" forward="arena-10-winner-portal-trigger" yaw="@180"/>
+    <portal destination="arena-14-point-2" forward="arena-11-winner-portal-trigger" yaw="@0"/>
+
+    <!-- Finals -->
+
+    <!-- Arena 15 Matchups -->
+    <portal destination="arena-15-point-1" forward="arena-13-winner-portal-trigger" yaw="@180"/>
+    <portal destination="arena-15-point-2" forward="arena-14-winner-portal-trigger" yaw="@0"/>
+</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<blitz>
+    <lives>1</lives>
+</blitz>
+</map>

@@ -1,0 +1,106 @@
+<map proto="1.4.3">
+<name>Flumine</name>
+<version>1.0.0</version>
+<objective>Capture the enemy flag 5 times!</objective>
+<!-- Map authors & contributors. -->
+<authors>
+    <author uuid="62d9830a-0b77-4e21-9d4f-de4b60c68fb5"/> <!-- Sharpie -->
+</authors>
+<!-- Map modules, i.e. objectives, regions, spawns. -->
+<broadcasts>
+    <alert after="15s">Flags may respawn at any of the two flag posts!</alert>
+</broadcasts>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+</filters>
+<regions>
+    <point id="blue-spawn">-55.5,14.1,0.5</point>
+    <point id="red-spawn">56.5,14.1,0.5</point>
+    <point id="obs-spawn">0.5,34,-2.5</point>
+    <cuboid id="blue-team-net" min="-42,10,-1" max="-40,13,1"/>
+    <cuboid id="red-team-net" min="40,10,-1" max="42,13,1"/>
+    <apply block="never" region="everywhere"/>
+</regions>
+<teams>
+    <team id="red-team" color="red" max="10" max-overfill="12">Red</team>
+    <team id="blue-team" color="blue" max="10" max-overfill="12">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" material="stone sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="golden carrot" amount="32"/>
+        <item slot="3" material="arrow" amount="16"/>
+        <item slot="4" material="golden apple" amount="1"/>
+        <chestplate unbreakable="true" material="iron chestplate"/>
+        <effect duration="5" amplifier="1">instant_health</effect>
+    </kit>
+    <kit id="red" parents="spawn">
+        <helmet color="cd0000" material="leather helmet"/>
+        <leggings color="cd0000" material="leather leggings"/>
+    </kit>
+    <kit id="blue" parents="spawn">
+        <helmet color="0066cc" material="leather helmet"/>
+        <leggings color="0066cc" material="leather leggings"/>
+    </kit>
+    <kit id="flag-carrier">
+        <walk-speed>0.5</walk-speed>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red-team" kit="red">
+        <regions yaw="90">
+            <region id="red-spawn"/>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue">
+        <regions yaw="-90">
+            <region id="blue-spawn"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <region id="obs-spawn"/>
+        </regions>
+    </default>
+</spawns>
+<flags>
+    <!-- Red flags stuff -->
+    <post id="red-post" pickup-filter="only-blue" recover-time="5s" respawn-time="15s">
+        <block>37.5,10,24.5</block>   
+        <block>37.5,10,-23.5</block>
+    </post>
+    <flag id="red-flag" name="Red Flag" color="red" post="red-post" owner="blue-team" carry-kit="flag-carrier"/>
+    <net post="red-post" points="1" region="blue-team-net" capture-filter="only-blue"/>
+    <!-- Blue flags stuff -->
+    <post id="blue-post" pickup-filter="only-red" recover-time="5s" respawn-time="15s">
+        <block id="blue-flag-right">-36.5,10,-23.5</block>
+        <block id="blue-flag-left">-36.5,10,24.5</block>
+    </post>
+    <flag id="blue-flag" name="Blue Flag" color="blue" post="blue-post" owner="red-team" carry-kit="flag-carrier"/>
+    <net post="blue-post" points="1" region="red-team-net" capture-filter="only-red"/>
+</flags>
+<score>
+    <limit>5</limit>
+</score>
+<time result="objectives">15m</time>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" material="golden apple"/>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>golden apple</tool>
+    <tool>arrow</tool>
+    <tool>leather helmet</tool>
+    <tool>leather leggings</tool>
+    <tool>iron chestplate</tool>
+</toolrepair>
+<itemremove>
+    <item>golden carrot</item>
+</itemremove>
+</map>

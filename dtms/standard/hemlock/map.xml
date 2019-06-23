@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Hemlock</name>
+<version>1.1.2</version>
+<objective>Destory the enemy's monument</objective>
+<!--Authors-->
+<authors>
+	<author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9"/><!--Obe-->
+	<author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/><!--Vice-->
+	<author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/><!--mitchiii_-->
+</authors>
+<contributors>
+	<contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6"/><!--rocky-->
+	<contributor uuid="c88f74cc-51e7-43da-b893-54f8ec630701"/>
+	<!--epicness-->
+	<contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65"/>
+	<!--BGM-->
+</contributors>
+<!--Teams-->
+<teams>
+	<team id="red-team" color="dark red" max="12" max-overfill="16">Red</team>
+	<team id="blue-team" color="blue" max="12" max-oerfill="16">Blue</team>
+</teams>
+<!--Filters-->
+<!--Filters-->
+<filters>
+	<team id="only-red">red-team</team>
+	<team id="only-blue">blue-team</team>
+	<deny id="no-void"><void/></deny>
+</filters>
+<regions>
+	<union id="build-region">
+		<rectangle min="-18,-142" max="-34,-109"/>
+		<rectangle min="-50,-97" max="-66,-154"/>
+		<rectangle min="-18,-130" max="-50,-121"/>
+	</union>
+	<union id="red-spawn">
+		<cuboid min="-50,16,-202" max="-34,0,-219"/>
+	</union>
+	<union id="blue-spawn">
+		<cuboid min="-50,16,-49" max="-34,0,-32"/>
+	</union>
+	<union id="portals">
+		<cylinder base="-50.5,7,-195" radius="3" height="7"/>
+		<cylinder base="-50.5,7,-56" radius="3" height="7"/>
+	</union>
+	<apply block="never" region="red-spawn" message="You cannot edit the spawns!"/>
+	<apply block="never" region="blue-spawn" message="You cannot edit the spawns!"/>
+	<apply block="never" region="portals" message="You cannot edit the blocks around the portal!"/>
+	<apply block-place="no-void" block-break="always" message="You cannot edit the void!">
+		<region>
+			<negative>
+				<union>
+					<rectangle min="-18,-142" max="-50,-109"/>
+					<rectangle min="-50,-97" max="-66,-154"/>
+					<union id="portal-exits">
+						<cuboid id="red-portal" min="-55.5,21,-202.5" max="-53.5,24,-200.5"/>
+						<cuboid id="blue-portal" min="-55.5,21,-48.5" max="-53.5,24,-50.5"/>
+					</union>
+				</union>
+			</negative>
+		</region>
+	</apply>
+	<apply enter="only-blue" region="blue-spawn" message="You cannot enter the enemies spawn!"/>
+	<apply enter="only-red" region="red-spawn" message="You cannot enter the enemies spawn!"/>
+	<apply block="never" message="You may not modify the portal exits!" region="portal-exits"/>
+</regions>
+<kits>
+	<kit id="spawn-kit" force="true">
+		<item slot="0" material="iron sword" unbreakable="true"/>
+		<item slot="1" material="bow" unbreakable="true"/>
+		<item slot="2" material="diamond pickaxe" unbreakable="true"/>
+		<item slot="3" material="iron axe" unbreakable="true"/>
+		<item slot="4" material="wood" damage="5" amount="64"/>
+		<item slot="7" material="golden apple" amount="1"/>
+		<item slot="8" material="bread" amount="24"/>
+		<item slot="28" material="arrow" amount="48"/>
+		<item slot="30" material="iron spade"/>
+	</kit>
+	<kit id="red-spawn-kit" parents="spawn-kit">
+		<item slot="5" material="stained clay" damage="14" amount="24"/>
+		<helmet color="cd0000" material="leather helmet"/>
+		<chestplate color="cd0000" material="leather chestplate"/>
+		<boots color="cd0000" material="leather boots"/>
+	</kit>
+	<kit id="blue-spawn-kit" parents="spawn-kit">
+		<item slot="5" material="stained clay" damage="11" amount="24"/>
+		<helmet color="0066cc" material="leather helmet"/>
+		<chestplate color="0066cc" material="leather chestplate"/>
+		<boots color="0066cc" material="leather boots"/>
+	</kit>
+</kits>
+<destroyables>
+	<destroyable owner="red-team"  name="Monument" materials="obsidian" completion="100%" mode-changes="true">
+		<region>
+			<cuboid min="-27,28,-194" max="-26,25,-195"/>
+		</region>
+	</destroyable>
+	<destroyable owner="blue-team"  name="Monument" materials="obsidian" completion="100%" mode-changes="true">
+		<region>
+			<cuboid min="-27,28,-56" max="-26,25,-57"/>
+		</region>
+	</destroyable>
+</destroyables>
+<modes>
+    <mode after="10m" material="coal block" name="Coal block mode"/>
+    <mode after="20m" material="ender stone" name="Ender stone mode"/>
+    <mode after="30m" material="glass" name="Glass mode"/>
+</modes>
+<!--Spawns-->
+<spawns>
+	<spawn team="red-team" kit="red-spawn-kit">
+		<regions yaw="0">
+			<cylinder base="-41.5,6.5,-208.5" radius="2" height="0"/>
+		</regions>
+	</spawn>
+	<spawn team="blue-team" kit="blue-spawn-kit">
+		<regions yaw="180">
+			<cylinder base="-41.5,6.5,-42.5" radius="2" height="0"/>
+		</regions>
+	</spawn>
+	<default>
+		<regions yaw="-90">
+			<point>-79.5,36.0625,-125.5</point>
+		</regions>
+	</default>
+</spawns>
+<kill-rewards>
+	<kill-reward>
+        <item amount="1" material="golden apple"/>
+        <item amount="12" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<!--Iron block respawn-->
+<renewables>
+	<renewable rate="2.5" grow="false" particles="true" sound="true" avoid-players="4">
+		<region>
+			<rectangle min="-47,-80" max="-39,-73"/>
+			<rectangle min="-39,-178" max="-47,-171"/>
+		</region>
+		<renew-filter>
+			<any>
+				<material>iron block</material>
+			</any>
+		</renew-filter>
+		<replace-filter>
+			<any>
+				<material>air</material>
+			</any>
+		</replace-filter>
+	</renewable>
+</renewables>
+<portals>
+    <portal x="@-54.5" y="@22" z="@-201.5" yaw="@-90">
+        <region><cylinder base="-50.5,8,-195" radius="0.75" height="2"/></region>
+    </portal>
+    <portal x="@-54.5" y="@22" z="@-49.5" yaw="@-90">
+        <region><cylinder base="-50.5,8,-56" radius="0.75" height="2"/></region>
+    </portal>
+</portals>
+<!--Item remove-->
+<toolrepair>
+	<item>iron sword</item>
+	<item>bow</item>
+	<item>iron pickaxe</item>
+	<item>iron axe</item>
+</toolrepair>
+<itemremove>
+	<item>bread</item>
+	<item>dirt</item>
+	<item>double step</item>
+	<item>step</item>
+	<item>leaves</item>
+	<item>stone</item>
+	<item>clay ball</item>
+	<item>stained clay</item>
+	<item>seeds</item>
+	<item>cobble wall</item>
+	<item>iron sword</item>
+	<item>bow</item>
+	<item>arrow</item>
+	<item>diamond pickaxe</item>
+	<item>iron axe</item>
+	<item>log 2</item>
+	<item>golden apple</item>
+	<item>ladder</item>
+	<item>rails</item>
+	<item>iron chestplate</item>
+	<item>iron helmet</item>
+	<item>iron boots</item>
+	<item>iron leggings</item>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>leather boots</item>
+    <item>obsidian</item>
+</itemremove>
+<maxbuildheight>35</maxbuildheight>
+</map>

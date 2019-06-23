@@ -1,0 +1,8 @@
+<map proto="1.4.3">
+<!--Dev phase-->
+<phase>development</phase>
+<!--Lilypad glitch temp fix-->
+
+<!--Disable random mutations-->
+<mutations chance="-1"/>
+</map>

@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Burnette</name>
+<version>1.0.0</version>
+<objective>Capture both enemy wools before time runs out!</objective>
+<authors>
+    <author uuid="a63de09d-6fa9-436f-9070-26f5e9a4d27b" contribution="Building, XML" />
+    <!-- dragonrider455 -->
+</authors>
+<timelock>on</timelock>
+<teams>
+    <team id="red-team" color="dark red" max="16" max-overfill="18">Red</team>
+    <team id="blue-team" color="blue" max="16" max-overfill="18">Blue</team>
+</teams>
+<spawns>
+    <default>
+        <region>
+            <point>149.5,52.5,165.5</point>
+        </region>
+    </default>
+    <spawn team="red-team" kit="red">
+        <region yaw="0">
+            <point>149.5,3.5,87.5</point>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="blue">
+        <region yaw="180">
+            <point>149.5,3.5,243.5</point>
+        </region>
+    </spawn>
+</spawns>
+<wools>
+    <wool team="blue-team" color="pink" craftable="false" location="159,22,89">
+        <monument>
+            <block>152.5,4,243.5</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="purple" craftable="false" location="140,22,89">
+        <monument>
+            <block>146.5,4,243.5</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="green" craftable="false" location="159,22,242">
+        <monument>
+            <block>152.5,4,87.5</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="lime" craftable="false" location="140,22,242">
+        <monument>
+            <block>146.5,4,87.5</block>
+        </monument>
+    </wool>
+</wools>
+<kits>
+    <kit id="spawn">
+        <item slot="0" material="iron sword" unbreakable="true" />
+        <item slot="1" material="bow" unbreakable="true" />
+        <item slot="2" material="iron pickaxe" unbreakable="true" enchantment="dig_speed:1" />
+        <item slot="3" material="iron axe" unbreakable="true" />
+        <item slot="4" material="wood" damage="1" amount="64" />
+        <item slot="5" material="glass" amount="48" />
+        <item slot="6" material="iron ingot" />
+        <item slot="7" material="bread" amount="32" />
+        <item slot="8" material="golden apple" />
+        <item slot="28" material="arrow" amount="32" />
+    </kit>
+    <kit id="red" parents="spawn">
+        <helmet color="cd0000" material="leather helmet" unbreakable="true" />
+        <chestplate color="cd0000" material="iron chestplate" enchantment="protection_projectile:1" unbreakable="true" />
+    </kit>
+    <kit id="blue" parents="spawn">
+        <helmet color="0066cc" material="leather helmet" unbreakable="true" />
+        <chestplate color="0066cc" material="iron chestplate" enchantment="protection_projectile:1" unbreakable="true" />
+    </kit>
+</kits>
+<kill-rewards>
+    <kill-reward>
+        <item amount="16" material="arrow" />
+        <item amount="1" material="golden apple" />
+        <item amount="1" material="iron ingot" />
+    </kill-reward>
+</kill-rewards>
+<filters>
+    <not id="deny-red">
+        <team>red-team</team>
+    </not>
+    <not id="deny-blue">
+        <team>blue-team</team>
+    </not>
+    <not id="no-mine-spawner">
+        <material>mob spawner</material>
+    </not>
+    <any id="woolroom-whitelist">
+        <material>stained glass</material>
+        <material>web</material>
+    </any>
+</filters>
+<regions>
+    <union id="woolrooms">
+        <union id="red-woolrooms">
+            <rectangle min="135,94" max="145,84" />
+            <rectangle min="164,94" max="154,84" />
+        </union>
+        <union id="blue-woolrooms">
+            <rectangle min="164,237" max="154,247" />
+            <rectangle min="135,237" max="145,247" />
+        </union>
+    </union>
+    <union id="team-spawns">
+        <cuboid id="red-spawn" min="146,15,84" max="153,0,106" />
+        <cuboid id="blue-spawn" min="153,15,247" max="146,0,225" />
+    </union>
+    <negative id="non-playable">
+        <rectangle min="115,247" max="184,83" />
+    </negative>
+    <apply enter="deny-red" region="blue-spawn" message="You may not enter the other team's spawn!" />
+    <apply enter="deny-blue" region="red-spawn" message="You may not enter the other team's spawn!" />
+    <apply enter="deny-red" region="red-woolrooms" message="You may not enter your own wool room!" />
+    <apply enter="deny-blue" region="blue-woolrooms" message="You may not enter your own wool room!" />
+    <apply block="never" region="team-spawns" message="You may not modify the spawn area!" />
+    <apply block="woolroom-whitelist" region="woolrooms" message="You may not modify the wool room!" />
+    <apply block-place="never" region="non-playable" message="You may not place blocks in this area!" />
+    <apply block="no-mine-spawner" />
+</regions>
+<maxbuildheight>31</maxbuildheight>
+<renewables>
+    <renewable rate="1" grow="true" particles="true" sound="true" avoid-players="2">
+        <region>
+            <union>
+                <cuboid min="148,17,110" max="151,9,113" />
+                <cuboid min="151,17,221" max="148,9,218" />
+            </union>
+        </region>
+        <renew-filter>
+            <any>
+                <material>iron block</material>
+            </any>
+        </renew-filter>
+        <replace-filter>
+            <any>
+                <material>air</material>
+                <material>wood</material>
+            </any>
+        </replace-filter>
+    </renewable>
+</renewables>
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>glass</item>
+    <item>arrow</item>
+    <item>bread</item>
+    <item>golden apple</item>
+    <item>string</item>
+    <item>leather helmet</item>
+    <item>iron chestplate</item>
+</itemremove>
+</map>

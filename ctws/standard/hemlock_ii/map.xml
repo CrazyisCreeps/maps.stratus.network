@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Hemlock II</name>
+<version>1.1.0</version>
+<objective>Take the enemy's wool located to either side of the enemy's base and place it in your victory monument.</objective>
+<authors>
+    <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- ViceWatercolour -->
+</authors>
+<contributors>
+    <contributor uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="old map design"/> <!-- Obelistics -->
+    <contributor uuid="f690a591-348b-482e-a18d-7779d0c0a28c" contribution="old map design"/> <!-- mitchiii_ -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="24">Blue</team>
+    <team id="red" color="dark red" max="24">Red</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="2" unbreakable="true" enchantment="durability:3;dig speed:1" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" unbreakable="true" enchantment="durability:3;dig speed:1" material="iron spade"/>
+        <item slot="5" amount="64" damage="1" material="wood"/>
+    		<item slot="6" amount="32" material="glass"/>
+    		<item slot="7" amount="1" material="golden apple"/>
+        <item slot="8" amount="32" material="cooked_fish"/>
+        <boots material="iron boots"/>
+    		<item slot="28" material="arrow"/>
+    </kit>
+  	<kit id="red-spawn-kit" parents="spawn">
+    		<helmet color="cd0000" material="leather helmet"/>
+    		<chestplate color="cd0000" material="leather chestplate"/>
+    		<leggings color="cd0000" material="leather leggings"/>
+  	</kit>
+  	<kit id="blue-spawn-kit" parents="spawn">
+    		<helmet color="0066cc" material="leather helmet"/>
+    		<chestplate color="0066cc" material="leather chestplate"/>
+    		<leggings color="0066cc" material="leather leggings"/>
+  	</kit>
+</kits>
+<spawns>
+    <spawn team="red" yaw="0" kit="red-spawn-kit">
+        <regions><point>7.5,10.5,4.5</point></regions>
+    </spawn>
+    <spawn team="blue" yaw="180" kit="blue-spawn-kit">
+        <regions><point>7.5,10.5,230.5</point></regions>
+    </spawn>
+    <default yaw="90">
+        <regions><cylinder base="68.5,13,117.5" radius="1" height="0"/></regions>
+    </default>
+</spawns>
+<filters>
+    <!-- Team Filters -->
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <!-- Block Filters -->
+    <deny id="no-void">
+        <void/>
+    </deny>
+    <material id="only-web">web</material>
+    <!-- Usage Filters -->
+    <any id="only-cobwebs">
+        <material>30</material>
+    </any>
+</filters>
+<regions>
+    <rectangle id="all" min="-oo,-oo" max="oo,oo"/>
+    <negative id="void">
+        <union id="spawns">
+            <cuboid id="red-spawn" min="-2,0,20" max="16,18,0"/>
+            <cuboid id="blue-spawn" min="-2,0,214" max="16,18,234"/>
+        </union>
+        <union id="wool-rooms">
+            <union id="blue-rooms">
+                <union id="pink-room">
+                    <rectangle min="32,-11" max="37,-29"/>
+                    <rectangle min="37,-29" max="43,-10"/>
+                    <rectangle min="44,-9" max="50,-28"/>
+                </union>
+                <union id="lime-room">
+                    <rectangle min="-35,-9" max="-28,-30"/>
+                    <rectangle min="-28,-30" max="-22,-10"/>
+                    <rectangle min="-22,-11" max="-17,-29"/>
+                </union>
+            </union>
+            <union id="red-rooms">
+                <union id="orange-room">
+                    <rectangle min="-17,246" max="-22,264"/>
+                    <rectangle min="-22,264" max="-28,245"/>
+                    <rectangle min="-28,244" max="-35,263"/>
+                </union>
+                <union id="cyan-room">
+                    <rectangle min="50,244" max="43,264"/>
+                    <rectangle min="43,264" max="37,245"/>
+                    <rectangle min="32,263" max="37,246"/>
+                </union>
+            </union>
+        </union>
+        <union id="bridge-areas">
+            <rectangle min="32.5,56.5" max="49.5,66.5"/>
+            <rectangle min="16.5,109.5" max="33.5,125.5"/>
+            <rectangle min="32.5,168.5" max="49.5,178.5"/>
+            <rectangle min="-34.5,178.5" max="-17.5,168.5"/>
+            <rectangle min="-17.5,148.5" max="-34.5,138.5"/>
+            <rectangle min="-34.5,-168.5" max="-17.5,178.5"/>
+        </union>
+    </negative>
+    <union id="wool-placements">
+        <block location="13,11,11" id="cyan-wool"/>
+        <block location="1,11,11" id="orange-wool"/>
+        <block location="1,11,223" id="pink-wool"/>
+        <block location="13,11,223" id="lime-wool"/>
+    </union>
+    <!-- Void -->
+    <apply block-place="no-void" message="You may not edit the void area!" region="void"/>
+    <!-- Spawns -->
+  	<apply block="never" region="red-spawn" message="You cannot edit the spawns!"/>
+    <apply block="never" region="blue-spawn" message="You cannot edit the spawns!"/>
+    <!-- Entry Rules -->
+    <apply region="red-rooms" enter="only-red" message="You may not enter your own wool room"/>
+    <apply region="blue-rooms" enter="only-blue" message="You may not enter your own wool room"/>
+    <apply region="red-rooms" use="only-red"/>
+    <apply region="blue-rooms" use="only-blue"/>
+    <!-- All WoolRooms -->
+    <apply block="only-cobwebs" message="You may not edit the wool rooms!" region="wool-rooms"/>
+</regions>
+<wools craftable="false">
+    <wool team="blue" color="lime" location="-28.5,19,-26.5" monument="lime-wool"/>
+    <wool team="blue" color="pink" location="42.5,19,-26.5" monument="pink-wool"/>
+    <wool team="red" color="cyan" location="42.5,19,260.5" monument="cyan-wool"/>
+    <wool team="red" color="orange" location="-28.5,19,260.5" monument="orange-wool"/>
+</wools>
+<renewables>
+    <renewable rate="2.5" grow="false" particles="true" sound="true" avoid-players="2">
+        <region>
+            <rectangle min="14,38" max="0,36"/>
+            <rectangle min="0,196" max="14,198"/>
+        </region>
+        <renew-filter>
+            <any>
+                <material>iron block</material>
+            </any>
+        </renew-filter>
+        <replace-filter>
+            <any>
+                <material>air</material>
+            </any>
+        </replace-filter>
+    </renewable>
+</renewables>
+<itemremove>
+    <item>string</item>
+    <item>glowstone dust</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>dirt</item>
+    <item>clay ball</item>
+    <item>sand</item>
+    <item>log 2</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>cooked fish</item>
+    <item>golden apple</item>
+    <item>log</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron spade</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<killreward>
+    <item material="golden apple"/>
+</killreward>
+<maxbuildheight>25</maxbuildheight>
+<timelock>on</timelock>
+</map>

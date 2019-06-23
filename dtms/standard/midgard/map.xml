@@ -1,0 +1,245 @@
+<map proto="1.4.2">
+<name>Midgard</name>
+<version>1.0.0</version>
+<objective>Destroy both of the enemy's monuments.</objective>
+<authors>
+    <author uuid="f70b7a8f-93b2-480f-9d54-88e21485a042"/>    <!-- Diamyx -->
+    <author uuid="75fd93dd-8e48-4698-81a2-97dae2ec5b5f"/>    <!-- Pugzy -->
+    <author uuid="5c0d744e-2561-4e24-966c-2f5ca4a8f8eb"/>    <!-- SamSafari -->
+</authors>
+<contributors>
+    <contributor uuid="07fa10c6-f564-4630-861e-fe134ae27527"/>    <!-- Yoyo_ -->
+</contributors>
+<teams>
+    <team color="red" max="32" id="red-team">Red</team>
+    <team color="blue" max="32" id="blue-team">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red-team" kit="red-kit" yaw="90" region="red-spawn"/>
+    <spawn team="blue-team" kit="blue-kit" yaw="-90" region="blue-spawn"/>
+    <default region="obs-spawn" yaw="0"/>
+</spawns>
+<kits>
+    <kit id="default-kit">
+        <item slot="0">stone_sword</item>
+        <item slot="1">bow</item>
+        <item slot="2">diamond_pickaxe</item>
+        <item slot="3">iron_axe</item>
+        <!-- Slot 4 / Team Coloured Wood -->
+        <item slot="5">iron_spade</item>
+        <item slot="6" amount="32">arrow</item>
+        <item slot="7">golden_apple</item>
+        <item slot="8" amount="32">cooked_mutton</item>
+        <helmet unbreakable="true">iron helmet</helmet>
+    </kit>
+    <kit id="red-kit" parents="default-kit">
+        <item slot="4" amount="32" damage="1">wood</item>
+        <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue-kit" parents="default-kit">
+        <item slot="4" amount="32">wood</item>
+        <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="0066cc" unbreakable="true">leather leggings</leggings>
+        <boots color="0066cc" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<broadcasts>
+  <alert after="5s">Dirt falls like sand.</alert>
+</broadcasts>
+<modes>
+    <mode name="`3BEACON MONUMENT MODE" after="20m" material="beacon"/>
+    <mode name="`3COAL MONUMENT MODE" after="35m" material="coal block"/>
+</modes>
+<destroyables materials="obsidian" completion="100%" mode-changes="true">
+    <destroyable name="Front" owner="blue-team" region="front-blue-mon"/>
+    <destroyable name="Back" owner="blue-team" region="back-blue-mon"/>
+    <destroyable name="Front" owner="red-team" region="front-red-mon"/>
+    <destroyable name="Back" owner="red-team" region="back-red-mon"/>
+</destroyables>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <time id="10-seconds">10s</time>
+    <time id="15-seconds">15s</time>
+</filters>
+<regions>
+    <negative id="not-playable">
+      <rectangle id="playable" min="194,-31" max="-194,32"/>
+    </negative>
+    <cylinder id="red-spawn" base="177.5,39,-0.5" radius=".5" height=".5"/>
+    <cylinder id="blue-spawn" base="-176.5,39,1.5" radius=".5" height=".5"/>
+    <cylinder id="obs-spawn" base="0.5,26,-64.5" radius=".5" height="0"/>
+    <cylinder id="red-spawn-enter" base="177.5,30,-0.5" radius="3.5" height="10"/>
+    <cylinder id="blue-spawn-enter" base="-176.5,30,1.5" radius="3.5" height="10"/>
+    <union id="spawn-block">
+        <above id="red-spawn-block" x="165"/>
+        <below id="blue-spawn-block" x="-164"/>
+    </union>
+    <union id="map-void">
+        <above id="north-void" z="-31"/>
+        <below id="south-void" x="32"/>
+    </union>
+    <cuboid id="front-red-mon" min="91,31,3" max="92,29,4"></cuboid>
+    <cuboid id="back-red-mon" min="139,41,-14" max="140,39,-13"></cuboid>
+    <cuboid id="front-blue-mon" min="-90,31,-2" max="-91,29,-3"></cuboid>
+    <cuboid id="back-blue-mon" min="-138,41,15" max="-139,39,14"></cuboid>
+    <union id="max-build-height">
+      <cuboid id="build-height-mid" min="63,38,34" max="-62,52,-36"></cuboid>
+      <cuboid id="build-height-sides" min="116,58,37" max="-115,52,-36"></cuboid>
+    </union>
+    <union id="atmospheric-tnt">
+      <!-- Red Side -->
+      <cuboid id="red-back-tnt" min="95,57,20" max="94,55,21"/>
+      <cuboid id="red-back-redstone" min="95,57,21" max="94,55,22"/>
+      <cuboid id="red-front-tnt" min="62,44,-18" max="64,42,-19"/>
+      <cuboid id="red-front-redstone" min="62,44,-19" max="64,42,-20"/>
+      <!-- Blue Side -->
+      <cuboid id="blue-back-tnt" min="-94,57,-19" max="-93,55,-20"/>
+      <cuboid id="blue-back-redstone" min="-94,57,-20" max="94,55,-21"/>
+      <cuboid id="blue-front-tnt" min="-62,44,19" max="-63,42,20"/>
+      <cuboid id="blue-front-redstone" min="-62,44,20" max="-63,42,21"/>
+    </union>
+    <!-- Applied Regions -->
+    <apply block="never" region="not-playable"/>
+    <apply block="never" region="max-build-height" message="You have reached the maximum build height for this area."/>
+    <apply block="never" region="spawn-block" message="You may not place blocks in spawn."/>
+    <apply enter="only-red" region="red-spawn-enter"/>
+    <apply enter="only-blue" region="blue-spawn-enter"/>
+</regions>
+<structures>
+    <!-- Red Side -->
+    <structure id="red-front-redstone-structure" region="red-front-redstone"/>
+    <structure id="red-front-tnt-structure" region="red-front-tnt"/>
+    <dynamic structure="red-front-redstone-structure" offset="0,-20,0" trigger="15-seconds"/>
+    <dynamic structure="red-front-tnt-structure" offset="0,-21,0" trigger="15-seconds"/>
+    <structure id="red-back-redstone-structure" region="red-back-redstone"/>
+    <structure id="red-back-tnt-structure" region="red-back-tnt"/>
+    <dynamic structure="red-back-redstone-structure" offset="0,-20,0" trigger="10-seconds"/>
+    <dynamic structure="red-back-tnt-structure" offset="0,-21,0" trigger="10-seconds"/>
+    <!-- Blue Side -->
+    <structure id="blue-front-redstone-structure" region="blue-front-redstone"/>
+    <structure id="blue-front-tnt-structure" region="blue-front-tnt"/>
+    <dynamic structure="blue-front-redstone-structure" offset="0,-20,0" trigger="15-seconds"/>
+    <dynamic structure="blue-front-tnt-structure" offset="0,-21,0" trigger="15-seconds"/>
+    <structure id="blue-back-redstone-structure" region="blue-back-redstone"/>
+    <structure id="blue-back-tnt-structure" region="blue-back-tnt"/>
+    <dynamic structure="blue-back-redstone-structure" offset="0,-20,0" trigger="10-seconds"/>
+    <dynamic structure="blue-back-tnt-structure" offset="0,-21,0" trigger="10-seconds"/>
+</structures>
+<tnt>
+    <fuse>0s</fuse>
+</tnt>
+<falling-blocks>
+    <rule>
+        <filter>
+            <any>
+                <material>dirt</material>
+                <material>soil</material>
+                <material>grass</material>
+            </any>
+        </filter>
+    </rule>
+</falling-blocks>
+<block-drops>
+    <rule>
+        <filter>
+            <material>wood:1</material>
+        </filter>
+        <drops>
+            <item damage="1">wood</item>
+        </drops>
+        <fall-chance>1</fall-chance>
+        <fall-speed>1</fall-speed>
+        <land-chance>0</land-chance>
+    </rule>
+    <rule>
+        <filter>
+            <material>stone:0</material>
+        </filter>
+        <drops>
+            <item>stone</item>
+        </drops>
+        <fall-chance>1</fall-chance>
+        <fall-speed>1</fall-speed>
+        <land-chance>0</land-chance>
+    </rule>
+    <rule>
+        <filter>
+            <material>stone:5</material>
+        </filter>
+        <drops>
+            <item damage="5">stone</item>
+        </drops>
+        <fall-chance>1</fall-chance>
+        <fall-speed>1</fall-speed>
+        <land-chance>0</land-chance>
+    </rule>
+    <rule>
+        <filter>
+            <material>wood step:5</material>
+        </filter>
+        <drops>
+            <item damage="5">wood step</item>
+        </drops>
+        <fall-chance>1</fall-chance>
+        <fall-speed>1</fall-speed>
+        <land-chance>0</land-chance>
+    </rule>
+</block-drops>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+<maxbuildheight>58</maxbuildheight>
+<itemremove>
+    <item>iron helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>obsidian</item>
+    <item>redstone block</item>
+    <item>coal block</item>
+    <item>beacon</item>
+    <item>seeds</item>
+    <item>wood</item>
+    <item>beetroot seeds</item>
+    <item>sandstone</item>
+    <item>wood button</item>
+    <item>wood plate</item>
+    <item>snow ball</item>
+    <item>flint</item>
+    <item>banner</item>
+    <item>netherrack</item>
+    <item>carpet</item>
+    <item>cobble wall</item>
+    <item>stone:2</item>
+    <item>stone:4</item>
+    <item>stone:6</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron spade</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item>golden apple</item>
+        <item amount="12">arrow</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <filter id="only-red"/>
+        </filter>
+        <item material="wood" damage="1" amount="16"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <filter id="only-blue"/>
+        </filter>
+        <item material="wood" amount="16"/>
+    </kill-reward>
+</kill-rewards>
+</map>

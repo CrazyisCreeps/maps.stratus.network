@@ -1,0 +1,124 @@
+<map proto="1.4.2">
+<name>Rolexius</name>
+<version>1.0.2</version>
+<gamemode>dtc</gamemode>
+<objective>Leak the enemy's core to win.</objective>
+<authors>
+	<author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- Oystervice -->
+    <author uuid="606252f7-3dc2-4277-853c-c5df999e22fc"/> <!-- Eteh -->
+    <author uuid="b333ddfc-019d-4de6-9e47-7a7fd232ce97"/> <!-- spexxi90 -->
+</authors>
+<teams>
+	<team id="red" color="dark red" max="10">Red</team>
+	<team id="blue" color="blue" max="10">Blue</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="0">
+            <cuboid min="4.5,30,0.5" max="6.5,30,2.5"/>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="180">
+            <cuboid min="4.5,30,136.5" max="6.5,30,134.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <cuboid min="57.5,31,67.5" max="59.5,31,69.5"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4" amount="48">wood</item>
+        <item slot="5" amount="16">glass</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="32">cooked fish</item>
+		<item slot="28" amount="1">arrow</item>
+        <potion duration="3" amplifier="3">heal</potion>
+        <potion duration="6">damage resistance</potion>
+		<leggings unbreakable="true">iron leggings</leggings>
+    </kit>
+	<kit id="red-kit" parents="spawn">
+		<helmet color="cd0000" unbreakable="true" enchantment="protection explosions:1">leather helmet</helmet>
+	    <chestplate color="cd0000" unbreakable="true" enchantment="protection explosions:1">leather chestplate</chestplate>
+        <boots color="cd0000" unbreakable="true" enchantment="protection explosions:1">leather boots</boots>
+    </kit>
+	<kit id="blue-kit" parents="spawn">
+	    <helmet color="0066cc" unbreakable="true" enchantment="protection explosions:1">leather helmet</helmet>
+		<chestplate color="0066cc" unbreakable="true" enchantment="protection explosions:1">leather chestplate</chestplate>
+        <boots color="0066cc" unbreakable="true" enchantment="protection explosions:1">leather boots</boots>
+    </kit>
+</kits>
+<filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+	<not id="no-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+	<negative id="void">
+		<union id="playable">
+		<rectangle min="0.5,120.5" max="10.5,15.5"/>
+		<rectangle min="24.5,47.5" max="-13.5,89.5"/>
+		</union>
+		<union id="spawns">
+			<rectangle id="blue-spawn" min="7.5,3.5" max="3.5,-0.5"/>
+			<rectangle id="red-spawn" min="7.5,133.5" max="3.5,137.5"/>
+		</union>
+	</negative>
+		<apply block-place="no-void" message="You may not place blocks in this area" region="void"/>
+		<apply block="never" message="You may not edit spawn" region="spawns"/>
+		<apply enter="only-red" message="You may not enter the enemy spawn" region="red-spawn"/>
+		<apply enter="only-blue" message="You may not enter the enemy spawn" region="blue-spawn"/>
+</regions>
+<modes>
+    <mode after="15m" material="gold block" name="`6Gold `0Monument `6Mode"/>
+    <mode after="20m" material="glass" name="`0Glass `0Monument `6Mode"/>
+</modes>
+<cores material="obsidian" leak="3" mode-changes="true">
+    <core team="blue">
+		<region><cuboid min="8.5,5,33.5" max="2.5,15,26.5"/></region>
+    </core>
+    <core team="red">
+		<region><cuboid min="8.5,5,110.5" max="2.5,15,103.5"/></region>
+    </core>
+</cores>
+<maxbuildheight>28</maxbuildheight>
+<itemremove>
+    <item>cooked fish</item>
+    <item>obsidian</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>string</item>
+    <item>glowstone dust</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>sugar cane</item>
+    <item>clay ball</item>
+    <item>stone plate</item>
+    <item>sand</item>
+    <item>wood</item>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>iron leggings</item>
+    <item>leather boots</item>
+	<item>red rose</item>
+    <item>arrow</item>
+</itemremove>
+<killreward>
+    <item amount="1">golden apple</item>
+</killreward>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+</map>

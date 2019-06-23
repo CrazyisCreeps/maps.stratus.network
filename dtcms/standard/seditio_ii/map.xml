@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Seditio II</name>
+<version>1.0.1</version>
+<objective>Leak lava from the enemy's Core and break their 2 Emerald ore monuments</objective>
+<gamemode>dtc</gamemode>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="1c898c77-b0cc-474a-8ce4-b5521f2b18e7"/> <!-- Proddyy -->
+    <author uuid="8de835a6-916a-4fcf-9b25-239dda454411"/> <!-- Passively -->
+    <author uuid="039e7a97-925f-4943-bfd2-3c79573af2cd"/> <!-- DYEH -->
+</authors>
+<contributors>
+    <contributor uuid="6054286f-89a0-479e-8c26-a893b90b2ff4" contribution="Original map idea"/> <!-- Sesia -->
+    <contributor uuid="c9ac7c8d-d13b-42a7-a608-f55ab9636417" contribution="Original map idea"/> <!-- Martin -->
+</contributors>
+<teams>
+    <team id="green-team" color="green" min="1" max="15">Green</team>
+    <team id="orange-team" color="gold" min="1" max="15">Orange</team>
+</teams>
+<maxbuildheight>80</maxbuildheight>
+<spawns>
+	<default kit="all">
+        <regions yaw="90">
+            <point>-64.5,54.5,2.5</point>
+        </regions>
+    </default>
+    <spawn team="green-team" filter="spawn1" kit="gkit">
+        <regions yaw="0">
+            <point>0.5,57,-78.5</point>
+        </regions>
+    </spawn>
+    <spawn team="green-team" filter="spawn2" kit="gkit">
+        <regions yaw="0">
+            <point>0.5,107,-78.5</point>
+        </regions>
+    </spawn>
+    <spawn team="green-team" filter="spawn3" kit="gkit">
+        <regions yaw="0">
+            <point>0.5,207,-78.5</point>
+        </regions>
+    </spawn>
+    <spawn team="green-team" filter="spawn4" kit="gkit">
+        <regions yaw="0">
+            <point>0.5,238,-78.5</point>
+        </regions>
+    </spawn>
+    <spawn team="orange-team" filter="spawn1" kit="okit">
+        <regions yaw="180">
+            <point>0.5,57,84.5</point>
+        </regions>
+    </spawn>
+    <spawn team="orange-team" filter="spawn2" kit="okit">
+        <regions yaw="180">
+            <point>0.5,107,84.5</point>
+        </regions>
+    </spawn>
+    <spawn team="orange-team" filter="spawn3" kit="okit">
+        <regions yaw="180">
+            <point>0.5,207,84.5</point>
+        </regions>
+    </spawn>
+    <spawn team="orange-team" filter="spawn4" kit="okit">
+        <regions yaw="180">
+            <point>0.5,238,84.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<kits>
+	<kit id="all">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="gen" parents="all">
+        <item slot="0" material="iron sword"/>
+        <item slot="1" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="2" enchantment="durability:3" material="diamond pickaxe"/>
+        <item slot="3" material="iron axe"/>
+        <item slot="4" amount="64" material="smooth brick"/>
+        <item slot="31" amount="64" material="smooth brick"/>
+        <item slot="6" amount="16" material="planks"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <item slot="28" amount="1" material="arrow"/>
+    </kit>
+    <kit id="okit" parents="gen">
+        <helmet color="D87F33" enchantment="protection environmental:1" material="leather helmet"/>
+        <item slot="7" amount="64" damage="1" material="stained clay"/>
+    </kit>
+    <kit id="gkit" parents="gen">
+        <helmet color="4C7F99" enchantment="protection environmental:1" material="leather helmet"/>
+        <item slot="7" amount="64" damage="13" material="stained clay"/>
+    </kit>
+    <kit id="sp">
+        <effect duration="3" amplifier="4">resistance</effect>
+    </kit>
+</kits>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<filters>
+	<not id="no-void">
+        <void/>
+    </not>
+<!-- Time Filters -->
+    <not id="spawn1">
+        <time>5m</time>
+    </not>
+    <all id="spawn2">
+        <time>5m</time>
+        <not>
+            <time>15m</time>
+        </not>
+    </all>
+    <all id="spawn3">
+        <time>15m</time>
+        <not>
+            <time>30m</time>
+        </not>
+    </all>
+    <all id="spawn4">
+        <time>30m</time>
+        <not>
+            <time>45m</time>
+        </not>
+    </all>
+</filters>
+<regions>
+	 <union id="spawnplat">
+	 	<cuboid min="-1,46,-66" max="2,53,-59"/>
+	 	<cuboid min="2,46,72" max="-1,53,65"/>
+	 </union> 
+    <apply block="never" region="spawnplat" message="You may not modify blocks in the spawn platform!"/>
+    <!-- blocks 36 -->
+    <apply block="no-void" message="You may not modify blocks outside the playing area!"/>
+    <cylinder id="pbasegreen" base="0,37,-79" radius="3" height="1"/>
+    <cylinder id="pbaseorange" base="0,37,84" radius="3" height="1"/>
+    <apply kit="sp">
+    	<region>
+    		<region id="pbasegreen"/>
+    		<region id="pbaseorange"/>
+    	</region>
+    </apply>
+</regions>
+<portals>
+    <!-- Spawn Portals -->
+    <portal x="@0.5" y="@47.5" z="@-64.5" yaw="@0" region="pbasegreen"/>
+    <portal x="@0.5" y="@47.5" z="@70.5" yaw="@180" region="pbaseorange"/>
+</portals>
+<cores 
+	material="obsidian" 
+	leak="11" 
+	mode-changes="true">
+    <core team="green-team">
+        <region>
+        	<cuboid min="4,47,-31" max="-3,37,-38"/>
+        </region>
+    </core>
+    <core team="orange-team">
+        <region>
+        	<cuboid min="-3,47,37" max="4,37,44"/>
+        </region>
+    </core>
+</cores>
+<destroyables 
+	name="Monument" 
+	materials="emerald block" 
+	show-progress="true" 
+	sparks="true">
+    <destroyable owner="green-team" name="Right Monument">
+       <region>
+       	<cuboid min="26,54,-50" max="29,42,-47"/>
+       </region>
+    </destroyable>
+    <destroyable owner="green-team" name="Left Monument">
+       <region>
+       	<cuboid min="-25,54,-47" max="-28,42,-50"/>
+       </region>
+    </destroyable>
+    <destroyable owner="orange-team" name="Right Monument">
+       <region>
+       	<cuboid min="-25,54,56" max="-28,42,53"/>
+       </region>
+    </destroyable>
+    <destroyable owner="orange-team" name="Left Monument">
+       <region>
+       	<cuboid min="26,54,53" max="29,42,56"/>
+       </region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="10m" material="gold block" name="`6GOLD CORE MODE"/>
+    <mode after="30m" material="packed ice" name="`bPACKED ICE CORE MODE"/>
+</modes>
+<itemremove>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>1:4</item> <!-- Polished Diorite -->
+    <item>1:6</item> <!-- Polished Andesite -->
+    <item>98:2</item> <!-- Cracked Stone Bricks -->
+    <item>dispenser</item>
+    <item>obsidian</item>
+    <item>emerald block</item>
+    <item>gold block</item>
+    <item>packed ice</item>
+    <item>cooked beef</item>
+    <item>159:1</item> <!-- Orange Stained Clay -->
+    <item>159:13</item> <!-- Green Stained Clay -->
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+</map>
