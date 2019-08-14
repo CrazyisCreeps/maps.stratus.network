@@ -4,20 +4,14 @@
 <version>1.2</version>
 <objective>Destroy the enemies core and monument!</objective>
 <authors>
-	<author uuid="21acc8c4-314b-45ce-9aae-3691e065c47b"/>
-	<!-- CarbineM1 -->
-	<author uuid="98caaac8-4996-4486-b2da-7600aadc27ae"/>
-	<!-- rokpoko -->
+	<author uuid="21acc8c4-314b-45ce-9aae-3691e065c47b"/> <!-- CarbineM1 -->
+	<author uuid="98caaac8-4996-4486-b2da-7600aadc27ae"/> <!-- rokpoko -->
 </authors>
 <contributors>
-	<contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65" contribution="XML"/>
-	<!-- BGM -->
-	<contributor uuid="a63de09d-6fa9-436f-9070-26f5e9a4d27b" contribution="Layout feedback"/>
-	<!-- dragonrider455 -->
-	<contributor uuid="3b95de2f-2bb6-4a16-b0ba-c723794af4d6" contribution="Minor feedback"/>
-	<!-- Chaselic204 -->
-	<contributor uuid="b5967591-14fc-421f-a5e2-931498e10fb8" contribution="Minor feedback"/>
-	<!-- OCNs_OMEN -->
+	<contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65" contribution="XML"/> <!-- BGM -->
+	<contributor uuid="a63de09d-6fa9-436f-9070-26f5e9a4d27b" contribution="Layout feedback"/> <!-- dragonrider455 -->
+	<contributor uuid="3b95de2f-2bb6-4a16-b0ba-c723794af4d6" contribution="Minor feedback"/> <!-- Chaselic204 -->
+	<contributor uuid="b5967591-14fc-421f-a5e2-931498e10fb8" contribution="Minor feedback"/> <!-- OCNs_OMEN -->
 </contributors>
 <teams>
 	<team id="red" color="dark red" max="18" max-overfill="20">Red</team>
@@ -25,26 +19,27 @@
 </teams>
 <kits>
 	<kit id="spawn">
-		<item slot="0" material="iron sword"/>
-		<item slot="1" enchantment="arrow infinite" material="bow"/>
-		<item slot="2" material="diamond pickaxe"/>
-		<item slot="3" material="iron axe"/>
+        <clear/>
+		<item slot="0" material="iron sword" unbreakable="true"/>
+		<item slot="1" enchantment="arrow infinite" material="bow" unbreakable="true"/>
+		<item slot="2" material="diamond pickaxe" unbreakable="true"/>
+		<item slot="3" material="iron axe" unbreakable="true"/>
 		<item slot="4" amount="64" damage="1" material="wood"/>
-		<item slot="5" amount="64" material="cooked chicken"/>
-		<item slot="6" amount="27" material="iron ingot"/>
+		<item slot="5" amount="27" material="iron ingot"/>
+		<item slot="6" material="bucket"/>
 		<item slot="7" amount="2" material="golden apple"/>
-		<item slot="8" material="water bucket"/>
+		<item slot="8" amount="64" material="golden carrot"/>
 		<item slot="28" material="arrow"/>
-		<item slot="30" material="diamond spade"/>
-		<helmet material="gold helmet"/>
-		<chestplate material="gold chestplate"/>
-		<boots material="gold boots"/>
+		<item slot="30" material="diamond spade" unbreakable="true"/>
+		<helmet material="gold helmet" unbreakable="true"/>
+		<chestplate material="gold chestplate" unbreakable="true"/>
+		<boots material="gold boots" unbreakable="true"/>
 	</kit>
 	<kit id="red-kit" parents="spawn">
-		<leggings color="b02e26" material="leather leggings"/>
+		<leggings color="b02e26" material="leather leggings" unbreakable="true"/>
 	</kit>
 	<kit id="blue-kit" parents="spawn">
-		<leggings color="3c44aa" material="leather leggings"/>
+		<leggings color="3c44aa" material="leather leggings" unbreakable="true"/>
 	</kit>
 </kits>
 <spawns>
@@ -97,12 +92,12 @@
 <cores material="obsidian" mode-changes="true" leak="3">
 	<core team="red">
 		<region>
-			<cuboid min="67,20,20" max="72,15,15"/>
+			<cuboid min="62,14,20" max="67,20,15"/>
 		</region>
 	</core>
 	<core team="blue">
 		<region>
-			<cuboid min="-33,20,-40" max="-28,15,-45"/>
+			<cuboid min="-22,14,-45" max="-27,20,-40"/>
 		</region>
 	</core>
 </cores>
@@ -133,7 +128,7 @@
 	<item>gold chestplate</item>
 	<item>leather leggings</item>
 	<item>gold boots</item>
-	<item>cooked chicken</item>
+	<item>golden carrot</item>
 	<item>obsidian</item>
 	<item>gold block</item>
 	<item>gravel</item>
@@ -149,7 +144,6 @@
 	<item>furnace</item>
 	<item>redstone block</item>
 	<item>wheat</item>
-	<item>water bucket</item>
 	<item>arrow</item>
 	<item>390</item>
 	<item>380</item>
@@ -158,12 +152,18 @@
 	<item>38:1</item>
 	<item>1:5</item>
 </itemremove>
-<tool-repair>
+<toolrepair>
 	<tool>iron sword</tool>
 	<tool>bow</tool>
 	<tool>diamond pickaxe</tool>
 	<tool>iron axe</tool>
 	<tool>diamond spade</tool>
-</tool-repair>
+</toolrepair>
+<itemkeep>
+    <item>golden apple</item>
+    <item>iron ingot</item>
+    <item>bucket</item>
+    <item>water bucket</item>
+</itemkeep>
 <maxbuildheight>26</maxbuildheight>
 </map>

@@ -1,3 +1,3 @@
 # xmls-stratus
 
-Updated as of June 21st, 2019
+Updated as of August 14th, 2019

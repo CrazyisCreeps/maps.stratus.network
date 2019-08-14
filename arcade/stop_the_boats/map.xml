@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.4.0" game="States">
+    <name>Stop The Boats</name>
+    <version>1.0</version>
+    <objective>Take over Australia before the time runs out!</objective>
+    <authors>
+        <author uuid="7475c44e-3066-468f-a4c6-488fe9612097" />
+        <!-- Jc -->
+    </authors>
+    <time result="green">6m</time>
+    <teams>
+        <team id="green" color="green" max="5" max-overill="7">Tony Abbott</team>
+        <team id="gold" color="gold" max="5" max-overill="7">Boat People</team>
+    </teams>
+    <broadcasts>
+        <tip after="1m">No one, however smart, however well educated, however experienced, is the suppository of all wisdom. - Tony Abbott</tip>
+        <tip after="2m">The Coalition will end the waste, repay the debt, stop the big new taxes and, above all else, stop the boats. - Tony Abbott</tip>
+        <tip after="3m">Indonesia is a country for which I have a great deal of respect and personal affection based on my own time in Indonesia. I want nothing, but the best for Indonesia, and I certainly want, Leigh, I certainly want the boats stopped and that is overwhelmingly in the interests of both our countries. - Tony Abbott</tip>
+        <tip after="4m">I'll be accountable to the Australian public at the next election - they expect us to stop the boats and that's what we are doing. - Tony Abbott</tip>
+        <tip after="5m">Jesus knew that there was a place for everything and it’s not necessarily everyone’s place to come to Australia. - Tony Abbott</tip>
+    </broadcasts>
+    <kits>
+        <kit id="all">
+            <potion duration="oo">night vision</potion>
+        </kit>
+        <kit id="team" parents="all">
+            <potion duration="oo">saturation</potion>
+            <clear />
+        </kit>
+        <kit id="green-kit" parents="team">
+            <item slot="0" name="Didgeridoo" enchantment="DAMAGE_ALL:3;KNOCKBACK:3" unbreakable="true" attributes="generic.movementSpeed:base:0.2">Stick</item>
+            <item slot="1" name="Boomerang with String" enchantment="ARROW_DAMAGE:2;ARROW_INFINITE" unbreakable="true">Bow</item>
+            <item slot="17">Arrow</item>
+            <helmet color="FFFF00" name="Cork Hat" material="leather helmet" locked="true" />
+            <chestplate color="2FFF00" name="Vegemite Stained Shirt" material="leather chestplate" locked="true" />
+            <leggings color="FFFF00" name="Shorts" material="leather leggings" locked="true" />
+            <boots color="2FFF00" name="Ugg Boots" material="leather boots" locked="true" />
+        </kit>
+        <kit id="gold-kit" parents="team">
+            <item slot="0">Boat</item>
+            <item slot="1">Boat</item>
+            <item slot="2">Boat</item>
+            <item slot="3">Boat</item>
+            <potion duration="oo" amplifier="1">increase damage</potion>
+            <potion duration="oo" amplifier="1">regeneration</potion>
+        </kit>
+        <kit id="speed-kit">
+            <potion duration="oo" amplifier="10">SPEED</potion>
+        </kit>
+        <kit id="wither-kit">
+            <potion duration="oo" amplifier="1">WITHER</potion>
+        </kit>
+    </kits>
+    <itemremove>
+        <item>stick</item>
+        <item>wood</item>
+        <item>bow</item>
+        <item>arrow</item>
+        <item>leather helmet</item>
+        <item>leather chestplate</item>
+        <item>leather leggings</item>
+        <item>leather boots</item>
+        <item>furnace</item>
+        <item>chest</item>
+        <item>wool</item>
+        <item>mutton</item>
+    </itemremove>
+    <itemkeep>
+        <item>boat</item>
+    </itemkeep>
+    <gamerules>
+        <naturalRegeneration>false</naturalRegeneration>
+    </gamerules>
+    <spawns>
+        <default>
+            <regions>
+                <cylinder base="71.5,77,13.5" radius="3" height="1" />
+            </regions>
+        </default>
+        <spawn team="gold" kit="gold-kit">
+            <regions>
+                <point yaw="180">71,6,118</point>
+                <point yaw="145">145,6,87</point>
+                <point yaw="90">174,6,12</point>
+                <point yaw="45">144,6,-60</point>
+                <point yaw="0">71,6,-90</point>
+                <point yaw="-45">-2,6,-59</point>
+                <point yaw="-90">-31,6,14</point>
+                <point yaw="-145">-2,6,87</point>
+            </regions>
+        </spawn>
+        <spawn team="green" kit="green-kit">
+            <regions>
+                <cylinder base="71.5,10,13.5" radius="6" height="1" />
+            </regions>
+        </spawn>
+    </spawns>
+    <control-points incremental="true" visual-materials="never">
+                    <!-- NT CP -->
+        <control-point name="Northern Territory" id="cap-nt" show-progress="true" capture-time="20">
+            <capture>
+                <region id="NT" />
+            </capture>
+            <player-filter>
+                <team>gold</team>
+            </player-filter>
+        </control-point>
+                    <!-- WA CP -->
+        <control-point name="Western Australia" id="cap-wa" show-progress="true" capture-time="15">
+            <capture>
+                <region id="WA" />
+            </capture>
+            <player-filter>
+                <team>gold</team>
+            </player-filter>
+        </control-point>
+                    <!-- SA CP -->
+        <control-point name="South Australia" id="cap-sa" show-progress="true" capture-time="11">
+            <capture>
+                <region id="SA" />
+            </capture>
+            <player-filter>
+                <team>gold</team>
+            </player-filter>
+        </control-point>
+                    <!-- TAS CP -->
+        <control-point name="Tasmania" id="cap-tas" show-progress="true" capture-time="10">
+            <capture>
+                <region id="TAS" />
+            </capture>
+            <player-filter>
+                <team>gold</team>
+            </player-filter>
+        </control-point>
+                    <!-- ACT CP -->
+        <control-point name="ACT (The Flag)" id="cap-act" show-progress="true" capture-time="6">
+            <capture>
+                <region id="ACT" />
+            </capture>
+            <player-filter>
+                <team>gold</team>
+            </player-filter>
+        </control-point>
+                    <!-- NSW CP -->
+        <control-point name="New South Whales" id="cap-nsw" show-progress="true" capture-time="10">
+            <capture>
+                <region id="NSW" />
+            </capture>
+            <player-filter>
+                <team>gold</team>
+            </player-filter>
+        </control-point>
+                    <!-- QLD CP -->
+        <control-point name="Queensland" id="cap-qld" show-progress="true" capture-time="20">
+            <capture>
+                <region id="QLD" />
+            </capture>
+            <player-filter>
+                <team>gold</team>
+            </player-filter>
+        </control-point>
+                    <!-- VIC CP -->
+        <control-point name="Victoria" id="cap-vic" show-progress="true" capture-time="16">
+            <capture>
+                <region id="VIC" />
+            </capture>
+            <player-filter>
+                <team>gold</team>
+            </player-filter>
+        </control-point>
+    </control-points>
+    <filters>
+        <team id="tony-team">green</team>
+    </filters>
+    <regions>
+        <apply region="Ring" lend-kit="speed-kit" />
+        <complement id="Ring">
+            <region id="Glass" />
+            <region id="Inside" />
+        </complement>        -->
+        <apply block="never" region="everywhere" />
+        <cylinder id="Glass" base="71.5,6,13.5" radius="110" height="1" />
+        <cylinder id="Inside" base="71.5,6,13.5" radius="98" height="1" />
+        <apply filter="tony-team" region="outside-barrier" lend-kit="wither-kit" />
+        <complement id="outside-barrier">
+            <region id="everywhere"/>
+            <region id="stay-inside"/>
+        </complement>
+        <cylinder id="stay-inside" base="77.5,0,13.5" radius="60" height="oo" />
+        <union id="boat-spawns">
+            <point yaw="180">71,6,118</point>
+            <point yaw="145">145,6,87</point>
+            <point yaw="90">174,6,12</point>
+            <point yaw="45">144,6,-60</point>
+            <point yaw="0">71,6,-90</point>
+            <point yaw="-45">-2,6,-59</point>
+            <point yaw="-90">-31,6,14</point>
+            <point yaw="-145">-2,6,87</point>
+        </union>
+        <union id="NT">
+            <!-- Northern Territory Union -->
+            <cuboid min="77,5,5" max="55,oo,28" />
+            <cuboid min="55,5,6" max="54,oo,28" />
+            <cuboid min="54,5,7" max="53,5,28" />
+            <cuboid min="53,5,8" max="52,oo,28" />
+            <cuboid min="52,5,10" max="51,oo,28" />
+            <cuboid min="51,5,11" max="50,oo,28" />
+            <cuboid min="50,5,12" max="49,oo,27" />
+            <cuboid min="49,5,13" max="48,oo,26" />
+            <cuboid min="48,5,14" max="45,oo,25" />
+            <cuboid min="45,5,13" max="44,oo,25" />
+            <cuboid min="44,5,13" max="43,oo,24" />
+        </union>
+        <union id="WA">
+            <!-- Western Australia Union -->
+            <cuboid min="75,5,57" max="72,oo,56" />
+            <cuboid min="76,5,56" max="68,oo,55" />
+            <cuboid min="79,5,55" max="67,oo,54" />
+            <cuboid min="80,5,54" max="65,oo,53" />
+            <cuboid min="82,5,53" max="64,oo,52" />
+            <cuboid min="84,5,52" max="64,oo,51" />
+            <cuboid min="86,5,51" max="63,oo,50" />
+            <cuboid min="88,5,50" max="63,oo,49" />
+            <cuboid min="92,5,49" max="62,oo,48" />
+            <cuboid min="93,5,48" max="62,oo,47" />
+            <cuboid min="94,5,47" max="61,oo,46" />
+            <cuboid min="100,5,46" max="60,oo,45" />
+            <cuboid min="101,5,45" max="58,oo,44" />
+            <cuboid min="100,5,44" max="56,oo,43" />
+            <cuboid min="100,5,43" max="54,oo,42" />
+            <cuboid min="99,5,42" max="53,oo,41" />
+            <cuboid min="99,5,41" max="51,oo,40" />
+            <cuboid min="98,5,40" max="50,oo,40" />
+            <cuboid min="97,5,39" max="48,oo,38" />
+            <cuboid min="97,5,38" max="47,oo,36" />
+            <cuboid min="97,5,36" max="48,oo,34" />
+            <cuboid min="96,5,34" max="49,oo,33" />
+            <cuboid min="96,5,33" max="50,oo,32" />
+            <cuboid min="96,5,32" max="51,oo,30" />
+            <cuboid min="95,5,30" max="51,oo,39" />
+            <cuboid min="95,5,30" max="51,oo,29" />
+        </union>
+        <union id="SA">
+            <!-- South Australia Union -->
+            <cuboid min="78,5,1" max="89,oo,28" />
+            <cuboid min="89,5,19" max="90,oo,28" />
+            <cuboid min="90,5,23" max="91,oo,28" />
+            <cuboid min="91,5,25" max="92,oo,28" />
+            <cuboid min="92,5,27" max="93,oo,28" />
+            <cuboid min="89,5,1" max="90,oo,15" />
+            <cuboid min="90,5,1" max="91,oo,14" />
+            <cuboid min="91,5,1" max="92,oo,13" />
+            <cuboid min="92,5,1" max="93,oo,11" />
+            <cuboid min="93,5,1" max="94,oo,10" />
+            <cuboid min="94,5,1" max="95,oo,9" />
+            <cuboid min="95,5,1" max="96,oo,8" />
+            <cuboid min="96,5,1" max="97,oo,7" />
+            <cuboid min="97,5,1" max="98,oo,6" />
+            <cuboid min="98,5,1" max="99,oo,5" />
+            <cuboid min="99,5,1" max="100,oo,4" />
+            <cuboid min="100,5,1" max="102,oo,3" />
+            <cuboid min="102,5,1" max="103,oo,2" />
+        </union>
+        <union id="TAS">
+            <!-- Tasmania Union -->
+            <cuboid min="115,5,-13" max="118,oo,-7" />
+            <cuboid min="118,5,-12" max="120,oo,-8" />
+            <cuboid min="120,5,-11" max="121,oo,-9" />
+        </union>
+        <union id="ACT">
+            <!-- Australian Capital Territory Union -->
+            <cuboid min="94,5,-17" max="96,oo,-16" />
+            <cuboid min="94,5,-16" max="95,oo,-15" />
+        </union>
+        <union id="NSW">
+            <!-- New South Whales Union -->
+            <cuboid min="101,5,-18" max="100,oo,-19" />
+            <cuboid min="100,5,-15" max="99,oo,-20" />
+            <cuboid min="99,5,-14," max="98,oo,-20" />
+            <cuboid min="98,5,-8" max="97,oo,-20" />
+            <cuboid min="97,5,-17" max="96,oo,-21" />
+            <cuboid min="96,5,-18" max="95,oo,-21" />
+            <cuboid min="95,5,-18" max="94,oo,-22" />
+            <cuboid min="94,5,-17" max="93,oo,-23" />
+            <cuboid min="97,5,-5" max="96,oo,-16" />
+            <cuboid min="96,5,0" max="95,oo,-15" />
+            <cuboid min="95,5,0" max="94,oo,-14" />
+            <cuboid min="94,5,0" max="93,oo,-15" />
+            <cuboid min="93,5,0" max="91,oo,-23" />
+            <cuboid min="91,5,0" max="87,oo,-24" />
+            <cuboid min="87,5,0" max="84,oo,-25" />
+            <cuboid min="84,5,-24" max="83,oo,-25" />
+            <cuboid min="84,5,0" max="83,oo,-15" />
+            <cuboid min="83,5,0" max="82,oo,-8" />
+        </union>
+        <union id="QLD">
+            <!-- Queensland Union -->
+            <cuboid min="77,5,4" max="56,oo,1" />
+            <cuboid min="77,5,1" max="55,oo,0" />
+            <cuboid min="56,5,0" max="54,oo,-11" />
+            <cuboid min="54,5,-1" max="53,oo,-10" />
+            <cuboid min="53,5,-2" max="52,oo,-3" />
+            <cuboid min="53,5,-3" max="50,oo,-10" />
+            <cuboid min="50,5,-3" max="49,oo,-9" />
+            <cuboid min="49,5,-4" max="48,oo,-8" />
+            <cuboid min="48,5,-4" max="47,oo,-7" />
+            <cuboid min="47,5,-4" max="44,oo,-5" />
+            <cuboid min="47,5,-5" max="42,oo,-6" />
+            <cuboid min="83,5,-15" max="82,oo,-24" />
+            <cuboid min="82,5,-8" max="81,oo,-26" />
+            <cuboid min="81,5,0" max="79,oo,-26" />
+            <cuboid min="79,5,0" max="56,oo,-11" />
+            <cuboid min="79,5,-11" max="74,oo,-25" />
+            <cuboid min="74,5,-11" max="73,oo,-24" />
+            <cuboid min="73,5,-11" max="71,oo,-23" />
+            <cuboid min="71,5,-11" max="70,oo,-22" />
+            <cuboid min="70,5,-11" max="69,oo,-21" />
+            <cuboid min="69,5,-11" max="67,oo,-20" />
+            <cuboid min="67,5,-11" max="66,oo,-19" />
+            <cuboid min="66,5,-11" max="65,oo,-18" />
+            <cuboid min="65,5,-11" max="63,oo,-17" />
+            <cuboid min="63,5,-11" max="62,oo,-16" />
+            <cuboid min="62,5,-11" max="61,oo,-15" />
+            <cuboid min="61,5,-11" max="60,oo,-13" />
+            <cuboid min="60,5,-11" max="59,oo,-12" />
+        </union>
+        <union id="VIC">
+            <!-- Victoria Union -->
+            <cuboid min="108,5,-7" max="107,oo,-14" />
+            <cuboid min="107,5,-5" max="106,oo,-15" />
+            <cuboid min="106,5,-3" max="105,oo,-17" />
+            <cuboid min="105,5,0" max="101,oo,-18" />
+            <cuboid min="103,5,-18" max="102,oo,-19" />
+            <cuboid min="101,5,0" max="100,oo,-15" />
+            <cuboid min="100,5,0" max="99,oo,-14" />
+            <cuboid min="99,5,0" max="98,oo,-8" />
+            <cuboid min="98,5,0" max="97,oo,-5" />
+        </union>
+    </regions>
+</map>

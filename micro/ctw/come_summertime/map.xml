@@ -1,13 +1,14 @@
 <?xml version="1.0"?> <!-- built in march 2019 -->
 <map proto="1.4.2">
 <name>Come Summertime</name>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Capture the wool!</objective>
 <authors>
     <author uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30"/> <!--  Ruediger_LP  -->
 </authors>
 <contributors>
-    <contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65" contribution="testing server"/> <!--  BGMP  -->   
+    <contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65" contribution="testing server"/> <!--  BGMP  -->
+    <contributor uuid="bbfac3db-dd46-4996-b936-0e2432f33285" contribution="polishing up"/> <!--  Valkyh  -->
 </contributors>
 <teams>
     <team id="lime-team" color="green" max="5" max-overfill="6">Lime</team>
@@ -25,24 +26,24 @@
         <item slot="7" material="vine" amount="24"/>
         <item slot="8" material="golden apple" amount="1"/>        
         <item slot="28" material="arrow" amount="20"/>
-        <helmet unbreakable="true">gold helmet</helmet>
-        <chestplate unbreakable="true">gold chestplate</chestplate>
+        <helmet material="gold helmet" unbreakable="true" enchantment="protection fire"/>
+        <chestplate material="gold chestplate" unbreakable="true" enchantment="protection fire"/>
     </kit>
 	<kit id="lime-kit" parents="spawn-kit">
         <item slot="6" material="stained clay" damage="5" amount="24"/>
-        <leggings color="2ECC71" unbreakable="true" enchantment="protection fire">leather leggings</leggings>
-        <boots color="229954" unbreakable="true" enchantment="protection fire">leather boots</boots>
+        <leggings material="leather leggings" color="2ECC71" unbreakable="true"/>
+        <boots material="leather boots" color="229954" unbreakable="true"/>
     </kit>
 	<kit id="magenta-kit" parents="spawn-kit">
         <item slot="6" material="stained clay" damage="2" amount="24"/>
-        <leggings color="A569BD" unbreakable="true" enchantment="protection fire">leather leggings</leggings>
-        <boots color="76448A" unbreakable="true" enchantment="protection fire">leather boots</boots>
+        <leggings material="leather leggings" color="A569BD" unbreakable="true"/>
+        <boots material="leather boots" color="76448A" unbreakable="true"/>
     </kit>
 </kits>
 <spawns>
     <spawn team="lime-team" kit="lime-kit" yaw="45" pitch="33">
         <region>
-            <cylinder base="40.5,28,-24.5" radius="1" height="0"/>
+            <cylinder base="41.5,28,-24.5" radius="1" height="0"/>
         </region>
     </spawn>
     <spawn team="magenta-team" kit="magenta-kit" yaw="-45" pitch="33">
@@ -53,74 +54,76 @@
     <default>
         <regions>
             <cylinder base="-40.5,28,-24.5" radius="1.5" height="0" yaw="-45" pitch="33"/>
-            <cylinder base="40.5,28,-24.5" radius="1.5" height="0" yaw="45" pitch="33"/>
+            <cylinder base="41.5,28,-24.5" radius="1.5" height="0" yaw="45" pitch="33"/>
         </regions>
     </default>
 </spawns>
 <wools craftable="false">
     <wool team="lime-team" color="lime" location="-58.5,9.2,25.5">
-        <monument><block>34,8,-19</block></monument>
+        <monument><block>35,8,-19</block></monument>
     </wool>
-    <wool team="magenta-team" color="magenta" location="58.5,9.2,25.5">
+    <wool team="magenta-team" color="magenta" location="59.5,9.2,25.5">
         <monument><block>-35,8,-19</block></monument>
     </wool>
 </wools>
 <filters>
-    <not id="no-void"><void/></not>
+    <not id="deny-double-step">
+        <material>double step</material>
+    </not>
+    <not id="not-void">
+        <void/>
+    </not>
     <not id="deny-pot">
         <material>flower pot</material>
     </not>
     <team id="only-lime">lime-team</team>
     <team id="only-magenta">magenta-team</team>
     <any id="only-lime-filter">
-        <any>
-            <material>sand</material>
-            <material>redstone wire</material>
-        </any>
+        <material>sand</material>
         <all>
-            <material>web</material>
+            <any>
+                <material>redstone wire</material>
+                <material>web</material>
+            </any>
             <team>lime-team</team>
         </all>
     </any>
     <any id="only-magenta-filter">
-        <any>
-            <material>sand</material>
-            <material>redstone wire</material>
-        </any>
+        <material>sand</material>
         <all>
-            <material>web</material>
+            <any>
+                <material>redstone wire</material>
+                <material>web</material>
+            </any>
             <team>magenta-team</team>
         </all>
     </any>
-	<not>
-		<any>
-			<material>mob spawner</material>
-			<material>gold plate</material>
-		</any>
-	</not>
 </filters>
 <regions>
-	<union id="lime-buildings">
-        <rectangle min="30,-34" max="50,-14" id="lime-spawn"/>
-        <rectangle min="-49,16" max="-68,35" id="lime-wool"/>
-    </union>
-    <cuboid min="-55,9,18" max="-62,20,19" id="lime-wool-enter"/>
-    <union id="magenta-buildings">
+    <union id="spawns">
+        <rectangle min="31,-34" max="51,-14" id="lime-spawn"/>
         <rectangle min="-30,-34" max="-50,-14" id="magenta-spawn"/>
-        <rectangle min="49,16" max="68,35" id="magenta-wool"/>
     </union>
-    <cuboid min="55,9,18" max="62,20,19" id="magenta-wool-enter"/>
-    <union id="allow-build">
-        <rectangle min="-24,-24" max="24,10"/>
+    <rectangle min="-49,16" max="-68,35" id="lime-wool"/>
+    <rectangle min="50,16" max="69,35" id="magenta-wool"/>
+    <cuboid min="-51,9,18" max="-66,27,33" id="lime-wool-enter"/>
+    <cuboid min="53,9,18" max="67,27,33" id="magenta-wool-enter"/>
+    <rectangle id="allow-build" min="-24,-24" max="25,10"/>
+	<union id="mid-spawner">
+        <block>0,2,19</block>
+        <block>0,3,19</block>
     </union>
-	<cuboid id="spawner" min="1,0,19" max="-1,4,21"/>
+    <below y="1" id="below-1"/>
+    <!-- applicators -->
     <apply enter="only-lime" region="lime-wool-enter" message="You may not enter the enemy's wool room!"/>
     <apply enter="only-magenta" region="magenta-wool-enter" message="You may not enter the enemy's wool room!"/>
+    <apply block="never" region="mid-spawner" message="You may not edit the spawner!"/>
     <apply block="always" region="allow-build"/>
-	<apply block="never" region="spawner"/>
-    <apply block="only-lime-filter" region="lime-buildings"/>
-    <apply block="only-magenta-filter" region="magenta-buildings"/>
-    <apply block="no-void" region="everywhere" message="You may not build in the void!"/>
+    <apply block="never" region="spawns" message="You may not edit spawn!"/>
+    <apply block="only-lime-filter" region="lime-wool" message="You may not edit the wool room!"/>
+    <apply block="only-magenta-filter" region="magenta-wool" message="You may not edit the wool room!"/>
+    <apply block-break="deny-double-step" region="below-1" message="You may not edit the void!"/>
+    <apply block-place="not-void" region="everywhere" message="You may not edit the void!"/>
     <apply use="deny-pot" region="everywhere"/>
 </regions>
 <itemkeep>
@@ -149,6 +152,8 @@
     <item>seeds</item>
     <item>redstone</item>
     <item>sand</item>
+    <item>ink sack</item>
+    <item>sapling</item>
 </itemremove>
 <toolrepair>
 	<tool>iron sword</tool>

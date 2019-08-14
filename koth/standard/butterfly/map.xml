@@ -1,0 +1,138 @@
+<map proto="1.4.2">
+<name>Butterfly</name>
+<version>1.0.2</version>
+<gamemode>koth</gamemode>
+<objective>Reach 750 points by capturing the hills!</objective>
+<authors>
+  <author uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad"/> <!--AlmightyBread-->
+</authors>
+<contributors>
+  <contributor uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9" contribution="XML Help" /> <!-- Xerocoles -->
+</contributors>
+<teams>
+  <team id="red" color="dark_red" max="12">Red</team>
+  <team id="blue" color="blue" max="12">Blue</team>
+</teams>
+<kits>
+  <kit id="spawn">
+    <item slot="0" unbreakable="true" material="iron sword"/>
+    <item slot="1" unbreakable="true" material="bow"/>
+    <item slot="2" amount="32" material="arrow"/>
+    <item slot="7" amount="1" material="golden apple"/>
+    <item slot="8" amount="64" material="golden carrot"/>
+    <chestplate material="chainmail chestplate"/>
+    <boots enchantment="protection fall:2" material="iron boots"/>
+    <effect duration="5" amplifier="1">heal</effect>
+  </kit>
+  <kit id="red-kit" parents="spawn">
+    <helmet color="993333" material="leather helmet"/>
+    <leggings color="993333" material="leather leggings"/>
+  </kit>
+  <kit id="blue-kit" parents="spawn">
+    <helmet color="334CB2" material="leather helmet"/>
+    <leggings color="334CB2" material="leather leggings"/>
+  </kit>
+</kits>
+<spawns>
+  <default yaw="180">
+    <region>
+      <cuboid min="-510,56,167" max="-507,56,169"/>
+    </region>
+  </default>
+  <spawn team="red" kit="red-kit" yaw="90">
+    <region>
+      <cuboid min="-426,32.1,155" max="-423,32.1,152"/>
+    </region>
+  </spawn>
+  <spawn team="blue" kit="blue-kit" yaw="-90">
+    <region>
+      <cuboid min="-591,32.1,152" max="-594,32.1,155"/>
+    </region>
+  </spawn>
+</spawns>
+<regions>
+  <apply block="never">
+    <rectangle min="-oo,-oo" max="oo,oo"/>
+  </apply>
+  <apply velocity="0,1.2,0">
+    <region>
+      <cuboid min="-477.2,26,187.8" max="-479.8,27,185.2"/>
+    </region>
+  </apply>
+  <apply velocity="0,1.2,0">
+    <region>
+      <cuboid min="-537.2,26,187.8" max="-539.8,27,185.2"/>
+    </region>
+  </apply>
+  <apply velocity="0,1.8,0">
+    <region>
+      <cuboid min="-543.8,28,140.2" max="-541.2,29,140.8"/>
+    </region>
+  </apply>
+  <apply velocity="0,1.8,0">
+    <region>
+      <cuboid min="-475.8,28,140.2" max="-473.2,29,140.8"/>
+    </region>
+  </apply>
+</regions>
+<control-points capture-time="5s" incremental="true" neutral-state="true" show-progress="true" required="false" scaled-time="true">
+  <control-point name="Center Hill" points="2">
+    <capture-region>
+      <cylinder base="-508.5,33,149.5" radius="5" height="1"/>
+    </capture-region>
+    <progress-display-region>
+      <cylinder base="-508.5,32,149.5" radius="4" height="1"/>
+    </progress-display-region>
+    <owner-display-region>
+      <cylinder base="-508.5,32,149.5" radius="4" height="1"/>
+    </owner-display-region>
+  </control-point>
+  <control-point name="East Hill" points="1">
+    <capture-region>
+      <cylinder base="-474.5,38,162.5" radius="4" height="1"/>
+    </capture-region>
+    <progress-display-region>
+      <cylinder base="-474.5,37,162.5" radius="4" height="1"/>
+    </progress-display-region>
+    <owner-display-region>
+      <cylinder base="-474.5,37,162.5" radius="4" height="1"/>
+    </owner-display-region>
+  </control-point>
+  <control-point name="West Hill" points="1">
+    <capture-region>
+      <cylinder base="-542.5,38,162.5" radius="4" height="1"/>
+    </capture-region>
+    <progress-display-region>
+      <cylinder base="-542.5,37,162.5" radius="4" height="1"/>
+    </progress-display-region>
+    <owner-display-region>
+      <cylinder base="-542.5,37,162.5" radius="4" height="1"/>
+    </owner-display-region>
+  </control-point>
+</control-points>
+<itemremove>
+    <item>arrow</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>leather leggings</item>
+    <item>chainmail chestplate</item>
+    <item>iron boots</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item>golden apple</item>
+    </kill-reward>
+    <kill-reward>
+        <item amount="8">arrow</item>
+    </kill-reward>
+</kill-rewards>
+<score>
+    <limit>750</limit>
+    <king/>
+</score>
+<timelock>on</timelock>
+</map>
